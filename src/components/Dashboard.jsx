@@ -14,10 +14,10 @@ import EditEvent from "./EditEvent";
 function DashBoard() {
   return (
     <>
-      {/* <EventList /> */}
-      {/* <EventPage /> */}
-      {/* <CreateEvent /> */}
-      {/* <EditEvent /> */}
+      <EventList />
+      <EventPage />
+      <CreateEvent />
+      <EditEvent />
     </>
   );
 }
