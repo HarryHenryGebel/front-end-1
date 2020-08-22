@@ -1,0 +1,17 @@
+App -   
+    NavBar
+        Login
+        Registration
+
+Dashboard - 
+    DashBoardNavBar - > Will Contain list of top 5 upcoming events that dynamically link to that event's full page
+                        Will have some kind of alert for events that have been changed/not rsvp'ed to
+            EventList -> Event
+                AddEventForm    EditEventForm
+            
+            EventPage -> Page for ONE Event with ALL information for EVERYONE
+                     UpdateEvent for Organizer
+                     RSVP for Guest
+                     Ability to Take Extra Menu Items for Guest
+
+            FoodList -> FoodItem ***STRETCH***
