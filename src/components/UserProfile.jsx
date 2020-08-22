@@ -1,43 +1,70 @@
-import React, {useState} from "react";
-import { Jumbotron, Button, Container, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
-import EditUser from './EditUser'
+import React, { useState } from "react";
+import {
+  Jumbotron,
+  Button,
+  Container,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+} from "reactstrap";
+import EditUser from "./EditUser";
+import Event from "./Event";
 //All userInformation stored on Profile Page
-//Next Event
-//Create Event
-//Update Event
+//Next user
+//Open user-Card for more information
 //Update Profile
 
 function UserProfile() {
-    const [modal, setModal] = useState(false);
+  const [userModal, setuserModal] = useState(false);
+  const userToggle = () => setuserModal(!userModal);
 
-    const toggle = () => setModal(!modal);
+  const [eventModal, setEventModal] = useState(false);
+  const eventToggle = () => setEventModal(!eventModal);
+
   return (
     <>
       <Jumbotron>
-          <img src = "https://picsum.photos/200" alt= "happy user" />
+        <img src="https://picsum.photos/200" alt="happy user" />
         <h1 className="display-3">Hello, user!</h1>
-        
+
         <hr className="my-2" />
-        <p>
-          Your next event is in number of days, at time!
-        </p>
+        <p>Your next user is in number of days, at time!</p>
         <p className="lead">
-          <Button color="primary">Learn More</Button>
+          <Button color="primary" onClick={eventToggle}>
+            Learn More
+          </Button>
         </p>
       </Jumbotron>
       <Container>
-          User's Address, phone number, email and list of events (linking to eventpage) will go here.
-          <Button color="danger" onClick={toggle}>Update Information</Button>
+        User's Address, phone number, email and list of users (linking to
+        userpage) will go here.
+        <Button color="primary" onClick={userToggle}>
+          Update Information
+        </Button>
       </Container>
 
-      <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+      <Modal isOpen={userModal} toggle={userToggle}>
+        <ModalHeader toggle={userToggle}>Modal title</ModalHeader>
         <ModalBody>
-<EditUser />
+          <EditUser />
         </ModalBody>
         <ModalFooter>
+          <Button color="primary" onClick={userToggle}>
+            Cancel
+          </Button>
+        </ModalFooter>
+      </Modal>
 
-          <Button color="primary" onClick={toggle}>Cancel</Button>
+      <Modal isOpen={eventModal} toggle={eventToggle}>
+        <ModalHeader toggle={eventToggle}>Modal title</ModalHeader>
+        <ModalBody>
+          <Event />
+        </ModalBody>
+        <ModalFooter>
+          <Button color="primary" onClick={eventToggle}>
+            Cancel
+          </Button>
         </ModalFooter>
       </Modal>
     </>
