@@ -1,6 +1,8 @@
 import React from "react";
 import { Col, Row, Button, Form, FormGroup, Label, Input } from "reactstrap";
 
+//Form Validation?
+
 //Use Add button to populate a list for Food and Guests
 
 function CreateEvent() {
