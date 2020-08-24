@@ -1,4 +1,4 @@
-const { axiosWithAuth } = require("./axiosWithAuth")
-const { PrivateRoute } = require("./PrivateRoute")
+const { axiosWithAuth } = require("./axiosWithAuth");
+const { PrivateRoute } = require("./PrivateRoute");
 
-export {axiosWithAuth, PrivateRoute}
+export { axiosWithAuth, PrivateRoute };
