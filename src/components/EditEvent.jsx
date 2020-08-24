@@ -78,7 +78,7 @@ function EditEvent(props) {
     setFormValues({ ...formValues, foods: [...formValues.foods, food] });
   };
 
-  console.log(formValues)
+
 
   return (
     <Form>
