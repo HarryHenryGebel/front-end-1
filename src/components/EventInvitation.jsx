@@ -53,7 +53,7 @@ function EventInvitation() {
         <ModalHeader toggle={toggle}>What will you be bringing?</ModalHeader>
         <Form>
           <FormGroup>
-            <Label for="exampleSelect">Select</Label>
+            <Label htmlFor="exampleSelect">Select</Label>
             <Input type="select" name="select" id="exampleSelect">
               <option>1</option>
               <option>2</option>
