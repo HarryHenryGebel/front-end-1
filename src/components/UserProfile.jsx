@@ -10,12 +10,21 @@ import {
 } from "reactstrap";
 import EditUser from "./EditUser";
 import Event from "./Event";
+import {connect} from 'react-redux'
 //All userInformation stored on Profile Page
 //Next user
 //Open user-Card for more information
 //Update Profile
 
-function UserProfile() {
+const mapStateToProps = (state) => {
+  return {
+    username: state.username,
+    imageurl: state.imageurl,
+    potlucks: state.potlucks,
+  };
+};
+
+function UserProfile(props) {
   const [userModal, setuserModal] = useState(false);
   const userToggle = () => setuserModal(!userModal);
 
@@ -25,8 +34,8 @@ function UserProfile() {
   return (
     <>
       <Jumbotron>
-        <img src="https://picsum.photos/200" alt="happy user" />
-        <h1 className="display-3">Hello, user!</h1>
+        <img src={props.imageurl} alt="happy user" />
+        <h1 className="display-3">Hello, {props.username}!</h1>
 
         <hr className="my-2" />
         <p>Your next event is in number of days, at time!</p>
@@ -75,4 +84,4 @@ function UserProfile() {
   );
 }
 
-export default UserProfile;
+export default connect (mapStateToProps, {})(UserProfile);

@@ -4,7 +4,13 @@ import { updateEvent } from "../actions";
 import { connect } from "react-redux";
 //Form Validation (same as createEvent)
 
-function EditEvent() {
+function EditEvent(props) {
+  const {
+    /*host,*/ eventname,
+    date,
+    time /*location, description foods, guests*/,
+  } = props;
+
   return (
     <Form>
       <Row form>
@@ -15,7 +21,7 @@ function EditEvent() {
               type="name"
               name="name"
               id="exampleName"
-              defaultValue="with a defaultValue"
+              defaultValue={eventname}
             />
           </FormGroup>
         </Col>
@@ -77,7 +83,7 @@ function EditEvent() {
               type="date"
               name="date"
               id="exampleDate"
-              defaultValue="with a defaultValue"
+              defaultValue={date}
             />
           </FormGroup>
         </Col>
@@ -88,7 +94,7 @@ function EditEvent() {
               type="time"
               name="time"
               id="exampleTime"
-              defaultValue="time defaultValue"
+              defaultValue={time}
             />
           </FormGroup>
         </Col>
