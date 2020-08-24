@@ -1,6 +1,7 @@
 import React from 'react'
 import { Col, Row, Button, Form, FormGroup, Label, Input } from "reactstrap";
-
+import {updateEvent} from '../actions'
+import {connect} from 'react-redux'
 //Form Validation (same as createEvent)
 
 function EditEvent(){
@@ -143,4 +144,4 @@ function EditEvent(){
     )
 }
 
-export default EditEvent
+export default connect(null, {updateEvent})(EditEvent)

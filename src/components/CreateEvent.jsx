@@ -1,6 +1,7 @@
 import React from "react";
 import { Col, Row, Button, Form, FormGroup, Label, Input } from "reactstrap";
-
+import { connect } from "react-redux";
+import { createEvent } from "../actions";
 //Form Validation?
 
 //Use Add button to populate a list for Food and Guests
@@ -119,12 +120,10 @@ function CreateEvent() {
           </FormGroup>
         </Col>
       </Row>
-      <Button className = "bg-addon">Add Guest</Button>
+      <Button className="bg-addon">Add Guest</Button>
       {/* Show List of Food Items added Here, can we click to remove food? */}
       <FormGroup>
-        <Label for="exampleFoodName">
-          Food Name
-        </Label>
+        <Label for="exampleFoodName">Food Name</Label>
         <Input
           type="name"
           name="name"
@@ -132,17 +131,17 @@ function CreateEvent() {
           placeholder="name"
         />
       </FormGroup>{" "}
-      <Button className = "bg-addon">Add Menu Item</Button>
+      <Button className="bg-addon">Add Menu Item</Button>
       <FormGroup check>
         <Input type="checkbox" name="check" id="exampleCheck" />
         <Label for="exampleCheck" check>
           Confirm
         </Label>
       </FormGroup>
-      <Button className = "bg-confirm">Create Event</Button>
-      <Button className = "bg-cancel">Cancel</Button>
+      <Button className="bg-confirm">Create Event</Button>
+      <Button className="bg-cancel">Cancel</Button>
     </Form>
   );
 }
 
-export default CreateEvent;
+export default connect(null, { createEvent })(CreateEvent);

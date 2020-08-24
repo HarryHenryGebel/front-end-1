@@ -5,7 +5,6 @@
 //Will sprout from Dashboard NavBar
 //Alert should popup to confirm attendance/rejection --code Alerts later
 //Alert Text "You have told Host you are not attending" "You are confirmed to attend event at location at time, and will be bringing fooditem"
-
 import React, { useState } from "react";
 import {
   Card,
@@ -22,6 +21,8 @@ import {
   Label,
   Input,
 } from "reactstrap";
+import {updateEvent} from '../actions'
+import {connect} from 'react-redux'
 
 function EventInvitation() {
   const [modal, setModal] = useState(false);
@@ -72,4 +73,4 @@ function EventInvitation() {
   );
 }
 
-export default EventInvitation;
+export default connect(null, {updateEvent})(EventInvitation)
