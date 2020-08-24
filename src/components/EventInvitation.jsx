@@ -21,8 +21,8 @@ import {
   Label,
   Input,
 } from "reactstrap";
-import {updateEvent} from '../actions'
-import {connect} from 'react-redux'
+import { updateEvent } from "../actions";
+import { connect } from "react-redux";
 
 function EventInvitation() {
   const [modal, setModal] = useState(false);
@@ -38,15 +38,17 @@ function EventInvitation() {
           alt="Card image cap"
         />
         <CardBody>
-          <CardTitle><h2>Event Name</h2></CardTitle>
+          <CardTitle>
+            <h2>Event Name</h2>
+          </CardTitle>
           <CardSubtitle>Date, Time, Location</CardSubtitle>
           <CardText>You have been invited to HostName's Event!</CardText>
           <CardText>Event will be held on Date at Time at Location.</CardText>
           <CardText>Please Respond in a Timely Manner</CardText>
-          <Button className = "bg-confirm" onClick={toggle}>
+          <Button className="bg-confirm" onClick={toggle}>
             Attending
           </Button>
-          <Button className = "bg-cancel">Regretfully Cannot</Button>
+          <Button className="bg-cancel">Regretfully Cannot</Button>
         </CardBody>
       </Card>
 
@@ -54,7 +56,7 @@ function EventInvitation() {
         <ModalHeader toggle={toggle}>What will you be bringing?</ModalHeader>
         <Form>
           <FormGroup>
-            <Label for="exampleSelect">Select</Label>
+            <Label htmlFor="exampleSelect">Select</Label>
             <Input type="select" name="select" id="exampleSelect">
               <option>1</option>
               <option>2</option>
@@ -63,8 +65,8 @@ function EventInvitation() {
               <option>5</option>
             </Input>
           </FormGroup>
-          <Button className = "bg-confirm">Confirm</Button>{" "}
-          <Button className = "bg-cancel" onClick={toggle}>
+          <Button className="bg-confirm">Confirm</Button>{" "}
+          <Button className="bg-cancel" onClick={toggle}>
             Cancel
           </Button>
         </Form>
@@ -73,4 +75,4 @@ function EventInvitation() {
   );
 }
 
-export default connect(null, {updateEvent})(EventInvitation)
+export default connect(null, { updateEvent })(EventInvitation);

@@ -8,5 +8,7 @@ export {
   DELETE_EVENT_FAIL,
   DELETE_EVENT_SUCESS,
   DELETE_EVENT_START,
-  createEvent, updateEvent, deleteEvent
+  createEvent,
+  updateEvent,
+  deleteEvent,
 } from "./hostActions";
