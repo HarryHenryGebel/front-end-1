@@ -80,7 +80,8 @@ function CreateEvent() {
 
   const addFood = (e) => {
     e.preventDefault();
-    setFormValues({ formValues, foods: [formValues.foods, food] });
+    setFormValues({ ...formValues, foods: [...formValues.foods, food] });
+    setFood(foodForm) 
   };
 
   return (
@@ -265,11 +266,12 @@ function CreateEvent() {
               id="email"
               placeholder="email placeholder"
               value={guest.primaryemail}
+              onChange={guestChangeHandler}
             />
           </FormGroup>
         </Col>
       </Row>
-      <Button onSubmit={addGuest} className="bg-addon">
+      <Button onClick={addGuest} className="bg-addon">
         Add Guest
       </Button>
       {formValues.foods.length > 0
@@ -292,20 +294,22 @@ function CreateEvent() {
           name="foodname"
           id="exampleFoodName"
           placeholder="name"
+          value = {food.foodname}
           onChange={foodChangeHandler}
         />
       </FormGroup>{" "}
       <FormGroup>
-        <Label htmlFor="exampleFoodName">Special Information:</Label>
+        <Label htmlFor="exampleDescription">Special Information:</Label>
         <Input
           type="text"
           name="description"
-          id="exampleFoodName"
+          id="exampleDescription"
           placeholder="name"
+          value = {food.description}
           onChange={foodChangeHandler}
         />
       </FormGroup>
-      <Button className="bg-addon" onSubmit={addFood}>
+      <Button className="bg-addon" onClick={addFood}>
         Add Menu Item
       </Button>
       <FormGroup check>
