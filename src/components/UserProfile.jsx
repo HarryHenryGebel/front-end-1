@@ -57,7 +57,7 @@ function UserProfile() {
       </Modal>
 
       <Modal isOpen={eventModal} toggle={eventToggle}>
-        <ModalHeader toggle={eventToggle}><h2>Modal title</h2></ModalHeader>
+        <ModalHeader toggle={eventToggle}><h2>Event Information</h2></ModalHeader>
         <ModalBody>
           <Event />
         </ModalBody>

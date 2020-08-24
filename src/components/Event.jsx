@@ -31,6 +31,8 @@ import {
   Col,
 } from "reactstrap";
 import EditEvent from "./EditEvent";
+import {deleteEvent} from '../actions'
+import {connect} from 'react-redux'
 
 function Event() {
   const [modal, setModal] = useState(false);
@@ -227,4 +229,4 @@ function Event() {
   );
 }
 
-export default Event;
+export default connect(null, {deleteEvent})(Event)

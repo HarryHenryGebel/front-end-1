@@ -30,6 +30,8 @@ import {
   ModalBody,
   ModalFooter,
 } from "reactstrap";
+import {updateEvent, deleteEvent} from '../actions'
+import {connect} from 'react-redux'
 
 function EventPage() {
   const [activeTab, setActiveTab] = useState("1");
@@ -182,4 +184,4 @@ function EventPage() {
   );
 }
 
-export default EventPage;
+export default connect(null, {updateEvent, deleteEvent})(EventPage)
