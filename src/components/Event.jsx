@@ -34,7 +34,10 @@ import EditEvent from "./EditEvent";
 import {deleteEvent} from '../actions'
 import {connect} from 'react-redux'
 
-function Event() {
+function Event(props) {
+
+const {host, eventname, date, time, location, description /*foods, guests*/} = props;
+
   const [modal, setModal] = useState(false);
   const [nestedModal, setNestedModal] = useState(false);
   const [closeAll, setCloseAll] = useState(false);
@@ -64,19 +67,19 @@ function Event() {
           alt="Card image cap"
         />
         <CardBody>
-          <CardTitle><h2>Event Name</h2></CardTitle>
-          <CardSubtitle>Event Host</CardSubtitle>
+          <CardTitle><h2>{eventname}</h2></CardTitle>
+          <CardSubtitle>{host}</CardSubtitle>
           <CardText>
-            Date and Time <br />
-            Location <br />
+            {date} at {time} <br />
+            {location} <br />
           </CardText>
           {/*Button will Launch Modal */}
-          <Button className = "bg-addon" onClick={toggle}>Launch Modal</Button>
+          <Button className = "bg-addon" onClick={toggle}>More Information</Button>
         </CardBody>
       </Card>
 
       <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle}>Event Name</ModalHeader>
+  <ModalHeader toggle={toggle}>{eventname}</ModalHeader>
         <Nav tabs>
           <NavItem>
             <NavLink
@@ -85,7 +88,7 @@ function Event() {
                 toggleTab("1");
               }}
             >
-              <h5>Event</h5>
+              <h5>Information</h5>
             </NavLink>
           </NavItem>
           {/*Event Organizer Only */}
@@ -138,18 +141,8 @@ function Event() {
             <Row>
               <Col sm="12">
                 <ModalBody>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                  cupidatat non proident, sunt in culpa qui officia deserunt
-                  mollit anim id est laborum.
-                  <br />
-                  <Button className = "bg-cancel" onClick={toggleNested}>
-                    Cancel Event
-                  </Button>
+                  {description}
+                  
                   <Modal
                     isOpen={nestedModal}
                     toggle={toggleNested}
@@ -222,6 +215,9 @@ function Event() {
             {/*Host Only */}
 
             <EditEvent />
+            <Button className = "bg-cancel" onClick={toggleNested}>
+                    Cancel Event
+                  </Button>
           </TabPane>
         </TabContent>
       </Modal>
