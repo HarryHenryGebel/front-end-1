@@ -21,8 +21,8 @@ import {
   Label,
   Input,
 } from "reactstrap";
-import {updateEvent} from '../actions'
-import {connect} from 'react-redux'
+import { updateEvent } from "../actions";
+import { connect } from "react-redux";
 
 function EventInvitation() {
   const [modal, setModal] = useState(false);
@@ -75,4 +75,4 @@ function EventInvitation() {
   );
 }
 
-export default connect(null, {updateEvent})(EventInvitation)
+export default connect(null, { updateEvent })(EventInvitation);
