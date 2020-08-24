@@ -1,9 +1,11 @@
 import React from "react";
 import DashBoard from "./Dashboard";
+import NavBar from "../components/NavBar"
 
 export default function App() {
   return (
     <>
+      <NavBar />
       {/* Private Routes: DashBoardNavBar */}
       <DashBoard />
       <center>
