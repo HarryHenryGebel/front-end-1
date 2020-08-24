@@ -31,6 +31,8 @@ import {
   Col,
 } from "reactstrap";
 import EditEvent from "./EditEvent";
+import { deleteEvent } from "../actions";
+import { connect } from "react-redux";
 
 function Event() {
   const [modal, setModal] = useState(false);
@@ -62,14 +64,18 @@ function Event() {
           alt="Card image cap"
         />
         <CardBody>
-          <CardTitle><h2>Event Name</h2></CardTitle>
+          <CardTitle>
+            <h2>Event Name</h2>
+          </CardTitle>
           <CardSubtitle>Event Host</CardSubtitle>
           <CardText>
             Date and Time <br />
             Location <br />
           </CardText>
           {/*Button will Launch Modal */}
-          <Button className = "bg-addon" onClick={toggle}>Launch Modal</Button>
+          <Button className="bg-addon" onClick={toggle}>
+            Launch Modal
+          </Button>
         </CardBody>
       </Card>
 
@@ -145,7 +151,7 @@ function Event() {
                   cupidatat non proident, sunt in culpa qui officia deserunt
                   mollit anim id est laborum.
                   <br />
-                  <Button className = "bg-cancel" onClick={toggleNested}>
+                  <Button className="bg-cancel" onClick={toggleNested}>
                     Cancel Event
                   </Button>
                   <Modal
@@ -153,15 +159,17 @@ function Event() {
                     toggle={toggleNested}
                     onClosed={closeAll ? toggle : undefined}
                   >
-                    <ModalHeader><h2>Cancel Event Name?</h2></ModalHeader>
+                    <ModalHeader>
+                      <h2>Cancel Event Name?</h2>
+                    </ModalHeader>
                     <ModalBody>
                       Are you sure you wish to cancel this event?
                     </ModalBody>
                     <ModalFooter>
-                      <Button className = "bg-confirm" onClick={toggleNested}>
+                      <Button className="bg-confirm" onClick={toggleNested}>
                         Nevermind
                       </Button>{" "}
-                      <Button className = "bg-cancel" onClick={toggleAll}>
+                      <Button className="bg-cancel" onClick={toggleAll}>
                         Yes, I'm Sure
                       </Button>
                     </ModalFooter>
@@ -169,7 +177,7 @@ function Event() {
                 </ModalBody>
 
                 <ModalFooter>
-                  <Button className = "bg-cancel" onClick={toggle}>
+                  <Button className="bg-cancel" onClick={toggle}>
                     Close
                   </Button>
                 </ModalFooter>
@@ -182,7 +190,9 @@ function Event() {
               <Col sm="6">
                 {/*map guest list to card, for event organizer only? */}
                 <Card>
-                  <CardTitle><h6>Guest Name</h6></CardTitle>
+                  <CardTitle>
+                    <h6>Guest Name</h6>
+                  </CardTitle>
                   <CardText>RSVP : True/False; Bringing: Food Item/s</CardText>
                   {/*Button makes phone call */}
                   <Button>Call</Button>
@@ -195,10 +205,12 @@ function Event() {
               <Col sm="6">
                 {/*map foodItem to card, for event guest only? */}
                 <Card>
-                  <CardTitle><h6>Food Item Name</h6></CardTitle>
+                  <CardTitle>
+                    <h6>Food Item Name</h6>
+                  </CardTitle>
                   <CardText>RSVP : True/False; Bringing: Food Item/s</CardText>
                   {/*Button makes phone call */}
-                  <Button className = "bg-addon">Search Recipe?(stretch)</Button>
+                  <Button className="bg-addon">Search Recipe?(stretch)</Button>
                 </Card>
               </Col>
             </Row>
@@ -209,7 +221,9 @@ function Event() {
               <Col sm="6">
                 {/*map foodItem to card, for event organizer only? */}
                 <Card>
-                  <CardTitle><h6>Menu</h6></CardTitle>
+                  <CardTitle>
+                    <h6>Menu</h6>
+                  </CardTitle>
                   <CardText>Filter Have / Need</CardText>
                   {/*Button makes phone call */}
                 </Card>
@@ -227,4 +241,4 @@ function Event() {
   );
 }
 
-export default Event;
+export default connect(null, { deleteEvent })(Event);

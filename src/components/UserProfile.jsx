@@ -31,7 +31,7 @@ function UserProfile() {
         <hr className="my-2" />
         <p>Your next event is in number of days, at time!</p>
         <p className="lead">
-          <Button className = "bg-addon" onClick={eventToggle}>
+          <Button className="bg-addon" onClick={eventToggle}>
             Learn More
           </Button>
         </p>
@@ -39,30 +39,34 @@ function UserProfile() {
       <Container>
         User's Address, phone number, email and list of users (linking to
         userpage) will go here.
-        <Button className = "bg-addon" onClick={userToggle}>
+        <Button className="bg-addon" onClick={userToggle}>
           Update Information
         </Button>
       </Container>
 
       <Modal isOpen={userModal} toggle={userToggle}>
-        <ModalHeader toggle={userToggle}><h2>Update Information</h2></ModalHeader>
+        <ModalHeader toggle={userToggle}>
+          <h2>Update Information</h2>
+        </ModalHeader>
         <ModalBody>
           <EditUser />
         </ModalBody>
         <ModalFooter>
-          <Button className = "bg-cancel" onClick={userToggle}>
+          <Button className="bg-cancel" onClick={userToggle}>
             Cancel
           </Button>
         </ModalFooter>
       </Modal>
 
       <Modal isOpen={eventModal} toggle={eventToggle}>
-        <ModalHeader toggle={eventToggle}><h2>Modal title</h2></ModalHeader>
+        <ModalHeader toggle={eventToggle}>
+          <h2>Event Information</h2>
+        </ModalHeader>
         <ModalBody>
           <Event />
         </ModalBody>
         <ModalFooter>
-          <Button className = "bg-cancel" onClick={eventToggle}>
+          <Button className="bg-cancel" onClick={eventToggle}>
             Cancel
           </Button>
         </ModalFooter>
