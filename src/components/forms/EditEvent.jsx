@@ -65,6 +65,7 @@ function EditEvent(props) {
 
   const changeLocationHandler = (e) => {
     setConcatLocation({ ...concatLocation, [e.target.name]: e.target.value });
+    setFormValues({...formValues, location: `${concatLocation.address} ${concatLocation.address2} ${concatLocation.city}, ${concatLocation.state} ${concatLocation.zip}`})
   };
 
   const addGuest = (e) => {
