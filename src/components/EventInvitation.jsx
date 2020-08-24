@@ -37,15 +37,17 @@ function EventInvitation() {
           alt="Card image cap"
         />
         <CardBody>
-          <CardTitle>Event Name</CardTitle>
+          <CardTitle>
+            <h2>Event Name</h2>
+          </CardTitle>
           <CardSubtitle>Date, Time, Location</CardSubtitle>
           <CardText>You have been invited to HostName's Event!</CardText>
           <CardText>Event will be held on Date at Time at Location.</CardText>
           <CardText>Please Respond in a Timely Manner</CardText>
-          <Button color="primary" onClick={toggle}>
+          <Button className="bg-confirm" onClick={toggle}>
             Attending
           </Button>
-          <Button color="danger">Regretfully Cannot</Button>
+          <Button className="bg-cancel">Regretfully Cannot</Button>
         </CardBody>
       </Card>
 
@@ -62,8 +64,8 @@ function EventInvitation() {
               <option>5</option>
             </Input>
           </FormGroup>
-          <Button color="primary">Confirm</Button>{" "}
-          <Button color="danger" onClick={toggle}>
+          <Button className="bg-confirm">Confirm</Button>{" "}
+          <Button className="bg-cancel" onClick={toggle}>
             Cancel
           </Button>
         </Form>

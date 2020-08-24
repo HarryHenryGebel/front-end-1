@@ -117,7 +117,7 @@ function EditEvent(){
             </FormGroup>
           </Col>
         </Row>
-        <Button>Add Guest</Button>
+        <Button className = "bg-addon">Add Guest</Button>
         {/* Show List of Food Items on list Here, click to remove? */}
         <FormGroup>
           <Label for="exampleFoodName">
@@ -130,14 +130,15 @@ function EditEvent(){
             defaultValue="name"
           />
         </FormGroup>{" "}
-        <Button>Add Menu Item</Button>
+        <Button className = "bg-addon">Add Menu Item</Button>
         <FormGroup check>
           <Input type="checkbox" name="check" id="exampleCheck" />
           <Label for="exampleCheck" check>
             Confirm
           </Label>
         </FormGroup>
-        <Button>Create Event</Button>
+        <Button className = "bg-confirm">Update Event</Button>
+        <Button className = "bg-cancel">Cancel</Button>
       </Form>
     )
 }

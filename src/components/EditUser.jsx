@@ -77,7 +77,8 @@ function EditUser(){
         </Label>
       </FormGroup>
       
-      <Button>Update User</Button>
+      <Button className = "bg-confirm">Update User</Button>
+      <Button className = "bg-cancel">Cancel</Button>
     </Form>
     )
 }
