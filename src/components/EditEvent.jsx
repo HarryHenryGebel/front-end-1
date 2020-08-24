@@ -5,13 +5,13 @@ import { connect } from "react-redux";
 //Form Validation (same as createEvent)
 
 function EditEvent(props) {
-  const {/*host,*/ eventname, date, time, description /*location, foods, guests*/} = props;
+  const {/*host,*/ eventname, date, time, description, location, /*foods, guests*/} = props;
   const initialForm = {
     potluckid:'', //potluckid?
     eventname: {eventname},
     date: {date},
     time: {time},
-    location: '',//description
+    location: {location},
     description:{description},
     foods: [],//foods
     guests: []//guests
@@ -118,6 +118,14 @@ function EditEvent(props) {
               value = {formValues.time}
               onChange = {changeHandler}
             />
+          </FormGroup>
+        </Col>
+      </Row>
+      <Row>
+      <Col md={2}>
+          <FormGroup>
+            <Label for="exampleDescription">Description</Label>
+            <Input onChange = {changeHandler} type="text" name="description" id="exampleDescription" value = {formValues.description}/>
           </FormGroup>
         </Col>
       </Row>
