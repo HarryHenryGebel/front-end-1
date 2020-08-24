@@ -3,7 +3,7 @@
 //AddEvent will be in the DashBoardNavBar
 import React from "react";
 import { CardDeck } from "reactstrap";
-import Event from "./Event";
+import Event from "../components/items/Event";
 import { connect } from "react-redux";
 
 const mapStateToProps = (state) => {
