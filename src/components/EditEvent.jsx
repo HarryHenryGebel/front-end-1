@@ -10,7 +10,7 @@ function EditEvent(props) {
     date,
     time,
     description,
-    location, foods, guests,
+    location, /*foods, guests,*/
   } = props;
 
   const locationForm = {
@@ -75,8 +75,10 @@ function EditEvent(props) {
 
   const addFood = (e) => {
     e.preventDefault();
-    setFormValues({ formValues, foods: [formValues.foods, food] });
+    setFormValues({ ...formValues, foods: [...formValues.foods, food] });
   };
+
+  console.log(formValues)
 
   return (
     <Form>
@@ -86,23 +88,11 @@ function EditEvent(props) {
             <Label htmlFor="exampleName">Event Name</Label>
             <Input
               type="text"
-              name="name"
+              name="eventname"
               id="exampleName"
               placeholder="with a placeholder"
               defaultValue = {eventname}
               value={formValues.eventname}
-              onChange={changeHandler}
-            />
-          </FormGroup>
-        </Col>
-        <Col md={6}>
-          <FormGroup>
-            <Label htmlFor="examplePhonenumber">Phone Number?</Label>
-            <Input
-              type="Phonenumber"
-              name="Phonenumber"
-              id="examplePhonenumber"
-              placeholder="Phonenumber placeholder"
               onChange={changeHandler}
             />
           </FormGroup>
@@ -202,7 +192,7 @@ function EditEvent(props) {
       <Row>
         <Col md={6}>
           <FormGroup>
-            <Label htmlFor="exampleDescription">Description</Label>
+            <Label htmlFor="exampleDescription">Description
             <Input
               onChange={changeHandler}
               type="text"
@@ -211,6 +201,7 @@ function EditEvent(props) {
               value={formValues.description}
               defaultValue = {description}
             />
+            </Label>
           </FormGroup>
         </Col>
       </Row>
@@ -258,18 +249,19 @@ function EditEvent(props) {
         </Col>
         <Col md={6}>
           <FormGroup>
-            <Label htmlFor="Guestemail">Email</Label>
+            <Label htmlFor="GuestEmail">Email</Label>
             <Input
-              type="email"
+              type="text"
               name="primaryemail"
-              id="email"
+              id="GuestEmail"
               placeholder="email placeholder"
               value={guest.primaryemail}
+              onChange={guestChangeHandler}
             />
           </FormGroup>
         </Col>
       </Row>
-      <Button onSubmit={addGuest} className="bg-addon">
+      <Button onClick={addGuest} className="bg-addon">
         Add Guest
       </Button>
       {formValues.foods.length > 0
@@ -292,6 +284,7 @@ function EditEvent(props) {
           name="foodname"
           id="exampleFoodName"
           placeholder="name"
+          value = {food.foodname}
           onChange={foodChangeHandler}
         />
       </FormGroup>{" "}
@@ -302,10 +295,11 @@ function EditEvent(props) {
           name="description"
           id="exampleFoodName"
           placeholder="name"
+          value = {food.description}
           onChange={foodChangeHandler}
         />
       </FormGroup>
-      <Button className="bg-addon" onSubmit={addFood}>
+      <Button className="bg-addon" onClick={addFood}>
         Add Menu Item
       </Button>
       <FormGroup check>
@@ -314,7 +308,7 @@ function EditEvent(props) {
           Confirm
         </Label>
       </FormGroup>
-      <Button className="bg-confirm">Create Event</Button>
+      <Button className="bg-confirm">Update Event</Button>
       <Button className="bg-cancel">Cancel</Button>
     </Form>
   );
