@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Col, Row, Button, Form, FormGroup, Label, Input } from "reactstrap";
+import { Col, Row, Button, Form, FormGroup, Label, Input, Card, CardBody, CardText, CardFooter } from "reactstrap";
 import { updateEvent } from "../actions";
 import { connect } from "react-redux";
 //Form Validation (same as createEvent)
@@ -10,17 +10,43 @@ function EditEvent(props) {
     date,
     time,
     description,
-    location /*foods, guests*/,
+    location, foods, guests,
   } = props;
+
+  const locationForm = {
+    address: "",
+    address2: "",
+    city: "",
+    state: "",
+    zip: "",
+  };
+
+  const guestForm = {
+    id: "",
+    fname: "",
+    lname: "",
+    primaryemail: "",
+  };
+
+  const foodForm = {
+    foodid: "",
+    foodname: "",
+    description: "",
+  };
+
+  const [food, setFood] = useState(foodForm);
+  const [concatLocation, setConcatLocation] = useState(locationForm);
+  const [guest, setGuests] = useState(guestForm);
+
   const initialForm = {
-    potluckid: "", //potluckid?
-    eventname: "",
+    potluckid: "",
+    eventname: ``,
     date: "",
     time: "",
-    location: "",
-    description: "",
-    foods: [], //foods
-    guests: [], //guests
+    location: `${concatLocation.address} ${concatLocation.address2} ${concatLocation.city}, ${concatLocation.state} ${concatLocation.zip}`,
+    description: ``,
+    foods: foods,
+    guests: guests,
   };
 
   const [formValues, setFormValues] = useState(initialForm);
@@ -29,17 +55,41 @@ function EditEvent(props) {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
 
+  const guestChangeHandler = (e) => {
+    setGuests({ ...guest, [e.target.name]: e.target.value });
+  };
+
+  const foodChangeHandler = (e) => {
+    setFood({ ...food, [e.target.name]: e.target.value });
+  };
+
+  const changeLocationHandler = (e) => {
+    setConcatLocation({ ...concatLocation, [e.target.name]: e.target.value });
+  };
+
+  const addGuest = (e) => {
+    e.preventDefault();
+    setFormValues({ ...formValues, guests: [...formValues.guests, guest] });
+    setGuests(guestForm);
+  };
+
+  const addFood = (e) => {
+    e.preventDefault();
+    setFormValues({ formValues, foods: [formValues.foods, food] });
+  };
+
   return (
     <Form>
       <Row form>
         <Col md={6}>
           <FormGroup>
-            <Label for="exampleName">Event Name</Label>
+            <Label htmlFor="exampleName">Event Name</Label>
             <Input
               type="text"
               name="name"
               id="exampleName"
-              defaultValue={eventname}
+              placeholder="with a placeholder"
+              defaultValue = {eventname}
               value={formValues.eventname}
               onChange={changeHandler}
             />
@@ -47,68 +97,74 @@ function EditEvent(props) {
         </Col>
         <Col md={6}>
           <FormGroup>
-            <Label for="examplePhonenumber">Phone Number?</Label>
+            <Label htmlFor="examplePhonenumber">Phone Number?</Label>
             <Input
               type="Phonenumber"
               name="Phonenumber"
               id="examplePhonenumber"
-              defaultValue="Phonenumber defaultValue"
+              placeholder="Phonenumber placeholder"
               onChange={changeHandler}
             />
           </FormGroup>
         </Col>
       </Row>
       <FormGroup>
-        <Label for="exampleAddress">Address</Label>
+        <Label htmlFor="exampleAddress">Address</Label>
         <Input
           type="text"
           name="address"
           id="exampleAddress"
-          defaultValue="1234 Main St"
-          onChange={changeHandler}
+          placeholder="1234 Main St"
+          defaultValue = {location}
+          value={concatLocation.address}
+          onChange={changeLocationHandler}
         />
       </FormGroup>
       <FormGroup>
-        <Label for="exampleAddress2">Address 2</Label>
+        <Label htmlFor="exampleAddress2">Address 2</Label>
         <Input
           type="text"
           name="address2"
           id="exampleAddress2"
-          defaultValue="Apartment, studio, or floor"
-          onChange={changeHandler}
+          placeholder="Apartment, studio, or floor"
+          value={concatLocation.address2}
+          onChange={changeLocationHandler}
         />
       </FormGroup>
       <Row form>
         <Col md={6}>
           <FormGroup>
-            <Label for="exampleCity">City</Label>
+            <Label htmlFor="exampleCity">City</Label>
             <Input
               type="text"
               name="city"
               id="exampleCity"
-              onChange={changeHandler}
+              value={concatLocation.city}
+              onChange={changeLocationHandler}
             />
           </FormGroup>
         </Col>
         <Col md={4}>
           <FormGroup>
-            <Label for="exampleState">State</Label>
+            <Label htmlFor="exampleState">State</Label>
             <Input
               type="text"
               name="state"
               id="exampleState"
-              onChange={changeHandler}
+              value={concatLocation.state}
+              onChange={changeLocationHandler}
             />
           </FormGroup>
         </Col>
         <Col md={2}>
           <FormGroup>
-            <Label for="exampleZip">Zip</Label>
+            <Label htmlFor="exampleZip">Zip</Label>
             <Input
               type="text"
               name="zip"
               id="exampleZip"
-              onChange={changeHandler}
+              value={concatLocation.zip}
+              onChange={changeLocationHandler}
             />
           </FormGroup>
         </Col>
@@ -116,27 +172,29 @@ function EditEvent(props) {
       <Row form>
         <Col md={6}>
           <FormGroup>
-            <Label for="exampleDate">Date</Label>
+            <Label htmlFor="exampleDate">Date</Label>
             <Input
               type="date"
               name="date"
               id="exampleDate"
-              defaultValue={date}
+              placeholder="with a placeholder"
               value={formValues.date}
               onChange={changeHandler}
+              defaultValue = {date}
             />
           </FormGroup>
         </Col>
         <Col md={6}>
           <FormGroup>
-            <Label for="exampleTime">Time</Label>
+            <Label htmlFor="exampleTime">Time</Label>
             <Input
               type="time"
               name="time"
               id="exampleTime"
-              defaultValue={time}
+              placeholder="time placeholder"
               value={formValues.time}
               onChange={changeHandler}
+              defaultValue = {time}
             />
           </FormGroup>
         </Col>
@@ -144,61 +202,119 @@ function EditEvent(props) {
       <Row>
         <Col md={6}>
           <FormGroup>
-            <Label for="exampleDescription">Description</Label>
+            <Label htmlFor="exampleDescription">Description</Label>
             <Input
               onChange={changeHandler}
               type="text"
               name="description"
               id="exampleDescription"
               value={formValues.description}
+              defaultValue = {description}
             />
           </FormGroup>
         </Col>
       </Row>
-      {/* Show List of Guests on list Here, click to remove? */}
+      {formValues.guests.length > 0
+        ? formValues.guests.map((guest) => (
+            <Card>
+              <CardBody>
+                <CardText>
+                  {guest.fname} {guest.lname}
+                </CardText>
+                <CardText>{guest.primaryemail}</CardText>
+                <CardFooter>
+                  <Button className=".bg-cancel">Remove</Button>
+                </CardFooter>
+              </CardBody>
+            </Card>
+          ))
+        : null}
       <Row form>
         <Col md={6}>
           <FormGroup>
-            <Label for="exampleGuestName">Guest Name</Label>
+            <Label htmlFor="fname">First Name</Label>
             <Input
               type="text"
-              name="guestName"
-              id="exampleGuestName"
-              defaultValue="with a defaultValue"
+              name="fname"
+              id="fname"
+              placeholder="with a placeholder"
+              value={guest.fname}
+              onChange={guestChangeHandler}
             />
           </FormGroup>
         </Col>
         <Col md={6}>
           <FormGroup>
-            <Label for="exampleGuestPhonenumber">Phone Number? or Email?</Label>
+            <Label htmlFor="lname">Last Name</Label>
             <Input
-              type="Phonenumber"
-              name="Phonenumber"
-              id="examplePhonenumber"
-              defaultValue="Phonenumber defaultValue"
+              type="text"
+              name="lname"
+              id="lname"
+              placeholder="with a placeholder"
+              value={guest.lname}
+              onChange={guestChangeHandler}
+            />
+          </FormGroup>
+        </Col>
+        <Col md={6}>
+          <FormGroup>
+            <Label htmlFor="Guestemail">Email</Label>
+            <Input
+              type="email"
+              name="primaryemail"
+              id="email"
+              placeholder="email placeholder"
+              value={guest.primaryemail}
             />
           </FormGroup>
         </Col>
       </Row>
-      <Button className="bg-addon">Add Guest</Button>
-      {/* Show List of Food Items on list Here, click to remove? */}
+      <Button onSubmit={addGuest} className="bg-addon">
+        Add Guest
+      </Button>
+      {formValues.foods.length > 0
+        ? formValues.foods.map((food) => <Card>
+        <CardBody>
+          <CardText>
+            {food.name}
+          </CardText>
+          <CardText>{food.description}</CardText>
+          <CardFooter>
+            <Button className=".bg-cancel">Remove</Button>
+          </CardFooter>
+        </CardBody>
+      </Card>)
+        : null}
       <FormGroup>
-        <Label for="exampleFoodName">Food Name</Label>
+        <Label htmlFor="exampleFoodName">Food Name</Label>
         <Input
           type="text"
-          name="name"
+          name="foodname"
           id="exampleFoodName"
-          defaultValue="name"
+          placeholder="name"
+          onChange={foodChangeHandler}
         />
       </FormGroup>{" "}
-      <Button className="bg-addon">Add Menu Item</Button>
+      <FormGroup>
+        <Label htmlFor="exampleFoodName">Special Information:</Label>
+        <Input
+          type="text"
+          name="description"
+          id="exampleFoodName"
+          placeholder="name"
+          onChange={foodChangeHandler}
+        />
+      </FormGroup>
+      <Button className="bg-addon" onSubmit={addFood}>
+        Add Menu Item
+      </Button>
       <FormGroup check>
         <Input type="checkbox" name="check" id="exampleCheck" />
-        <Label for="exampleCheck" check>
+        <Label htmlFor="exampleCheck" check>
           Confirm
         </Label>
       </FormGroup>
-      <Button className="bg-confirm">Update Event</Button>
+      <Button className="bg-confirm">Create Event</Button>
       <Button className="bg-cancel">Cancel</Button>
     </Form>
   );
