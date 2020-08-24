@@ -7,7 +7,7 @@ function EditUser() {
       <Row form>
         <Col md={6}>
           <FormGroup>
-            <Label for="exampleName">Name</Label>
+            <Label htmlFor="exampleName">Name</Label>
             <Input
               type="name"
               name="name"
@@ -18,7 +18,7 @@ function EditUser() {
         </Col>
         <Col md={6}>
           <FormGroup>
-            <Label for="examplePhonenumber">Phone Number?</Label>
+            <Label htmlFor="examplePhonenumber">Phone Number?</Label>
             <Input
               type="Phonenumber"
               name="Phonenumber"
@@ -29,7 +29,7 @@ function EditUser() {
         </Col>
       </Row>
       <FormGroup>
-        <Label for="exampleAddress">Address</Label>
+        <Label htmlFor="exampleAddress">Address</Label>
         <Input
           type="text"
           name="address"
@@ -38,7 +38,7 @@ function EditUser() {
         />
       </FormGroup>
       <FormGroup>
-        <Label for="exampleAddress2">Address 2</Label>
+        <Label htmlFor="exampleAddress2">Address 2</Label>
         <Input
           type="text"
           name="address2"
@@ -49,25 +49,25 @@ function EditUser() {
       <Row form>
         <Col md={6}>
           <FormGroup>
-            <Label for="exampleCity">City</Label>
+            <Label htmlFor="exampleCity">City</Label>
             <Input type="text" name="city" id="exampleCity" />
           </FormGroup>
         </Col>
         <Col md={4}>
           <FormGroup>
-            <Label for="exampleState">State</Label>
+            <Label htmlFor="exampleState">State</Label>
             <Input type="text" name="state" id="exampleState" />
           </FormGroup>
         </Col>
         <Col md={2}>
           <FormGroup>
-            <Label for="exampleZip">Zip</Label>
+            <Label htmlFor="exampleZip">Zip</Label>
             <Input type="text" name="zip" id="exampleZip" />
           </FormGroup>
         </Col>
       </Row>
       <FormGroup>
-        <Label for="password">
+        <Label htmlFor="password">
           {" "}
           Password:
           <Input type="password" name="password" id="password" />
@@ -75,7 +75,7 @@ function EditUser() {
       </FormGroup>
       <FormGroup check>
         <Input type="checkbox" name="check" id="exampleCheck" />
-        <Label for="exampleCheck" check>
+        <Label htmlFor="exampleCheck" check>
           Confirm
         </Label>
       </FormGroup>
