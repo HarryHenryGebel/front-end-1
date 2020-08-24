@@ -1,5 +1,17 @@
 import React, { useState } from "react";
-import { Col, Row, Button, Form, FormGroup, Label, Input } from "reactstrap";
+import {
+  Col,
+  Row,
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Card,
+  CardBody,
+  CardText,
+  CardFooter,
+} from "reactstrap";
 import { connect } from "react-redux";
 import { createEvent } from "../actions";
 //Form Validation?
@@ -26,7 +38,6 @@ function CreateEvent() {
     foodid: "",
     foodname: "",
     description: "",
-    imageurl: null,
   };
 
   const [food, setFood] = useState(foodForm);
@@ -203,7 +214,21 @@ function CreateEvent() {
           </FormGroup>
         </Col>
       </Row>
-      {/* Show List of Guests added Here, can we click to remove guests? */}
+      {formValues.guests.length > 0
+        ? formValues.guests.map((guest) => (
+            <Card>
+              <CardBody>
+                <CardText>
+                  {guest.fname} {guest.lname}
+                </CardText>
+                <CardText>{guest.primaryemail}</CardText>
+                <CardFooter>
+                  <Button className=".bg-cancel">Remove</Button>
+                </CardFooter>
+              </CardBody>
+            </Card>
+          ))
+        : null}
       <Row form>
         <Col md={6}>
           <FormGroup>
@@ -220,7 +245,7 @@ function CreateEvent() {
         </Col>
         <Col md={6}>
           <FormGroup>
-            <Label htmlFor="lname">First Name</Label>
+            <Label htmlFor="lname">Last Name</Label>
             <Input
               type="text"
               name="lname"
@@ -247,7 +272,19 @@ function CreateEvent() {
       <Button onSubmit={addGuest} className="bg-addon">
         Add Guest
       </Button>
-      {/* Show List of Food Items added Here, can we click to remove food? */}
+      {formValues.foods.length > 0
+        ? formValues.foods.map((food) => <Card>
+        <CardBody>
+          <CardText>
+            {food.name}
+          </CardText>
+          <CardText>{food.description}</CardText>
+          <CardFooter>
+            <Button className=".bg-cancel">Remove</Button>
+          </CardFooter>
+        </CardBody>
+      </Card>)
+        : null}
       <FormGroup>
         <Label htmlFor="exampleFoodName">Food Name</Label>
         <Input
@@ -259,7 +296,7 @@ function CreateEvent() {
         />
       </FormGroup>{" "}
       <FormGroup>
-        <Label htmlFor="exampleFoodName">Food Name</Label>
+        <Label htmlFor="exampleFoodName">Special Information:</Label>
         <Input
           type="text"
           name="description"
