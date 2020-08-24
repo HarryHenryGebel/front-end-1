@@ -12,16 +12,18 @@ import CreateEvent from "./forms/CreateEvent";
 import EditEvent from "./forms/EditEvent";
 import UserProfile from "./UserProfile";
 import EventInvitation from "./EventInvitation";
+import EditUser from "./forms/EditUser";
 
 function DashBoard() {
   return (
     <>
       {/* <EventList />
-      <EventPage /> */}
+      <EventPage />
       <CreateEvent />
-      {/* <EditEvent />
+      <EditEvent />
       <UserProfile />
       <EventInvitation /> */}
+      <EditUser />
     </>
   );
 }

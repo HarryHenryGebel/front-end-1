@@ -1,81 +1,68 @@
-import React from "react";
+import React, { useState } from "react";
 import { Col, Row, Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 function EditUser() {
+  const initialForm = {
+    userid: "",
+    username: "",
+    password: "",
+    primaryemail: "",
+    imageurl: null,
+  };
+
+  const [user, setUser] = useState(initialForm);
+
+  const changeHandler = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
   return (
     <Form>
       <Row form>
         <Col md={6}>
           <FormGroup>
-            <Label for="exampleName">Name</Label>
+            <Label htmlFor="Name">Name</Label>
             <Input
               type="text"
-              name="name"
-              id="exampleName"
+              name="username"
+              id="Name"
               defaultValue="with a defaultValue"
+              value={user.username}
+              onChange={changeHandler}
             />
           </FormGroup>
         </Col>
         <Col md={6}>
           <FormGroup>
-            <Label for="examplePhonenumber">Phone Number?</Label>
+            <Label htmlFor="email">email</Label>
             <Input
-              type="Phonenumber"
-              name="Phonenumber"
-              id="examplePhonenumber"
-              defaultValue="Phonenumber defaultValue"
+              type="email"
+              name="primary"
+              id="email"
+              defaultValue="email defaultValue"
+              value={user.primaryemail}
+              onChange={changeHandler}
             />
           </FormGroup>
         </Col>
       </Row>
+
       <FormGroup>
-        <Label for="exampleAddress">Address</Label>
-        <Input
-          type="text"
-          name="address"
-          id="exampleAddress"
-          defaultValue="1234 Main St"
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label for="exampleAddress2">Address 2</Label>
-        <Input
-          type="text"
-          name="address2"
-          id="exampleAddress2"
-          defaultValue="Apartment, studio, or floor"
-        />
-      </FormGroup>
-      <Row form>
-        <Col md={6}>
-          <FormGroup>
-            <Label for="exampleCity">City</Label>
-            <Input type="text" name="city" id="exampleCity" />
-          </FormGroup>
-        </Col>
-        <Col md={4}>
-          <FormGroup>
-            <Label for="exampleState">State</Label>
-            <Input type="text" name="state" id="exampleState" />
-          </FormGroup>
-        </Col>
-        <Col md={2}>
-          <FormGroup>
-            <Label for="exampleZip">Zip</Label>
-            <Input type="text" name="zip" id="exampleZip" />
-          </FormGroup>
-        </Col>
-      </Row>
-      <FormGroup>
-        <Label for="password">
+        <Label htmlFor="password">
           {" "}
           Password:
-          <Input type="password" name="password" id="password" />
+          <Input
+            type="password"
+            name="password"
+            id="password"
+            value={user.password}
+            onChange={changeHandler}
+          />
         </Label>
       </FormGroup>
       <FormGroup check>
-        <Input type="checkbox" name="check" id="exampleCheck" />
-        <Label for="exampleCheck" check>
+        <Input type="checkbox" name="check" id="Check" />
+        <Label htmlFor="Check" check>
           Confirm
         </Label>
       </FormGroup>
