@@ -1,29 +1,34 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Col, Row, Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { updateEvent } from "../actions";
 import { connect } from "react-redux";
 //Form Validation (same as createEvent)
 
 function EditEvent(props) {
-  const {/*host,*/ eventname, date, time, description, location, /*foods, guests*/} = props;
+  const {
+    /*host,*/ eventname,
+    date,
+    time,
+    description,
+    location /*foods, guests*/,
+  } = props;
   const initialForm = {
-    potluckid:'', //potluckid?
-    eventname: '',
-    date: '',
-    time:'',
-    location: '',
-    description:'',
-    foods: [],//foods
-    guests: []//guests
-  }
-  
-  const [formValues, setFormValues] = useState(initialForm)
-  
-  const changeHandler = (e) => {
-    setFormValues({...formValues, [e.target.name]: e.target.value})
-  }
+    potluckid: "", //potluckid?
+    eventname: "",
+    date: "",
+    time: "",
+    location: "",
+    description: "",
+    foods: [], //foods
+    guests: [], //guests
+  };
 
-  
+  const [formValues, setFormValues] = useState(initialForm);
+
+  const changeHandler = (e) => {
+    setFormValues({ ...formValues, [e.target.name]: e.target.value });
+  };
+
   return (
     <Form>
       <Row form>
@@ -31,12 +36,12 @@ function EditEvent(props) {
           <FormGroup>
             <Label for="exampleName">Event Name</Label>
             <Input
-              type="name"
+              type="text"
               name="name"
               id="exampleName"
               defaultValue={eventname}
-              value = {formValues.eventname}
-              onChange = {changeHandler}
+              value={formValues.eventname}
+              onChange={changeHandler}
             />
           </FormGroup>
         </Col>
@@ -48,7 +53,7 @@ function EditEvent(props) {
               name="Phonenumber"
               id="examplePhonenumber"
               defaultValue="Phonenumber defaultValue"
-              onChange = {changeHandler}
+              onChange={changeHandler}
             />
           </FormGroup>
         </Col>
@@ -60,7 +65,7 @@ function EditEvent(props) {
           name="address"
           id="exampleAddress"
           defaultValue="1234 Main St"
-          onChange = {changeHandler}
+          onChange={changeHandler}
         />
       </FormGroup>
       <FormGroup>
@@ -70,26 +75,41 @@ function EditEvent(props) {
           name="address2"
           id="exampleAddress2"
           defaultValue="Apartment, studio, or floor"
-          onChange = {changeHandler}
+          onChange={changeHandler}
         />
       </FormGroup>
       <Row form>
         <Col md={6}>
           <FormGroup>
             <Label for="exampleCity">City</Label>
-            <Input type="text" name="city" id="exampleCity" onChange = {changeHandler}/>
+            <Input
+              type="text"
+              name="city"
+              id="exampleCity"
+              onChange={changeHandler}
+            />
           </FormGroup>
         </Col>
         <Col md={4}>
           <FormGroup>
             <Label for="exampleState">State</Label>
-            <Input type="text" name="state" id="exampleState" onChange = {changeHandler}/>
+            <Input
+              type="text"
+              name="state"
+              id="exampleState"
+              onChange={changeHandler}
+            />
           </FormGroup>
         </Col>
         <Col md={2}>
           <FormGroup>
             <Label for="exampleZip">Zip</Label>
-            <Input type="text" name="zip" id="exampleZip" onChange = {changeHandler}/>
+            <Input
+              type="text"
+              name="zip"
+              id="exampleZip"
+              onChange={changeHandler}
+            />
           </FormGroup>
         </Col>
       </Row>
@@ -102,8 +122,8 @@ function EditEvent(props) {
               name="date"
               id="exampleDate"
               defaultValue={date}
-              value = {formValues.date}
-              onChange = {changeHandler}
+              value={formValues.date}
+              onChange={changeHandler}
             />
           </FormGroup>
         </Col>
@@ -115,17 +135,23 @@ function EditEvent(props) {
               name="time"
               id="exampleTime"
               defaultValue={time}
-              value = {formValues.time}
-              onChange = {changeHandler}
+              value={formValues.time}
+              onChange={changeHandler}
             />
           </FormGroup>
         </Col>
       </Row>
       <Row>
-      <Col md={6}>
+        <Col md={6}>
           <FormGroup>
             <Label for="exampleDescription">Description</Label>
-            <Input onChange = {changeHandler} type="text" name="description" id="exampleDescription" value = {formValues.description}/>
+            <Input
+              onChange={changeHandler}
+              type="text"
+              name="description"
+              id="exampleDescription"
+              value={formValues.description}
+            />
           </FormGroup>
         </Col>
       </Row>
@@ -135,7 +161,7 @@ function EditEvent(props) {
           <FormGroup>
             <Label for="exampleGuestName">Guest Name</Label>
             <Input
-              type="name"
+              type="text"
               name="guestName"
               id="exampleGuestName"
               defaultValue="with a defaultValue"
@@ -159,7 +185,7 @@ function EditEvent(props) {
       <FormGroup>
         <Label for="exampleFoodName">Food Name</Label>
         <Input
-          type="name"
+          type="text"
           name="name"
           id="exampleFoodName"
           defaultValue="name"

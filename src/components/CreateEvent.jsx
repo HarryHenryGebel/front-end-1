@@ -16,11 +16,20 @@ function CreateEvent() {
   };
 
   const guestForm = {
+    id: "",
     fname: "",
     lname: "",
     primaryemail: "",
   };
 
+  const foodForm = {
+    foodid: "",
+    foodname: "",
+    description: "",
+    imageurl: null,
+  };
+
+  const [food, setFood] = useState(foodForm);
   const [concatLocation, setConcatLocation] = useState(locationForm);
   const [guest, setGuests] = useState(guestForm);
 
@@ -36,13 +45,16 @@ function CreateEvent() {
   };
   const [formValues, setFormValues] = useState(initialForm);
 
-
   const changeHandler = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
-  
+
   const guestChangeHandler = (e) => {
     setGuests({ ...guest, [e.target.name]: e.target.value });
+  };
+
+  const foodChangeHandler = (e) => {
+    setFood({ ...food, [e.target.name]: e.target.value });
   };
 
   const changeLocationHandler = (e) => {
@@ -55,6 +67,11 @@ function CreateEvent() {
     setGuests(guestForm);
   };
 
+  const addFood = (e) => {
+    e.preventDefault();
+    setFormValues({ formValues, foods: [formValues.foods, food] });
+  };
+
   return (
     <Form>
       <Row form>
@@ -62,7 +79,7 @@ function CreateEvent() {
           <FormGroup>
             <Label htmlFor="exampleName">Event Name</Label>
             <Input
-              type="name"
+              type="text"
               name="name"
               id="exampleName"
               placeholder="with a placeholder"
@@ -192,7 +209,7 @@ function CreateEvent() {
           <FormGroup>
             <Label htmlFor="fname">First Name</Label>
             <Input
-              type="name"
+              type="text"
               name="fname"
               id="fname"
               placeholder="with a placeholder"
@@ -205,7 +222,7 @@ function CreateEvent() {
           <FormGroup>
             <Label htmlFor="lname">First Name</Label>
             <Input
-              type="name"
+              type="text"
               name="lname"
               id="lname"
               placeholder="with a placeholder"
@@ -234,13 +251,26 @@ function CreateEvent() {
       <FormGroup>
         <Label htmlFor="exampleFoodName">Food Name</Label>
         <Input
-          type="name"
-          name="name"
+          type="text"
+          name="foodname"
           id="exampleFoodName"
           placeholder="name"
+          onChange={foodChangeHandler}
         />
       </FormGroup>{" "}
-      <Button className="bg-addon">Add Menu Item</Button>
+      <FormGroup>
+        <Label htmlFor="exampleFoodName">Food Name</Label>
+        <Input
+          type="text"
+          name="description"
+          id="exampleFoodName"
+          placeholder="name"
+          onChange={foodChangeHandler}
+        />
+      </FormGroup>
+      <Button className="bg-addon" onSubmit={addFood}>
+        Add Menu Item
+      </Button>
       <FormGroup check>
         <Input type="checkbox" name="check" id="exampleCheck" />
         <Label htmlFor="exampleCheck" check>
