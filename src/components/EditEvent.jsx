@@ -85,11 +85,11 @@ function EditEvent(props) {
       <Row form>
         <Col md={6}>
           <FormGroup>
-            <Label htmlFor="exampleName">Event Name</Label>
+            <Label htmlFor="Name">Event Name</Label>
             <Input
               type="text"
               name="eventname"
-              id="exampleName"
+              id="Name"
               placeholder="with a placeholder"
               defaultValue = {eventname}
               value={formValues.eventname}
@@ -99,11 +99,11 @@ function EditEvent(props) {
         </Col>
       </Row>
       <FormGroup>
-        <Label htmlFor="exampleAddress">Address</Label>
+        <Label htmlFor="Address">Address</Label>
         <Input
           type="text"
           name="address"
-          id="exampleAddress"
+          id="Address"
           placeholder="1234 Main St"
           defaultValue = {location}
           value={concatLocation.address}
@@ -111,11 +111,11 @@ function EditEvent(props) {
         />
       </FormGroup>
       <FormGroup>
-        <Label htmlFor="exampleAddress2">Address 2</Label>
+        <Label htmlFor="Address2">Address 2</Label>
         <Input
           type="text"
           name="address2"
-          id="exampleAddress2"
+          id="Address2"
           placeholder="Apartment, studio, or floor"
           value={concatLocation.address2}
           onChange={changeLocationHandler}
@@ -124,11 +124,11 @@ function EditEvent(props) {
       <Row form>
         <Col md={6}>
           <FormGroup>
-            <Label htmlFor="exampleCity">City</Label>
+            <Label htmlFor="City">City</Label>
             <Input
               type="text"
               name="city"
-              id="exampleCity"
+              id="City"
               value={concatLocation.city}
               onChange={changeLocationHandler}
             />
@@ -136,11 +136,11 @@ function EditEvent(props) {
         </Col>
         <Col md={4}>
           <FormGroup>
-            <Label htmlFor="exampleState">State</Label>
+            <Label htmlFor="State">State</Label>
             <Input
               type="text"
               name="state"
-              id="exampleState"
+              id="State"
               value={concatLocation.state}
               onChange={changeLocationHandler}
             />
@@ -148,11 +148,11 @@ function EditEvent(props) {
         </Col>
         <Col md={2}>
           <FormGroup>
-            <Label htmlFor="exampleZip">Zip</Label>
+            <Label htmlFor="Zip">Zip</Label>
             <Input
               type="text"
               name="zip"
-              id="exampleZip"
+              id="Zip"
               value={concatLocation.zip}
               onChange={changeLocationHandler}
             />
@@ -162,11 +162,11 @@ function EditEvent(props) {
       <Row form>
         <Col md={6}>
           <FormGroup>
-            <Label htmlFor="exampleDate">Date</Label>
+            <Label htmlFor="Date">Date</Label>
             <Input
               type="date"
               name="date"
-              id="exampleDate"
+              id="Date"
               placeholder="with a placeholder"
               value={formValues.date}
               onChange={changeHandler}
@@ -176,11 +176,11 @@ function EditEvent(props) {
         </Col>
         <Col md={6}>
           <FormGroup>
-            <Label htmlFor="exampleTime">Time</Label>
+            <Label htmlFor="Time">Time</Label>
             <Input
               type="time"
               name="time"
-              id="exampleTime"
+              id="Time"
               placeholder="time placeholder"
               value={formValues.time}
               onChange={changeHandler}
@@ -192,12 +192,12 @@ function EditEvent(props) {
       <Row>
         <Col md={6}>
           <FormGroup>
-            <Label htmlFor="exampleDescription">Description
+            <Label htmlFor="Description">Description
             <Input
               onChange={changeHandler}
               type="text"
               name="description"
-              id="exampleDescription"
+              id="Description"
               value={formValues.description}
               defaultValue = {description}
             />
@@ -278,22 +278,22 @@ function EditEvent(props) {
       </Card>)
         : null}
       <FormGroup>
-        <Label htmlFor="exampleFoodName">Food Name</Label>
+        <Label htmlFor="FoodName">Food Name</Label>
         <Input
           type="text"
           name="foodname"
-          id="exampleFoodName"
+          id="FoodName"
           placeholder="name"
           value = {food.foodname}
           onChange={foodChangeHandler}
         />
       </FormGroup>{" "}
       <FormGroup>
-        <Label htmlFor="exampleFoodName">Special Information:</Label>
+        <Label htmlFor="FoodName">Special Information:</Label>
         <Input
           type="text"
           name="description"
-          id="exampleFoodName"
+          id="FoodName"
           placeholder="name"
           value = {food.description}
           onChange={foodChangeHandler}
@@ -303,8 +303,8 @@ function EditEvent(props) {
         Add Menu Item
       </Button>
       <FormGroup check>
-        <Input type="checkbox" name="check" id="exampleCheck" />
-        <Label htmlFor="exampleCheck" check>
+        <Input type="checkbox" name="check" id="Check" />
+        <Label htmlFor="Check" check>
           Confirm
         </Label>
       </FormGroup>
