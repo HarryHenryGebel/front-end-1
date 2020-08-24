@@ -11,7 +11,7 @@
 //ADD ALERT TO CONFIRM UN-RSVP
 //ADD ALERT TO CONFIRM FOOD ADDITION?
 import React, { useState } from "react";
-import EditEvent from './EditEvent'
+import EditEvent from './forms/EditEvent'
 import {
   Container,
   TabContent,

@@ -1,18 +1,24 @@
 import React, { useState } from "react";
-import { Col, Row, Button, Form, FormGroup, Label, Input, Card, CardBody, CardText, CardFooter } from "reactstrap";
-import { updateEvent } from "../actions";
+import {
+  Col,
+  Row,
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Card,
+  CardBody,
+  CardText,
+  CardFooter,
+} from "reactstrap";
 import { connect } from "react-redux";
-//Form Validation (same as createEvent)
+import { createEvent } from "../../actions";
+//Form Validation?
 
-function EditEvent(props) {
-  const {
-    /*host,*/ eventname,
-    date,
-    time,
-    description,
-    location, /*foods, guests,*/
-  } = props;
+//Use Add button to populate a list htmlFor Food and Guests
 
+function CreateEvent() {
   const locationForm = {
     address: "",
     address2: "",
@@ -48,7 +54,6 @@ function EditEvent(props) {
     foods: [],
     guests: [],
   };
-
   const [formValues, setFormValues] = useState(initialForm);
 
   const changeHandler = (e) => {
@@ -76,9 +81,8 @@ function EditEvent(props) {
   const addFood = (e) => {
     e.preventDefault();
     setFormValues({ ...formValues, foods: [...formValues.foods, food] });
+    setFood(foodForm) 
   };
-
-
 
   return (
     <Form>
@@ -88,11 +92,22 @@ function EditEvent(props) {
             <Label htmlFor="Name">Event Name</Label>
             <Input
               type="text"
-              name="eventname"
+              name="name"
               id="Name"
               placeholder="with a placeholder"
-              defaultValue = {eventname}
               value={formValues.eventname}
+              onChange={changeHandler}
+            />
+          </FormGroup>
+        </Col>
+        <Col md={6}>
+          <FormGroup>
+            <Label htmlFor="Phonenumber">Phone Number?</Label>
+            <Input
+              type="Phonenumber"
+              name="Phonenumber"
+              id="Phonenumber"
+              placeholder="Phonenumber placeholder"
               onChange={changeHandler}
             />
           </FormGroup>
@@ -105,7 +120,6 @@ function EditEvent(props) {
           name="address"
           id="Address"
           placeholder="1234 Main St"
-          defaultValue = {location}
           value={concatLocation.address}
           onChange={changeLocationHandler}
         />
@@ -170,7 +184,6 @@ function EditEvent(props) {
               placeholder="with a placeholder"
               value={formValues.date}
               onChange={changeHandler}
-              defaultValue = {date}
             />
           </FormGroup>
         </Col>
@@ -184,7 +197,6 @@ function EditEvent(props) {
               placeholder="time placeholder"
               value={formValues.time}
               onChange={changeHandler}
-              defaultValue = {time}
             />
           </FormGroup>
         </Col>
@@ -192,16 +204,14 @@ function EditEvent(props) {
       <Row>
         <Col md={6}>
           <FormGroup>
-            <Label htmlFor="Description">Description
+            <Label htmlFor="Description">Description</Label>
             <Input
               onChange={changeHandler}
               type="text"
               name="description"
               id="Description"
               value={formValues.description}
-              defaultValue = {description}
             />
-            </Label>
           </FormGroup>
         </Col>
       </Row>
@@ -249,11 +259,11 @@ function EditEvent(props) {
         </Col>
         <Col md={6}>
           <FormGroup>
-            <Label htmlFor="GuestEmail">Email</Label>
+            <Label htmlFor="Guestemail">Email</Label>
             <Input
-              type="text"
+              type="email"
               name="primaryemail"
-              id="GuestEmail"
+              id="email"
               placeholder="email placeholder"
               value={guest.primaryemail}
               onChange={guestChangeHandler}
@@ -289,11 +299,11 @@ function EditEvent(props) {
         />
       </FormGroup>{" "}
       <FormGroup>
-        <Label htmlFor="FoodName">Special Information:</Label>
+        <Label htmlFor="Description">Special Information:</Label>
         <Input
           type="text"
           name="description"
-          id="FoodName"
+          id="Description"
           placeholder="name"
           value = {food.description}
           onChange={foodChangeHandler}
@@ -308,10 +318,10 @@ function EditEvent(props) {
           Confirm
         </Label>
       </FormGroup>
-      <Button className="bg-confirm">Update Event</Button>
+      <Button className="bg-confirm">Create Event</Button>
       <Button className="bg-cancel">Cancel</Button>
     </Form>
   );
 }
 
-export default connect(null, { updateEvent })(EditEvent);
+export default connect(null, { createEvent })(CreateEvent);

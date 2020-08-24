@@ -30,7 +30,7 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import EditEvent from "./EditEvent";
+import EditEvent from "./forms/EditEvent";
 import {deleteEvent} from '../actions'
 import {connect} from 'react-redux'
 

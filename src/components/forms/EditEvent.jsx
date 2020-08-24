@@ -1,24 +1,18 @@
 import React, { useState } from "react";
-import {
-  Col,
-  Row,
-  Button,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  Card,
-  CardBody,
-  CardText,
-  CardFooter,
-} from "reactstrap";
+import { Col, Row, Button, Form, FormGroup, Label, Input, Card, CardBody, CardText, CardFooter } from "reactstrap";
+import { updateEvent } from "../../actions";
 import { connect } from "react-redux";
-import { createEvent } from "../actions";
-//Form Validation?
+//Form Validation (same as createEvent)
 
-//Use Add button to populate a list htmlFor Food and Guests
+function EditEvent(props) {
+  const {
+    /*host,*/ eventname,
+    date,
+    time,
+    description,
+    location, /*foods, guests,*/
+  } = props;
 
-function CreateEvent() {
   const locationForm = {
     address: "",
     address2: "",
@@ -54,6 +48,7 @@ function CreateEvent() {
     foods: [],
     guests: [],
   };
+
   const [formValues, setFormValues] = useState(initialForm);
 
   const changeHandler = (e) => {
@@ -81,8 +76,9 @@ function CreateEvent() {
   const addFood = (e) => {
     e.preventDefault();
     setFormValues({ ...formValues, foods: [...formValues.foods, food] });
-    setFood(foodForm) 
   };
+
+
 
   return (
     <Form>
@@ -92,22 +88,11 @@ function CreateEvent() {
             <Label htmlFor="Name">Event Name</Label>
             <Input
               type="text"
-              name="name"
+              name="eventname"
               id="Name"
               placeholder="with a placeholder"
+              defaultValue = {eventname}
               value={formValues.eventname}
-              onChange={changeHandler}
-            />
-          </FormGroup>
-        </Col>
-        <Col md={6}>
-          <FormGroup>
-            <Label htmlFor="Phonenumber">Phone Number?</Label>
-            <Input
-              type="Phonenumber"
-              name="Phonenumber"
-              id="Phonenumber"
-              placeholder="Phonenumber placeholder"
               onChange={changeHandler}
             />
           </FormGroup>
@@ -120,6 +105,7 @@ function CreateEvent() {
           name="address"
           id="Address"
           placeholder="1234 Main St"
+          defaultValue = {location}
           value={concatLocation.address}
           onChange={changeLocationHandler}
         />
@@ -184,6 +170,7 @@ function CreateEvent() {
               placeholder="with a placeholder"
               value={formValues.date}
               onChange={changeHandler}
+              defaultValue = {date}
             />
           </FormGroup>
         </Col>
@@ -197,6 +184,7 @@ function CreateEvent() {
               placeholder="time placeholder"
               value={formValues.time}
               onChange={changeHandler}
+              defaultValue = {time}
             />
           </FormGroup>
         </Col>
@@ -204,14 +192,16 @@ function CreateEvent() {
       <Row>
         <Col md={6}>
           <FormGroup>
-            <Label htmlFor="Description">Description</Label>
+            <Label htmlFor="Description">Description
             <Input
               onChange={changeHandler}
               type="text"
               name="description"
               id="Description"
               value={formValues.description}
+              defaultValue = {description}
             />
+            </Label>
           </FormGroup>
         </Col>
       </Row>
@@ -259,11 +249,11 @@ function CreateEvent() {
         </Col>
         <Col md={6}>
           <FormGroup>
-            <Label htmlFor="Guestemail">Email</Label>
+            <Label htmlFor="GuestEmail">Email</Label>
             <Input
-              type="email"
+              type="text"
               name="primaryemail"
-              id="email"
+              id="GuestEmail"
               placeholder="email placeholder"
               value={guest.primaryemail}
               onChange={guestChangeHandler}
@@ -299,11 +289,11 @@ function CreateEvent() {
         />
       </FormGroup>{" "}
       <FormGroup>
-        <Label htmlFor="Description">Special Information:</Label>
+        <Label htmlFor="FoodName">Special Information:</Label>
         <Input
           type="text"
           name="description"
-          id="Description"
+          id="FoodName"
           placeholder="name"
           value = {food.description}
           onChange={foodChangeHandler}
@@ -318,10 +308,10 @@ function CreateEvent() {
           Confirm
         </Label>
       </FormGroup>
-      <Button className="bg-confirm">Create Event</Button>
+      <Button className="bg-confirm">Update Event</Button>
       <Button className="bg-cancel">Cancel</Button>
     </Form>
   );
 }
 
-export default connect(null, { createEvent })(CreateEvent);
+export default connect(null, { updateEvent })(EditEvent);
