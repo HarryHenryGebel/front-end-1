@@ -62,14 +62,14 @@ function Event() {
           alt="Card image cap"
         />
         <CardBody>
-          <CardTitle>Event Name</CardTitle>
+          <CardTitle><h2>Event Name</h2></CardTitle>
           <CardSubtitle>Event Host</CardSubtitle>
           <CardText>
             Date and Time <br />
             Location <br />
           </CardText>
           {/*Button will Launch Modal */}
-          <Button onClick={toggle}>Launch Modal</Button>
+          <Button className = "bg-addon" onClick={toggle}>Launch Modal</Button>
         </CardBody>
       </Card>
 
@@ -83,7 +83,7 @@ function Event() {
                 toggleTab("1");
               }}
             >
-              Event
+              <h5>Event</h5>
             </NavLink>
           </NavItem>
           {/*Event Organizer Only */}
@@ -94,7 +94,7 @@ function Event() {
                 toggleTab("2");
               }}
             >
-              Guest List
+              <h5>Guest List</h5>
             </NavLink>
           </NavItem>
           {/* Event Guest Only */}
@@ -105,7 +105,7 @@ function Event() {
                 toggleTab("3");
               }}
             >
-              Food
+              <h5>Food</h5>
             </NavLink>
           </NavItem>
 
@@ -116,7 +116,7 @@ function Event() {
                 toggleTab("4");
               }}
             >
-              Food
+              <h5>Food</h5>
             </NavLink>
           </NavItem>
           <NavItem>
@@ -126,7 +126,7 @@ function Event() {
                 toggleTab("5");
               }}
             >
-              Update Event
+              <h5>Update Event</h5>
             </NavLink>
           </NavItem>
         </Nav>
@@ -145,7 +145,7 @@ function Event() {
                   cupidatat non proident, sunt in culpa qui officia deserunt
                   mollit anim id est laborum.
                   <br />
-                  <Button color="danger" onClick={toggleNested}>
+                  <Button className = "bg-cancel" onClick={toggleNested}>
                     Cancel Event
                   </Button>
                   <Modal
@@ -153,15 +153,15 @@ function Event() {
                     toggle={toggleNested}
                     onClosed={closeAll ? toggle : undefined}
                   >
-                    <ModalHeader>Cancel Event Name?</ModalHeader>
+                    <ModalHeader><h2>Cancel Event Name?</h2></ModalHeader>
                     <ModalBody>
                       Are you sure you wish to cancel this event?
                     </ModalBody>
                     <ModalFooter>
-                      <Button color="primary" onClick={toggleNested}>
+                      <Button className = "bg-confirm" onClick={toggleNested}>
                         Nevermind
                       </Button>{" "}
-                      <Button color="danger" onClick={toggleAll}>
+                      <Button className = "bg-cancel" onClick={toggleAll}>
                         Yes, I'm Sure
                       </Button>
                     </ModalFooter>
@@ -169,7 +169,7 @@ function Event() {
                 </ModalBody>
 
                 <ModalFooter>
-                  <Button color="primary" onClick={toggle}>
+                  <Button className = "bg-cancel" onClick={toggle}>
                     Close
                   </Button>
                 </ModalFooter>
@@ -182,7 +182,7 @@ function Event() {
               <Col sm="6">
                 {/*map guest list to card, for event organizer only? */}
                 <Card>
-                  <CardTitle>Guest Name</CardTitle>
+                  <CardTitle><h6>Guest Name</h6></CardTitle>
                   <CardText>RSVP : True/False; Bringing: Food Item/s</CardText>
                   {/*Button makes phone call */}
                   <Button>Call</Button>
@@ -195,10 +195,10 @@ function Event() {
               <Col sm="6">
                 {/*map foodItem to card, for event guest only? */}
                 <Card>
-                  <CardTitle>Food Item Name</CardTitle>
+                  <CardTitle><h6>Food Item Name</h6></CardTitle>
                   <CardText>RSVP : True/False; Bringing: Food Item/s</CardText>
                   {/*Button makes phone call */}
-                  <Button>Search Recipe?(stretch)</Button>
+                  <Button className = "bg-addon">Search Recipe?(stretch)</Button>
                 </Card>
               </Col>
             </Row>
@@ -209,7 +209,7 @@ function Event() {
               <Col sm="6">
                 {/*map foodItem to card, for event organizer only? */}
                 <Card>
-                  <CardTitle>Menu</CardTitle>
+                  <CardTitle><h6>Menu</h6></CardTitle>
                   <CardText>Filter Have / Need</CardText>
                   {/*Button makes phone call */}
                 </Card>

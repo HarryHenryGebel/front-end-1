@@ -1,11 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&family=Pacifico&display=swap');
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Open Sans Condensed', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Pacifico', cursive;
+  color: #4281A4; 
+}
+
+
+button {
+  border-radius: 0;
+
+}
+
+button:focus {
+  outline: 1px dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+}
+
+input,
+button,
+select,
+optgroup,
+textarea {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+button,
+input {
+  overflow: visible;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+[role="button"] {
+  cursor: pointer;
+}
+
+select {
+  word-wrap: normal;
+}
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+}
+
+button:not(:disabled),
+[type="button"]:not(:disabled),
+[type="reset"]:not(:disabled),
+[type="submit"]:not(:disabled) {
+  cursor: pointer;
+}
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  padding: 0;
+  border-style: none;
+}
+button.close {
+  padding: 0;
+  background-color: transparent;
+  border: 0;
+}
+
+.bg-cancel {
+  background-color: #504746 !important;
+}
+
+a.bg-cancel:hover, a.bg-cancel:focus,
+button.bg-cancel:hover,
+button.bg-cancel:focus {
+  background-color: #786A68 !important;
+}
+
+.bg-confirm {
+  background-color: #027977!important;
+}
+
+a.bg-confirm:hover, a.bg-confirm:focus,
+button.bg-confirm:hover,
+button.bg-confirm:focus {
+  background-color: #027977 !important;
+}
+
+.bg-addon {
+  background-color: #17a2b8!important;
+}
+
+a.bg-addon:hover, a.bg-addon:focus,
+button.bg-addon:hover,
+button.bg-addon:focus {
+  background-color: #03CBC7 !important;
+}
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
