@@ -1,11 +1,9 @@
-import React from 'react'
-import {Col, Row, Button, Form, FormGroup, Label, Input} from 'reactstrap'
+import React from "react";
+import { Col, Row, Button, Form, FormGroup, Label, Input } from "reactstrap";
 
-
-
-function EditUser(){
-    return(
-<Form>
+function EditUser() {
+  return (
+    <Form>
       <Row form>
         <Col md={6}>
           <FormGroup>
@@ -69,9 +67,11 @@ function EditUser(){
         </Col>
       </Row>
       <FormGroup>
-      <Label for = "password"> Password: 
-      <Input type = "password" name="password" id = "password" />
-      </Label>
+        <Label for="password">
+          {" "}
+          Password:
+          <Input type="password" name="password" id="password" />
+        </Label>
       </FormGroup>
       <FormGroup check>
         <Input type="checkbox" name="check" id="exampleCheck" />
@@ -79,11 +79,11 @@ function EditUser(){
           Confirm
         </Label>
       </FormGroup>
-      
-      <Button className = "bg-confirm">Update User</Button>
-      <Button className = "bg-cancel">Cancel</Button>
+
+      <Button className="bg-confirm">Update User</Button>
+      <Button className="bg-cancel">Cancel</Button>
     </Form>
-    )
+  );
 }
 
-export default EditUser
+export default EditUser;
