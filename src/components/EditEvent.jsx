@@ -45,8 +45,8 @@ function EditEvent(props) {
     time: "",
     location: `${concatLocation.address} ${concatLocation.address2} ${concatLocation.city}, ${concatLocation.state} ${concatLocation.zip}`,
     description: ``,
-    foods: foods,
-    guests: guests,
+    foods: [],
+    guests: [],
   };
 
   const [formValues, setFormValues] = useState(initialForm);
