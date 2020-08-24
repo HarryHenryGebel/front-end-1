@@ -1,3 +1,3 @@
-const { axiosWithAuth } = require("./axiosWithAuth");
+import { axiosWithAuth } from "./axiosWithAuth";
 
 export { axiosWithAuth };
