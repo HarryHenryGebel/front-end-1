@@ -1,13 +1,16 @@
+
+
+
 const hostState = {
     userid: '1',
     username: 'avadinner',
     primaryemail: 'avawingfield@email.com',
-    imageurl: 'src/assets/defaultimage.webp',
+    imageurl: '../assets/user.svg',
     potlucks: [
         {
             potluckid:'3',
             eventname: `Dinner at Ava's`,
-            date: '22 March 2021',
+            date: '02/11/2021',
             time: '12:00PM',
             location: `George's Deli`,
             description:`Turn left at the pointy hats!`,

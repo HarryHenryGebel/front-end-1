@@ -3,12 +3,9 @@ import { Col, Row, Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { updateEvent } from "../actions";
 import { connect } from "react-redux";
 //Form Validation (same as createEvent)
-const mapStateToProps = (state) => {
-  return { 
-    username: state.username, 
-    primaryemail: state.primaryemail };
-};
+
 function EditEvent(props) {
+  const {/*host,*/ eventname, date, time, /*location, description foods, guests*/} = props;
 
   return (
     <Form>
@@ -20,7 +17,7 @@ function EditEvent(props) {
               type="name"
               name="name"
               id="exampleName"
-              defaultValue="with a defaultValue"
+              defaultValue={eventname}
             />
           </FormGroup>
         </Col>
@@ -82,7 +79,7 @@ function EditEvent(props) {
               type="date"
               name="date"
               id="exampleDate"
-              defaultValue="with a defaultValue"
+              defaultValue={date}
             />
           </FormGroup>
         </Col>
@@ -93,7 +90,7 @@ function EditEvent(props) {
               type="time"
               name="time"
               id="exampleTime"
-              defaultValue="time defaultValue"
+              defaultValue={time}
             />
           </FormGroup>
         </Col>
@@ -147,4 +144,4 @@ function EditEvent(props) {
   );
 }
 
-export default connect(mapStateToProps, { updateEvent })(EditEvent);
+export default connect(null, { updateEvent })(EditEvent);

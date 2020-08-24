@@ -17,7 +17,7 @@ function EventList(props) {
   return (
     <CardDeck>
       {props.potlucks.map(dinner => {
-        return <Event key = {dinner.potluckid} host = {props.username} eventname = {dinner.eventname} date = {dinner.date} time = {dinner.time} location = {dinner.location} description = {dinner.description} /*foods = {dinner.foods} guests = {dinner.guests}*/ />
+        return <Event  potluckid = {dinner.potluckid} host = {props.username} eventname = {dinner.eventname} date = {dinner.date} time = {dinner.time} location = {dinner.location} description = {dinner.description} /*foods = {dinner.foods} guests = {dinner.guests}*/ />
       })}
       
     </CardDeck>
