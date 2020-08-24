@@ -7,12 +7,20 @@ import { createEvent } from "../actions";
 //Use Add button to populate a list for Food and Guests
 
 function CreateEvent() {
+const locationForm = {
+  address: '',
+  address2: '',
+  city: '',
+  state: '',
+  zip: ''
+}
+const [concatLocation, setConcatLocation] = useState(locationForm)
 const initialForm = {
   potluckid:'',
   eventname: ``,
   date: '',
   time: '',
-  location: ``,
+  location: `${concatLocation.address} ${concatLocation.address2} ${concatLocation.city}, ${concatLocation.state} ${concatLocation.zip}` ,
   description:``,
   foods: [],
   guests: []
@@ -24,6 +32,9 @@ const changeHandler = (e) => {
   setFormValues({...formValues, [e.target.name]: e.target.value})
 }
 
+const changeLocationHandler = (e) => {
+  setConcatLocation({...concatLocation, [e.target.name]: e.target.value})
+}
 
 
   return (
@@ -62,7 +73,8 @@ const changeHandler = (e) => {
           name="address"
           id="exampleAddress"
           placeholder="1234 Main St"
-          onChange = {changeHandler}
+          value = {concatLocation.address}
+          onChange = {changeLocationHandler}
         />
       </FormGroup>
       <FormGroup>
@@ -72,25 +84,27 @@ const changeHandler = (e) => {
           name="address2"
           id="exampleAddress2"
           placeholder="Apartment, studio, or floor"
+          value = {concatLocation.address2}
+          onChange = {changeLocationHandler}
         />
       </FormGroup>
       <Row form>
         <Col md={6}>
           <FormGroup>
             <Label for="exampleCity">City</Label>
-            <Input type="text" name="city" id="exampleCity" onChange = {changeHandler}/>
+            <Input type="text" name="city" id="exampleCity" value = {concatLocation.city} onChange = {changeLocationHandler}/>
           </FormGroup>
         </Col>
         <Col md={4}>
           <FormGroup>
             <Label for="exampleState">State</Label>
-            <Input type="text" name="state" id="exampleState" onChange = {changeHandler} />
+            <Input type="text" name="state" id="exampleState" value = {concatLocation.state} onChange = {changeLocationHandler} />
           </FormGroup>
         </Col>
         <Col md={2}>
           <FormGroup>
             <Label for="exampleZip">Zip</Label>
-            <Input type="text" name="zip" id="exampleZip" onChange = {changeHandler}/>
+            <Input type="text" name="zip" id="exampleZip" value = {concatLocation.zip} onChange = {changeLocationHandler}/>
           </FormGroup>
         </Col>
       </Row>
