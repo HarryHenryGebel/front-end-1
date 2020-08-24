@@ -16,12 +16,12 @@ import EventInvitation from "./EventInvitation";
 function DashBoard() {
   return (
     <>
-      <EventList />
-      <EventPage />
+      {/* <EventList />
+      <EventPage /> */}
       <CreateEvent />
-      <EditEvent />
+      {/* <EditEvent />
       <UserProfile />
-      <EventInvitation />
+      <EventInvitation /> */}
     </>
   );
 }

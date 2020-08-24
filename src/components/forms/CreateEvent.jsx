@@ -49,7 +49,7 @@ function CreateEvent() {
     eventname: ``,
     date: "",
     time: "",
-    location: `${concatLocation.address} ${concatLocation.address2} ${concatLocation.city}, ${concatLocation.state} ${concatLocation.zip}`,
+    location: ``,
     description: ``,
     foods: [],
     guests: [],
@@ -70,8 +70,9 @@ function CreateEvent() {
 
   const changeLocationHandler = (e) => {
     setConcatLocation({ ...concatLocation, [e.target.name]: e.target.value });
+    setFormValues({...formValues, location: `${concatLocation.address} ${concatLocation.address2} ${concatLocation.city}, ${concatLocation.state} ${concatLocation.zip}`})
   };
-
+console.log(formValues)
   const addGuest = (e) => {
     e.preventDefault();
     setFormValues({ ...formValues, guests: [...formValues.guests, guest] });
