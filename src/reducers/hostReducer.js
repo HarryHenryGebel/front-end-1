@@ -1,6 +1,3 @@
-
-
-
 const hostState = {
     userid: '1',
     username: 'avadinner',

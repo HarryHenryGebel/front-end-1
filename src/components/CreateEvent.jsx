@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Col, Row, Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { connect } from "react-redux";
 import { createEvent } from "../actions";
@@ -7,6 +7,25 @@ import { createEvent } from "../actions";
 //Use Add button to populate a list for Food and Guests
 
 function CreateEvent() {
+const initialForm = {
+  potluckid:'',
+  eventname: ``,
+  date: '',
+  time: '',
+  location: ``,
+  description:``,
+  foods: [],
+  guests: []
+}
+
+const [formValues, setFormValues] = useState(initialForm)
+
+const changeHandler = (e) => {
+  setFormValues({...formValues, [e.target.name]: e.target.value})
+}
+
+
+
   return (
     <Form>
       <Row form>
@@ -18,6 +37,8 @@ function CreateEvent() {
               name="name"
               id="exampleName"
               placeholder="with a placeholder"
+              value = {formValues.eventname}
+              onChange = {changeHandler}
             />
           </FormGroup>
         </Col>
@@ -29,6 +50,7 @@ function CreateEvent() {
               name="Phonenumber"
               id="examplePhonenumber"
               placeholder="Phonenumber placeholder"
+              onChange = {changeHandler}
             />
           </FormGroup>
         </Col>
@@ -40,6 +62,7 @@ function CreateEvent() {
           name="address"
           id="exampleAddress"
           placeholder="1234 Main St"
+          onChange = {changeHandler}
         />
       </FormGroup>
       <FormGroup>
@@ -55,31 +78,33 @@ function CreateEvent() {
         <Col md={6}>
           <FormGroup>
             <Label for="exampleCity">City</Label>
-            <Input type="text" name="city" id="exampleCity" />
+            <Input type="text" name="city" id="exampleCity" onChange = {changeHandler}/>
           </FormGroup>
         </Col>
         <Col md={4}>
           <FormGroup>
             <Label for="exampleState">State</Label>
-            <Input type="text" name="state" id="exampleState" />
+            <Input type="text" name="state" id="exampleState" onChange = {changeHandler} />
           </FormGroup>
         </Col>
         <Col md={2}>
           <FormGroup>
             <Label for="exampleZip">Zip</Label>
-            <Input type="text" name="zip" id="exampleZip" />
+            <Input type="text" name="zip" id="exampleZip" onChange = {changeHandler}/>
           </FormGroup>
         </Col>
       </Row>
       <Row form>
         <Col md={6}>
           <FormGroup>
-            <Label for="exampleDate">Date</Label>
+            <Label for="exampleDate" >Date</Label>
             <Input
               type="date"
               name="date"
               id="exampleDate"
               placeholder="with a placeholder"
+              value = {formValues.date}
+              onChange = {changeHandler}
             />
           </FormGroup>
         </Col>
@@ -91,7 +116,17 @@ function CreateEvent() {
               name="time"
               id="exampleTime"
               placeholder="time placeholder"
+              value = {formValues.time}
+              onChange = {changeHandler}
             />
+          </FormGroup>
+        </Col>
+      </Row>
+      <Row>
+      <Col md={2}>
+          <FormGroup>
+            <Label for="exampleDescription">Description</Label>
+            <Input onChange = {changeHandler} type="text" name="description" id="exampleDescription" value = {formValues.description}/>
           </FormGroup>
         </Col>
       </Row>
