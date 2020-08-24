@@ -8,11 +8,11 @@ function EditEvent(props) {
   const {/*host,*/ eventname, date, time, description, location, /*foods, guests*/} = props;
   const initialForm = {
     potluckid:'', //potluckid?
-    eventname: {eventname},
-    date: {date},
-    time: {time},
-    location: {location},
-    description:{description},
+    eventname: '',
+    date: '',
+    time:'',
+    location: '',
+    description:'',
     foods: [],//foods
     guests: []//guests
   }
@@ -34,7 +34,7 @@ function EditEvent(props) {
               type="name"
               name="name"
               id="exampleName"
-              defaultValue={initialForm.eventname}
+              defaultValue={eventname}
               value = {formValues.eventname}
               onChange = {changeHandler}
             />
@@ -101,7 +101,7 @@ function EditEvent(props) {
               type="date"
               name="date"
               id="exampleDate"
-              defaultValue={initialForm.date}
+              defaultValue={date}
               value = {formValues.date}
               onChange = {changeHandler}
             />
@@ -114,7 +114,7 @@ function EditEvent(props) {
               type="time"
               name="time"
               id="exampleTime"
-              defaultValue={initialForm.time}
+              defaultValue={time}
               value = {formValues.time}
               onChange = {changeHandler}
             />
@@ -122,7 +122,7 @@ function EditEvent(props) {
         </Col>
       </Row>
       <Row>
-      <Col md={2}>
+      <Col md={6}>
           <FormGroup>
             <Label for="exampleDescription">Description</Label>
             <Input onChange = {changeHandler} type="text" name="description" id="exampleDescription" value = {formValues.description}/>
