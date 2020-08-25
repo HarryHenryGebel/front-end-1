@@ -10,11 +10,9 @@ export default function DashboardNav () {
           AfterLoginMenu
         </DropdownToggle>
         <DropdownMenu right>
+          {/* map over upcoming events with dropdown and dynamic link */}
           <DropdownItem>
             Upcoming Event1
-          </DropdownItem>
-          <DropdownItem>
-            Upcoming Event2
           </DropdownItem>
           <DropdownItem divider />
           <DropdownItem>

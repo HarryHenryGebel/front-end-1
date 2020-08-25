@@ -7,23 +7,25 @@
 
 import React from "react";
 import EventList from "./EventList";
-import EventPage from "./EventPage";
-import CreateEvent from "./forms/CreateEvent";
-import EditEvent from "./forms/EditEvent";
-import UserProfile from "./UserProfile";
-import EventInvitation from "./EventInvitation";
-import EditUser from "./forms/EditUser";
+import EventPage from './EventPage'
+import UserProfile from './UserProfile'
+import { Route } from "react-router-dom";
+
+//import PrivateRoute
 
 export default function DashBoard() {
   return (
     <>
-      <EventList />
-      <EventPage />
-      <CreateEvent />
-      <EditEvent />
-      <UserProfile />
-      <EventInvitation />
-      <EditUser />
+      {/* if logged in, show EventList. Else, show Login/Registration */}
+      <Route exact path = "/dashboard">
+        <EventList />
+      </Route>
+      <Route path = "/event/:id">
+        <EventPage />
+      </Route>
+      <Route path = "/profile">
+        <UserProfile />
+      </Route>
     </>
   );
 }
