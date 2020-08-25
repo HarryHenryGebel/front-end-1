@@ -25,8 +25,8 @@ import { updateEvent } from "../actions";
 import { connect } from "react-redux";
 
 function EventInvitation(props) {
-  const {potluck} = props;
-  console.log(potluck)
+  const { potluck } = props;
+  console.log(potluck);
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
 
@@ -43,9 +43,14 @@ function EventInvitation(props) {
           <CardTitle>
             <h2>{potluck.eventname}</h2>
           </CardTitle>
-          <CardSubtitle>{potluck.date}, {potluck.time}, {potluck.location}</CardSubtitle>
+          <CardSubtitle>
+            {potluck.date}, {potluck.time}, {potluck.location}
+          </CardSubtitle>
           <CardText>You have been invited to HostName's Event!</CardText>
-          <CardText>Event will be held on {potluck.date} at {potluck.time} at {potluck.location}.</CardText>
+          <CardText>
+            Event will be held on {potluck.date} at {potluck.time} at{" "}
+            {potluck.location}.
+          </CardText>
           <CardText>Please Respond in a Timely Manner</CardText>
           <Button className="bg-confirm" onClick={toggle}>
             Attending
@@ -60,8 +65,15 @@ function EventInvitation(props) {
           <FormGroup>
             <Label htmlFor="exampleSelect">Select</Label>
             <Input type="select" name="select" id="exampleSelect">
-              {potluck.foods.length > 0 ? potluck.foods.map(food => <option value = {food.foodid}>{food.foodname}</option>): null}
-              
+              {potluck.foods.length > 0
+                ? potluck.foods.map(food => {
+                    if (food.isclaimed === false){
+                      return (
+                        <option value={food.foodid}>{food.foodname}</option>
+                      );
+                    }
+                  })
+                : null}
             </Input>
           </FormGroup>
           <Button className="bg-confirm">Confirm</Button>{" "}

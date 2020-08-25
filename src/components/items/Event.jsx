@@ -82,13 +82,14 @@ function Event(props) {
       if (guests[i].isattending === true) {
         guestList.push(guests[i]);
       }
-      if (guests[i].responded === false) {
-        needResponse.push(guests[i]);
+      if (guests[i].responded === false){
+        needResponse.push(guests[i])
       }
     }
   }
 
-  guestSorter();
+
+  guestSorter()
   foodSorter();
   return (
     <>
@@ -223,29 +224,8 @@ function Event(props) {
               <Col sm="6">
                 {/*map guest list to card, for event organizer only? */}
                 <Card>
-                  {guestList.length > 0
-                    ? guestList.map((guest) => (
-                        <>
-                          {guest.fname} {guest.lname} is bringing:{" "}
-                          {guest.isbringing.map((food) => (
-                            <>
-                              {" "}
-                              {food.foodname}
-                              <br />{" "}
-                            </>
-                          ))}
-                          !
-                        </>
-                      ))
-                    : null}
-                  {needResponse.length > 0
-                    ? needResponse.map((guest) => (
-                        <>
-                          You are waiting for responses from : {guest.fname}{" "}
-                          {guest.lname} <br />
-                        </>
-                      ))
-                    : null}
+              {guestList.length > 0 ? guestList.map(guest => <>{guest.fname} {guest.lname} is bringing: {guest.isbringing.map(food => <> {food.foodname}<br /> </>)}!</>): null}
+              {needResponse.length > 0 ? needResponse.map(guest => <>You are waiting for responses from : {guest.fname} {guest.lname} <br /></>): null}  
                 </Card>
               </Col>
             </Row>
