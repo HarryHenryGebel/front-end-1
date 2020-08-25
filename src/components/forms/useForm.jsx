@@ -1,6 +1,6 @@
- import {useState} from 'react'
+import { useState } from "react";
 
- const useForm = (callback) =>{
+const useForm = (callback) => {
   const locationForm = {
     address: "",
     address2: "",
@@ -9,14 +9,14 @@
     zip: "",
   };
 
- const guestForm = {
+  const guestForm = {
     guestid: "",
     fname: "",
     lname: "",
     primaryemail: "",
   };
 
- const foodForm = {
+  const foodForm = {
     foodid: "",
     foodname: "",
     description: "",
@@ -28,11 +28,11 @@
 
   const initialForm = {
     potluckid: "",
-    eventname: '',
+    eventname: "",
     date: "",
     time: "",
-    location: '',
-    description: '',
+    location: "",
+    description: "",
     foods: [],
     guests: [],
   };
@@ -52,7 +52,10 @@
 
   const changeLocationHandler = (e) => {
     setConcatLocation({ ...concatLocation, [e.target.name]: e.target.value });
-    setFormValues({...formValues, location: `${concatLocation.address} ${concatLocation.address2} ${concatLocation.city}, ${concatLocation.state} ${concatLocation.zip}`})
+    setFormValues({
+      ...formValues,
+      location: `${concatLocation.address} ${concatLocation.address2} ${concatLocation.city}, ${concatLocation.state} ${concatLocation.zip}`,
+    });
   };
 
   const addGuest = (e) => {
@@ -64,14 +67,21 @@
   const addFood = (e) => {
     e.preventDefault();
     setFormValues({ ...formValues, foods: [...formValues.foods, food] });
-    setFood(foodForm) 
+    setFood(foodForm);
   };
 
   return {
-    food, concatLocation, guest, formValues, changeHandler, changeLocationHandler, guestChangeHandler, foodChangeHandler, addGuest, addFood
-  }
- }
+    food,
+    concatLocation,
+    guest,
+    formValues,
+    changeHandler,
+    changeLocationHandler,
+    guestChangeHandler,
+    foodChangeHandler,
+    addGuest,
+    addFood,
+  };
+};
 
- export default useForm
- 
- 
+export default useForm;

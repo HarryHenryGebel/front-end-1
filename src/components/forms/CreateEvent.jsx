@@ -11,7 +11,7 @@ import Food from "../items/Food";
 
 function CreateEvent() {
 const {food, concatLocation, guest, formValues, changeHandler, changeLocationHandler, guestChangeHandler, foodChangeHandler, addGuest, addFood} = useForm()
-console.log(formValues)  
+ 
 
 return (
     <Form>
