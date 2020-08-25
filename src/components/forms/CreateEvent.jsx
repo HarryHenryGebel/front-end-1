@@ -7,13 +7,11 @@ import {
   FormGroup,
   Label,
   Input,
-  Card,
-  CardBody,
-  CardText,
-  CardFooter,
 } from "reactstrap";
 import { connect } from "react-redux";
 import { createEvent } from "../../actions";
+import Guest from '../items/Guest'
+import Food from '../items/Food'
 //Form Validation?
 
 //Use Add button to populate a list htmlFor Food and Guests
@@ -28,7 +26,7 @@ function CreateEvent() {
   };
 
   const guestForm = {
-    id: "",
+    guestid: "",
     fname: "",
     lname: "",
     primaryemail: "",
@@ -218,17 +216,7 @@ function CreateEvent() {
       </Row>
       {formValues.guests.length > 0
         ? formValues.guests.map((guest) => (
-            <Card>
-              <CardBody>
-                <CardText>
-                  {guest.fname} {guest.lname}
-                </CardText>
-                <CardText>{guest.primaryemail}</CardText>
-                <CardFooter>
-                  <Button className=".bg-cancel">Remove</Button>
-                </CardFooter>
-              </CardBody>
-            </Card>
+            <Guest key = {guest.guestid}fname = {guest.fname} lname = {guest.lname} primaryemail = {guest.primaryemail}/>
           ))
         : null}
       <Row form>
@@ -276,17 +264,7 @@ function CreateEvent() {
         Add Guest
       </Button>
       {formValues.foods.length > 0
-        ? formValues.foods.map((food) => <Card>
-        <CardBody>
-          <CardText>
-            {food.name}
-          </CardText>
-          <CardText>{food.description}</CardText>
-          <CardFooter>
-            <Button className=".bg-cancel">Remove</Button>
-          </CardFooter>
-        </CardBody>
-      </Card>)
+        ? formValues.foods.map((food) => <Food key = {food.foodid} foodname = {food.foodname} description = {food.description}/>)
         : null}
       <FormGroup>
         <Label htmlFor="FoodName">Food Name</Label>

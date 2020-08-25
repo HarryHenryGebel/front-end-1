@@ -17,12 +17,12 @@ import EditUser from "./forms/EditUser";
 function DashBoard() {
   return (
     <>
-      {/* <EventList />
+      <EventList />
       <EventPage />
       <CreateEvent />
       <EditEvent />
       <UserProfile />
-      <EventInvitation /> */}
+      <EventInvitation />
       <EditUser />
     </>
   );

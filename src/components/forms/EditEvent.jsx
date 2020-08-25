@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { Col, Row, Button, Form, FormGroup, Label, Input, Card, CardBody, CardText, CardFooter } from "reactstrap";
+import { Col, Row, Button, Form, FormGroup, Label, Input} from "reactstrap";
 import { updateEvent } from "../../actions";
 import { connect } from "react-redux";
+import Guest from '../items/Guest'
+import Food from "../items/Food";
 //Form Validation (same as createEvent)
 
 function EditEvent(props) {
@@ -22,7 +24,7 @@ function EditEvent(props) {
   };
 
   const guestForm = {
-    id: "",
+    guestid: "",
     fname: "",
     lname: "",
     primaryemail: "",
@@ -208,17 +210,7 @@ function EditEvent(props) {
       </Row>
       {formValues.guests.length > 0
         ? formValues.guests.map((guest) => (
-            <Card>
-              <CardBody>
-                <CardText>
-                  {guest.fname} {guest.lname}
-                </CardText>
-                <CardText>{guest.primaryemail}</CardText>
-                <CardFooter>
-                  <Button className=".bg-cancel">Remove</Button>
-                </CardFooter>
-              </CardBody>
-            </Card>
+            <Guest key = {guest.guestid}fname = {guest.fname} lname = {guest.lname} primaryemail = {guest.primaryemail}/>
           ))
         : null}
       <Row form>
@@ -266,17 +258,7 @@ function EditEvent(props) {
         Add Guest
       </Button>
       {formValues.foods.length > 0
-        ? formValues.foods.map((food) => <Card>
-        <CardBody>
-          <CardText>
-            {food.name}
-          </CardText>
-          <CardText>{food.description}</CardText>
-          <CardFooter>
-            <Button className=".bg-cancel">Remove</Button>
-          </CardFooter>
-        </CardBody>
-      </Card>)
+        ? formValues.foods.map((food) => <Food key = {food.foodid} foodname = {food.foodname} description = {food.description}/>)
         : null}
       <FormGroup>
         <Label htmlFor="FoodName">Food Name</Label>
