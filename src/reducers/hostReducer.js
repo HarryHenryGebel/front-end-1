@@ -30,59 +30,62 @@ const hostState = {
         {
           foodid: "18",
           foodname: "pizza",
-          isclaimed: false,
+          isclaimed: true,
         },
-        { foodid: "22", foodname: "strange cake", isclaimed: true },
+        { foodid: "22", 
+        foodname: "strange cake", 
+        isclaimed: false },
       ],
-      guests: [{
-        guestid: '57',
-        fname: 'Martin',
-        lname: 'Ricky',
-        primaryemail: "avawingfield@email.com",
-        responded: false,
-        isattending: false,
-        isbringing: []
-      },
-    
-      {
-        guestid: '39',
-        fname: 'Ricky',
-        lname: 'Martin',
-        primaryemail: 'livin@lavidaloca.com',
-        responded: true,
-        isattending: false,
-        isbringing: [
-          {
-            foodid: '86',
-            foodname: 'not available'
-          },
-          {
-            foodid: '13',
-            foodname: 'ice cream'
-          }
-        ]
-      },
-      {
-        guestid: '17',
-        fname: 'Martin',
-        lname: 'Ricky',
-        primaryemail: 'livin@lavidaloca.com',
-        responded: true,
-        isattending: true,
-        isbringing: [
-          {
-            foodid: '86',
-            foodname: 'not available',
-            isclaimed: true,
-          },
-          {
-            foodid: '13',
-            foodname: 'ice cream',
-            isclaimed: true,
-          }
-        ]
-      }
-    ],
+      guests: [
+        {
+          guestid: "57",
+          fname: "Martin",
+          lname: "Ricky",
+          primaryemail: "avawingfield@email.com",
+          responded: false,
+          isattending: false,
+          isbringing: [],
+        },
+
+        {
+          guestid: "39",
+          fname: "Ricky",
+          lname: "Martin",
+          primaryemail: "livin@lavidaloca.com",
+          responded: true,
+          isattending: false,
+          isbringing: [
+            {
+              foodid: "86",
+              foodname: "not available",
+            },
+            {
+              foodid: "13",
+              foodname: "ice cream",
+            },
+          ],
+        },
+        {
+          guestid: "17",
+          fname: "Martin",
+          lname: "Ricky",
+          primaryemail: "livin@lavidaloca.com",
+          responded: true,
+          isattending: true,
+          isbringing: [
+            {
+              foodid: "86",
+              foodname: "not available",
+              isclaimed: true,
+            },
+            {
+              foodid: "13",
+              foodname: "ice cream",
+              isclaimed: true,
+            },
+          ],
+        },
+      ],
       isLoading: false,
       errors: false,
     },
@@ -106,53 +109,54 @@ const hostState = {
           isclaimed: false,
         },
       ],
-      guests: [{
-        guestid: '57',
-        fname: 'Martin',
-        lname: 'Ricky',
-        primaryemail: 'livin@lavidaloca.com',
-        responded: false,
-        isattending: false,
-        isbringing: []
-      },
-    
-      {
-        guestid: '39',
-        fname: 'Ricky',
-        lname: 'Martin',
-        primaryemail: 'livin@lavidaloca.com',
-        responded: true,
-        isattending: false,
-        isbringing: [
-          {
-            foodid: '86',
-            foodname: 'not available'
-          },
-          {
-            foodid: '13',
-            foodname: 'ice cream'
-          }
-        ]
-      },
-      {
-        guestid: '17',
-        fname: 'Martin',
-        lname: 'Ricky',
-        primaryemail: 'livin@lavidaloca.com',
-        responded: true,
-        isattending: true,
-        isbringing: [
-          {
-            foodid: '86',
-            foodname: 'not available'
-          },
-          {
-            foodid: '13',
-            foodname: 'ice cream'
-          }
-        ]
-      }
-    ],
+      guests: [
+        {
+          guestid: "57",
+          fname: "Martin",
+          lname: "Ricky",
+          primaryemail: "livin@lavidaloca.com",
+          responded: false,
+          isattending: false,
+          isbringing: [],
+        },
+
+        {
+          guestid: "39",
+          fname: "Ricky",
+          lname: "Martin",
+          primaryemail: "livin@lavidaloca.com",
+          responded: true,
+          isattending: false,
+          isbringing: [
+            {
+              foodid: "86",
+              foodname: "not available",
+            },
+            {
+              foodid: "13",
+              foodname: "ice cream",
+            },
+          ],
+        },
+        {
+          guestid: "17",
+          fname: "Martin",
+          lname: "Ricky",
+          primaryemail: "livin@lavidaloca.com",
+          responded: true,
+          isattending: true,
+          isbringing: [
+            {
+              foodid: "86",
+              foodname: "not available",
+            },
+            {
+              foodid: "13",
+              foodname: "ice cream",
+            },
+          ],
+        },
+      ],
       isLoading: false,
       errors: false,
     },

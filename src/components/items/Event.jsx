@@ -1,7 +1,6 @@
 //will contain all data for the upcoming event
 //if user === host, card will contain complete GuestList (RSVP true/false)
 //if user === host, card will contain access to foods being brought and who is bringing food
-//if user === host, card will feature a button to call/text guests if they have not RSVP'd
 
 //if user === guest, card will contain googleMap location, date and time
 //if user === guest, card will contain their food obligation && stretch - recipe(Josh)
@@ -77,6 +76,7 @@ function Event(props) {
       }
     }
   }
+
   foodSorter();
   return (
     <>
@@ -215,8 +215,7 @@ function Event(props) {
                     <h6>Guest Name</h6>
                   </CardTitle>
                   <CardText>RSVP : True/False; Bringing: Food Item/s</CardText>
-                  {/*Button makes phone call */}
-                  <Button>Call</Button>
+
                 </Card>
               </Col>
             </Row>
@@ -224,14 +223,14 @@ function Event(props) {
           <TabPane tabId="3">
             <Row>
               <Col sm="6">
-                {/*map foodItem to card, for event guest only? */}
+
                 <Card>
                   <CardTitle>
                     <h6>Menu</h6>
                   </CardTitle>
 
                   {claimedFood.length > 0
-                    ? unclaimedFood.map((food) => (
+                    ? claimedFood.map((food) => (
                         <>
                           <Food key={food.foodid} foodname={food.foodname} />{" "}
                           <Button className="bg-addon">Search Recipe?(stretch)</Button>{" "}
@@ -248,7 +247,7 @@ function Event(props) {
           <TabPane tabId="4">
             <Row>
               <Col sm="6">
-                {/*map foodItem to card, for event organizer only? */}
+
                 <Card>
                   {unclaimedFood.length > 0
                     ? unclaimedFood.map((food) => (
