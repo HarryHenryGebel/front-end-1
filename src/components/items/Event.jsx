@@ -49,6 +49,8 @@ function Event(props) {
   const [nestedModal, setNestedModal] = useState(false);
   const [closeAll, setCloseAll] = useState(false);
   const [activeTab, setActiveTab] = useState("1");
+  let claimedFood = [];
+  let unclaimedFood = [];
 
   const toggle = () => setModal(!modal);
   const toggleNested = () => {
@@ -64,9 +66,6 @@ function Event(props) {
     if (activeTab !== tab) setActiveTab(tab);
   };
 
-  let claimedFood = [];
-  let unclaimedFood = [];
-
   function foodSorter() {
     for (let i = 0; i < foods.length; i++) {
       if (foods[i].isclaimed === true) {
@@ -76,7 +75,20 @@ function Event(props) {
       }
     }
   }
+  let guestList = [];
+  let needResponse = [];
+  function guestSorter() {
+    for (let i = 0; i < guests.length; i++) {
+      if (guests[i].isattending === true) {
+        guestList.push(guests[i]);
+      }
+      if (guests[i].responded === false) {
+        needResponse.push(guests[i]);
+      }
+    }
+  }
 
+  guestSorter();
   foodSorter();
   return (
     <>
@@ -211,11 +223,29 @@ function Event(props) {
               <Col sm="6">
                 {/*map guest list to card, for event organizer only? */}
                 <Card>
-                  <CardTitle>
-                    <h6>Guest Name</h6>
-                  </CardTitle>
-                  <CardText>RSVP : True/False; Bringing: Food Item/s</CardText>
-
+                  {guestList.length > 0
+                    ? guestList.map((guest) => (
+                        <>
+                          {guest.fname} {guest.lname} is bringing:{" "}
+                          {guest.isbringing.map((food) => (
+                            <>
+                              {" "}
+                              {food.foodname}
+                              <br />{" "}
+                            </>
+                          ))}
+                          !
+                        </>
+                      ))
+                    : null}
+                  {needResponse.length > 0
+                    ? needResponse.map((guest) => (
+                        <>
+                          You are waiting for responses from : {guest.fname}{" "}
+                          {guest.lname} <br />
+                        </>
+                      ))
+                    : null}
                 </Card>
               </Col>
             </Row>
@@ -223,7 +253,6 @@ function Event(props) {
           <TabPane tabId="3">
             <Row>
               <Col sm="6">
-
                 <Card>
                   <CardTitle>
                     <h6>Menu</h6>
@@ -233,12 +262,12 @@ function Event(props) {
                     ? claimedFood.map((food) => (
                         <>
                           <Food key={food.foodid} foodname={food.foodname} />{" "}
-                          <Button className="bg-addon">Search Recipe?(stretch)</Button>{" "}
+                          <Button className="bg-addon">
+                            Search Recipe?(stretch)
+                          </Button>{" "}
                         </>
                       ))
                     : null}
-
-                  
                 </Card>
               </Col>
             </Row>
@@ -247,13 +276,12 @@ function Event(props) {
           <TabPane tabId="4">
             <Row>
               <Col sm="6">
-
                 <Card>
                   {unclaimedFood.length > 0
                     ? unclaimedFood.map((food) => (
                         <>
                           <Food key={food.foodid} foodname={food.foodname} />{" "}
-                          <Button className = 'bg-addon'>Claim</Button>{" "}
+                          <Button className="bg-addon">Claim</Button>{" "}
                         </>
                       ))
                     : null}
