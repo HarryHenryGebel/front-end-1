@@ -9,7 +9,6 @@ import { connect } from "react-redux";
 const mapStateToProps = (state) => {
   return {
     username: state.username,
-    primaryemail: state.primaryemail,
     potlucks: state.potlucks,
   };
 };
@@ -26,11 +25,10 @@ function EventList(props) {
             date={dinner.date}
             time={dinner.time}
             location={dinner.location}
-            description={
-              dinner.description
-            }
-             foods = {dinner.foods} guests = {dinner.guests}
-             ishost = {dinner.ishost}
+            description={dinner.description}
+            foods={dinner.foods}
+            guests={dinner.guests}
+            ishost={dinner.ishost}
           />
         );
       })}

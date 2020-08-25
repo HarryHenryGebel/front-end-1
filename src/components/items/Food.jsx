@@ -7,7 +7,6 @@ export default function Food(props) {
     <Card>
       <CardBody>
         <h3>{foodname}</h3>
-
       </CardBody>
     </Card>
   );

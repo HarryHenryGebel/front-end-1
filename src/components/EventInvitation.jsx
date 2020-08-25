@@ -26,7 +26,6 @@ import { connect } from "react-redux";
 
 function EventInvitation(props) {
   const { potluck } = props;
-  console.log(potluck);
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
 

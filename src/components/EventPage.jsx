@@ -141,7 +141,7 @@ let potluck = []
               <Row>
                 <Col sm="12">
               <p>{potluck[0].eventname} will be held at {potluck[0].time} on {potluck[0].date} at {potluck[0].location}.</p>
-              <p>You have told the host that you will be bringing, {potluck[0].foods.map(food=> console.log(food.foodname))}</p>
+              <p>You have told the host that you will be bringing, {potluck[0].foods.map(food=> <>{food.foodname}</>)}</p>
                 </Col>
               </Row>
             </TabPane>
@@ -149,7 +149,7 @@ let potluck = []
             <TabPane tabId="2">
               <Row>
                 <Col sm="12">
-                  {potluck[0].guests.map(guest => console.log(`${guest.fname}`))}
+              {potluck[0].guests.map(guest => <>{guest.fname} {guest.lname}<br /></>)}
                 </Col>
               </Row>
             </TabPane>
