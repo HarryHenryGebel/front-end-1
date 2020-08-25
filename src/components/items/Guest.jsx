@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Card, CardBody, CardText, CardFooter } from "reactstrap";
 
-function Guest(props) {
+export default function Guest(props) {
   const { fname, lname, primaryemail } = [props];
 
   return (
@@ -18,5 +18,3 @@ function Guest(props) {
     </Card>
   );
 }
-
-export default Guest;
