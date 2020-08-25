@@ -1,21 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&family=Pacifico&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&family=Pacifico&display=swap");
 
 body {
   margin: 0;
-  font-family: 'Open Sans Condensed', sans-serif;
+  font-family: "Open Sans Condensed", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Pacifico', cursive;
-  color: #4281A4; 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Pacifico", cursive;
+  color: #4281a4;
 }
-
 
 button {
   border-radius: 0;
-
 }
 
 button:focus {
@@ -83,34 +86,36 @@ button.close {
   background-color: #504746 !important;
 }
 
-a.bg-cancel:hover, a.bg-cancel:focus,
+a.bg-cancel:hover,
+a.bg-cancel:focus,
 button.bg-cancel:hover,
 button.bg-cancel:focus {
-  background-color: #786A68 !important;
+  background-color: #786a68 !important;
 }
 
 .bg-confirm {
-  background-color: #027977!important;
+  background-color: #027977 !important;
 }
 
-a.bg-confirm:hover, a.bg-confirm:focus,
+a.bg-confirm:hover,
+a.bg-confirm:focus,
 button.bg-confirm:hover,
 button.bg-confirm:focus {
   background-color: #027977 !important;
 }
 
 .bg-addon {
-  background-color: #17a2b8!important;
+  background-color: #17a2b8 !important;
 }
 
-a.bg-addon:hover, a.bg-addon:focus,
+a.bg-addon:hover,
+a.bg-addon:focus,
 button.bg-addon:hover,
 button.bg-addon:focus {
-  background-color: #03CBC7 !important;
+  background-color: #03cbc7 !important;
 }
 
-
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
