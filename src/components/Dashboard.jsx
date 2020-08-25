@@ -17,7 +17,7 @@ export default function DashBoard() {
   return (
     <>
       {/* if logged in, show EventList. Else, show Login/Registration */}
-      <Route exact path = "/dashboard">
+      <Route path = "/dashboard">
         <EventList />
       </Route>
       <Route path = "/event/:id">
