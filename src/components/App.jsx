@@ -15,7 +15,6 @@ export default function App() {
       <Route path="/event/:id">
         <EventPage />
       </Route>
-      <Route path="/profile" component={UserProfile} />
     </>
   );
 }
