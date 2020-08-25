@@ -8,20 +8,22 @@
 import React from "react";
 import EventList from "./EventList";
 import EventPage from "./EventPage";
-import CreateEvent from "./CreateEvent";
-import EditEvent from "./EditEvent";
+import CreateEvent from "./forms/CreateEvent";
+import EditEvent from "./forms/EditEvent";
 import UserProfile from "./UserProfile";
 import EventInvitation from "./EventInvitation";
+import EditUser from "./forms/EditUser";
 
 function DashBoard() {
   return (
     <>
-      <EventList />
+      {/* <EventList />
       <EventPage />
       <CreateEvent />
       <EditEvent />
       <UserProfile />
-      <EventInvitation />
+      <EventInvitation /> */}
+      <EditUser />
     </>
   );
 }

@@ -8,7 +8,7 @@ import {
   ModalBody,
   ModalFooter,
 } from "reactstrap";
-import EditUser from "./EditUser";
+import EditUser from "../components/forms/EditUser";
 import Event from "./Event";
 import {connect} from 'react-redux'
 //All userInformation stored on Profile Page
