@@ -8,8 +8,8 @@ import {
   ModalBody,
   ModalFooter,
 } from "reactstrap";
-import EditUser from "../components/forms/EditUser";
-import Event from "../components/items/Event";
+import EditUser from "./forms/EditUser";
+import Event from "./items/Event";
 import { connect } from "react-redux";
 
 //All userInformation stored on Profile Page
