@@ -3,7 +3,7 @@ import Dashboard from "./Dashboard";
 import NavBar from "./Nav/NavBar.jsx";
 import EventPage from "./EventPage";
 import UserProfile from "./UserProfile";
-import { Route, Link } from "react-router-dom";
+import { Route } from "react-router-dom";
 
 export default function App() {
   return (
