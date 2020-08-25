@@ -1,26 +1,89 @@
-import React from "react";
-import { Col, Row, Button, Form, FormGroup, Label, Input } from "reactstrap";
+import React, { useState } from "react";
+import {
+  Col,
+  Row,
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+
+} from "reactstrap";
 import { connect } from "react-redux";
 import { createEvent } from "../../actions";
-import {
-  formValues,
-  changeHandler,
-  concatLocation,
-  changeLocationHandler,
-  guest,
-  guestChangeHandler,
-  addGuest,
-  food,
-  foodChangeHandler,
-  addFood,
-} from "./DryForm";
-import Guest from "../items/Guest";
-import Food from "../items/Food";
+import Guest from '../items/Guest'
+import Food from '../items/Food'
 //Form Validation?
 
 //Use Add button to populate a list htmlFor Food and Guests
 
 function CreateEvent() {
+  const locationForm = {
+    address: "",
+    address2: "",
+    city: "",
+    state: "",
+    zip: "",
+  };
+
+  const guestForm = {
+    guestid: "",
+    fname: "",
+    lname: "",
+    primaryemail: "",
+  };
+
+  const foodForm = {
+    foodid: "",
+    foodname: "",
+    description: "",
+  };
+
+  const [food, setFood] = useState(foodForm);
+  const [concatLocation, setConcatLocation] = useState(locationForm);
+  const [guest, setGuests] = useState(guestForm);
+
+  const initialForm = {
+    potluckid: "",
+    eventname: ``,
+    date: "",
+    time: "",
+    location: ``,
+    description: ``,
+    foods: [],
+    guests: [],
+  };
+  const [formValues, setFormValues] = useState(initialForm);
+
+  const changeHandler = (e) => {
+    setFormValues({ ...formValues, [e.target.name]: e.target.value });
+  };
+
+  const guestChangeHandler = (e) => {
+    setGuests({ ...guest, [e.target.name]: e.target.value });
+  };
+
+  const foodChangeHandler = (e) => {
+    setFood({ ...food, [e.target.name]: e.target.value });
+  };
+
+  const changeLocationHandler = (e) => {
+    setConcatLocation({ ...concatLocation, [e.target.name]: e.target.value });
+    setFormValues({...formValues, location: `${concatLocation.address} ${concatLocation.address2} ${concatLocation.city}, ${concatLocation.state} ${concatLocation.zip}`})
+  };
+
+  const addGuest = (e) => {
+    e.preventDefault();
+    setFormValues({ ...formValues, guests: [...formValues.guests, guest] });
+    setGuests(guestForm);
+  };
+
+  const addFood = (e) => {
+    e.preventDefault();
+    setFormValues({ ...formValues, foods: [...formValues.foods, food] });
+    setFood(foodForm) 
+  };
+
   return (
     <Form>
       <Row form>
@@ -39,12 +102,12 @@ function CreateEvent() {
         </Col>
         <Col md={6}>
           <FormGroup>
-            <Label htmlFor="email">Phone Number?</Label>
+            <Label htmlFor="Phonenumber">Phone Number?</Label>
             <Input
-              type="email"
-              name="email"
-              id="email"
-              placeholder="email placeholder"
+              type="Phonenumber"
+              name="Phonenumber"
+              id="Phonenumber"
+              placeholder="Phonenumber placeholder"
               onChange={changeHandler}
             />
           </FormGroup>
@@ -154,12 +217,7 @@ function CreateEvent() {
       </Row>
       {formValues.guests.length > 0
         ? formValues.guests.map((guest) => (
-            <Guest
-              key={guest.guestid}
-              fname={guest.fname}
-              lname={guest.lname}
-              primaryemail={guest.primaryemail}
-            />
+            <Guest key = {guest.guestid}fname = {guest.fname} lname = {guest.lname} primaryemail = {guest.primaryemail}/>
           ))
         : null}
       <Row form>
@@ -207,13 +265,7 @@ function CreateEvent() {
         Add Guest
       </Button>
       {formValues.foods.length > 0
-        ? formValues.foods.map((food) => (
-            <Food
-              key={food.foodid}
-              foodname={food.foodname}
-              description={food.description}
-            />
-          ))
+        ? formValues.foods.map((food) => <Food key = {food.foodid} foodname = {food.foodname} description = {food.description}/>)
         : null}
       <FormGroup>
         <Label htmlFor="FoodName">Food Name</Label>
@@ -222,7 +274,7 @@ function CreateEvent() {
           name="foodname"
           id="FoodName"
           placeholder="name"
-          value={food.foodname}
+          value = {food.foodname}
           onChange={foodChangeHandler}
         />
       </FormGroup>{" "}
@@ -233,7 +285,7 @@ function CreateEvent() {
           name="description"
           id="Description"
           placeholder="name"
-          value={food.description}
+          value = {food.description}
           onChange={foodChangeHandler}
         />
       </FormGroup>

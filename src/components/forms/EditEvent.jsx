@@ -1,21 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Col, Row, Button, Form, FormGroup, Label, Input} from "reactstrap";
 import { updateEvent } from "../../actions";
 import { connect } from "react-redux";
 import Guest from '../items/Guest'
 import Food from "../items/Food";
-import {
-  formValues,
-  changeHandler,
-  concatLocation,
-  changeLocationHandler,
-  guest,
-  guestChangeHandler,
-  addGuest,
-  food,
-  foodChangeHandler,
-  addFood,
-} from "./DryForm";
+
 //Form Validation (same as createEvent)
 
 function EditEvent(props) {
@@ -26,6 +15,74 @@ function EditEvent(props) {
     description,
     location, /*foods, guests,*/
   } = props;
+
+  const locationForm = {
+    address: "",
+    address2: "",
+    city: "",
+    state: "",
+    zip: "",
+  };
+
+  const guestForm = {
+    guestid: "",
+    fname: "",
+    lname: "",
+    primaryemail: "",
+  };
+
+  const foodForm = {
+    foodid: "",
+    foodname: "",
+    description: "",
+  };
+
+  const [food, setFood] = useState(foodForm);
+  const [concatLocation, setConcatLocation] = useState(locationForm);
+  const [guest, setGuests] = useState(guestForm);
+
+  const initialForm = {
+    potluckid: "",
+    eventname: ``,
+    date: "",
+    time: "",
+    location: `${concatLocation.address} ${concatLocation.address2} ${concatLocation.city}, ${concatLocation.state} ${concatLocation.zip}`,
+    description: ``,
+    foods: [],
+    guests: [],
+  };
+
+  const [formValues, setFormValues] = useState(initialForm);
+
+  const changeHandler = (e) => {
+    setFormValues({ ...formValues, [e.target.name]: e.target.value });
+  };
+
+  const guestChangeHandler = (e) => {
+    setGuests({ ...guest, [e.target.name]: e.target.value });
+  };
+
+  const foodChangeHandler = (e) => {
+    setFood({ ...food, [e.target.name]: e.target.value });
+  };
+
+  const changeLocationHandler = (e) => {
+    setConcatLocation({ ...concatLocation, [e.target.name]: e.target.value });
+    setFormValues({...formValues, location: `${concatLocation.address} ${concatLocation.address2} ${concatLocation.city}, ${concatLocation.state} ${concatLocation.zip}`})
+  };
+
+  const addGuest = (e) => {
+    e.preventDefault();
+    setFormValues({ ...formValues, guests: [...formValues.guests, guest] });
+    setGuests(guestForm);
+  };
+
+  const addFood = (e) => {
+    e.preventDefault();
+    setFormValues({ ...formValues, foods: [...formValues.foods, food] });
+  };
+
+
 
   return (
     <Form>
