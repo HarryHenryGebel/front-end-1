@@ -19,4 +19,4 @@ function Guest(props) {
   );
 }
 
-export default Guest
+export default Guest;

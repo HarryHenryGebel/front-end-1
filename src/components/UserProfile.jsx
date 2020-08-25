@@ -9,8 +9,9 @@ import {
   ModalFooter,
 } from "reactstrap";
 import EditUser from "../components/forms/EditUser";
-import Event from '../components/items/Event';
-import {connect} from 'react-redux'
+import Event from "../components/items/Event";
+import { connect } from "react-redux";
+
 //All userInformation stored on Profile Page
 //Next user
 //Open user-Card for more information
@@ -84,4 +85,4 @@ function UserProfile(props) {
   );
 }
 
-export default connect (mapStateToProps, {})(UserProfile);
+export default connect(mapStateToProps, {})(UserProfile);
