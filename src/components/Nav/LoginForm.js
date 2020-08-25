@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, FormGroup, Label, Input, Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { loginSchema } from "./yupSchemas"
 import * as yup from "yup"
+import axios from "axios"
 //import {useHistory} from 'react-router-dom'
 //push /
 export default function LoginForm() {
@@ -12,21 +14,67 @@ export default function LoginForm() {
     terms: true
   })
   const [buttonDisabled, setButtonDisabled] = useState(true)
-  const formSubmit = () => {}
+  const [errors, setErrors] = useState({
+    email: "",
+    password: ""
+  })
+  const [post, setPost] = useState([]);
+
+  useEffect(() => {
+    console.log('form state change')
+    loginSchema.isValid(formState).then(valid => {
+      // console.log('valid?', valid)
+			setButtonDisabled(!valid);
+    });
+  }, [formState]);
+
+  const formSubmit = (e) => {
+    e.preventDefault();
+    setFormState({
+      email: "",
+      password: ""
+    });
+    axios
+      .post("https://reqres.in/api/users", formState)
+      .then(res => {
+        setPost(res.data);
+        console.log("success", post);
+      })
+      .catch(err => console.log(err.response));
+  }
+
+  const validateChange = e => {
+    yup
+      .reach(loginSchema, e.target.name)
+      .validate(e.target.value)
+      .then(valid => {
+        setErrors({...errors, [e.target.name]: ""});
+        console.log('ERRORS', errors)
+      })
+      .catch(err => {
+        // add error by name of input since value breaks validation
+        setErrors({...errors, [e.target.name]: err.errors[0]});
+        console.log('ERRORS', errors, errors.email.length)
+      });
+  };
   const inputChange = (e) => {
+    e.persist();
     const newFormData = {
       ...formState, [e.target.name]: e.target.value
     };
-    //validateChange(e);
+    validateChange(e);
     setFormState(newFormData)
   }
+
+
   return (
     <div>
       <Button className="bg-addon" onClick={toggleModal}>Login</Button>
+      <Form inline onSubmit={formSubmit}>
       <Modal isOpen={modal} toggle={toggleModal}>
         <ModalHeader toggle={toggleModal}>Login</ModalHeader>
         <ModalBody>
-          <Form inline onSubmit={formSubmit}>
+          {/* <Form inline onSubmit={formSubmit}> */}
             <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
               <Label htmlFor="email" className="mr-sm-2">
                 Email
@@ -39,6 +87,8 @@ export default function LoginForm() {
                 onChange={inputChange}
                 placeholder="something@idk.cool"
               />
+              {/* for the love of potlucks, style these to go fit in the modal */}
+              {errors.email.length > 0 ? <p className="error">{errors.email}</p> : null}
             </FormGroup>
             <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
               <Label htmlFor="password" className="mr-sm-2">
@@ -52,18 +102,22 @@ export default function LoginForm() {
                 onChange={inputChange}
                 placeholder="don't share me!"
               />
+              {/* for the love of potlucks, style these to go fit in the modal */}
+              {errors.password.length > 0 ? <p className="error">{errors.password}</p> : null}
             </FormGroup>
-          </Form>
+          {/* </Form> */}
         </ModalBody>
         <ModalFooter>
+        <pre>{JSON.stringify(post, null, 2)}</pre>
           <Button
             color="primary"
             type="submit"
             disabled={buttonDisabled}
-            onClick={toggleModal}
+            // onClick={toggleModal}
           >Submit</Button>{' '}
         </ModalFooter>
       </Modal>
+        </Form>
     </div>
   )
 }
