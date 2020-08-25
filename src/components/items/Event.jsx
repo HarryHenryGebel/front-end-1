@@ -16,7 +16,6 @@ import {
   CardImg,
   CardTitle,
   CardText,
-  CardSubtitle,
   CardBody,
   Modal,
   ModalHeader,
@@ -33,6 +32,7 @@ import {
 import EditEvent from "../forms/EditEvent";
 import { deleteEvent } from "../../actions";
 import { connect } from "react-redux";
+import Food from "./Food";
 
 function Event(props) {
   const {
@@ -65,6 +65,19 @@ function Event(props) {
     if (activeTab !== tab) setActiveTab(tab);
   };
 
+  let claimedFood = [];
+  let unclaimedFood = [];
+
+  function foodSorter() {
+    for (let i = 0; i < foods.length; i++) {
+      if (foods[i].isclaimed === true) {
+        claimedFood.push(foods[i]);
+      } else {
+        unclaimedFood.push(foods[i]);
+      }
+    }
+  }
+  foodSorter();
   return (
     <>
       <Card>
@@ -216,10 +229,17 @@ function Event(props) {
                   <CardTitle>
                     <h6>Menu</h6>
                   </CardTitle>
+
+                  {claimedFood.length > 0
+                    ? unclaimedFood.map((food) => (
+                        <>
+                          <Food key={food.foodid} foodname={food.foodname} />{" "}
+                          <Button className="bg-addon">Search Recipe?(stretch)</Button>{" "}
+                        </>
+                      ))
+                    : null}
+
                   
-                  <CardText>RSVP : True/False; Bringing: Food Item/s</CardText>
-                  
-                  <Button className="bg-addon">Search Recipe?(stretch)</Button>
                 </Card>
               </Col>
             </Row>
@@ -230,11 +250,14 @@ function Event(props) {
               <Col sm="6">
                 {/*map foodItem to card, for event organizer only? */}
                 <Card>
-                  <CardTitle>
-                    <h6>Menu</h6>
-                  </CardTitle>
-                  <CardText>Filter Have / Need</CardText>
-                  {/*Button makes phone call */}
+                  {unclaimedFood.length > 0
+                    ? unclaimedFood.map((food) => (
+                        <>
+                          <Food key={food.foodid} foodname={food.foodname} />{" "}
+                          <Button className = 'bg-addon'>Claim</Button>{" "}
+                        </>
+                      ))
+                    : null}
                 </Card>
               </Col>
             </Row>
