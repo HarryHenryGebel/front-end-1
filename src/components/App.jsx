@@ -1,13 +1,13 @@
 import React from "react";
-import DashBoard from "./Dashboard";
-import NavBar from "./Nav/NavBar"
+import Dashboard from "./Dashboard";
+import NavBar from "./Nav/NavBar";
 
 export default function App() {
   return (
     <>
       <NavBar />
       {/* Private Routes: DashBoardNavBar */}
-      <DashBoard />
+      <Dashboard />
       <center>
         <h1>WIREFRAMING IS MERELY A SUGGESTION AND ANYTHING CAN BE CHANGED!</h1>
         <h2>I PROMISE MY FEELINGS WILL NOT BE HURT</h2>

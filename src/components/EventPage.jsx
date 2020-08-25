@@ -11,7 +11,7 @@
 //ADD ALERT TO CONFIRM UN-RSVP
 //ADD ALERT TO CONFIRM FOOD ADDITION?
 import React, { useState } from "react";
-import EditEvent from './EditEvent'
+import EditEvent from "./forms/EditEvent";
 import {
   Container,
   TabContent,
@@ -30,6 +30,8 @@ import {
   ModalBody,
   ModalFooter,
 } from "reactstrap";
+import { updateEvent, deleteEvent } from "../actions";
+import { connect } from "react-redux";
 
 function EventPage() {
   const [activeTab, setActiveTab] = useState("1");
@@ -64,7 +66,7 @@ function EventPage() {
                   toggleTab("1");
                 }}
               >
-                Location Information
+                <h5>Location Information</h5>
               </NavLink>
             </NavItem>
             <NavItem>
@@ -74,7 +76,7 @@ function EventPage() {
                   toggleTab("2");
                 }}
               >
-                Guest List
+                <h5>Guest List</h5>
               </NavLink>
             </NavItem>
             <NavItem>
@@ -84,7 +86,7 @@ function EventPage() {
                   toggleTab("3");
                 }}
               >
-                Bring Food
+                <h5>Bring Food</h5>
               </NavLink>
             </NavItem>
             <NavItem>
@@ -94,7 +96,7 @@ function EventPage() {
                   toggleTab("4");
                 }}
               >
-                Change Your Mind? ONLY FOR GUEST
+                <h5>Change Your Mind? ONLY FOR GUEST</h5>
               </NavLink>
             </NavItem>
             <NavItem>
@@ -104,7 +106,7 @@ function EventPage() {
                   toggleTab("5");
                 }}
               >
-                Update Event ONLY FOR HOST
+                <h5>Update Event ONLY FOR HOST</h5>
               </NavLink>
             </NavItem>
           </Nav>
@@ -112,9 +114,9 @@ function EventPage() {
             <TabPane tabId="1">
               <Row>
                 <Col sm="12">
-                  <h4>
+                  <h6>
                     Location, Date, Time and What Food Item will be brought
-                  </h4>
+                  </h6>
                 </Col>
               </Row>
             </TabPane>
@@ -122,10 +124,10 @@ function EventPage() {
             <TabPane tabId="2">
               <Row>
                 <Col sm="12">
-                  <h4>
+                  <h6>
                     List of Guests and Photo (Bio?) - Easy Guest Identification
                     - Make new friends!
-                  </h4>
+                  </h6>
                 </Col>
               </Row>
             </TabPane>
@@ -134,9 +136,11 @@ function EventPage() {
               <Row>
                 <Col sm="6">
                   <Card body>
-                    <CardTitle>Unclaimed Menu Item</CardTitle>
+                    <CardTitle>
+                      <h2>Unclaimed Menu Item</h2>
+                    </CardTitle>
                     <CardText>Map over each item in list to display</CardText>
-                    <Button>Claim Food Item!</Button>
+                    <Button className="bg-addon">Claim Food Item!</Button>
                   </Card>
                 </Col>
               </Row>
@@ -146,9 +150,11 @@ function EventPage() {
               <Row>
                 <Col sm="6">
                   <Card body>
-                    <CardTitle>Change your Mind?</CardTitle>
+                    <CardTitle>
+                      <h2>Change your Mind?</h2>
+                    </CardTitle>
                     <CardText>Minor Admonishment</CardText>
-                    <Button color="danger" onClick={toggle}>
+                    <Button className="bg-cancel" onClick={toggle}>
                       Cancel Event
                     </Button>
                   </Card>
@@ -156,6 +162,7 @@ function EventPage() {
               </Row>
             </TabPane>
             <TabPane tabId="5">
+              {/* Put editEvent component inside modal. Too annoyed to do it now.*/}
               <Row>
                 <Col sm="12">
                   <EditEvent />
@@ -165,13 +172,15 @@ function EventPage() {
           </TabContent>
         </div>
         <Modal isOpen={modal} toggle={toggle}>
-          <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+          <ModalHeader toggle={toggle}>
+            <h2>Modal title</h2>
+          </ModalHeader>
           <ModalBody>Confirm Cancellation? Your host will be sad.</ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={toggle}>
+            <Button className="bg-confirm" onClick={toggle}>
               DO NOT CANCEL
             </Button>{" "}
-            <Button color="danger" onClick={toggle}>
+            <Button className="bg-cancel" onClick={toggle}>
               Yes, Cancel
             </Button>
           </ModalFooter>
@@ -181,4 +190,4 @@ function EventPage() {
   );
 }
 
-export default EventPage;
+export default connect(null, { updateEvent, deleteEvent })(EventPage);

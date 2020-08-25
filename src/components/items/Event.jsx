@@ -30,9 +30,20 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import EditEvent from "./EditEvent";
+import EditEvent from "../forms/EditEvent";
+import { deleteEvent } from "../../actions";
+import { connect } from "react-redux";
 
-function Event() {
+function Event(props) {
+  const {
+    host,
+    eventname,
+    date,
+    time,
+    location,
+    description /*foods, guests*/,
+  } = props;
+
   const [modal, setModal] = useState(false);
   const [nestedModal, setNestedModal] = useState(false);
   const [closeAll, setCloseAll] = useState(false);
@@ -62,19 +73,23 @@ function Event() {
           alt="Card image cap"
         />
         <CardBody>
-          <CardTitle>Event Name</CardTitle>
-          <CardSubtitle>Event Host</CardSubtitle>
+          <CardTitle>
+            <h2>{eventname}</h2>
+          </CardTitle>
+          <CardSubtitle>{host}</CardSubtitle>
           <CardText>
-            Date and Time <br />
-            Location <br />
+            {date} at {time} <br />
+            {location} <br />
           </CardText>
           {/*Button will Launch Modal */}
-          <Button onClick={toggle}>Launch Modal</Button>
+          <Button className="bg-addon" onClick={toggle}>
+            More Information
+          </Button>
         </CardBody>
       </Card>
 
       <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle}>Event Name</ModalHeader>
+        <ModalHeader toggle={toggle}>{eventname}</ModalHeader>
         <Nav tabs>
           <NavItem>
             <NavLink
@@ -83,7 +98,7 @@ function Event() {
                 toggleTab("1");
               }}
             >
-              Event
+              <h5>Information</h5>
             </NavLink>
           </NavItem>
           {/*Event Organizer Only */}
@@ -94,7 +109,7 @@ function Event() {
                 toggleTab("2");
               }}
             >
-              Guest List
+              <h5>Guest List</h5>
             </NavLink>
           </NavItem>
           {/* Event Guest Only */}
@@ -105,7 +120,7 @@ function Event() {
                 toggleTab("3");
               }}
             >
-              Food
+              <h5>Food</h5>
             </NavLink>
           </NavItem>
 
@@ -116,7 +131,7 @@ function Event() {
                 toggleTab("4");
               }}
             >
-              Food
+              <h5>Food</h5>
             </NavLink>
           </NavItem>
           <NavItem>
@@ -126,7 +141,7 @@ function Event() {
                 toggleTab("5");
               }}
             >
-              Update Event
+              <h5>Update Event</h5>
             </NavLink>
           </NavItem>
         </Nav>
@@ -136,32 +151,24 @@ function Event() {
             <Row>
               <Col sm="12">
                 <ModalBody>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                  cupidatat non proident, sunt in culpa qui officia deserunt
-                  mollit anim id est laborum.
-                  <br />
-                  <Button color="danger" onClick={toggleNested}>
-                    Cancel Event
-                  </Button>
+                  {description}
+
                   <Modal
                     isOpen={nestedModal}
                     toggle={toggleNested}
                     onClosed={closeAll ? toggle : undefined}
                   >
-                    <ModalHeader>Cancel Event Name?</ModalHeader>
+                    <ModalHeader>
+                      <h2>Cancel Event Name?</h2>
+                    </ModalHeader>
                     <ModalBody>
                       Are you sure you wish to cancel this event?
                     </ModalBody>
                     <ModalFooter>
-                      <Button color="primary" onClick={toggleNested}>
+                      <Button className="bg-confirm" onClick={toggleNested}>
                         Nevermind
                       </Button>{" "}
-                      <Button color="danger" onClick={toggleAll}>
+                      <Button className="bg-cancel" onClick={toggleAll}>
                         Yes, I'm Sure
                       </Button>
                     </ModalFooter>
@@ -169,7 +176,7 @@ function Event() {
                 </ModalBody>
 
                 <ModalFooter>
-                  <Button color="primary" onClick={toggle}>
+                  <Button className="bg-cancel" onClick={toggle}>
                     Close
                   </Button>
                 </ModalFooter>
@@ -182,7 +189,9 @@ function Event() {
               <Col sm="6">
                 {/*map guest list to card, for event organizer only? */}
                 <Card>
-                  <CardTitle>Guest Name</CardTitle>
+                  <CardTitle>
+                    <h6>Guest Name</h6>
+                  </CardTitle>
                   <CardText>RSVP : True/False; Bringing: Food Item/s</CardText>
                   {/*Button makes phone call */}
                   <Button>Call</Button>
@@ -195,10 +204,12 @@ function Event() {
               <Col sm="6">
                 {/*map foodItem to card, for event guest only? */}
                 <Card>
-                  <CardTitle>Food Item Name</CardTitle>
+                  <CardTitle>
+                    <h6>Food Item Name</h6>
+                  </CardTitle>
                   <CardText>RSVP : True/False; Bringing: Food Item/s</CardText>
                   {/*Button makes phone call */}
-                  <Button>Search Recipe?(stretch)</Button>
+                  <Button className="bg-addon">Search Recipe?(stretch)</Button>
                 </Card>
               </Col>
             </Row>
@@ -209,7 +220,9 @@ function Event() {
               <Col sm="6">
                 {/*map foodItem to card, for event organizer only? */}
                 <Card>
-                  <CardTitle>Menu</CardTitle>
+                  <CardTitle>
+                    <h6>Menu</h6>
+                  </CardTitle>
                   <CardText>Filter Have / Need</CardText>
                   {/*Button makes phone call */}
                 </Card>
@@ -220,6 +233,9 @@ function Event() {
             {/*Host Only */}
 
             <EditEvent />
+            <Button className="bg-cancel" onClick={toggleNested}>
+              Cancel Event
+            </Button>
           </TabPane>
         </TabContent>
       </Modal>
@@ -227,4 +243,4 @@ function Event() {
   );
 }
 
-export default Event;
+export default connect(null, { deleteEvent })(Event);

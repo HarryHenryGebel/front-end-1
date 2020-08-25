@@ -3,14 +3,37 @@
 //AddEvent will be in the DashBoardNavBar
 import React from "react";
 import { CardDeck } from "reactstrap";
-import Event from "./Event";
+import Event from "./items/Event";
+import { connect } from "react-redux";
 
-function EventList() {
+const mapStateToProps = (state) => {
+  return {
+    username: state.username,
+    primaryemail: state.primaryemail,
+    potlucks: state.potlucks,
+  };
+};
+
+function EventList(props) {
   return (
     <CardDeck>
-      <Event />
+      {props.potlucks.map((dinner) => {
+        return (
+          <Event
+            potluckid={dinner.potluckid}
+            host={props.username}
+            eventname={dinner.eventname}
+            date={dinner.date}
+            time={dinner.time}
+            location={dinner.location}
+            description={
+              dinner.description
+            } /*foods = {dinner.foods} guests = {dinner.guests}*/
+          />
+        );
+      })}
     </CardDeck>
   );
 }
 
-export default EventList;
+export default connect(mapStateToProps, {})(EventList);
