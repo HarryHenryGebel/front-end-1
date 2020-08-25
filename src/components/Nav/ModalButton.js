@@ -9,7 +9,7 @@ export default function ModalButton ({buttonLabel, buttonColor, formComponent}) 
 
   return (
     <div>
-      <Button color={buttonColor} onClick={toggleModal}>{buttonLabel}</Button>
+      <Button className={buttonColor} onClick={toggleModal}>{buttonLabel}</Button>
       <Modal isOpen={modal} toggle={toggleModal}>
           <ModalHeader toggle={toggleModal}>{buttonLabel} component</ModalHeader>
           <ModalBody>

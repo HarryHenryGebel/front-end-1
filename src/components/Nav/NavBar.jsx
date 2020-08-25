@@ -15,18 +15,20 @@ export default function NavBar () {
     return (
         <div>
             <Navbar color="light" light expand="md">
-                <NavbarBrand href="/">Not Yo Momma's Potluck</NavbarBrand>
-                <NavbarToggler onClick={toggle} />
-                <Collapse isOpen={isOpen} navbar>
+            <Collapse isOpen={isOpen} navbar>
                 {/*add a space here pushing to opposite sides of screen */}
                     <Nav className="mr-auto" navbar>
                        <MarketingButton />
-                        <ModalButton buttonLabel="Login" buttonColor="primary" formComponent={LoginForm()} />
-                        <ModalButton buttonLabel="Registration" buttonColor="danger" formComponent={RegistrationForm()}/>
+                        
                         {/* Dynamic Dropdown that only appears after login/registration */}
                        <DashboardNav />
                     </Nav>
                 </Collapse>
+                <NavbarBrand href="/">Not Yo Momma's Potluck</NavbarBrand>
+                <NavbarToggler onClick={toggle} />
+                
+                <ModalButton buttonLabel="Login" buttonColor = "bg-addon" formComponent={LoginForm()} />
+                        <ModalButton buttonLabel="Registration" buttonColor = "bg-confirm" formComponent={RegistrationForm()}/>
             </Navbar>
         </div>
     )
