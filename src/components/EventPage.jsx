@@ -11,6 +11,7 @@
 //ADD ALERT TO CONFIRM UN-RSVP
 //ADD ALERT TO CONFIRM FOOD ADDITION?
 import React, { useState } from "react";
+import {useParams} from 'react-router-dom'
 import EditEvent from "./forms/EditEvent";
 import {
   Container,
@@ -33,7 +34,10 @@ import {
 import { updateEvent, deleteEvent } from "../actions";
 import { connect } from "react-redux";
 
-function EventPage() {
+function EventPage({id}) {
+  const params = useParams();
+  const event = params.id;
+
   const [activeTab, setActiveTab] = useState("1");
   const [modal, setModal] = useState(false);
 
@@ -53,8 +57,9 @@ function EventPage() {
             height="300vh"
             width="100%"
           />
-          <h1>Event Name</h1>
-          <p className="lead">Date and Location</p>
+          <h1>{event.eventname}</h1>
+          <p className="lead">{event.date} at {event.time}</p>
+          <p className="lead">{event.location}</p>
         </Container>
 
         <div>
@@ -114,9 +119,8 @@ function EventPage() {
             <TabPane tabId="1">
               <Row>
                 <Col sm="12">
-                  <h6>
-                    Location, Date, Time and What Food Item will be brought
-                  </h6>
+              <p>{event.eventname} will be held at {event.time} on {event.date} at {event.location}.</p>
+              <p>You have told the host that you will be bringing, {event.foods.map(food=> console.log(food))}</p>
                 </Col>
               </Row>
             </TabPane>
@@ -124,10 +128,7 @@ function EventPage() {
             <TabPane tabId="2">
               <Row>
                 <Col sm="12">
-                  <h6>
-                    List of Guests and Photo (Bio?) - Easy Guest Identification
-                    - Make new friends!
-                  </h6>
+                  {event.guests.map(guest => console.log(`${guest}`))}
                 </Col>
               </Row>
             </TabPane>
@@ -137,7 +138,7 @@ function EventPage() {
                 <Col sm="6">
                   <Card body>
                     <CardTitle>
-                      <h2>Unclaimed Menu Item</h2>
+                      <h2>Help your Host</h2>
                     </CardTitle>
                     <CardText>Map over each item in list to display</CardText>
                     <Button className="bg-addon">Claim Food Item!</Button>

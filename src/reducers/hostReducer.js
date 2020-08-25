@@ -37,7 +37,7 @@ const hostState = {
         guestid: '57',
         fname: 'Martin',
         lname: 'Ricky',
-        primaryemail: 'livin@lavidaloca.com',
+        primaryemail: "avawingfield@email.com",
         responded: false,
         isattending: false,
         isbringing: []

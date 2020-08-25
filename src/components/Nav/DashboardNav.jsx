@@ -13,30 +13,60 @@ import {
 import EventInvitation from "../EventInvitation";
 import EditUser from '../forms/EditUser'
 import { Link } from "react-router-dom";
+import {connect} from 'react-redux'
 
-export default function DashboardNav() {
+const mapStateToProps = (state) =>{
+return{
+  isLoading: state.isLoading,
+  potlucks: state.potlucks,
+  primaryemail: state.primaryemail
+}
+}
+
+//potlucks
+
+
+
+
+function DashboardNav(props) {
   const [modal, setModal] = useState(false);
   const toggleModal = () => setModal(!modal);
   const [userModal, setuserModal] = useState(false);
   const userToggle = () => setuserModal(!userModal);
 
+  let newInvites = []
+
+  function eventFinder(){
+    for (let i = 0; i < props.potlucks.length; i++){
+      for (let j = 0; j < props.potlucks[i].guests.length; j++){
+        console.log()
+        if (props.primaryemail === props.potlucks[i].guests[j].primaryemail){
+          newInvites.push(props.potlucks[i])
+        }
+      }
+    } 
+  }
+
+  eventFinder()
   return (
     <div>
       <UncontrolledDropdown nav inNavbar>
         <DropdownToggle nav caret>
           AfterLoginMenu
         </DropdownToggle>
+
         <DropdownMenu right>
           <DropdownItem onClick = {userToggle}>
             Update Profile
           </DropdownItem>
-          {/* map over upcoming events with dropdown and dynamic link */}
-          <DropdownItem>
-            {/*Dynamic Link Here <Link to = {`/event/${id}`}>Upcoming Event1</Link> */}
-            <Link to="/event/id">Event1</Link>
-          </DropdownItem>
+          {props.potlucks.length > 0 ? props.potlucks.map(potluck => <DropdownItem key = {potluck.potluckid}>
+            <Link to={`/event/${potluck.potluckid}`}>{potluck.eventname}</Link>
+          </DropdownItem>) : null}
+
           {/* if unresponded invitation, map and show alert */}
-          <DropdownItem onClick={toggleModal}>Event Invitations</DropdownItem>
+{newInvites.length > 0 ? newInvites.map(invite => <DropdownItem key = {invite.potluckid} onClick={toggleModal}>{invite.eventname}</DropdownItem>) : null}
+
+          
           <DropdownItem divider />
           <DropdownItem>Logout</DropdownItem>
         </DropdownMenu>
@@ -62,3 +92,5 @@ export default function DashboardNav() {
     </div>
   );
 }
+
+export default connect(mapStateToProps, {})(DashboardNav)

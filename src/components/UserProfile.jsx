@@ -2,13 +2,11 @@ import React, { useState } from "react";
 import {
   Jumbotron,
   Button,
-  Container,
   Modal,
   ModalHeader,
   ModalBody,
   ModalFooter,
 } from "reactstrap";
-import EditUser from "./forms/EditUser";
 import Event from "./items/Event";
 import { connect } from "react-redux";
 
