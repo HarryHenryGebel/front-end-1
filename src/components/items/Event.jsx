@@ -128,18 +128,19 @@ function Event(props) {
             </NavItem>
           )}
 
+          {ishost ? null : (
+            <NavItem>
+              <NavLink
+                className={{ active: activeTab === "4" }}
+                onClick={() => {
+                  toggleTab("4");
+                }}
+              >
+                <h5>Bring More</h5>
+              </NavLink>
+            </NavItem>
+          )}
 
-{ishost ? null : <NavItem>
-            <NavLink
-              className={{ active: activeTab === "4" }}
-              onClick={() => {
-                toggleTab("4");
-              }}
-            >
-              <h5>Bring More</h5>
-            </NavLink>
-          </NavItem>}
-          
           {ishost ? (
             <NavItem>
               <NavLink
@@ -213,10 +214,11 @@ function Event(props) {
                 {/*map foodItem to card, for event guest only? */}
                 <Card>
                   <CardTitle>
-                    <h6>Food Item Name</h6>
+                    <h6>Menu</h6>
                   </CardTitle>
+                  
                   <CardText>RSVP : True/False; Bringing: Food Item/s</CardText>
-                  {/*Button makes phone call */}
+                  
                   <Button className="bg-addon">Search Recipe?(stretch)</Button>
                 </Card>
               </Col>

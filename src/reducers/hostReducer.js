@@ -30,8 +30,9 @@ const hostState = {
         {
           foodid: "18",
           foodname: "pizza",
+          isclaimed: false,
         },
-        { foodid: "22", foodname: "strange cake" },
+        { foodid: "22", foodname: "strange cake", isclaimed: true },
       ],
       guests: [{
         guestid: '57',
@@ -71,11 +72,13 @@ const hostState = {
         isbringing: [
           {
             foodid: '86',
-            foodname: 'not available'
+            foodname: 'not available',
+            isclaimed: true,
           },
           {
             foodid: '13',
-            foodname: 'ice cream'
+            foodname: 'ice cream',
+            isclaimed: true,
           }
         ]
       }
@@ -95,10 +98,12 @@ const hostState = {
         {
           foodid: "18",
           foodname: "pizza",
+          isclaimed: true,
         },
         {
           foodid: "22",
           foodname: "strange cake",
+          isclaimed: false,
         },
       ],
       guests: [{
