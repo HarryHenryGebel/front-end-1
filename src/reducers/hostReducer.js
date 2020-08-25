@@ -1,8 +1,22 @@
+import {
+  CREATE_EVENT_START,
+  CREATE_EVENT_SUCCESS,
+  CREATE_EVENT_FAIL,
+  UPDATE_EVENT_START,
+  UPDATE_EVENT_SUCESS,
+  UPDATE_EVENT_FAIL,
+  DELETE_EVENT_START,
+  DELETE_EVENT_SUCESS,
+  DELETE_EVENT_FAIL
+} from "../actions";
+
 const hostState = {
   userid: "1",
   username: "avadinner",
   primaryemail: "avawingfield@email.com",
   imageurl: "../assets/user.svg",
+  isLoading: false,
+  errors: "",
   potlucks: [
     {
       potluckid: "3",
@@ -13,6 +27,8 @@ const hostState = {
       description: `Turn left at the pointy hats!`,
       foods: [],
       guests: [],
+      isLoading: false,
+      errors: false,
     },
     {
       potluckid: "5",
@@ -23,12 +39,66 @@ const hostState = {
       description: `Turn left at the pointy hats!`,
       foods: [],
       guests: [],
+      isLoading: false,
+      errors: false,
     },
   ],
 };
 
 function hostReducer(state = hostState, action) {
   switch (action) {
+    case CREATE_EVENT_START:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case CREATE_EVENT_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        potlucks: [...state.potlucks, action.payload],
+      };
+    case CREATE_EVENT_FAIL:
+      return {
+        ...state,
+        isLoading: false,
+        errors: `Your event could not be added. Please try again. ${action.payload}`,
+      };
+
+    case UPDATE_EVENT_START:
+      return {
+        ...state,
+        isLoading: true,
+      };
+
+    case UPDATE_EVENT_SUCESS:
+      return {
+        ...state,
+        isLoading: false,
+      };
+
+    case UPDATE_EVENT_FAIL:
+      return {
+        ...state,
+        isLoading: false,
+        errors: `Your event could not be updated, please try again. ${action.payload}`,
+      };
+
+      case DELETE_EVENT_START :
+        return {
+          ...state, isLoading: true,
+        }
+
+        case DELETE_EVENT_SUCESS :
+          return {
+            ...state, isLoading: false,
+          }
+
+          case DELETE_EVENT_FAIL :
+            return {
+              ...state, isLoading: false,
+              errors: `Your event could not be deleted. If you are attempting to cancel your event last minute, please inform your guests directly. ${action.payload}`
+            }
     default:
       return state;
   }
