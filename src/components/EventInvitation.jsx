@@ -1,7 +1,7 @@
 //Will display for Guest when invited to Event
 //Will have ability to Accept or Reject RSVP
 //Will have ability to select foodItem via dropdown
-//Will contain information of Host, Location, Date, Time and Missing Menu Items
+//Will contain information of Host, {potluck.location}, {potluck.date}, Time and Missing Menu Items
 //Will sprout from Dashboard NavBar
 //Alert should popup to confirm attendance/rejection --code Alerts later
 //Alert Text "You have told Host you are not attending" "You are confirmed to attend event at location at time, and will be bringing fooditem"
@@ -24,7 +24,9 @@ import {
 import { updateEvent } from "../actions";
 import { connect } from "react-redux";
 
-function EventInvitation() {
+function EventInvitation(props) {
+  const {potluck} = props;
+  console.log(potluck)
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
 
@@ -39,11 +41,11 @@ function EventInvitation() {
         />
         <CardBody>
           <CardTitle>
-            <h2>Event Name</h2>
+            <h2>{potluck.eventname}</h2>
           </CardTitle>
-          <CardSubtitle>Date, Time, Location</CardSubtitle>
+          <CardSubtitle>{potluck.date}, {potluck.time}, {potluck.location}</CardSubtitle>
           <CardText>You have been invited to HostName's Event!</CardText>
-          <CardText>Event will be held on Date at Time at Location.</CardText>
+          <CardText>Event will be held on {potluck.date} at {potluck.time} at {potluck.location}.</CardText>
           <CardText>Please Respond in a Timely Manner</CardText>
           <Button className="bg-confirm" onClick={toggle}>
             Attending
@@ -58,11 +60,8 @@ function EventInvitation() {
           <FormGroup>
             <Label htmlFor="exampleSelect">Select</Label>
             <Input type="select" name="select" id="exampleSelect">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
+              {potluck.foods.length > 0 ? potluck.foods.map(food => <option value = {food.foodid}>{food.foodname}</option>): null}
+              
             </Input>
           </FormGroup>
           <Button className="bg-confirm">Confirm</Button>{" "}

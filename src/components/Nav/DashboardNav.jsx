@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Modal,
   ModalHeader,
@@ -11,22 +11,19 @@ import {
   DropdownItem,
 } from "reactstrap";
 import EventInvitation from "../EventInvitation";
-import EditUser from '../forms/EditUser'
+import EditUser from "../forms/EditUser";
 import { Link } from "react-router-dom";
-import {connect} from 'react-redux'
+import { connect } from "react-redux";
 
-const mapStateToProps = (state) =>{
-return{
-  isLoading: state.isLoading,
-  potlucks: state.potlucks,
-  primaryemail: state.primaryemail
-}
-}
+const mapStateToProps = (state) => {
+  return {
+    isLoading: state.isLoading,
+    potlucks: state.potlucks,
+    primaryemail: state.primaryemail,
+  };
+};
 
 //potlucks
-
-
-
 
 function DashboardNav(props) {
   const [modal, setModal] = useState(false);
@@ -34,20 +31,22 @@ function DashboardNav(props) {
   const [userModal, setuserModal] = useState(false);
   const userToggle = () => setuserModal(!userModal);
 
-  let newInvites = []
+  let newInvites = [];
 
-  function eventFinder(){
-    for (let i = 0; i < props.potlucks.length; i++){
-      for (let j = 0; j < props.potlucks[i].guests.length; j++){
-        console.log()
-        if (props.primaryemail === props.potlucks[i].guests[j].primaryemail){
-          newInvites.push(props.potlucks[i])
+  function eventFinder() {
+    for (let i = 0; i < props.potlucks.length; i++) {
+      for (let j = 0; j < props.potlucks[i].guests.length; j++) {
+        console.log();
+        if (props.primaryemail === props.potlucks[i].guests[j].primaryemail &&props.potlucks[i].guests[j].responded === false) {
+          newInvites.push(props.potlucks[i]);
         }
       }
-    } 
+    }
   }
 
-  eventFinder()
+  eventFinder();
+
+  
   return (
     <div>
       <UncontrolledDropdown nav inNavbar>
@@ -56,25 +55,35 @@ function DashboardNav(props) {
         </DropdownToggle>
 
         <DropdownMenu right>
-          <DropdownItem onClick = {userToggle}>
-            Update Profile
-          </DropdownItem>
-          {props.potlucks.length > 0 ? props.potlucks.map(potluck => <DropdownItem key = {potluck.potluckid}>
-            <Link to={`/event/${potluck.potluckid}`}>{potluck.eventname}</Link>
-          </DropdownItem>) : null}
+          <DropdownItem onClick={userToggle}>Update Profile</DropdownItem>
+          {props.potlucks.length > 0
+            ? props.potlucks.map((potluck) => (
+                <DropdownItem key={potluck.potluckid}>
+                  <Link to={`/event/${potluck.potluckid}`}>
+                    {potluck.eventname}
+                  </Link>
+                </DropdownItem>
+              ))
+            : null}
 
           {/* if unresponded invitation, map and show alert */}
-{newInvites.length > 0 ? newInvites.map(invite => <DropdownItem key = {invite.potluckid} onClick={toggleModal}>{invite.eventname}</DropdownItem>) : null}
+          {newInvites.length > 0
+            ? newInvites.map((invite) => (
+                <DropdownItem key = {invite.id} onClick={toggleModal}>
+                  {invite.eventname} 
+                  <Modal isOpen={modal} toggle={toggleModal}>
+        <EventInvitation key={invite.potluckid} potluck = {invite}/>
+      </Modal>
+                </DropdownItem>
+              ))
+            : null}
 
-          
           <DropdownItem divider />
           <DropdownItem>Logout</DropdownItem>
         </DropdownMenu>
       </UncontrolledDropdown>
 
-      <Modal isOpen={modal} toggle={toggleModal}>
-        <EventInvitation />
-      </Modal>
+
 
       <Modal isOpen={userModal} toggle={userToggle}>
         <ModalHeader toggle={userToggle}>
@@ -93,4 +102,4 @@ function DashboardNav(props) {
   );
 }
 
-export default connect(mapStateToProps, {})(DashboardNav)
+export default connect(mapStateToProps, {})(DashboardNav);
