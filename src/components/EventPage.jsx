@@ -11,7 +11,7 @@
 //ADD ALERT TO CONFIRM UN-RSVP
 //ADD ALERT TO CONFIRM FOOD ADDITION?
 import React, { useState } from "react";
-import EditEvent from './forms/EditEvent'
+import EditEvent from "./forms/EditEvent";
 import {
   Container,
   TabContent,
@@ -30,8 +30,8 @@ import {
   ModalBody,
   ModalFooter,
 } from "reactstrap";
-import {updateEvent, deleteEvent} from '../actions'
-import {connect} from 'react-redux'
+import { updateEvent, deleteEvent } from "../actions";
+import { connect } from "react-redux";
 
 function EventPage() {
   const [activeTab, setActiveTab] = useState("1");
@@ -136,9 +136,11 @@ function EventPage() {
               <Row>
                 <Col sm="6">
                   <Card body>
-                    <CardTitle><h2>Unclaimed Menu Item</h2></CardTitle>
+                    <CardTitle>
+                      <h2>Unclaimed Menu Item</h2>
+                    </CardTitle>
                     <CardText>Map over each item in list to display</CardText>
-                    <Button className = "bg-addon">Claim Food Item!</Button>
+                    <Button className="bg-addon">Claim Food Item!</Button>
                   </Card>
                 </Col>
               </Row>
@@ -148,9 +150,11 @@ function EventPage() {
               <Row>
                 <Col sm="6">
                   <Card body>
-                    <CardTitle><h2>Change your Mind?</h2></CardTitle>
+                    <CardTitle>
+                      <h2>Change your Mind?</h2>
+                    </CardTitle>
                     <CardText>Minor Admonishment</CardText>
-                    <Button className = "bg-cancel" onClick={toggle}>
+                    <Button className="bg-cancel" onClick={toggle}>
                       Cancel Event
                     </Button>
                   </Card>
@@ -168,13 +172,15 @@ function EventPage() {
           </TabContent>
         </div>
         <Modal isOpen={modal} toggle={toggle}>
-          <ModalHeader toggle={toggle}><h2>Modal title</h2></ModalHeader>
+          <ModalHeader toggle={toggle}>
+            <h2>Modal title</h2>
+          </ModalHeader>
           <ModalBody>Confirm Cancellation? Your host will be sad.</ModalBody>
           <ModalFooter>
-            <Button className = "bg-confirm" onClick={toggle}>
+            <Button className="bg-confirm" onClick={toggle}>
               DO NOT CANCEL
             </Button>{" "}
-            <Button className = "bg-cancel" onClick={toggle}>
+            <Button className="bg-cancel" onClick={toggle}>
               Yes, Cancel
             </Button>
           </ModalFooter>
@@ -184,4 +190,4 @@ function EventPage() {
   );
 }
 
-export default connect(null, {updateEvent, deleteEvent})(EventPage)
+export default connect(null, { updateEvent, deleteEvent })(EventPage);

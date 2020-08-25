@@ -31,12 +31,18 @@ import {
   Col,
 } from "reactstrap";
 import EditEvent from "./forms/EditEvent";
-import {deleteEvent} from '../actions'
-import {connect} from 'react-redux'
+import { deleteEvent } from "../actions";
+import { connect } from "react-redux";
 
 function Event(props) {
-
-const {host, eventname, date, time, location, description /*foods, guests*/} = props;
+  const {
+    host,
+    eventname,
+    date,
+    time,
+    location,
+    description /*foods, guests*/,
+  } = props;
 
   const [modal, setModal] = useState(false);
   const [nestedModal, setNestedModal] = useState(false);
@@ -67,19 +73,23 @@ const {host, eventname, date, time, location, description /*foods, guests*/} = p
           alt="Card image cap"
         />
         <CardBody>
-          <CardTitle><h2>{eventname}</h2></CardTitle>
+          <CardTitle>
+            <h2>{eventname}</h2>
+          </CardTitle>
           <CardSubtitle>{host}</CardSubtitle>
           <CardText>
             {date} at {time} <br />
             {location} <br />
           </CardText>
           {/*Button will Launch Modal */}
-          <Button className = "bg-addon" onClick={toggle}>More Information</Button>
+          <Button className="bg-addon" onClick={toggle}>
+            More Information
+          </Button>
         </CardBody>
       </Card>
 
       <Modal isOpen={modal} toggle={toggle}>
-  <ModalHeader toggle={toggle}>{eventname}</ModalHeader>
+        <ModalHeader toggle={toggle}>{eventname}</ModalHeader>
         <Nav tabs>
           <NavItem>
             <NavLink
@@ -142,21 +152,23 @@ const {host, eventname, date, time, location, description /*foods, guests*/} = p
               <Col sm="12">
                 <ModalBody>
                   {description}
-                  
+
                   <Modal
                     isOpen={nestedModal}
                     toggle={toggleNested}
                     onClosed={closeAll ? toggle : undefined}
                   >
-                    <ModalHeader><h2>Cancel Event Name?</h2></ModalHeader>
+                    <ModalHeader>
+                      <h2>Cancel Event Name?</h2>
+                    </ModalHeader>
                     <ModalBody>
                       Are you sure you wish to cancel this event?
                     </ModalBody>
                     <ModalFooter>
-                      <Button className = "bg-confirm" onClick={toggleNested}>
+                      <Button className="bg-confirm" onClick={toggleNested}>
                         Nevermind
                       </Button>{" "}
-                      <Button className = "bg-cancel" onClick={toggleAll}>
+                      <Button className="bg-cancel" onClick={toggleAll}>
                         Yes, I'm Sure
                       </Button>
                     </ModalFooter>
@@ -164,7 +176,7 @@ const {host, eventname, date, time, location, description /*foods, guests*/} = p
                 </ModalBody>
 
                 <ModalFooter>
-                  <Button className = "bg-cancel" onClick={toggle}>
+                  <Button className="bg-cancel" onClick={toggle}>
                     Close
                   </Button>
                 </ModalFooter>
@@ -177,7 +189,9 @@ const {host, eventname, date, time, location, description /*foods, guests*/} = p
               <Col sm="6">
                 {/*map guest list to card, for event organizer only? */}
                 <Card>
-                  <CardTitle><h6>Guest Name</h6></CardTitle>
+                  <CardTitle>
+                    <h6>Guest Name</h6>
+                  </CardTitle>
                   <CardText>RSVP : True/False; Bringing: Food Item/s</CardText>
                   {/*Button makes phone call */}
                   <Button>Call</Button>
@@ -190,10 +204,12 @@ const {host, eventname, date, time, location, description /*foods, guests*/} = p
               <Col sm="6">
                 {/*map foodItem to card, for event guest only? */}
                 <Card>
-                  <CardTitle><h6>Food Item Name</h6></CardTitle>
+                  <CardTitle>
+                    <h6>Food Item Name</h6>
+                  </CardTitle>
                   <CardText>RSVP : True/False; Bringing: Food Item/s</CardText>
                   {/*Button makes phone call */}
-                  <Button className = "bg-addon">Search Recipe?(stretch)</Button>
+                  <Button className="bg-addon">Search Recipe?(stretch)</Button>
                 </Card>
               </Col>
             </Row>
@@ -204,7 +220,9 @@ const {host, eventname, date, time, location, description /*foods, guests*/} = p
               <Col sm="6">
                 {/*map foodItem to card, for event organizer only? */}
                 <Card>
-                  <CardTitle><h6>Menu</h6></CardTitle>
+                  <CardTitle>
+                    <h6>Menu</h6>
+                  </CardTitle>
                   <CardText>Filter Have / Need</CardText>
                   {/*Button makes phone call */}
                 </Card>
@@ -215,9 +233,9 @@ const {host, eventname, date, time, location, description /*foods, guests*/} = p
             {/*Host Only */}
 
             <EditEvent />
-            <Button className = "bg-cancel" onClick={toggleNested}>
-                    Cancel Event
-                  </Button>
+            <Button className="bg-cancel" onClick={toggleNested}>
+              Cancel Event
+            </Button>
           </TabPane>
         </TabContent>
       </Modal>
@@ -225,4 +243,4 @@ const {host, eventname, date, time, location, description /*foods, guests*/} = p
   );
 }
 
-export default connect(null, {deleteEvent})(Event)
+export default connect(null, { deleteEvent })(Event);
