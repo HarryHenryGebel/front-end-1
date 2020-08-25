@@ -36,12 +36,12 @@ import { connect } from "react-redux";
 
 function Event(props) {
   const {
-    host,
+    ishost,
     eventname,
     date,
     time,
     location,
-    description /*foods, guests*/,
+    description, foods, guests,
   } = props;
 
   const [modal, setModal] = useState(false);
@@ -63,6 +63,7 @@ function Event(props) {
     if (activeTab !== tab) setActiveTab(tab);
   };
 
+  
   return (
     <>
       <Card>
@@ -76,7 +77,6 @@ function Event(props) {
           <CardTitle>
             <h2>{eventname}</h2>
           </CardTitle>
-          <CardSubtitle>{host}</CardSubtitle>
           <CardText>
             {date} at {time} <br />
             {location} <br />
@@ -101,8 +101,7 @@ function Event(props) {
               <h5>Information</h5>
             </NavLink>
           </NavItem>
-          {/*Event Organizer Only */}
-          <NavItem>
+          {ishost ? <NavItem>
             <NavLink
               className={{ active: activeTab === "2" }}
               onClick={() => {
@@ -111,9 +110,9 @@ function Event(props) {
             >
               <h5>Guest List</h5>
             </NavLink>
-          </NavItem>
-          {/* Event Guest Only */}
-          <NavItem>
+          </NavItem> : null}
+          
+          {ishost ? null : <NavItem>
             <NavLink
               className={{ active: activeTab === "3" }}
               onClick={() => {
@@ -122,7 +121,8 @@ function Event(props) {
             >
               <h5>Food</h5>
             </NavLink>
-          </NavItem>
+          </NavItem>}
+          
 
           <NavItem>
             <NavLink

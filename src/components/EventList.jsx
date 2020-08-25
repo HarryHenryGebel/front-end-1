@@ -28,7 +28,9 @@ function EventList(props) {
             location={dinner.location}
             description={
               dinner.description
-            } /*foods = {dinner.foods} guests = {dinner.guests}*/
+            }
+             foods = {dinner.foods} guests = {dinner.guests}
+             ishost = {dinner.ishost}
           />
         );
       })}

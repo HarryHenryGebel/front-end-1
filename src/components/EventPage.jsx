@@ -34,9 +34,9 @@ import {
 import { updateEvent, deleteEvent } from "../actions";
 import { connect } from "react-redux";
 
-function EventPage({id}) {
+function EventPage({events}) {
   const params = useParams();
-  const event = params.id;
+  const event = params.events;
 
   const [activeTab, setActiveTab] = useState("1");
   const [modal, setModal] = useState(false);
@@ -120,7 +120,7 @@ function EventPage({id}) {
               <Row>
                 <Col sm="12">
               <p>{event.eventname} will be held at {event.time} on {event.date} at {event.location}.</p>
-              <p>You have told the host that you will be bringing, {event.foods.map(food=> console.log(food))}</p>
+              <p>You have told the host that you will be bringing, {event.foods.map(food=> console)}</p>
                 </Col>
               </Row>
             </TabPane>
@@ -138,7 +138,7 @@ function EventPage({id}) {
                 <Col sm="6">
                   <Card body>
                     <CardTitle>
-                      <h2>Help your Host</h2>
+                      <h2>Unclaimed Menu Item</h2>
                     </CardTitle>
                     <CardText>Map over each item in list to display</CardText>
                     <Button className="bg-addon">Claim Food Item!</Button>

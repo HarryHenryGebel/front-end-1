@@ -37,7 +37,10 @@ function DashboardNav(props) {
     for (let i = 0; i < props.potlucks.length; i++) {
       for (let j = 0; j < props.potlucks[i].guests.length; j++) {
         console.log();
-        if (props.primaryemail === props.potlucks[i].guests[j].primaryemail &&props.potlucks[i].guests[j].responded === false) {
+        if (
+          props.primaryemail === props.potlucks[i].guests[j].primaryemail &&
+          props.potlucks[i].guests[j].responded === false
+        ) {
           newInvites.push(props.potlucks[i]);
         }
       }
@@ -46,7 +49,6 @@ function DashboardNav(props) {
 
   eventFinder();
 
-  
   return (
     <div>
       <UncontrolledDropdown nav inNavbar>
@@ -66,14 +68,14 @@ function DashboardNav(props) {
               ))
             : null}
 
-          {/* if unresponded invitation, map and show alert */}
+          {/* show alert? */}
           {newInvites.length > 0
             ? newInvites.map((invite) => (
-                <DropdownItem key = {invite.id} onClick={toggleModal}>
-                  {invite.eventname} 
+                <DropdownItem key={invite.id} onClick={toggleModal}>
+                  {invite.eventname}
                   <Modal isOpen={modal} toggle={toggleModal}>
-        <EventInvitation key={invite.potluckid} potluck = {invite}/>
-      </Modal>
+                    <EventInvitation key={invite.potluckid} potluck={invite} />
+                  </Modal>
                 </DropdownItem>
               ))
             : null}
@@ -82,8 +84,6 @@ function DashboardNav(props) {
           <DropdownItem>Logout</DropdownItem>
         </DropdownMenu>
       </UncontrolledDropdown>
-
-
 
       <Modal isOpen={userModal} toggle={userToggle}>
         <ModalHeader toggle={userToggle}>
