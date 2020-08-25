@@ -14,7 +14,7 @@ import UserProfile from "./UserProfile";
 import EventInvitation from "./EventInvitation";
 import EditUser from "./forms/EditUser";
 
-function DashBoard() {
+export default function DashBoard() {
   return (
     <>
       <EventList />
@@ -27,5 +27,3 @@ function DashBoard() {
     </>
   );
 }
-
-export default DashBoard;

@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Card, CardBody, CardText, CardFooter } from "reactstrap";
 
-function Food(props) {
+export default function Food(props) {
   const { foodname, description } = props;
   return (
     <Card>
@@ -15,5 +15,3 @@ function Food(props) {
     </Card>
   );
 }
-
-export default Food;
