@@ -6,24 +6,16 @@
 //Will contain and/or display a countdown for upcoming events ***Stretch***
 
 import React from "react";
-import EventList from "./EventList";
-import EventPage from "./EventPage";
-import CreateEvent from "./forms/CreateEvent";
-import EditEvent from "./forms/EditEvent";
-import UserProfile from "./UserProfile";
-import EventInvitation from "./EventInvitation";
-import EditUser from "./forms/EditUser";
+import EventList from './EventList'
+
+
+//import PrivateRoute
 
 export default function DashBoard() {
   return (
     <>
+      {/* if logged in, show EventList. Else, show Login/Registration */}
       <EventList />
-      <EventPage />
-      <CreateEvent />
-      <EditEvent />
-      <UserProfile />
-      <EventInvitation />
-      <EditUser />
     </>
   );
 }

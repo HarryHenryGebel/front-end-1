@@ -9,7 +9,7 @@ export default function MarketingButton () {
         <DropdownToggle nav caret>
         More Info (marketing pgs)
         </DropdownToggle>
-        <DropdownMenu right>
+        <DropdownMenu left>
           <DropdownItem>
             Testimonials
           </DropdownItem>

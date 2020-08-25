@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-
+//import {useHistory} from 'react-router-dom'
+//push /dashboard
 export default function RegistrationForm () {
   return (
     <Form>
