@@ -1,6 +1,6 @@
 import React from "react";
 import DashBoard from "./Dashboard";
-import NavBar from "../components/NavBar"
+import NavBar from "./Nav/NavBar"
 
 export default function App() {
   return (
