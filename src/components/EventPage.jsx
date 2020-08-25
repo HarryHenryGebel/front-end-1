@@ -11,7 +11,7 @@
 //ADD ALERT TO CONFIRM UN-RSVP
 //ADD ALERT TO CONFIRM FOOD ADDITION?
 import React, { useState } from "react";
-import {useParams} from 'react-router-dom'
+import { useParams } from "react-router-dom";
 import EditEvent from "./forms/EditEvent";
 import {
   Container,
@@ -36,15 +36,15 @@ import { connect } from "react-redux";
 
 const mapStateToProps = (state) => {
   return {
-   potlucks: state.potlucks
-  }
-}
+    potlucks: state.potlucks,
+  };
+};
 
 function EventPage(props) {
   const params = useParams();
-  const {potlucks} = props;
-//params is the id
-let potluck = []
+  const { potlucks } = props;
+  //params is the id
+  let potluck = [];
 
   const [activeTab, setActiveTab] = useState("1");
   const [modal, setModal] = useState(false);
@@ -54,18 +54,15 @@ let potluck = []
     if (activeTab !== tab) setActiveTab(tab);
   };
 
-  function potluckFinder(){
-    for(let i = 0; i<potlucks.length; i++){
-      if(potlucks[i].potluckid === params.id){
-        potluck.push(potlucks[i])
+  function potluckFinder() {
+    for (let i = 0; i < potlucks.length; i++) {
+      if (potlucks[i].potluckid === params.id) {
+        potluck.push(potlucks[i]);
       }
     }
   }
 
-  potluckFinder()
-
-  console.log(potluck)
- 
+  potluckFinder();
 
   return (
     <>
@@ -79,7 +76,9 @@ let potluck = []
             width="100%"
           />
           <h1>{potluck[0].eventname}</h1>
-          <p className="lead">{potluck[0].date} at {potluck[0].time}</p>
+          <p className="lead">
+            {potluck[0].date} at {potluck[0].time}
+          </p>
           <p className="lead">{potluck[0].location}</p>
         </Container>
 
@@ -115,33 +114,46 @@ let potluck = []
                 <h5>Bring Food</h5>
               </NavLink>
             </NavItem>
-            <NavItem>
-              <NavLink
-                className={{ active: activeTab === "4" }}
-                onClick={() => {
-                  toggleTab("4");
-                }}
-              >
-                <h5>Change Your Mind? ONLY FOR GUEST</h5>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink
-                className={{ active: activeTab === "5" }}
-                onClick={() => {
-                  toggleTab("5");
-                }}
-              >
-                <h5>Update Event ONLY FOR HOST</h5>
-              </NavLink>
-            </NavItem>
+            {potluck[0].ishost ? null : (
+              <NavItem>
+                <NavLink
+                  className={{ active: activeTab === "4" }}
+                  onClick={() => {
+                    toggleTab("4");
+                  }}
+                >
+                  <h5>Change Your Mind?</h5>
+                </NavLink>
+              </NavItem>
+            )}
+
+            {potluck[0].ishost ? (
+              <NavItem>
+                <NavLink
+                  className={{ active: activeTab === "5" }}
+                  onClick={() => {
+                    toggleTab("5");
+                  }}
+                >
+                  <h5>Update Event</h5>
+                </NavLink>
+              </NavItem>
+            ) : null}
           </Nav>
           <TabContent activeTab={activeTab}>
             <TabPane tabId="1">
               <Row>
                 <Col sm="12">
-              <p>{potluck[0].eventname} will be held at {potluck[0].time} on {potluck[0].date} at {potluck[0].location}.</p>
-              <p>You have told the host that you will be bringing, {potluck[0].foods.map(food=> <>{food.foodname}</>)}</p>
+                  <p>
+                    {potluck[0].eventname} will be held at {potluck[0].time} on{" "}
+                    {potluck[0].date} at {potluck[0].location}.
+                  </p>
+                  <p>
+                    You have told the host that you will be bringing,{" "}
+                    {potluck[0].foods.map((food) => (
+                      <>{food.foodname}</>
+                    ))}
+                  </p>
                 </Col>
               </Row>
             </TabPane>
@@ -149,7 +161,12 @@ let potluck = []
             <TabPane tabId="2">
               <Row>
                 <Col sm="12">
-              {potluck[0].guests.map(guest => <>{guest.fname} {guest.lname}<br /></>)}
+                  {potluck[0].guests.map((guest) => (
+                    <>
+                      {guest.fname} {guest.lname}
+                      <br />
+                    </>
+                  ))}
                 </Col>
               </Row>
             </TabPane>
@@ -212,4 +229,6 @@ let potluck = []
   );
 }
 
-export default connect(mapStateToProps, { updateEvent, deleteEvent })(EventPage);
+export default connect(mapStateToProps, { updateEvent, deleteEvent })(
+  EventPage
+);
