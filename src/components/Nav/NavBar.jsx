@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav } from "reactstrap";
 import ModalButton from "./ModalButton";
-import DashboardNav from "./DashboardNav";
+import DashboardNav from "./DashboardNav.jsx";
 import MarketingButton from "./MarketingButton";
 import LoginForm from "./LoginForm";
 import RegistrationForm from "./RegistrationForm";
