@@ -41,7 +41,9 @@ function Event(props) {
     date,
     time,
     location,
-    description, foods, guests,
+    description,
+    foods,
+    guests,
   } = props;
 
   const [modal, setModal] = useState(false);
@@ -63,7 +65,6 @@ function Event(props) {
     if (activeTab !== tab) setActiveTab(tab);
   };
 
-  
   return (
     <>
       <Card>
@@ -101,49 +102,56 @@ function Event(props) {
               <h5>Information</h5>
             </NavLink>
           </NavItem>
-          {ishost ? <NavItem>
-            <NavLink
-              className={{ active: activeTab === "2" }}
-              onClick={() => {
-                toggleTab("2");
-              }}
-            >
-              <h5>Guest List</h5>
-            </NavLink>
-          </NavItem> : null}
-          
-          {ishost ? null : <NavItem>
-            <NavLink
-              className={{ active: activeTab === "3" }}
-              onClick={() => {
-                toggleTab("3");
-              }}
-            >
-              <h5>Food</h5>
-            </NavLink>
-          </NavItem>}
-          
+          {ishost ? (
+            <NavItem>
+              <NavLink
+                className={{ active: activeTab === "2" }}
+                onClick={() => {
+                  toggleTab("2");
+                }}
+              >
+                <h5>Guest List</h5>
+              </NavLink>
+            </NavItem>
+          ) : null}
 
-          <NavItem>
+          {ishost ? null : (
+            <NavItem>
+              <NavLink
+                className={{ active: activeTab === "3" }}
+                onClick={() => {
+                  toggleTab("3");
+                }}
+              >
+                <h5>Menu</h5>
+              </NavLink>
+            </NavItem>
+          )}
+
+
+{ishost ? null : <NavItem>
             <NavLink
               className={{ active: activeTab === "4" }}
               onClick={() => {
                 toggleTab("4");
               }}
             >
-              <h5>Food</h5>
+              <h5>Bring More</h5>
             </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink
-              className={{ active: activeTab === "5" }}
-              onClick={() => {
-                toggleTab("5");
-              }}
-            >
-              <h5>Update Event</h5>
-            </NavLink>
-          </NavItem>
+          </NavItem>}
+          
+          {ishost ? (
+            <NavItem>
+              <NavLink
+                className={{ active: activeTab === "5" }}
+                onClick={() => {
+                  toggleTab("5");
+                }}
+              >
+                <h5>Update Event</h5>
+              </NavLink>
+            </NavItem>
+          ) : null}
         </Nav>
 
         <TabContent activeTab={activeTab}>
