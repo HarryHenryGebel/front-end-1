@@ -52,6 +52,7 @@ function EventPage(props) {
   let guestList = [];
   let needResponse = [];
   let yourObligation = [];
+  let foundId = "";
 
   const [activeTab, setActiveTab] = useState("1");
   const [modal, setModal] = useState(false);
@@ -61,10 +62,26 @@ function EventPage(props) {
     if (activeTab !== tab) setActiveTab(tab);
   };
 
+  const guestFormValues = {
+    guestid: foundId,
+    isattending: true,
+    isbringing: yourObligation,
+  };
+
+  const [guestUpdate, setGuestUpdate] = useState(guestFormValues);
+
   function potluckFinder() {
     for (let i = 0; i < potlucks.length; i++) {
       if (potlucks[i].potluckid === params.id) {
         potluck.push(potlucks[i]);
+      }
+    }
+  }
+
+  function guestIdFinder() {
+    for (let i = 0; i < potluck[0].guests.length; i++) {
+      if (potluck[0].guests[i].primaryemail === primaryemail) {
+        foundId = potluck[0].guests[i].guestid;
       }
     }
   }
@@ -82,26 +99,34 @@ function EventPage(props) {
       if (potluck[0].guests[i].isattending === true) {
         guestList.push(potluck[0].guests[i]);
       }
-      if (potluck[0].guests[i].responded === false){
-        needResponse.push(potluck[0].guests[i])
+      if (potluck[0].guests[i].responded === false) {
+        needResponse.push(potluck[0].guests[i]);
       }
     }
   }
 
-  function obligationFinder(){
-    for (let i = 0; i < guestList.length; i++){
-      if (primaryemail === guestList[i].primaryemail){
-        for(let j = 0; j < guestList[i].isbringing.length; j++){
-          yourObligation.push(guestList[i].isbringing[j])
+  function obligationFinder() {
+    for (let i = 0; i < guestList.length; i++) {
+      if (primaryemail === guestList[i].primaryemail) {
+        for (let j = 0; j < guestList[i].isbringing.length; j++) {
+          yourObligation.push(guestList[i].isbringing[j]);
         }
       }
     }
   }
 
+  const foodUpdateHandler = (e) => {
+    setGuestUpdate({
+      ...guestUpdate,
+      isbringing: [...guestUpdate.isbringing, e.target.value],
+    });
+  };
+
   potluckFinder();
+  guestIdFinder();
   foodSorter();
-  guestSorter()
-  obligationFinder()
+  guestSorter();
+  obligationFinder();
 
   return (
     <>
@@ -143,17 +168,19 @@ function EventPage(props) {
                 <h5>Guest List</h5>
               </NavLink>
             </NavItem>
-            {potluck[0].ishost ? null : <NavItem>
-              <NavLink
-                className={{ active: activeTab === "3" }}
-                onClick={() => {
-                  toggleTab("3");
-                }}
-              >
-                <h5>Bring Food</h5>
-              </NavLink>
-            </NavItem>}
-            
+            {potluck[0].ishost ? null : (
+              <NavItem>
+                <NavLink
+                  className={{ active: activeTab === "3" }}
+                  onClick={() => {
+                    toggleTab("3");
+                  }}
+                >
+                  <h5>Bring Food</h5>
+                </NavLink>
+              </NavItem>
+            )}
+
             {potluck[0].ishost ? null : (
               <NavItem>
                 <NavLink
@@ -189,14 +216,20 @@ function EventPage(props) {
                     {potluck[0].date} at {potluck[0].location}.
                   </p>
                   <p>
-                    {/* This function is wrong. It should loop through to find the guest and post the guest's food. The function exists in Event.jsx */}
-                    {" "}
-                    {potluck[0].ishost ? null: yourObligation.length > 0 ? yourObligation.map((food) => (
-                      <>
-                        You have told the host that you will be bringing:<Food key={food.foodid} foodname={food.foodname} />
-                      </>
-                    )) : <CardText> Please help your host and bring some food! </CardText>}
-                    
+                    {/* This function is wrong. It should loop through to find the guest and post the guest's food. The function exists in Event.jsx */}{" "}
+                    {potluck[0].ishost ? null : yourObligation.length > 0 ? (
+                      yourObligation.map((food) => (
+                        <>
+                          You have told the host that you will be bringing:
+                          <Food key={food.foodid} foodname={food.foodname} />
+                        </>
+                      ))
+                    ) : (
+                      <CardText>
+                        {" "}
+                        Please help your host and bring some food!{" "}
+                      </CardText>
+                    )}
                   </p>
                 </Col>
               </Row>
@@ -227,7 +260,7 @@ function EventPage(props) {
                       unclaimedFood.map((food) => (
                         <>
                           <Food key={food.foodid} foodname={food.foodname} />{" "}
-                          <Button className="bg-addon">Claim Food Item!</Button>
+                          <Button className="bg-addon" onClick = {foodUpdateHandler}>Claim Food Item!</Button>
                         </>
                       ))
                     ) : (
