@@ -224,10 +224,10 @@ function Event(props) {
                 {/*map guest list to card, for event organizer only? */}
                 <Card>
                   {guestList.map((guest) => (
-                    <Fragment key={guest.guestid}>
+                    <Fragment key={guest.guestId}>
                       {guest.firstName} {guest.lastName} is bringing:{" "}
                       {guest.isBringing.map((food) => (
-                        <Fragment key={food.foodid}>
+                        <Fragment key={food.foodId}>
                           {" "}
                           {food.foodName}
                           <br />{" "}
@@ -237,7 +237,7 @@ function Event(props) {
                     </Fragment>
                   ))}
                   {needResponse.map((guest) => (
-                    <Fragment key={guest.guestid}>
+                    <Fragment key={guest.guestId}>
                       You are waiting for responses from : {guest.firstName}{" "}
                       {guest.lastName} <br />
                     </Fragment>
@@ -255,7 +255,7 @@ function Event(props) {
                   </CardTitle>
 
                   {claimedFood.map((food) => (
-                    <Fragment key={food.foodid}>
+                    <Fragment key={food.foodId}>
                       <Food key={food.foodId} foodName={food.foodName} />{" "}
                       <Button className="bg-addon">
                         Search Recipe?(stretch)
@@ -272,7 +272,7 @@ function Event(props) {
               <Col sm="6">
                 <Card>
                   {unclaimedFood.map((food) => (
-                    <Fragment key={food.foodid}>
+                    <Fragment key={food.foodId}>
                       <Food key={food.foodId} foodName={food.foodName} />{" "}
                       <Button className="bg-addon">Claim</Button>{" "}
                     </Fragment>
