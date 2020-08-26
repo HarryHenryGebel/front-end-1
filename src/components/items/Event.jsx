@@ -8,7 +8,7 @@
 //may need to break component down further
 
 //ADD ALERT TO CONFIRM EVENT CANCELLATION
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import {
   Card,
   Button,
@@ -34,19 +34,19 @@ import { connect } from "react-redux";
 import Food from "./Food";
 
 const mapStateToProps = (state) => {
-  return {primaryemail: state.primaryemail}
-}
+  return { primaryemail: state.primaryemail };
+};
 
 function Event(props) {
   const {
-    ishost,
-    eventname,
+    isHost,
+    eventName,
     date,
     time,
     location,
     description,
     foods,
-    guests
+    guests,
   } = props;
 
   const [modal, setModal] = useState(false);
@@ -58,7 +58,7 @@ function Event(props) {
   let guestList = [];
   let needResponse = [];
   let foundId = [];
-  let yourObligation = []
+  let yourObligation = [];
 
   const guestFormValues = {
     guestid: foundId,
@@ -84,7 +84,7 @@ function Event(props) {
 
   function foodSorter() {
     for (let i = 0; i < foods.length; i++) {
-      if (foods[i].isclaimed === true) {
+      if (foods[i].isClaimed === true) {
         claimedFood.push(foods[i]);
       } else {
         unclaimedFood.push(foods[i]);
@@ -94,11 +94,11 @@ function Event(props) {
 
   function guestSorter() {
     for (let i = 0; i < guests.length; i++) {
-      if (guests[i].isattending === true) {
+      if (guests[i].isAttending === true) {
         guestList.push(guests[i]);
       }
-      if (guests[i].responded === false){
-        needResponse.push(guests[i])
+      if (guests[i].responded === false) {
+        needResponse.push(guests[i]);
       }
     }
   }
@@ -112,9 +112,9 @@ function Event(props) {
 
   function obligationFinder() {
     for (let i = 0; i < guestList.length; i++) {
-      if (props.primaryemail === guestList[i].primaryemail) {
-        for (let j = 0; j < guestList[i].isbringing.length; j++) {
-          yourObligation.push(guestList[i].isbringing[j]);
+      if (props.primaryemail === guestList[i].primaryEmail) {
+        for (let j = 0; j < guestList[i].isBringing.length; j++) {
+          yourObligation.push(guestList[i].isBringing[j]);
         }
       }
     }
@@ -141,7 +141,7 @@ function Event(props) {
         />
         <CardBody>
           <CardTitle>
-            <h2>{eventname}</h2>
+            <h2>{eventName}</h2>
           </CardTitle>
           <CardText>
             {date} at {time} <br />
@@ -155,11 +155,11 @@ function Event(props) {
       </Card>
 
       <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle}>{eventname}</ModalHeader>
+        <ModalHeader toggle={toggle}>{eventName}</ModalHeader>
         <Nav tabs>
           <NavItem>
             <NavLink
-              className={{ active: activeTab === "1" }}
+              /* className={{ active: activeTab === "1" }} */
               onClick={() => {
                 toggleTab("1");
               }}
@@ -167,10 +167,10 @@ function Event(props) {
               <h5>Information</h5>
             </NavLink>
           </NavItem>
-          {ishost ? (
+          {isHost ? (
             <NavItem>
               <NavLink
-                className={{ active: activeTab === "2" }}
+                /* className={{ active: activeTab === "2" }} */
                 onClick={() => {
                   toggleTab("2");
                 }}
@@ -180,10 +180,10 @@ function Event(props) {
             </NavItem>
           ) : null}
 
-          {ishost ? null : (
+          {isHost ? null : (
             <NavItem>
               <NavLink
-                className={{ active: activeTab === "3" }}
+                /* className={{ active: activeTab === "3" }} */
                 onClick={() => {
                   toggleTab("3");
                 }}
@@ -193,10 +193,10 @@ function Event(props) {
             </NavItem>
           )}
 
-          {ishost ? null : (
+          {isHost ? null : (
             <NavItem>
               <NavLink
-                className={{ active: activeTab === "4" }}
+                /* className={{ active: activeTab === "4" }} */
                 onClick={() => {
                   toggleTab("4");
                 }}
@@ -206,10 +206,10 @@ function Event(props) {
             </NavItem>
           )}
 
-          {ishost ? (
+          {isHost ? (
             <NavItem>
               <NavLink
-                className={{ active: activeTab === "5" }}
+                /* className={{ active: activeTab === "5" }} */
                 onClick={() => {
                   toggleTab("5");
                 }}
@@ -263,8 +263,25 @@ function Event(props) {
               <Col sm="6">
                 {/*map guest list to card, for event organizer only? */}
                 <Card>
-              {guestList.length > 0 ? guestList.map(guest => <>{guest.fname} {guest.lname} is bringing: {guest.isbringing.map(food => <> {food.foodname}<br /> </>)}!</>): null}
-              {needResponse.length > 0 ? needResponse.map(guest => <>You are waiting for responses from : {guest.fname} {guest.lname} <br /></>): null}  
+                  {guestList.map((guest) => (
+                    <Fragment key={guest.guestId}>
+                      {guest.firstName} {guest.lastName} is bringing:{" "}
+                      {guest.isBringing.map((food) => (
+                        <Fragment key={food.foodId}>
+                          {" "}
+                          {food.foodName}
+                          <br />{" "}
+                        </Fragment>
+                      ))}
+                      !
+                    </Fragment>
+                  ))}
+                  {needResponse.map((guest) => (
+                    <Fragment key={guest.guestId}>
+                      You are waiting for responses from : {guest.firstName}{" "}
+                      {guest.lastName} <br />
+                    </Fragment>
+                  ))}
                 </Card>
               </Col>
             </Row>
@@ -277,16 +294,14 @@ function Event(props) {
                     <h6>Menu</h6>
                   </CardTitle>
 
-                  {claimedFood.length > 0
-                    ? claimedFood.map((food) => (
-                        <>
-                          <Food key={food.foodid} foodname={food.foodname} />{" "}
-                          <Button className="bg-addon">
-                            Search Recipe?(stretch)
-                          </Button>{" "}
-                        </>
-                      ))
-                    : null}
+                  {claimedFood.map((food) => (
+                    <Fragment key={food.foodId}>
+                      <Food key={food.foodId} foodName={food.foodName} />{" "}
+                      <Button className="bg-addon">
+                        Search Recipe?(stretch)
+                      </Button>{" "}
+                    </Fragment>
+                  ))}
                 </Card>
               </Col>
             </Row>
@@ -296,15 +311,15 @@ function Event(props) {
             <Row>
               <Col sm="6">
                 <Card>
-                  {unclaimedFood.length > 0
-                    ? unclaimedFood.map((food) => (
-                        <>
-                          <Food key={food.foodid} foodname={food.foodname} />{" "}
-                          {/* Change onClick to onSubmit */}
-                          <Button className="bg-addon" onClick = {foodUpdateHandler}>Claim</Button>{" "}
-                        </>
-                      ))
-                    : null}
+                  {unclaimedFood.map((food) => (
+                    <Fragment key={food.foodId}>
+                      <Food key={food.foodId} foodname={food.foodName} />{" "}
+                      {/* Change onClick to onSubmit */}
+                      <Button className="bg-addon" onClick={foodUpdateHandler}>
+                        Claim
+                      </Button>{" "}
+                    </Fragment>
+                  ))}
                 </Card>
               </Col>
             </Row>

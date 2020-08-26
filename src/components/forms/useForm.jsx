@@ -10,15 +10,15 @@ const useForm = (callback) => {
   };
 
   const guestForm = {
-    guestid: "",
-    fname: "",
-    lname: "",
-    primaryemail: "",
+    guestId: "",
+    firstName: "",
+    lastName: "",
+    primaryEmail: "",
   };
 
   const foodForm = {
-    foodid: "",
-    foodname: "",
+    foodId: "",
+    foodName: "",
     description: "",
   };
 
@@ -27,9 +27,9 @@ const useForm = (callback) => {
   const [guest, setGuests] = useState(guestForm);
 
   const initialForm = {
-    ishost: true,
-    potluckid: "",
-    eventname: "",
+    isHost: true,
+    potluckId: "",
+    eventName: "",
     date: "",
     time: "",
     location: "",
@@ -72,15 +72,15 @@ const useForm = (callback) => {
   };
 
   const foodRemover = (food) => {
-    const newFoods = formValues.foods.filter(item => item.foodname !== food)
-    setFormValues({...formValues, foods: newFoods})
+    const newFoods = formValues.foods.filter((item) => item.foodname !== food);
+    setFormValues({ ...formValues, foods: newFoods });
   };
 
   const guestRemover = (guest) => {
-    const newGuests = formValues.guests.filter(item => item.fname !== guest)
-    setFormValues({...formValues, guests: newGuests})
+    const newGuests = formValues.guests.filter((item) => item.fname !== guest);
+    setFormValues({ ...formValues, guests: newGuests });
   };
- 
+
   return {
     food,
     concatLocation,
@@ -93,7 +93,7 @@ const useForm = (callback) => {
     addGuest,
     addFood,
     foodRemover,
-    guestRemover
+    guestRemover,
   };
 };
 

@@ -11,9 +11,7 @@ export default function App() {
       {/* Private Routes: DashBoardNavBar */}
       <Route exact path="/" component={Dashboard} />
 
-      <Route path="/event/:id" render = {props => <EventPage {...props} />} />
-</>
+      <Route path="/event/:id" render={(props) => <EventPage {...props} />} />
+    </>
   );
 }
-
-

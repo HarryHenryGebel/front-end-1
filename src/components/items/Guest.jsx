@@ -1,17 +1,16 @@
 import React from "react";
-import { Button, Card, CardBody, CardText, CardFooter } from "reactstrap";
+import { Card, CardBody, CardText } from "reactstrap";
 
 export default function Guest(props) {
-  const { fname, lname, primaryemail } = props;
+  const { firstName, lastName, primaryEmail } = props;
 
   return (
     <Card>
       <CardBody>
         <CardText>
-          {fname} {lname}
+          {firstName} {lastName}
         </CardText>
-        <CardText>{primaryemail}</CardText>
-
+        <CardText>{primaryEmail}</CardText>
       </CardBody>
     </Card>
   );

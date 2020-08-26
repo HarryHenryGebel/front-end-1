@@ -73,7 +73,7 @@ function EventInvitation(props) {
         />
         <CardBody>
           <CardTitle>
-            <h2>{potluck.eventname}</h2>
+            <h2>{potluck.eventName}</h2>
           </CardTitle>
           <CardSubtitle>
             {potluck.date}, {potluck.time}, {potluck.location}
@@ -103,21 +103,13 @@ function EventInvitation(props) {
               onChange={attendanceHandler}
             >
               <option>Please Select</option>
-              {potluck.foods.length > 0
-                ? potluck.foods.map((food) => {
-                    if (food.isclaimed === false) {
-                      return (
-                        <option
-                          key={food.foodid}
-                          name="isbringing"
-                          value={food.foodname}
-                        >
-                          {food.foodname}
-                        </option>
-                      );
-                    }
-                  })
-                : null}
+              {potluck.foods
+                .filter((food) => food.isClaimed === false)
+                .map((food) => (
+                  <option key={food.foodId} value={food.foodId}>
+                    {food.foodName}
+                  </option>
+                ))}
             </Input>
           </FormGroup>
           <Button className="bg-confirm">Confirm</Button>{" "}

@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav } from "reactstrap";
-import ModalButton from "./ModalButton";
 import DashboardNav from "./DashboardNav.jsx";
-import MarketingButton from "./MarketingButton";
-import LoginForm from "./LoginForm";
-import RegistrationForm from "./RegistrationForm";
+import MarketingButton from "./MarketingButton.jsx";
+import LoginForm from "./LoginForm.jsx";
+import RegistrationForm from "./RegistrationForm.jsx";
 
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,18 +23,9 @@ export default function NavBar() {
           </Nav>
         </Collapse>
         <NavbarBrand href="/">Not Yo Momma's Potluck</NavbarBrand>
-        <NavbarToggler onClick={toggle} />
-
-        <ModalButton
-          buttonLabel="Login"
-          buttonColor="bg-addon"
-          formComponent={LoginForm()}
-        />
-        <ModalButton
-          buttonLabel="Registration"
-          buttonColor="bg-confirm"
-          formComponent={RegistrationForm()}
-        />
+        <NavbarToggler onClick={toggle} /> {/* Is this actually needed? or some weird inclusion for the hamburger dropdown?*/}
+        <LoginForm />
+        <RegistrationForm />
       </Navbar>
     </div>
   );
