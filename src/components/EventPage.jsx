@@ -190,12 +190,13 @@ function EventPage(props) {
                   </p>
                   <p>
                     {/* This function is wrong. It should loop through to find the guest and post the guest's food. The function exists in Event.jsx */}
-                    You have told the host that you will be bringing:{" "}
-                    {yourObligation.length > 0 ? yourObligation.map((food) => (
+                    {" "}
+                    {potluck[0].ishost ? null: yourObligation.length > 0 ? yourObligation.map((food) => (
                       <>
-                        <Food key={food.foodid} foodname={food.foodname} />
+                        You have told the host that you will be bringing:<Food key={food.foodid} foodname={food.foodname} />
                       </>
                     )) : <CardText> Please help your host and bring some food! </CardText>}
+                    
                   </p>
                 </Col>
               </Row>

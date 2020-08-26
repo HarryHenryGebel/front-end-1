@@ -25,10 +25,26 @@ import { updateEvent } from "../actions";
 import { connect } from "react-redux";
 
 function EventInvitation(props) {
+
   const { potluck } = props;
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
 
+  const formValues = {
+    guestid: '', //from params?
+    responded: false,
+    isattending: false,
+    isbringing: []
+  }
+
+  const [guestForm, setGuestForm] = useState(formValues)
+
+  const attendanceHandler = (e) => {
+    setGuestForm({...guestForm, responded: true, isattending: true, isbringing: [...guestForm.isbringing, e.target.value]})
+    console.log('Handler2', guestForm)
+  }
+
+  console.log('check', guestForm)
   return (
     <div>
       <Card>
@@ -62,17 +78,23 @@ function EventInvitation(props) {
         <ModalHeader toggle={toggle}>What will you be bringing?</ModalHeader>
         <Form>
           <FormGroup>
-            <Label htmlFor="exampleSelect">Select</Label>
-            <Input type="select" name="select" id="exampleSelect">
+            <Label htmlFor="isbringing">Select</Label>
+            <Input type="select" name="isbringing" id="isbringing" onChange = {attendanceHandler}>
+              <option>Please Select</option>
               {potluck.foods.length > 0
                 ? potluck.foods.map(food => {
                     if (food.isclaimed === false){
                       return (
-                        <option value={food.foodid}>{food.foodname}</option>
+                        <option key = {food.foodid} name = "isbringing"  value={food.foodname}>{food.foodname}</option>
                       );
                     }
                   })
                 : null}
+                <option value={guestForm.isbringing}>Ice Cream</option>
+                <option value={guestForm.isbringing}>Ice Cream</option>
+                <option value={guestForm.isbringing}>Ice Cream</option>
+                <option value={guestForm.isbringing}>Ice Cream</option>
+                
             </Input>
           </FormGroup>
           <Button className="bg-confirm">Confirm</Button>{" "}
