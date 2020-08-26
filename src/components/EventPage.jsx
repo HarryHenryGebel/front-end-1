@@ -58,7 +58,7 @@ function EventPage(props) {
 
   function potluckFinder() {
     for (let i = 0; i < potlucks.length; i++) {
-      if (potlucks[i].potluckid === params.id) {
+      if (potlucks[i].potluckId === params.id) {
         potluck.push(potlucks[i]);
       }
     }

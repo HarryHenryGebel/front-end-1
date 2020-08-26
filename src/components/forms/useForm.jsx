@@ -27,7 +27,7 @@ const useForm = (callback) => {
   const [guest, setGuests] = useState(guestForm);
 
   const initialForm = {
-    potluckid: "",
+    potluckId: "",
     eventName: "",
     date: "",
     time: "",

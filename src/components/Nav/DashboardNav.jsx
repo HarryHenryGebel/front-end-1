@@ -60,8 +60,8 @@ function DashboardNav(props) {
           <DropdownItem onClick={userToggle}>Update Profile</DropdownItem>
           {props.potlucks.length > 0
             ? props.potlucks.map((potluck) => (
-                <DropdownItem key={potluck.potluckid}>
-                  <Link to={`/event/${potluck.potluckid}`}>
+                <DropdownItem key={potluck.potluckId}>
+                  <Link to={`/event/${potluck.potluckId}`}>
                     {potluck.eventName}
                   </Link>
                 </DropdownItem>
@@ -70,10 +70,10 @@ function DashboardNav(props) {
 
           {/* show alert? */}
           {newInvites.map((invite) => (
-            <DropdownItem key={invite.potluckid} onClick={toggleModal}>
+            <DropdownItem key={invite.potluckId} onClick={toggleModal}>
               {invite.eventName}
               <Modal isOpen={modal} toggle={toggleModal}>
-                <EventInvitation key={invite.potluckid} potluck={invite} />
+                <EventInvitation key={invite.potluckId} potluck={invite} />
               </Modal>
             </DropdownItem>
           ))}

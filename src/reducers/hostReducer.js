@@ -19,7 +19,7 @@ const hostState = {
   errors: "",
   potlucks: [
     {
-      potluckid: "3",
+      potluckId: "3",
       ishost: true,
       eventName: `Dinner at Ava's`,
       date: "02/11/2021",
@@ -88,7 +88,7 @@ const hostState = {
       errors: false,
     },
     {
-      potluckid: "5",
+      potluckId: "5",
       ishost: false,
       eventName: `Dinner at Not Ava's`,
       date: "22 March 2021",
