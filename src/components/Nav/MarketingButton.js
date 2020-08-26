@@ -1,30 +1,26 @@
-import React from "react"
-import {UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap"
+import React from "react";
+import {
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from "reactstrap";
 
-export default function MarketingButton () {
-
+export default function MarketingButton() {
   return (
     <div>
       <UncontrolledDropdown nav inNavbar>
         <DropdownToggle nav caret>
-        More Info (marketing pgs)
+          More Info (marketing pgs)
         </DropdownToggle>
-        <DropdownMenu left>
-          <DropdownItem>
-            Testimonials
-          </DropdownItem>
-          <DropdownItem>
-            Theme Ideas
-          </DropdownItem>
-          <DropdownItem>
-            Contact
-          </DropdownItem>
+        <DropdownMenu left="true">
+          <DropdownItem>Testimonials</DropdownItem>
+          <DropdownItem>Theme Ideas</DropdownItem>
+          <DropdownItem>Contact</DropdownItem>
           <DropdownItem divider />
-          <DropdownItem>
-            Home
-          </DropdownItem>
+          <DropdownItem>Home</DropdownItem>
         </DropdownMenu>
       </UncontrolledDropdown>
     </div>
-  )
+  );
 }
