@@ -211,7 +211,7 @@ function CreateEvent() {
       </Button>
       {formValues.foods.map((food) => (
         <>
-          <Food key={food.foodid} foodName={food.foodName} />
+          <Food key={food.foodId} foodName={food.foodName} />
           <Button className="bg-cancel">Remove</Button>
         </>
       ))}

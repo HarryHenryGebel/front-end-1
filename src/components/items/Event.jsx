@@ -256,7 +256,7 @@ function Event(props) {
 
                   {claimedFood.map((food) => (
                     <>
-                      <Food key={food.foodid} foodName={food.foodName} />{" "}
+                      <Food key={food.foodId} foodName={food.foodName} />{" "}
                       <Button className="bg-addon">
                         Search Recipe?(stretch)
                       </Button>{" "}
@@ -273,7 +273,7 @@ function Event(props) {
                 <Card>
                   {unclaimedFood.map((food) => (
                     <>
-                      <Food key={food.foodid} foodName={food.foodName} />{" "}
+                      <Food key={food.foodId} foodName={food.foodName} />{" "}
                       <Button className="bg-addon">Claim</Button>{" "}
                     </>
                   ))}

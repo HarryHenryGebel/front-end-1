@@ -155,7 +155,7 @@ function EventPage(props) {
                     You have told the host that you will be bringing:{" "}
                     {potluck[0].foods.map((food) => (
                       <>
-                        <Food key={food.foodid} foodName={food.foodName} />
+                        <Food key={food.foodId} foodName={food.foodName} />
                       </>
                     ))}
                   </p>

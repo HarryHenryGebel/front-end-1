@@ -28,11 +28,11 @@ const hostState = {
       description: `Turn left at the pointy hats!`,
       foods: [
         {
-          foodid: "18",
+          foodId: "18",
           foodName: "pizza",
           isclaimed: true,
         },
-        { foodid: "22", foodName: "strange cake", isclaimed: false },
+        { foodId: "22", foodName: "strange cake", isclaimed: false },
       ],
       guests: [
         {
@@ -54,11 +54,11 @@ const hostState = {
           isattending: false,
           isbringing: [
             {
-              foodid: "86",
+              foodId: "86",
               foodName: "not available",
             },
             {
-              foodid: "13",
+              foodId: "13",
               foodName: "ice cream",
             },
           ],
@@ -72,12 +72,12 @@ const hostState = {
           isattending: true,
           isbringing: [
             {
-              foodid: "86",
+              foodId: "86",
               foodName: "not available",
               isclaimed: true,
             },
             {
-              foodid: "13",
+              foodId: "13",
               foodName: "ice cream",
               isclaimed: true,
             },
@@ -97,12 +97,12 @@ const hostState = {
       description: `Turn left at the pointy hats!`,
       foods: [
         {
-          foodid: "18",
+          foodId: "18",
           foodName: "pizza",
           isclaimed: true,
         },
         {
-          foodid: "22",
+          foodId: "22",
           foodName: "strange cake",
           isclaimed: false,
         },
@@ -127,11 +127,11 @@ const hostState = {
           isattending: false,
           isbringing: [
             {
-              foodid: "86",
+              foodId: "86",
               foodName: "not available",
             },
             {
-              foodid: "13",
+              foodId: "13",
               foodName: "ice cream",
             },
           ],
@@ -145,11 +145,11 @@ const hostState = {
           isattending: true,
           isbringing: [
             {
-              foodid: "86",
+              foodId: "86",
               foodName: "not available",
             },
             {
-              foodid: "13",
+              foodId: "13",
               foodName: "ice cream",
             },
           ],

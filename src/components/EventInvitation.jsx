@@ -67,7 +67,7 @@ function EventInvitation(props) {
               {potluck.foods
                 .filter((food) => food.isclaimed === false)
                 .map((food) => (
-                  <option key={food.foodid} value={food.foodid}>
+                  <option key={food.foodId} value={food.foodId}>
                     {food.foodName}
                   </option>
                 ))}
