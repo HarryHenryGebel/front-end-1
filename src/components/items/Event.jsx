@@ -119,7 +119,7 @@ function Event(props) {
         <Nav tabs>
           <NavItem>
             <NavLink
-              className={{ active: activeTab === "1" }}
+              /* className={{ active: activeTab === "1" }} */
               onClick={() => {
                 toggleTab("1");
               }}
@@ -130,7 +130,7 @@ function Event(props) {
           {ishost ? (
             <NavItem>
               <NavLink
-                className={{ active: activeTab === "2" }}
+                /* className={{ active: activeTab === "2" }} */
                 onClick={() => {
                   toggleTab("2");
                 }}
@@ -143,7 +143,7 @@ function Event(props) {
           {ishost ? null : (
             <NavItem>
               <NavLink
-                className={{ active: activeTab === "3" }}
+                /* className={{ active: activeTab === "3" }} */
                 onClick={() => {
                   toggleTab("3");
                 }}
@@ -156,7 +156,7 @@ function Event(props) {
           {ishost ? null : (
             <NavItem>
               <NavLink
-                className={{ active: activeTab === "4" }}
+                /* className={{ active: activeTab === "4" }} */
                 onClick={() => {
                   toggleTab("4");
                 }}
@@ -169,7 +169,7 @@ function Event(props) {
           {ishost ? (
             <NavItem>
               <NavLink
-                className={{ active: activeTab === "5" }}
+                /* className={{ active: activeTab === "5" }} */
                 onClick={() => {
                   toggleTab("5");
                 }}
