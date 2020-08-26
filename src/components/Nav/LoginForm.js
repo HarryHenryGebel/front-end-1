@@ -70,11 +70,12 @@ export default function LoginForm() {
   return (
     <div>
       <Button className="bg-addon" onClick={toggleModal}>Login</Button>
-      <Form inline onSubmit={formSubmit}>
       <Modal isOpen={modal} toggle={toggleModal}>
+        {/* using this outer placement of Form lets the submit button properly POST, but totally ruins the layout. */}
+      {/* <Form inline onSubmit={formSubmit}> */}
         <ModalHeader toggle={toggleModal}>Login</ModalHeader>
         <ModalBody>
-          {/* <Form inline onSubmit={formSubmit}> */}
+          <Form inline onSubmit={formSubmit}>
             <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
               <Label htmlFor="email" className="mr-sm-2">
                 Email
@@ -105,7 +106,7 @@ export default function LoginForm() {
               {/* for the love of potlucks, style these to go fit in the modal */}
               {errors.password.length > 0 ? <p className="error">{errors.password}</p> : null}
             </FormGroup>
-          {/* </Form> */}
+          </Form>
         </ModalBody>
         <ModalFooter>
         <pre>{JSON.stringify(post, null, 2)}</pre>
@@ -113,11 +114,12 @@ export default function LoginForm() {
             color="primary"
             type="submit"
             disabled={buttonDisabled}
+            // Temp disabled to test submit button posting
             // onClick={toggleModal}
           >Submit</Button>{' '}
         </ModalFooter>
+        {/* </Form> */}
       </Modal>
-        </Form>
     </div>
   )
 }
