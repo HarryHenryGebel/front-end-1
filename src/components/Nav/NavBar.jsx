@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav } from "reactstrap";
 import DashboardNav from "./DashboardNav.jsx";
-import MarketingButton from "./MarketingButton";
-import LoginForm from "./LoginForm";
-import RegistrationForm from "./RegistrationForm";
+import MarketingButton from "./MarketingButton.jsx";
+import LoginForm from "./LoginForm.jsx";
+import RegistrationForm from "./RegistrationForm.jsx";
 
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
