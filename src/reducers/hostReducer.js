@@ -11,7 +11,7 @@ import {
 } from "../actions";
 
 const hostState = {
-  userid: "1",
+  userId: "1",
   username: "avadinner",
   primaryEmail: "avawingfield@email.com",
   imageurl: "../assets/user.svg",

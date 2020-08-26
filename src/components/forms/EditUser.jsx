@@ -3,7 +3,7 @@ import { Col, Row, Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 function EditUser() {
   const initialForm = {
-    userid: "",
+    userId: "",
     username: "",
     password: "",
     primaryEmail: "",
