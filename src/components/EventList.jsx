@@ -9,7 +9,6 @@ import { connect } from "react-redux";
 const mapStateToProps = (state) => {
   return {
     username: state.username,
-    primaryemail: state.primaryemail,
     potlucks: state.potlucks,
   };
 };
