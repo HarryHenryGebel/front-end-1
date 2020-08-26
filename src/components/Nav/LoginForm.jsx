@@ -107,7 +107,9 @@ export default function LoginForm() {
                 placeholder="don't share me!"
               />
               {/* for the love of potlucks, style these to go fit in the modal */}
-              {errors.password.length > 0 ? <p className="error">{errors.password}</p> : null}
+              {errors.password.length > 0 ?
+                <AlertRed message={<p className="error">{errors.password}</p>}/>
+                : null}
             </FormGroup>
           </Form>
         </ModalBody>
