@@ -19,7 +19,7 @@ export default function RegistrationForm () {
     username: "",
     email: "",
     password: "",
-    terms: true
+    terms: "",
   })
   const [post, setPost] = useState([]);
 
@@ -54,12 +54,11 @@ export default function RegistrationForm () {
       .validate(e.target.name === "terms" ? e.target.checked : e.target.value)
       .then(valid => {
         setErrors({...errors, [e.target.name]: ""});
-        console.log('ERRORS', errors)
+        console.log('Valid ERRORS', errors)
       })
       .catch(err => {
-        // add error by name of input since value breaks validation
         setErrors({...errors, [e.target.name]: err.errors[0]});
-        console.log('ERRORS', errors, errors.email.length)
+        console.log('Catch ERRORS', errors, "e.target", e.target, "t.target.name", e.target.name)
       });
   };
   const inputChange = (e) => {
@@ -124,6 +123,7 @@ export default function RegistrationForm () {
             <Label check>
               <Input
                 type="checkbox"
+                name="terms"
                 value={formState.terms}
                 onChange={inputChange}/>{' '}
                 I Agree to Terms of Service and promise to be a nice human.
@@ -134,6 +134,7 @@ export default function RegistrationForm () {
         </Form>
       </ModalBody>
       <ModalFooter>
+        {/* temp to test post, delete when done */}
       <pre>{JSON.stringify(post, null, 2)}</pre>
         <Button
           color="primary"
