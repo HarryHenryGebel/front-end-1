@@ -170,7 +170,7 @@ function EventPage(props) {
                     <>
                       <Guest
                         firstName={guest.firstName}
-                        lname={guest.lname}
+                        lastName={guest.lastName}
                         primaryEmail={guest.primaryEmail}
                       />
                       <br />

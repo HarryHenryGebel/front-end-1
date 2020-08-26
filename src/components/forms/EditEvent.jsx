@@ -161,7 +161,7 @@ function EditEvent(props) {
           <Guest
             key={guest.guestId}
             firstName={guest.firstName}
-            lname={guest.lname}
+            lastName={guest.lastName}
             primaryEmail={guest.primaryEmail}
           />
           <Button className="bg-cancel">Remove</Button>
@@ -183,13 +183,13 @@ function EditEvent(props) {
         </Col>
         <Col md={6}>
           <FormGroup>
-            <Label htmlFor="lname">Last Name</Label>
+            <Label htmlFor="lastName">Last Name</Label>
             <Input
               type="text"
-              name="lname"
-              id="lname"
+              name="lastName"
+              id="lastName"
               placeholder="with a placeholder"
-              value={guest.lname}
+              value={guest.lastName}
               onChange={guestChangeHandler}
             />
           </FormGroup>

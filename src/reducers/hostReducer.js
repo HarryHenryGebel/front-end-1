@@ -34,7 +34,7 @@ const hostState = {
         {
           guestId: "57",
           firstName: "Martin",
-          lname: "Ricky",
+          lastName: "Ricky",
           primaryEmail: "avawingfield@email.com",
           responded: false,
           isattending: false,
@@ -44,7 +44,7 @@ const hostState = {
         {
           guestId: "39",
           firstName: "Ricky",
-          lname: "Martin",
+          lastName: "Martin",
           primaryEmail: "livin@lavidaloca.com",
           responded: true,
           isattending: false,
@@ -62,7 +62,7 @@ const hostState = {
         {
           guestId: "17",
           firstName: "Martin",
-          lname: "Ricky",
+          lastName: "Ricky",
           primaryEmail: "livin@lavidaloca.com",
           responded: true,
           isattending: true,
@@ -107,7 +107,7 @@ const hostState = {
         {
           guestId: "57",
           firstName: "Martin",
-          lname: "Ricky",
+          lastName: "Ricky",
           primaryEmail: "livin@lavidaloca.com",
           responded: false,
           isattending: false,
@@ -117,7 +117,7 @@ const hostState = {
         {
           guestId: "39",
           firstName: "Ricky",
-          lname: "Martin",
+          lastName: "Martin",
           primaryEmail: "livin@lavidaloca.com",
           responded: true,
           isattending: false,
@@ -135,7 +135,7 @@ const hostState = {
         {
           guestId: "17",
           firstName: "Martin",
-          lname: "Ricky",
+          lastName: "Ricky",
           primaryEmail: "livin@lavidaloca.com",
           responded: true,
           isattending: true,
