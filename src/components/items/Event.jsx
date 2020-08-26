@@ -8,7 +8,7 @@
 //may need to break component down further
 
 //ADD ALERT TO CONFIRM EVENT CANCELLATION
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import {
   Card,
   Button,
@@ -35,8 +35,8 @@ import Food from "./Food";
 
 function Event(props) {
   const {
-    ishost,
-    eventname,
+    isHost,
+    eventName,
     date,
     time,
     location,
@@ -68,7 +68,7 @@ function Event(props) {
 
   function foodSorter() {
     for (let i = 0; i < foods.length; i++) {
-      if (foods[i].isclaimed === true) {
+      if (foods[i].isClaimed === true) {
         claimedFood.push(foods[i]);
       } else {
         unclaimedFood.push(foods[i]);
@@ -79,7 +79,7 @@ function Event(props) {
   let needResponse = [];
   function guestSorter() {
     for (let i = 0; i < guests.length; i++) {
-      if (guests[i].isattending === true) {
+      if (guests[i].isAttending === true) {
         guestList.push(guests[i]);
       }
       if (guests[i].responded === false) {
@@ -101,7 +101,7 @@ function Event(props) {
         />
         <CardBody>
           <CardTitle>
-            <h2>{eventname}</h2>
+            <h2>{eventName}</h2>
           </CardTitle>
           <CardText>
             {date} at {time} <br />
@@ -115,7 +115,7 @@ function Event(props) {
       </Card>
 
       <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle}>{eventname}</ModalHeader>
+        <ModalHeader toggle={toggle}>{eventName}</ModalHeader>
         <Nav tabs>
           <NavItem>
             <NavLink
@@ -127,7 +127,7 @@ function Event(props) {
               <h5>Information</h5>
             </NavLink>
           </NavItem>
-          {ishost ? (
+          {isHost ? (
             <NavItem>
               <NavLink
                 /* className={{ active: activeTab === "2" }} */
@@ -140,7 +140,7 @@ function Event(props) {
             </NavItem>
           ) : null}
 
-          {ishost ? null : (
+          {isHost ? null : (
             <NavItem>
               <NavLink
                 /* className={{ active: activeTab === "3" }} */
@@ -153,7 +153,7 @@ function Event(props) {
             </NavItem>
           )}
 
-          {ishost ? null : (
+          {isHost ? null : (
             <NavItem>
               <NavLink
                 /* className={{ active: activeTab === "4" }} */
@@ -166,7 +166,7 @@ function Event(props) {
             </NavItem>
           )}
 
-          {ishost ? (
+          {isHost ? (
             <NavItem>
               <NavLink
                 /* className={{ active: activeTab === "5" }} */
@@ -224,23 +224,23 @@ function Event(props) {
                 {/*map guest list to card, for event organizer only? */}
                 <Card>
                   {guestList.map((guest) => (
-                    <>
-                      {guest.fname} {guest.lname} is bringing:{" "}
-                      {guest.isbringing.map((food) => (
-                        <>
+                    <Fragment key={guest.guestId}>
+                      {guest.firstName} {guest.lastName} is bringing:{" "}
+                      {guest.isBringing.map((food) => (
+                        <Fragment key={food.foodId}>
                           {" "}
-                          {food.foodname}
+                          {food.foodName}
                           <br />{" "}
-                        </>
+                        </Fragment>
                       ))}
                       !
-                    </>
+                    </Fragment>
                   ))}
                   {needResponse.map((guest) => (
-                    <>
-                      You are waiting for responses from : {guest.fname}{" "}
-                      {guest.lname} <br />
-                    </>
+                    <Fragment key={guest.guestId}>
+                      You are waiting for responses from : {guest.firstName}{" "}
+                      {guest.lastName} <br />
+                    </Fragment>
                   ))}
                 </Card>
               </Col>
@@ -255,12 +255,12 @@ function Event(props) {
                   </CardTitle>
 
                   {claimedFood.map((food) => (
-                    <>
-                      <Food key={food.foodid} foodname={food.foodname} />{" "}
+                    <Fragment key={food.foodId}>
+                      <Food key={food.foodId} foodName={food.foodName} />{" "}
                       <Button className="bg-addon">
                         Search Recipe?(stretch)
                       </Button>{" "}
-                    </>
+                    </Fragment>
                   ))}
                 </Card>
               </Col>
@@ -272,10 +272,10 @@ function Event(props) {
               <Col sm="6">
                 <Card>
                   {unclaimedFood.map((food) => (
-                    <>
-                      <Food key={food.foodid} foodname={food.foodname} />{" "}
+                    <Fragment key={food.foodId}>
+                      <Food key={food.foodId} foodName={food.foodName} />{" "}
                       <Button className="bg-addon">Claim</Button>{" "}
-                    </>
+                    </Fragment>
                   ))}
                 </Card>
               </Col>

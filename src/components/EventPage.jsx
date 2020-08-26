@@ -58,7 +58,7 @@ function EventPage(props) {
 
   function potluckFinder() {
     for (let i = 0; i < potlucks.length; i++) {
-      if (potlucks[i].potluckid === params.id) {
+      if (potlucks[i].potluckId === params.id) {
         potluck.push(potlucks[i]);
       }
     }
@@ -77,7 +77,7 @@ function EventPage(props) {
             height="300vh"
             width="100%"
           />
-          <h1>{potluck[0].eventname}</h1>
+          <h1>{potluck[0].eventName}</h1>
           <p className="lead">
             {potluck[0].date} at {potluck[0].time}
           </p>
@@ -116,7 +116,7 @@ function EventPage(props) {
                 <h5>Bring Food</h5>
               </NavLink>
             </NavItem>
-            {potluck[0].ishost ? null : (
+            {potluck[0].isHost ? null : (
               <NavItem>
                 <NavLink
                   className={{ active: activeTab === "4" }}
@@ -129,7 +129,7 @@ function EventPage(props) {
               </NavItem>
             )}
 
-            {potluck[0].ishost ? (
+            {potluck[0].isHost ? (
               <NavItem>
                 <NavLink
                   className={{ active: activeTab === "5" }}
@@ -147,7 +147,7 @@ function EventPage(props) {
               <Row>
                 <Col sm="12">
                   <p>
-                    {potluck[0].eventname} will be held at {potluck[0].time} on{" "}
+                    {potluck[0].eventName} will be held at {potluck[0].time} on{" "}
                     {potluck[0].date} at {potluck[0].location}.
                   </p>
                   <p>
@@ -155,7 +155,7 @@ function EventPage(props) {
                     You have told the host that you will be bringing:{" "}
                     {potluck[0].foods.map((food) => (
                       <>
-                        <Food key={food.foodid} foodname={food.foodname} />
+                        <Food key={food.foodId} foodName={food.foodName} />
                       </>
                     ))}
                   </p>
@@ -169,9 +169,9 @@ function EventPage(props) {
                   {potluck[0].guests.map((guest) => (
                     <>
                       <Guest
-                        fname={guest.fname}
-                        lname={guest.lname}
-                        primaryemail={guest.primaryemail}
+                        firstName={guest.firstName}
+                        lastName={guest.lastName}
+                        primaryEmail={guest.primaryEmail}
                       />
                       <br />
                     </>

@@ -3,11 +3,11 @@ import { Col, Row, Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 function EditUser() {
   const initialForm = {
-    userid: "",
+    userId: "",
     username: "",
     password: "",
-    primaryemail: "",
-    imageurl: null,
+    primaryEmail: "",
+    imageUrl: null,
   };
 
   const [user, setUser] = useState(initialForm);
@@ -40,7 +40,7 @@ function EditUser() {
               name="primary"
               id="email"
               defaultValue="email defaultValue"
-              value={user.primaryemail}
+              value={user.primaryEmail}
               onChange={changeHandler}
             />
           </FormGroup>
