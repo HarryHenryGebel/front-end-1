@@ -47,6 +47,7 @@ function EventPage(props) {
   const { potlucks } = props;
   //params is the id
   let potluck = [];
+  let unclaimedFood = [];
 
   const [activeTab, setActiveTab] = useState("1");
   const [modal, setModal] = useState(false);
@@ -63,8 +64,16 @@ function EventPage(props) {
       }
     }
   }
-
+  
+  function foodSorter() {
+    for (let i = 0; i < potluck[0].foods.length; i++) {
+      if (potluck[0].foods[i].isclaimed === false) {
+        unclaimedFood.push(potluck[0].foods[i]);
+      } 
+    }
+  }
   potluckFinder();
+  foodSorter();
 
   return (
     <>
@@ -184,11 +193,8 @@ function EventPage(props) {
               <Row>
                 <Col sm="6">
                   <Card body>
-                    <CardTitle>
-                      <h2>Unclaimed Menu Item</h2>
-                    </CardTitle>
-                    <CardText>Map over each item in list to display</CardText>
-                    <Button className="bg-addon">Claim Food Item!</Button>
+                    {unclaimedFood.length > 0 ? unclaimedFood.map(food => <><Food key = {food.foodid} foodname = {foodname}/>                    <Button className="bg-addon">Claim Food Item!</Button></>) : <CardText>All food is being brought!</CardText>}
+
                   </Card>
                 </Col>
               </Row>
