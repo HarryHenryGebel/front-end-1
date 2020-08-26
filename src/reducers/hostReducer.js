@@ -14,7 +14,7 @@ const hostState = {
   userId: "1",
   username: "avadinner",
   primaryEmail: "avawingfield@email.com",
-  imageurl: "../assets/user.svg",
+  imageUrl: "../assets/user.svg",
   isLoading: false,
   errors: "",
   potlucks: [

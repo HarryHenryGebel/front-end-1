@@ -7,7 +7,7 @@ function EditUser() {
     username: "",
     password: "",
     primaryEmail: "",
-    imageurl: null,
+    imageUrl: null,
   };
 
   const [user, setUser] = useState(initialForm);
