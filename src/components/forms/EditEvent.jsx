@@ -2,7 +2,7 @@ import React from "react";
 import { Col, Row, Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { updateEvent } from "../../actions";
 import { connect } from "react-redux";
-import useForm from "./useForm";
+import {useForm} from "../../utils/";
 import Guest from "../items/Guest";
 import Food from "../items/Food";
 
