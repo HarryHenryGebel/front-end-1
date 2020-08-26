@@ -29,10 +29,10 @@ const hostState = {
       foods: [
         {
           foodid: "18",
-          foodname: "pizza",
+          foodName: "pizza",
           isclaimed: true,
         },
-        { foodid: "22", foodname: "strange cake", isclaimed: false },
+        { foodid: "22", foodName: "strange cake", isclaimed: false },
       ],
       guests: [
         {
@@ -55,11 +55,11 @@ const hostState = {
           isbringing: [
             {
               foodid: "86",
-              foodname: "not available",
+              foodName: "not available",
             },
             {
               foodid: "13",
-              foodname: "ice cream",
+              foodName: "ice cream",
             },
           ],
         },
@@ -73,12 +73,12 @@ const hostState = {
           isbringing: [
             {
               foodid: "86",
-              foodname: "not available",
+              foodName: "not available",
               isclaimed: true,
             },
             {
               foodid: "13",
-              foodname: "ice cream",
+              foodName: "ice cream",
               isclaimed: true,
             },
           ],
@@ -98,12 +98,12 @@ const hostState = {
       foods: [
         {
           foodid: "18",
-          foodname: "pizza",
+          foodName: "pizza",
           isclaimed: true,
         },
         {
           foodid: "22",
-          foodname: "strange cake",
+          foodName: "strange cake",
           isclaimed: false,
         },
       ],
@@ -128,11 +128,11 @@ const hostState = {
           isbringing: [
             {
               foodid: "86",
-              foodname: "not available",
+              foodName: "not available",
             },
             {
               foodid: "13",
-              foodname: "ice cream",
+              foodName: "ice cream",
             },
           ],
         },
@@ -146,11 +146,11 @@ const hostState = {
           isbringing: [
             {
               foodid: "86",
-              foodname: "not available",
+              foodName: "not available",
             },
             {
               foodid: "13",
-              foodname: "ice cream",
+              foodName: "ice cream",
             },
           ],
         },

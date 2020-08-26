@@ -18,7 +18,7 @@ const useForm = (callback) => {
 
   const foodForm = {
     foodid: "",
-    foodname: "",
+    foodName: "",
     description: "",
   };
 

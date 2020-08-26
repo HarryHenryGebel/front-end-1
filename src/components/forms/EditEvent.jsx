@@ -213,7 +213,7 @@ function EditEvent(props) {
       </Button>
       {formValues.foods.map((food) => (
         <>
-          <Food key={food.foodid} foodname={food.foodname} />
+          <Food key={food.foodid} foodName={food.foodName} />
           <Button className="bg-cancel">Remove</Button>
         </>
       ))}
@@ -221,10 +221,10 @@ function EditEvent(props) {
         <Label htmlFor="FoodName">Food Name</Label>
         <Input
           type="text"
-          name="foodname"
+          name="foodName"
           id="FoodName"
           placeholder="name"
-          value={food.foodname}
+          value={food.foodName}
           onChange={foodChangeHandler}
         />
       </FormGroup>{" "}

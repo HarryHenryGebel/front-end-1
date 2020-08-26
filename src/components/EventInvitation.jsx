@@ -68,7 +68,7 @@ function EventInvitation(props) {
                 .filter((food) => food.isclaimed === false)
                 .map((food) => (
                   <option key={food.foodid} value={food.foodid}>
-                    {food.foodname}
+                    {food.foodName}
                   </option>
                 ))}
             </Input>
