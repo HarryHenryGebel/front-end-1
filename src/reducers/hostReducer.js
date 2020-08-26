@@ -37,7 +37,7 @@ const hostState = {
           lastName: "Ricky",
           primaryEmail: "avawingfield@email.com",
           responded: false,
-          isattending: false,
+          isAttending: false,
           isbringing: [],
         },
 
@@ -47,7 +47,7 @@ const hostState = {
           lastName: "Martin",
           primaryEmail: "livin@lavidaloca.com",
           responded: true,
-          isattending: false,
+          isAttending: false,
           isbringing: [
             {
               foodId: "86",
@@ -65,7 +65,7 @@ const hostState = {
           lastName: "Ricky",
           primaryEmail: "livin@lavidaloca.com",
           responded: true,
-          isattending: true,
+          isAttending: true,
           isbringing: [
             {
               foodId: "86",
@@ -110,7 +110,7 @@ const hostState = {
           lastName: "Ricky",
           primaryEmail: "livin@lavidaloca.com",
           responded: false,
-          isattending: false,
+          isAttending: false,
           isbringing: [],
         },
 
@@ -120,7 +120,7 @@ const hostState = {
           lastName: "Martin",
           primaryEmail: "livin@lavidaloca.com",
           responded: true,
-          isattending: false,
+          isAttending: false,
           isbringing: [
             {
               foodId: "86",
@@ -138,7 +138,7 @@ const hostState = {
           lastName: "Ricky",
           primaryEmail: "livin@lavidaloca.com",
           responded: true,
-          isattending: true,
+          isAttending: true,
           isbringing: [
             {
               foodId: "86",

@@ -79,7 +79,7 @@ function Event(props) {
   let needResponse = [];
   function guestSorter() {
     for (let i = 0; i < guests.length; i++) {
-      if (guests[i].isattending === true) {
+      if (guests[i].isAttending === true) {
         guestList.push(guests[i]);
       }
       if (guests[i].responded === false) {
