@@ -39,7 +39,7 @@ import { connect } from "react-redux";
 
 const mapStateToProps = (state) => {
   return {
-    isloading: state.isloading,
+    isLoading: state.isLoading,
     primaryEmail: state.primaryEmail,
     potlucks: state.potlucks,
   };
@@ -132,7 +132,7 @@ function EventPage(props) {
 
   return (
     <>
-      {props.isloading ? <Spinner /> : null}
+      {props.isLoading ? <Spinner /> : null}
       <div>
         <Container fluid>
           <img

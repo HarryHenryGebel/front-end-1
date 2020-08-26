@@ -10,7 +10,7 @@ const mapStateToProps = (state) => {
   return {
     username: state.username,
     potlucks: state.potlucks,
-    isloading: state.isloading,
+    isLoading: state.isLoading,
   };
 };
 
@@ -18,7 +18,7 @@ function EventList(props) {
 
   return (
     <>
-    {props.isloading ? <Spinner /> : null}
+    {props.isLoading ? <Spinner /> : null}
     <CardDeck>
       {props.potlucks.map((dinner) => {
         return (

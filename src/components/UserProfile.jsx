@@ -21,7 +21,7 @@ const mapStateToProps = (state) => {
     username: state.username,
     imageUrl: state.imageUrl,
     potlucks: state.potlucks,
-    isloading: state.isloading
+    isLoading: state.isLoading
   };
 };
 
@@ -31,7 +31,7 @@ function UserProfile(props) {
 
   return (
     <>
-    {props.isloading ? <Spinner /> : null}
+    {props.isLoading ? <Spinner /> : null}
       <Jumbotron>
         <img src={props.imageUrl} alt="happy user" />
         <h1 className="display-3">Hello, {props.username}!</h1>
