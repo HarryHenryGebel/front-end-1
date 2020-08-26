@@ -33,6 +33,10 @@ import { deleteEvent } from "../../actions";
 import { connect } from "react-redux";
 import Food from "./Food";
 
+const mapStateToProps = (state) => {
+  return {primaryemail: state.primaryemail}
+}
+
 function Event(props) {
   const {
     ishost,
@@ -42,7 +46,7 @@ function Event(props) {
     location,
     description,
     foods,
-    guests,
+    guests, primaryemail
   } = props;
 
   const [modal, setModal] = useState(false);
@@ -51,6 +55,18 @@ function Event(props) {
   const [activeTab, setActiveTab] = useState("1");
   let claimedFood = [];
   let unclaimedFood = [];
+  let guestList = [];
+  let needResponse = [];
+  let foundId = [];
+  let yourObligation = []
+
+  const guestFormValues = {
+    guestid: foundId,
+    isattending: true,
+    isbringing: yourObligation,
+  };
+
+  const [guestUpdate, setGuestUpdate] = useState(guestFormValues);
 
   const toggle = () => setModal(!modal);
   const toggleNested = () => {
@@ -75,8 +91,7 @@ function Event(props) {
       }
     }
   }
-  let guestList = [];
-  let needResponse = [];
+
   function guestSorter() {
     for (let i = 0; i < guests.length; i++) {
       if (guests[i].isattending === true) {
@@ -87,9 +102,33 @@ function Event(props) {
       }
     }
   }
+  function guestIdFinder() {
+    for (let i = 0; i < guests.length; i++) {
+      if (guests[i].primaryemail === primaryemail) {
+        foundId = guests[i].guestid;
+      }
+    }
+  }
 
+  function obligationFinder() {
+    for (let i = 0; i < guestList.length; i++) {
+      if (primaryemail === guestList[i].primaryemail) {
+        for (let j = 0; j < guestList[i].isbringing.length; j++) {
+          yourObligation.push(guestList[i].isbringing[j]);
+        }
+      }
+    }
+  }
 
-  guestSorter()
+  const foodUpdateHandler = (e) => {
+    setGuestUpdate({
+      ...guestUpdate,
+      isbringing: [...guestUpdate.isbringing, e.target.value],
+    });
+  };
+  guestIdFinder();
+  obligationFinder();
+  guestSorter();
   foodSorter();
   return (
     <>
@@ -261,7 +300,8 @@ function Event(props) {
                     ? unclaimedFood.map((food) => (
                         <>
                           <Food key={food.foodid} foodname={food.foodname} />{" "}
-                          <Button className="bg-addon">Claim</Button>{" "}
+                          {/* Change onClick to onSubmit */}
+                          <Button className="bg-addon" onClick = {foodUpdateHandler}>Claim</Button>{" "}
                         </>
                       ))
                     : null}
@@ -283,4 +323,4 @@ function Event(props) {
   );
 }
 
-export default connect(null, { deleteEvent })(Event);
+export default connect(mapStateToProps, { deleteEvent })(Event);
