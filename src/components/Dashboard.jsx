@@ -6,9 +6,8 @@
 //Will contain and/or display a countdown for upcoming events ***Stretch***
 
 import React from "react";
-import EventList from './EventList'
+import EventList from "./EventList";
 import UserProfile from "./UserProfile";
-
 
 //import PrivateRoute
 

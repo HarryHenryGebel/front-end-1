@@ -24,10 +24,43 @@ import {
 import { updateEvent } from "../actions";
 import { connect } from "react-redux";
 
+const mapStateToProps = (state) => {
+  return { primaryEmail: state.primaryEmail };
+};
+
 function EventInvitation(props) {
-  const { potluck } = props;
+  const { potluck, primaryEmail } = props;
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
+  let foundId = "";
+
+  function guestIdFinder() {
+    for (let i = 0; i < potluck.guests.length; i++) {
+      if (potluck.guests[i].primaryEmail === primaryEmail) {
+        foundId = potluck.guests[i].guestId;
+      }
+    }
+  }
+
+  guestIdFinder();
+
+  const formValues = {
+    guestId: foundId,
+    responded: false,
+    isAttending: false,
+    isBringing: [],
+  };
+
+  const [guestForm, setGuestForm] = useState(formValues);
+
+  const attendanceHandler = (e) => {
+    setGuestForm({
+      ...guestForm,
+      responded: true,
+      isAttending: true,
+      isBringing: [...guestForm.isBringing, e.target.value],
+    });
+  };
 
   return (
     <div>
@@ -62,8 +95,14 @@ function EventInvitation(props) {
         <ModalHeader toggle={toggle}>What will you be bringing?</ModalHeader>
         <Form>
           <FormGroup>
-            <Label htmlFor="exampleSelect">Select</Label>
-            <Input type="select" name="select" id="exampleSelect">
+            <Label htmlFor="isBringing">Select</Label>
+            <Input
+              type="select"
+              name="isBringing"
+              id="isBringing"
+              onChange={attendanceHandler}
+            >
+              <option>Please Select</option>
               {potluck.foods
                 .filter((food) => food.isClaimed === false)
                 .map((food) => (
@@ -82,4 +121,5 @@ function EventInvitation(props) {
     </div>
   );
 }
-export default connect(null, { updateEvent })(EventInvitation);
+
+export default connect(mapStateToProps, { updateEvent })(EventInvitation);
