@@ -29,7 +29,7 @@ function EventList(props) {
             description={dinner.description}
             foods={dinner.foods}
             guests={dinner.guests}
-            ishost={dinner.ishost}
+            isHost={dinner.isHost}
           />
         );
       })}

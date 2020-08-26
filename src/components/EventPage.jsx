@@ -116,7 +116,7 @@ function EventPage(props) {
                 <h5>Bring Food</h5>
               </NavLink>
             </NavItem>
-            {potluck[0].ishost ? null : (
+            {potluck[0].isHost ? null : (
               <NavItem>
                 <NavLink
                   className={{ active: activeTab === "4" }}
@@ -129,7 +129,7 @@ function EventPage(props) {
               </NavItem>
             )}
 
-            {potluck[0].ishost ? (
+            {potluck[0].isHost ? (
               <NavItem>
                 <NavLink
                   className={{ active: activeTab === "5" }}

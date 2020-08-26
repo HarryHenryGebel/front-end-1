@@ -35,7 +35,7 @@ import Food from "./Food";
 
 function Event(props) {
   const {
-    ishost,
+    isHost,
     eventName,
     date,
     time,
@@ -127,7 +127,7 @@ function Event(props) {
               <h5>Information</h5>
             </NavLink>
           </NavItem>
-          {ishost ? (
+          {isHost ? (
             <NavItem>
               <NavLink
                 /* className={{ active: activeTab === "2" }} */
@@ -140,7 +140,7 @@ function Event(props) {
             </NavItem>
           ) : null}
 
-          {ishost ? null : (
+          {isHost ? null : (
             <NavItem>
               <NavLink
                 /* className={{ active: activeTab === "3" }} */
@@ -153,7 +153,7 @@ function Event(props) {
             </NavItem>
           )}
 
-          {ishost ? null : (
+          {isHost ? null : (
             <NavItem>
               <NavLink
                 /* className={{ active: activeTab === "4" }} */
@@ -166,7 +166,7 @@ function Event(props) {
             </NavItem>
           )}
 
-          {ishost ? (
+          {isHost ? (
             <NavItem>
               <NavLink
                 /* className={{ active: activeTab === "5" }} */
