@@ -160,7 +160,7 @@ function CreateEvent() {
             key={guest.guestid}
             fname={guest.fname}
             lname={guest.lname}
-            primaryemail={guest.primaryemail}
+            primaryEmail={guest.primaryEmail}
           />
           <Button className="bg-cancel">Remove</Button>
         </>
@@ -197,10 +197,10 @@ function CreateEvent() {
             <Label htmlFor="Guestemail">Email</Label>
             <Input
               type="email"
-              name="primaryemail"
+              name="primaryEmail"
               id="email"
               placeholder="email placeholder"
-              value={guest.primaryemail}
+              value={guest.primaryEmail}
               onChange={guestChangeHandler}
             />
           </FormGroup>

@@ -2,7 +2,7 @@ import React from "react";
 import { Card, CardBody, CardText } from "reactstrap";
 
 export default function Guest(props) {
-  const { fname, lname, primaryemail } = props;
+  const { fname, lname, primaryEmail } = props;
 
   return (
     <Card>
@@ -10,7 +10,7 @@ export default function Guest(props) {
         <CardText>
           {fname} {lname}
         </CardText>
-        <CardText>{primaryemail}</CardText>
+        <CardText>{primaryEmail}</CardText>
       </CardBody>
     </Card>
   );

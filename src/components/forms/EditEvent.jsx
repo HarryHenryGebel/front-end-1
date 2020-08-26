@@ -162,7 +162,7 @@ function EditEvent(props) {
             key={guest.guestid}
             fname={guest.fname}
             lname={guest.lname}
-            primaryemail={guest.primaryemail}
+            primaryEmail={guest.primaryEmail}
           />
           <Button className="bg-cancel">Remove</Button>
         </>
@@ -199,10 +199,10 @@ function EditEvent(props) {
             <Label htmlFor="GuestEmail">Email</Label>
             <Input
               type="text"
-              name="primaryemail"
+              name="primaryEmail"
               id="GuestEmail"
               placeholder="email placeholder"
-              value={guest.primaryemail}
+              value={guest.primaryEmail}
               onChange={guestChangeHandler}
             />
           </FormGroup>

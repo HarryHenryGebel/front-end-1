@@ -6,7 +6,7 @@ function EditUser() {
     userid: "",
     username: "",
     password: "",
-    primaryemail: "",
+    primaryEmail: "",
     imageurl: null,
   };
 
@@ -40,7 +40,7 @@ function EditUser() {
               name="primary"
               id="email"
               defaultValue="email defaultValue"
-              value={user.primaryemail}
+              value={user.primaryEmail}
               onChange={changeHandler}
             />
           </FormGroup>

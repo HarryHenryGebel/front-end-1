@@ -19,7 +19,7 @@ const mapStateToProps = (state) => {
   return {
     isLoading: state.isLoading,
     potlucks: state.potlucks,
-    primaryemail: state.primaryemail,
+    primaryEmail: state.primaryEmail,
   };
 };
 
@@ -38,7 +38,7 @@ function DashboardNav(props) {
       for (let j = 0; j < props.potlucks[i].guests.length; j++) {
         console.log();
         if (
-          props.primaryemail === props.potlucks[i].guests[j].primaryemail &&
+          props.primaryEmail === props.potlucks[i].guests[j].primaryEmail &&
           props.potlucks[i].guests[j].responded === false
         ) {
           newInvites.push(props.potlucks[i]);

@@ -13,7 +13,7 @@ const useForm = (callback) => {
     guestid: "",
     fname: "",
     lname: "",
-    primaryemail: "",
+    primaryEmail: "",
   };
 
   const foodForm = {
