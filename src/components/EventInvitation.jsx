@@ -65,15 +65,13 @@ function EventInvitation(props) {
           <FormGroup>
             <Label htmlFor="exampleSelect">Select</Label>
             <Input type="select" name="select" id="exampleSelect">
-              {potluck.foods.length > 0
-                ? potluck.foods.map(food => {
-                    if (food.isclaimed === false){
-                      return (
-                        <option value={food.foodid}>{food.foodname}</option>
-                      );
-                    }
-                  })
-                : null}
+              {potluck.foods
+                .filter((food) => food.isclaimed === false)
+                .map((food) => (
+                  <option key={food.foodid} value={food.foodid}>
+                    {food.foodname}
+                  </option>
+                ))}
             </Input>
           </FormGroup>
           <Button className="bg-confirm">Confirm</Button>{" "}
@@ -85,5 +83,4 @@ function EventInvitation(props) {
     </div>
   );
 }
-
 export default connect(null, { updateEvent })(EventInvitation);
