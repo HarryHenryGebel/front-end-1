@@ -45,7 +45,7 @@ function EventInvitation(props) {
           <CardSubtitle>
             {potluck.date}, {potluck.time}, {potluck.location}
           </CardSubtitle>
-          <CardText>You have been invited to HostName's Event!</CardText>
+          <CardText>You have been invited to an event!</CardText>
           <CardText>
             Event will be held on {potluck.date} at {potluck.time} at{" "}
             {potluck.location}.

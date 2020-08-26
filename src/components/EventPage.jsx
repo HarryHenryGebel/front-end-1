@@ -31,6 +31,8 @@ import {
   ModalBody,
   ModalFooter,
 } from "reactstrap";
+import Food from "../components/items/Food";
+import Guest from "../components/items/Guest";
 import { updateEvent, deleteEvent } from "../actions";
 import { connect } from "react-redux";
 
@@ -149,9 +151,12 @@ function EventPage(props) {
                     {potluck[0].date} at {potluck[0].location}.
                   </p>
                   <p>
-                    You have told the host that you will be bringing,{" "}
+                    {/* This function is wrong. It should loop through to find the guest and post the guest's food. The function exists in Event.jsx */}
+                    You have told the host that you will be bringing:{" "}
                     {potluck[0].foods.map((food) => (
-                      <>{food.foodname}</>
+                      <>
+                        <Food key={food.foodid} foodname={food.foodname} />
+                      </>
                     ))}
                   </p>
                 </Col>
@@ -163,7 +168,11 @@ function EventPage(props) {
                 <Col sm="12">
                   {potluck[0].guests.map((guest) => (
                     <>
-                      {guest.fname} {guest.lname}
+                      <Guest
+                        fname={guest.fname}
+                        lname={guest.lname}
+                        primaryemail={guest.primaryemail}
+                      />
                       <br />
                     </>
                   ))}

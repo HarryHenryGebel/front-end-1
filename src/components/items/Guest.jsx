@@ -11,9 +11,7 @@ export default function Guest(props) {
           {fname} {lname}
         </CardText>
         <CardText>{primaryemail}</CardText>
-        <CardFooter>
-          <Button className=".bg-cancel">Remove</Button>
-        </CardFooter>
+
       </CardBody>
     </Card>
   );
