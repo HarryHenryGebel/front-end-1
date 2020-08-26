@@ -70,7 +70,7 @@ function DashboardNav(props) {
 
           {/* show alert? */}
           {newInvites.map((invite) => (
-            <DropdownItem key={invite.id} onClick={toggleModal}>
+            <DropdownItem key={invite.potluckid} onClick={toggleModal}>
               {invite.eventname}
               <Modal isOpen={modal} toggle={toggleModal}>
                 <EventInvitation key={invite.potluckid} potluck={invite} />
