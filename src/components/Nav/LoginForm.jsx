@@ -3,6 +3,7 @@ import { Form, FormGroup, Label, Input, Button, Modal, ModalHeader, ModalBody, M
 import { loginSchema } from "./yupSchemas"
 import * as yup from "yup"
 import axios from "axios"
+import AlertRed from "../AlertRed.jsx"
 //import {useHistory} from 'react-router-dom'
 //push /
 export default function LoginForm() {
@@ -75,7 +76,7 @@ export default function LoginForm() {
       {/* <Form inline onSubmit={formSubmit}> */}
         <ModalHeader toggle={toggleModal}>Login</ModalHeader>
         <ModalBody>
-          <Form inline onSubmit={formSubmit}>
+          <Form onSubmit={formSubmit}>
             <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
               <Label htmlFor="email" className="mr-sm-2">
                 Email
@@ -89,7 +90,9 @@ export default function LoginForm() {
                 placeholder="something@idk.cool"
               />
               {/* for the love of potlucks, style these to go fit in the modal */}
-              {errors.email.length > 0 ? <p className="error">{errors.email}</p> : null}
+              {errors.email.length > 0
+                ? <AlertRed message={<p className="error">{errors.email}</p>}/>
+                : null}
             </FormGroup>
             <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
               <Label htmlFor="password" className="mr-sm-2">
