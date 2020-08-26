@@ -8,7 +8,7 @@
 //may need to break component down further
 
 //ADD ALERT TO CONFIRM EVENT CANCELLATION
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import {
   Card,
   Button,
@@ -224,23 +224,23 @@ function Event(props) {
                 {/*map guest list to card, for event organizer only? */}
                 <Card>
                   {guestList.map((guest) => (
-                    <>
+                    <Fragment key={guest.guestid}>
                       {guest.firstName} {guest.lastName} is bringing:{" "}
                       {guest.isBringing.map((food) => (
-                        <>
+                        <Fragment key={food.foodid}>
                           {" "}
                           {food.foodName}
                           <br />{" "}
-                        </>
+                        </Fragment>
                       ))}
                       !
-                    </>
+                    </Fragment>
                   ))}
                   {needResponse.map((guest) => (
-                    <>
+                    <Fragment key={guest.guestid}>
                       You are waiting for responses from : {guest.firstName}{" "}
                       {guest.lastName} <br />
-                    </>
+                    </Fragment>
                   ))}
                 </Card>
               </Col>
@@ -255,12 +255,12 @@ function Event(props) {
                   </CardTitle>
 
                   {claimedFood.map((food) => (
-                    <>
+                    <Fragment key={food.foodid}>
                       <Food key={food.foodId} foodName={food.foodName} />{" "}
                       <Button className="bg-addon">
                         Search Recipe?(stretch)
                       </Button>{" "}
-                    </>
+                    </Fragment>
                   ))}
                 </Card>
               </Col>
@@ -272,10 +272,10 @@ function Event(props) {
               <Col sm="6">
                 <Card>
                   {unclaimedFood.map((food) => (
-                    <>
+                    <Fragment key={food.foodid}>
                       <Food key={food.foodId} foodName={food.foodName} />{" "}
                       <Button className="bg-addon">Claim</Button>{" "}
-                    </>
+                    </Fragment>
                   ))}
                 </Card>
               </Col>
