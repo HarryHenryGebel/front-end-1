@@ -18,7 +18,7 @@ import { connect } from "react-redux";
 const mapStateToProps = (state) => {
   return {
     username: state.username,
-    imageurl: state.imageurl,
+    imageUrl: state.imageUrl,
     potlucks: state.potlucks,
   };
 };
@@ -30,7 +30,7 @@ function UserProfile(props) {
   return (
     <>
       <Jumbotron>
-        <img src={props.imageurl} alt="happy user" />
+        <img src={props.imageUrl} alt="happy user" />
         <h1 className="display-3">Hello, {props.username}!</h1>
 
         <hr className="my-2" />

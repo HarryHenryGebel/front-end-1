@@ -2,11 +2,11 @@ import React from "react";
 import { Card, CardBody} from "reactstrap";
 
 export default function Food(props) {
-  const { foodname } = props;
+  const { foodName } = props;
   return (
     <Card>
       <CardBody>
-        <h3>{foodname}</h3>
+        <h3>{foodName}</h3>
       </CardBody>
     </Card>
   );

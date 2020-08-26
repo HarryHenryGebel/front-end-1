@@ -40,7 +40,7 @@ function EventInvitation(props) {
         />
         <CardBody>
           <CardTitle>
-            <h2>{potluck.eventname}</h2>
+            <h2>{potluck.eventName}</h2>
           </CardTitle>
           <CardSubtitle>
             {potluck.date}, {potluck.time}, {potluck.location}
@@ -65,10 +65,10 @@ function EventInvitation(props) {
             <Label htmlFor="exampleSelect">Select</Label>
             <Input type="select" name="select" id="exampleSelect">
               {potluck.foods
-                .filter((food) => food.isclaimed === false)
+                .filter((food) => food.isClaimed === false)
                 .map((food) => (
-                  <option key={food.foodid} value={food.foodid}>
-                    {food.foodname}
+                  <option key={food.foodId} value={food.foodId}>
+                    {food.foodName}
                   </option>
                 ))}
             </Input>

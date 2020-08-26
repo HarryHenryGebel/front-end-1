@@ -10,15 +10,15 @@ const useForm = (callback) => {
   };
 
   const guestForm = {
-    guestid: "",
-    fname: "",
-    lname: "",
-    primaryemail: "",
+    guestId: "",
+    firstName: "",
+    lastName: "",
+    primaryEmail: "",
   };
 
   const foodForm = {
-    foodid: "",
-    foodname: "",
+    foodId: "",
+    foodName: "",
     description: "",
   };
 
@@ -27,8 +27,8 @@ const useForm = (callback) => {
   const [guest, setGuests] = useState(guestForm);
 
   const initialForm = {
-    potluckid: "",
-    eventname: "",
+    potluckId: "",
+    eventName: "",
     date: "",
     time: "",
     location: "",

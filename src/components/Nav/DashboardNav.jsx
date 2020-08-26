@@ -19,7 +19,7 @@ const mapStateToProps = (state) => {
   return {
     isLoading: state.isLoading,
     potlucks: state.potlucks,
-    primaryemail: state.primaryemail,
+    primaryEmail: state.primaryEmail,
   };
 };
 
@@ -38,7 +38,7 @@ function DashboardNav(props) {
       for (let j = 0; j < props.potlucks[i].guests.length; j++) {
         console.log();
         if (
-          props.primaryemail === props.potlucks[i].guests[j].primaryemail &&
+          props.primaryEmail === props.potlucks[i].guests[j].primaryEmail &&
           props.potlucks[i].guests[j].responded === false
         ) {
           newInvites.push(props.potlucks[i]);
@@ -60,9 +60,9 @@ function DashboardNav(props) {
           <DropdownItem onClick={userToggle}>Update Profile</DropdownItem>
           {props.potlucks.length > 0
             ? props.potlucks.map((potluck) => (
-                <DropdownItem key={potluck.potluckid}>
-                  <Link to={`/event/${potluck.potluckid}`}>
-                    {potluck.eventname}
+                <DropdownItem key={potluck.potluckId}>
+                  <Link to={`/event/${potluck.potluckId}`}>
+                    {potluck.eventName}
                   </Link>
                 </DropdownItem>
               ))
@@ -70,10 +70,10 @@ function DashboardNav(props) {
 
           {/* show alert? */}
           {newInvites.map((invite) => (
-            <DropdownItem key={invite.potluckid} onClick={toggleModal}>
-              {invite.eventname}
+            <DropdownItem key={invite.potluckId} onClick={toggleModal}>
+              {invite.eventName}
               <Modal isOpen={modal} toggle={toggleModal}>
-                <EventInvitation key={invite.potluckid} potluck={invite} />
+                <EventInvitation key={invite.potluckId} potluck={invite} />
               </Modal>
             </DropdownItem>
           ))}

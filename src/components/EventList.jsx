@@ -19,17 +19,17 @@ function EventList(props) {
       {props.potlucks.map((dinner) => {
         return (
           <Event
-            key={dinner.potluckid}
-            potluckid={dinner.potluckid}
+            key={dinner.potluckId}
+            potluckId={dinner.potluckId}
             host={props.username}
-            eventname={dinner.eventname}
+            eventName={dinner.eventName}
             date={dinner.date}
             time={dinner.time}
             location={dinner.location}
             description={dinner.description}
             foods={dinner.foods}
             guests={dinner.guests}
-            ishost={dinner.ishost}
+            isHost={dinner.isHost}
           />
         );
       })}
