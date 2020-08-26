@@ -23,7 +23,8 @@ export default function NavBar() {
           </Nav>
         </Collapse>
         <NavbarBrand href="/">Not Yo Momma's Potluck</NavbarBrand>
-        <NavbarToggler onClick={toggle} /> {/* Is this actually needed? or some weird inclusion for the hamburger dropdown?*/}
+        <NavbarToggler onClick={toggle} />{" "}
+        {/* Is this actually needed? or some weird inclusion for the hamburger dropdown?*/}
         <LoginForm />
         <RegistrationForm />
       </Navbar>
