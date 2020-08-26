@@ -159,7 +159,7 @@ function EditEvent(props) {
       {formValues.guests.map((guest) => (
         <>
           <Guest
-            key={guest.guestid}
+            key={guest.guestId}
             fname={guest.fname}
             lname={guest.lname}
             primaryEmail={guest.primaryEmail}

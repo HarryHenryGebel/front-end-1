@@ -10,7 +10,7 @@ const useForm = (callback) => {
   };
 
   const guestForm = {
-    guestid: "",
+    guestId: "",
     fname: "",
     lname: "",
     primaryEmail: "",

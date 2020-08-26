@@ -32,7 +32,7 @@ const hostState = {
       ],
       guests: [
         {
-          guestid: "57",
+          guestId: "57",
           fname: "Martin",
           lname: "Ricky",
           primaryEmail: "avawingfield@email.com",
@@ -42,7 +42,7 @@ const hostState = {
         },
 
         {
-          guestid: "39",
+          guestId: "39",
           fname: "Ricky",
           lname: "Martin",
           primaryEmail: "livin@lavidaloca.com",
@@ -60,7 +60,7 @@ const hostState = {
           ],
         },
         {
-          guestid: "17",
+          guestId: "17",
           fname: "Martin",
           lname: "Ricky",
           primaryEmail: "livin@lavidaloca.com",
@@ -105,7 +105,7 @@ const hostState = {
       ],
       guests: [
         {
-          guestid: "57",
+          guestId: "57",
           fname: "Martin",
           lname: "Ricky",
           primaryEmail: "livin@lavidaloca.com",
@@ -115,7 +115,7 @@ const hostState = {
         },
 
         {
-          guestid: "39",
+          guestId: "39",
           fname: "Ricky",
           lname: "Martin",
           primaryEmail: "livin@lavidaloca.com",
@@ -133,7 +133,7 @@ const hostState = {
           ],
         },
         {
-          guestid: "17",
+          guestId: "17",
           fname: "Martin",
           lname: "Ricky",
           primaryEmail: "livin@lavidaloca.com",
