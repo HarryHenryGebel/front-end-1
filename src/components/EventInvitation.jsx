@@ -24,27 +24,44 @@ import {
 import { updateEvent } from "../actions";
 import { connect } from "react-redux";
 
-function EventInvitation(props) {
+const mapStateToProps = (state) => {
+  return { primaryemail: state.primaryemail };
+};
 
-  const { potluck } = props;
+function EventInvitation(props) {
+  const { potluck, primaryemail } = props;
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
+  let foundId = "";
+
+  function guestIdFinder() {
+    for (let i = 0; i < potluck.guests.length; i++) {
+      if (potluck.guests[i].primaryemail === primaryemail) {
+        foundId = potluck.guests[i].guestid;
+      }
+    }
+  }
+
+  guestIdFinder();
 
   const formValues = {
-    guestid: '', //from params?
+    guestid: foundId,
     responded: false,
     isattending: false,
-    isbringing: []
-  }
+    isbringing: [],
+  };
 
-  const [guestForm, setGuestForm] = useState(formValues)
+  const [guestForm, setGuestForm] = useState(formValues);
 
   const attendanceHandler = (e) => {
-    setGuestForm({...guestForm, responded: true, isattending: true, isbringing: [...guestForm.isbringing, e.target.value]})
-    console.log('Handler2', guestForm)
-  }
+    setGuestForm({
+      ...guestForm,
+      responded: true,
+      isattending: true,
+      isbringing: [...guestForm.isbringing, e.target.value],
+    });
+  };
 
-  console.log('check', guestForm)
   return (
     <div>
       <Card>
@@ -79,22 +96,28 @@ function EventInvitation(props) {
         <Form>
           <FormGroup>
             <Label htmlFor="isbringing">Select</Label>
-            <Input type="select" name="isbringing" id="isbringing" onChange = {attendanceHandler}>
+            <Input
+              type="select"
+              name="isbringing"
+              id="isbringing"
+              onChange={attendanceHandler}
+            >
               <option>Please Select</option>
               {potluck.foods.length > 0
-                ? potluck.foods.map(food => {
-                    if (food.isclaimed === false){
+                ? potluck.foods.map((food) => {
+                    if (food.isclaimed === false) {
                       return (
-                        <option key = {food.foodid} name = "isbringing"  value={food.foodname}>{food.foodname}</option>
+                        <option
+                          key={food.foodid}
+                          name="isbringing"
+                          value={food.foodname}
+                        >
+                          {food.foodname}
+                        </option>
                       );
                     }
                   })
                 : null}
-                <option value={guestForm.isbringing}>Ice Cream</option>
-                <option value={guestForm.isbringing}>Ice Cream</option>
-                <option value={guestForm.isbringing}>Ice Cream</option>
-                <option value={guestForm.isbringing}>Ice Cream</option>
-                
             </Input>
           </FormGroup>
           <Button className="bg-confirm">Confirm</Button>{" "}
@@ -107,4 +130,4 @@ function EventInvitation(props) {
   );
 }
 
-export default connect(null, { updateEvent })(EventInvitation);
+export default connect(mapStateToProps, { updateEvent })(EventInvitation);
