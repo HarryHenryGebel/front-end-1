@@ -11,8 +11,7 @@ export default function LoginForm() {
   const toggleModal = () => setModal(!modal);
   const [formState, setFormState] = useState({
     email: "",
-    password: "",
-    terms: true
+    password: ""
   })
   const [buttonDisabled, setButtonDisabled] = useState(true)
   const [errors, setErrors] = useState({
@@ -53,7 +52,6 @@ export default function LoginForm() {
         console.log('ERRORS', errors)
       })
       .catch(err => {
-        // add error by name of input since value breaks validation
         setErrors({...errors, [e.target.name]: err.errors[0]});
         console.log('ERRORS', errors, errors.email.length)
       });

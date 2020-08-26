@@ -21,6 +21,8 @@ function CreateEvent() {
     foodChangeHandler,
     addGuest,
     addFood,
+    foodRemover,
+    guestRemover,
   } = useForm();
 
   return (
@@ -162,7 +164,14 @@ function CreateEvent() {
             lastName={guest.lastName}
             primaryEmail={guest.primaryEmail}
           />
-          <Button className="bg-cancel">Remove</Button>
+          <Button
+            onClick={() => {
+              guestRemover(guest.firstName);
+            }}
+            className="bg-cancel"
+          >
+            Remove
+          </Button>
         </>
       ))}
       <Row form>
@@ -209,10 +218,18 @@ function CreateEvent() {
       <Button onClick={addGuest} className="bg-addon">
         Add Guest
       </Button>
+      {console.log(formValues.foods)}
       {formValues.foods.map((food) => (
         <>
           <Food key={food.foodId} foodName={food.foodName} />
-          <Button className="bg-cancel">Remove</Button>
+          <Button
+            onClick={(e) => {
+              foodRemover(food.foodName);
+            }}
+            className="bg-cancel"
+          >
+            Remove
+          </Button>
         </>
       ))}
       <FormGroup>

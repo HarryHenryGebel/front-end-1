@@ -30,6 +30,7 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
+  Spinner,
 } from "reactstrap";
 import Food from "../components/items/Food";
 import Guest from "../components/items/Guest";
@@ -38,15 +39,22 @@ import { connect } from "react-redux";
 
 const mapStateToProps = (state) => {
   return {
+    isLoading: state.isLoading,
+    primaryEmail: state.primaryEmail,
     potlucks: state.potlucks,
   };
 };
 
 function EventPage(props) {
   const params = useParams();
-  const { potlucks } = props;
+  const { potlucks, primaryEmail } = props;
   //params is the id
   let potluck = [];
+  let unclaimedFood = [];
+  let guestList = [];
+  let needResponse = [];
+  let yourObligation = [];
+  let foundId = "";
 
   const [activeTab, setActiveTab] = useState("1");
   const [modal, setModal] = useState(false);
@@ -56,6 +64,14 @@ function EventPage(props) {
     if (activeTab !== tab) setActiveTab(tab);
   };
 
+  const guestFormValues = {
+    guestId: foundId,
+    isAttending: true,
+    isBringing: yourObligation,
+  };
+
+  const [guestUpdate, setGuestUpdate] = useState(guestFormValues);
+
   function potluckFinder() {
     for (let i = 0; i < potlucks.length; i++) {
       if (potlucks[i].potluckId === params.id) {
@@ -64,10 +80,59 @@ function EventPage(props) {
     }
   }
 
+  function guestIdFinder() {
+    for (let i = 0; i < potluck[0].guests.length; i++) {
+      if (potluck[0].guests[i].primaryEmail === primaryEmail) {
+        foundId = potluck[0].guests[i].guestId;
+      }
+    }
+  }
+
+  function foodSorter() {
+    for (let i = 0; i < potluck[0].foods.length; i++) {
+      if (potluck[0].foods[i].isclaimed === false) {
+        unclaimedFood.push(potluck[0].foods[i]);
+      }
+    }
+  }
+
+  function guestSorter() {
+    for (let i = 0; i < potluck[0].guests.length; i++) {
+      if (potluck[0].guests[i].isAttending === true) {
+        guestList.push(potluck[0].guests[i]);
+      }
+      if (potluck[0].guests[i].responded === false) {
+        needResponse.push(potluck[0].guests[i]);
+      }
+    }
+  }
+
+  function obligationFinder() {
+    for (let i = 0; i < guestList.length; i++) {
+      if (primaryEmail === guestList[i].primaryEmail) {
+        for (let j = 0; j < guestList[i].isBringing.length; j++) {
+          yourObligation.push(guestList[i].isBringing[j]);
+        }
+      }
+    }
+  }
+
+  const foodUpdateHandler = (e) => {
+    setGuestUpdate({
+      ...guestUpdate,
+      isBringing: [...guestUpdate.isBringing, e.target.value],
+    });
+  };
+
   potluckFinder();
+  guestIdFinder();
+  foodSorter();
+  guestSorter();
+  obligationFinder();
 
   return (
     <>
+      {props.isLoading ? <Spinner /> : null}
       <div>
         <Container fluid>
           <img
@@ -106,17 +171,20 @@ function EventPage(props) {
                 <h5>Guest List</h5>
               </NavLink>
             </NavItem>
-            <NavItem>
-              <NavLink
-                className={{ active: activeTab === "3" }}
-                onClick={() => {
-                  toggleTab("3");
-                }}
-              >
-                <h5>Bring Food</h5>
-              </NavLink>
-            </NavItem>
-            {potluck[0].isHost ? null : (
+            {potluck[0].ishost ? null : (
+              <NavItem>
+                <NavLink
+                  className={{ active: activeTab === "3" }}
+                  onClick={() => {
+                    toggleTab("3");
+                  }}
+                >
+                  <h5>Bring Food</h5>
+                </NavLink>
+              </NavItem>
+            )}
+
+            {potluck[0].ishost ? null : (
               <NavItem>
                 <NavLink
                   className={{ active: activeTab === "4" }}
@@ -151,13 +219,20 @@ function EventPage(props) {
                     {potluck[0].date} at {potluck[0].location}.
                   </p>
                   <p>
-                    {/* This function is wrong. It should loop through to find the guest and post the guest's food. The function exists in Event.jsx */}
-                    You have told the host that you will be bringing:{" "}
-                    {potluck[0].foods.map((food) => (
-                      <>
-                        <Food key={food.foodId} foodName={food.foodName} />
-                      </>
-                    ))}
+                    {/* This function is wrong. It should loop through to find the guest and post the guest's food. The function exists in Event.jsx */}{" "}
+                    {potluck[0].ishost ? null : yourObligation.length > 0 ? (
+                      yourObligation.map((food) => (
+                        <>
+                          You have told the host that you will be bringing:
+                          <Food key={food.foodId} foodName={food.foodName} />
+                        </>
+                      ))
+                    ) : (
+                      <CardText>
+                        {" "}
+                        Please help your host and bring some food!{" "}
+                      </CardText>
+                    )}
                   </p>
                 </Col>
               </Row>
@@ -184,11 +259,21 @@ function EventPage(props) {
               <Row>
                 <Col sm="6">
                   <Card body>
-                    <CardTitle>
-                      <h2>Unclaimed Menu Item</h2>
-                    </CardTitle>
-                    <CardText>Map over each item in list to display</CardText>
-                    <Button className="bg-addon">Claim Food Item!</Button>
+                    {unclaimedFood.length > 0 ? (
+                      unclaimedFood.map((food) => (
+                        <>
+                          <Food key={food.foodId} foodName={food.foodName} />{" "}
+                          <Button
+                            className="bg-addon"
+                            onClick={foodUpdateHandler}
+                          >
+                            Claim Food Item!
+                          </Button>
+                        </>
+                      ))
+                    ) : (
+                      <CardText>All food is being</CardText>
+                    )}
                   </Card>
                 </Col>
               </Row>

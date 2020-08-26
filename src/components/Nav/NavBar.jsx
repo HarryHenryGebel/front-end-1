@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav } from "reactstrap";
-import ModalButton from "./ModalButton.jsx";
 import DashboardNav from "./DashboardNav.jsx";
 import MarketingButton from "./MarketingButton.jsx";
 import LoginForm from "./LoginForm.jsx";
@@ -24,18 +23,10 @@ export default function NavBar() {
           </Nav>
         </Collapse>
         <NavbarBrand href="/">Not Yo Momma's Potluck</NavbarBrand>
-        <NavbarToggler onClick={toggle} /> {/* Is this actually needed? or some weird inclusion for the hamburger dropdown?*/}
-        {/* <ModalButton
-          buttonLabel="Login"
-          buttonColor="bg-addon"
-          formComponent={LoginForm()}
-        /> */}
+        <NavbarToggler onClick={toggle} />{" "}
+        {/* Is this actually needed? or some weird inclusion for the hamburger dropdown?*/}
         <LoginForm />
-        <ModalButton
-          buttonLabel="Registration"
-          buttonColor="bg-confirm"
-          formComponent={RegistrationForm()}
-        />
+        <RegistrationForm />
       </Navbar>
     </div>
   );
