@@ -156,19 +156,17 @@ function EditEvent(props) {
           </FormGroup>
         </Col>
       </Row>
-      {formValues.guests.length > 0
-        ? formValues.guests.map((guest) => (
-          <>
-            <Guest
-              key={guest.guestid}
-              fname={guest.fname}
-              lname={guest.lname}
-              primaryemail={guest.primaryemail}
-            />
-            <Button className = "bg-cancel">Remove</Button>
-            </>
-          ))
-        : null}
+      {formValues.guests.map((guest) => (
+        <>
+          <Guest
+            key={guest.guestid}
+            fname={guest.fname}
+            lname={guest.lname}
+            primaryemail={guest.primaryemail}
+          />
+          <Button className="bg-cancel">Remove</Button>
+        </>
+      ))}
       <Row form>
         <Col md={6}>
           <FormGroup>
@@ -213,17 +211,12 @@ function EditEvent(props) {
       <Button onClick={addGuest} className="bg-addon">
         Add Guest
       </Button>
-      {formValues.foods.length > 0
-        ? formValues.foods.map((food) => (
-          <>
-            <Food
-              key={food.foodid}
-              foodname={food.foodname}
-            />
-            <Button className = "bg-cancel">Remove</Button>
-            </>
-          ))
-        : null}
+      {formValues.foods.map((food) => (
+        <>
+          <Food key={food.foodid} foodname={food.foodname} />
+          <Button className="bg-cancel">Remove</Button>
+        </>
+      ))}
       <FormGroup>
         <Label htmlFor="FoodName">Food Name</Label>
         <Input
