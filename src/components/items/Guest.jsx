@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Card, CardBody, CardText, CardFooter } from "reactstrap";
+import { Card, CardBody, CardText } from "reactstrap";
 
 export default function Guest(props) {
   const { fname, lname, primaryemail } = props;
@@ -11,7 +11,6 @@ export default function Guest(props) {
           {fname} {lname}
         </CardText>
         <CardText>{primaryemail}</CardText>
-
       </CardBody>
     </Card>
   );
