@@ -77,7 +77,7 @@ function EventPage(props) {
             height="300vh"
             width="100%"
           />
-          <h1>{potluck[0].eventname}</h1>
+          <h1>{potluck[0].eventName}</h1>
           <p className="lead">
             {potluck[0].date} at {potluck[0].time}
           </p>
@@ -147,7 +147,7 @@ function EventPage(props) {
               <Row>
                 <Col sm="12">
                   <p>
-                    {potluck[0].eventname} will be held at {potluck[0].time} on{" "}
+                    {potluck[0].eventName} will be held at {potluck[0].time} on{" "}
                     {potluck[0].date} at {potluck[0].location}.
                   </p>
                   <p>

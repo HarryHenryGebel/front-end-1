@@ -22,7 +22,7 @@ function EventList(props) {
             key={dinner.potluckid}
             potluckid={dinner.potluckid}
             host={props.username}
-            eventname={dinner.eventname}
+            eventName={dinner.eventName}
             date={dinner.date}
             time={dinner.time}
             location={dinner.location}

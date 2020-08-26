@@ -31,10 +31,10 @@ function CreateEvent() {
             <Label htmlFor="Name">Event Name</Label>
             <Input
               type="text"
-              name="eventname"
+              name="eventName"
               id="Name"
               placeholder="with a placeholder"
-              value={formValues.eventname}
+              value={formValues.eventName}
               onChange={changeHandler}
             />
           </FormGroup>

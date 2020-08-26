@@ -28,7 +28,7 @@ const useForm = (callback) => {
 
   const initialForm = {
     potluckid: "",
-    eventname: "",
+    eventName: "",
     date: "",
     time: "",
     location: "",

@@ -36,7 +36,7 @@ import Food from "./Food";
 function Event(props) {
   const {
     ishost,
-    eventname,
+    eventName,
     date,
     time,
     location,
@@ -101,7 +101,7 @@ function Event(props) {
         />
         <CardBody>
           <CardTitle>
-            <h2>{eventname}</h2>
+            <h2>{eventName}</h2>
           </CardTitle>
           <CardText>
             {date} at {time} <br />
@@ -115,7 +115,7 @@ function Event(props) {
       </Card>
 
       <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle}>{eventname}</ModalHeader>
+        <ModalHeader toggle={toggle}>{eventName}</ModalHeader>
         <Nav tabs>
           <NavItem>
             <NavLink

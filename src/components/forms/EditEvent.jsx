@@ -10,7 +10,7 @@ import Food from "../items/Food";
 
 function EditEvent(props) {
   const {
-    /*host,*/ eventname,
+    /*host,*/ eventName,
     date,
     time,
     description,
@@ -38,11 +38,11 @@ function EditEvent(props) {
             <Label htmlFor="Name">Event Name</Label>
             <Input
               type="text"
-              name="eventname"
+              name="eventName"
               id="Name"
               placeholder="with a placeholder"
-              defaultValue={eventname}
-              value={formValues.eventname}
+              defaultValue={eventName}
+              value={formValues.eventName}
               onChange={changeHandler}
             />
           </FormGroup>

@@ -21,7 +21,7 @@ const hostState = {
     {
       potluckid: "3",
       ishost: true,
-      eventname: `Dinner at Ava's`,
+      eventName: `Dinner at Ava's`,
       date: "02/11/2021",
       time: "12:00PM",
       location: `George's Deli`,
@@ -90,7 +90,7 @@ const hostState = {
     {
       potluckid: "5",
       ishost: false,
-      eventname: `Dinner at Not Ava's`,
+      eventName: `Dinner at Not Ava's`,
       date: "22 March 2021",
       time: "12:00PM",
       location: `George's Deli`,
