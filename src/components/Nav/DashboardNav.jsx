@@ -69,16 +69,14 @@ function DashboardNav(props) {
             : null}
 
           {/* show alert? */}
-          {newInvites.length > 0
-            ? newInvites.map((invite) => (
-                <DropdownItem key={invite.id} onClick={toggleModal}>
-                  {invite.eventname}
-                  <Modal isOpen={modal} toggle={toggleModal}>
-                    <EventInvitation key={invite.potluckid} potluck={invite} />
-                  </Modal>
-                </DropdownItem>
-              ))
-            : null}
+          {newInvites.map((invite) => (
+            <DropdownItem key={invite.id} onClick={toggleModal}>
+              {invite.eventname}
+              <Modal isOpen={modal} toggle={toggleModal}>
+                <EventInvitation key={invite.potluckid} potluck={invite} />
+              </Modal>
+            </DropdownItem>
+          ))}
 
           <DropdownItem divider />
           <DropdownItem>Logout</DropdownItem>
