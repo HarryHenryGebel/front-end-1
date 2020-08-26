@@ -10,9 +10,8 @@ import Food from "../items/Food";
 //Use Add button to populate a list htmlFor Food and Guests
 
 function CreateEvent() {
-const {food, concatLocation, guest, formValues, changeHandler, changeLocationHandler, guestChangeHandler, foodChangeHandler, addGuest, addFood} = useForm()
+const {food, concatLocation, guest, formValues, changeHandler, changeLocationHandler, guestChangeHandler, foodChangeHandler, addGuest, addFood, foodRemover, guestRemover} = useForm()
  
-
 return (
     <Form>
       <Row form>
@@ -153,7 +152,7 @@ return (
               lname={guest.lname}
               primaryemail={guest.primaryemail}
             />
-            <Button className = "bg-cancel">Remove</Button>
+            <Button onClick = {()=>{guestRemover(guest.fname)}} className = "bg-cancel">Remove</Button>
             </>
           ))
         : null}
@@ -201,6 +200,7 @@ return (
       <Button onClick={addGuest} className="bg-addon">
         Add Guest
       </Button>
+      {console.log(formValues.foods)}
       {formValues.foods.length > 0
         ? formValues.foods.map((food) => (
           <>
@@ -208,7 +208,7 @@ return (
               key={food.foodid}
               foodname={food.foodname}
             />
-            <Button className = "bg-cancel">Remove</Button>
+            <Button onClick = {(e)=>{foodRemover(food.foodname)}} className = "bg-cancel">Remove</Button>
             </>
           ))
         : null}

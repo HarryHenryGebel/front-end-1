@@ -46,7 +46,7 @@ function Event(props) {
     location,
     description,
     foods,
-    guests, primaryemail
+    guests
   } = props;
 
   const [modal, setModal] = useState(false);
@@ -104,7 +104,7 @@ function Event(props) {
   }
   function guestIdFinder() {
     for (let i = 0; i < guests.length; i++) {
-      if (guests[i].primaryemail === primaryemail) {
+      if (guests[i].primaryemail === props.primaryemail) {
         foundId = guests[i].guestid;
       }
     }
@@ -112,7 +112,7 @@ function Event(props) {
 
   function obligationFinder() {
     for (let i = 0; i < guestList.length; i++) {
-      if (primaryemail === guestList[i].primaryemail) {
+      if (props.primaryemail === guestList[i].primaryemail) {
         for (let j = 0; j < guestList[i].isbringing.length; j++) {
           yourObligation.push(guestList[i].isbringing[j]);
         }

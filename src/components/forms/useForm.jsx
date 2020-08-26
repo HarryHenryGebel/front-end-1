@@ -70,6 +70,16 @@ const useForm = (callback) => {
     setFood(foodForm);
   };
 
+  const foodRemover = (food) => {
+    const newFoods = formValues.foods.filter(item => item.foodname !== food)
+    setFormValues({...formValues, foods: newFoods})
+  };
+
+  const guestRemover = (guest) => {
+    const newGuests = formValues.guests.filter(item => item.fname !== guest)
+    setFormValues({...formValues, guests: newGuests})
+  };
+ 
   return {
     food,
     concatLocation,
@@ -81,6 +91,8 @@ const useForm = (callback) => {
     foodChangeHandler,
     addGuest,
     addFood,
+    foodRemover,
+    guestRemover
   };
 };
 

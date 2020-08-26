@@ -8,6 +8,7 @@
 import React from "react";
 import EventList from './EventList'
 import UserProfile from "./UserProfile";
+import CreateEvent from "./forms/CreateEvent";
 
 
 //import PrivateRoute
