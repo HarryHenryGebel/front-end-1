@@ -225,7 +225,7 @@ function Event(props) {
                 <Card>
                   {guestList.map((guest) => (
                     <>
-                      {guest.fname} {guest.lname} is bringing:{" "}
+                      {guest.firstName} {guest.lname} is bringing:{" "}
                       {guest.isbringing.map((food) => (
                         <>
                           {" "}
@@ -238,7 +238,7 @@ function Event(props) {
                   ))}
                   {needResponse.map((guest) => (
                     <>
-                      You are waiting for responses from : {guest.fname}{" "}
+                      You are waiting for responses from : {guest.firstName}{" "}
                       {guest.lname} <br />
                     </>
                   ))}

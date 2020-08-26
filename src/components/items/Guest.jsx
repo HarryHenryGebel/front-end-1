@@ -2,13 +2,13 @@ import React from "react";
 import { Card, CardBody, CardText } from "reactstrap";
 
 export default function Guest(props) {
-  const { fname, lname, primaryEmail } = props;
+  const { firstName, lname, primaryEmail } = props;
 
   return (
     <Card>
       <CardBody>
         <CardText>
-          {fname} {lname}
+          {firstName} {lname}
         </CardText>
         <CardText>{primaryEmail}</CardText>
       </CardBody>

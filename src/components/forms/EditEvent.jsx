@@ -160,7 +160,7 @@ function EditEvent(props) {
         <>
           <Guest
             key={guest.guestId}
-            fname={guest.fname}
+            firstName={guest.firstName}
             lname={guest.lname}
             primaryEmail={guest.primaryEmail}
           />
@@ -170,13 +170,13 @@ function EditEvent(props) {
       <Row form>
         <Col md={6}>
           <FormGroup>
-            <Label htmlFor="fname">First Name</Label>
+            <Label htmlFor="firstName">First Name</Label>
             <Input
               type="text"
-              name="fname"
-              id="fname"
+              name="firstName"
+              id="firstName"
               placeholder="with a placeholder"
-              value={guest.fname}
+              value={guest.firstName}
               onChange={guestChangeHandler}
             />
           </FormGroup>

@@ -11,7 +11,7 @@ const useForm = (callback) => {
 
   const guestForm = {
     guestId: "",
-    fname: "",
+    firstName: "",
     lname: "",
     primaryEmail: "",
   };

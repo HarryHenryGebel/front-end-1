@@ -169,7 +169,7 @@ function EventPage(props) {
                   {potluck[0].guests.map((guest) => (
                     <>
                       <Guest
-                        fname={guest.fname}
+                        firstName={guest.firstName}
                         lname={guest.lname}
                         primaryEmail={guest.primaryEmail}
                       />
