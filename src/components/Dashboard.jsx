@@ -7,6 +7,7 @@
 
 import React from "react";
 import EventList from './EventList'
+import UserProfile from "./UserProfile";
 
 
 //import PrivateRoute
@@ -15,6 +16,7 @@ export default function DashBoard() {
   return (
     <>
       {/* if logged in, show EventList. Else, show Login/Registration */}
+      <UserProfile />
       <EventList />
     </>
   );

@@ -2,13 +2,11 @@ import React, { useState } from "react";
 import {
   Jumbotron,
   Button,
-  Container,
   Modal,
   ModalHeader,
   ModalBody,
   ModalFooter,
 } from "reactstrap";
-import EditUser from "./forms/EditUser";
 import Event from "./items/Event";
 import { connect } from "react-redux";
 
@@ -26,9 +24,6 @@ const mapStateToProps = (state) => {
 };
 
 function UserProfile(props) {
-  const [userModal, setuserModal] = useState(false);
-  const userToggle = () => setuserModal(!userModal);
-
   const [eventModal, setEventModal] = useState(false);
   const eventToggle = () => setEventModal(!eventModal);
 
@@ -46,27 +41,7 @@ function UserProfile(props) {
           </Button>
         </p>
       </Jumbotron>
-      <Container>
-        User's Address, phone number, email and list of users (linking to
-        userpage) will go here.
-        <Button className="bg-addon" onClick={userToggle}>
-          Update Information
-        </Button>
-      </Container>
 
-      <Modal isOpen={userModal} toggle={userToggle}>
-        <ModalHeader toggle={userToggle}>
-          <h2>Update Information</h2>
-        </ModalHeader>
-        <ModalBody>
-          <EditUser />
-        </ModalBody>
-        <ModalFooter>
-          <Button className="bg-cancel" onClick={userToggle}>
-            Cancel
-          </Button>
-        </ModalFooter>
-      </Modal>
 
       <Modal isOpen={eventModal} toggle={eventToggle}>
         <ModalHeader toggle={eventToggle}>

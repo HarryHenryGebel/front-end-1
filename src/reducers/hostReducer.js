@@ -7,7 +7,7 @@ import {
   UPDATE_EVENT_FAIL,
   DELETE_EVENT_START,
   DELETE_EVENT_SUCESS,
-  DELETE_EVENT_FAIL
+  DELETE_EVENT_FAIL,
 } from "../actions";
 
 const hostState = {
@@ -20,25 +20,143 @@ const hostState = {
   potlucks: [
     {
       potluckid: "3",
+      ishost: true,
       eventname: `Dinner at Ava's`,
       date: "02/11/2021",
       time: "12:00PM",
       location: `George's Deli`,
       description: `Turn left at the pointy hats!`,
-      foods: [],
-      guests: [],
+      foods: [
+        {
+          foodid: "18",
+          foodname: "pizza",
+          isclaimed: true,
+        },
+        { foodid: "22", 
+        foodname: "strange cake", 
+        isclaimed: false },
+      ],
+      guests: [
+        {
+          guestid: "57",
+          fname: "Martin",
+          lname: "Ricky",
+          primaryemail: "avawingfield@email.com",
+          responded: false,
+          isattending: false,
+          isbringing: [],
+        },
+
+        {
+          guestid: "39",
+          fname: "Ricky",
+          lname: "Martin",
+          primaryemail: "livin@lavidaloca.com",
+          responded: true,
+          isattending: false,
+          isbringing: [
+            {
+              foodid: "86",
+              foodname: "not available",
+            },
+            {
+              foodid: "13",
+              foodname: "ice cream",
+            },
+          ],
+        },
+        {
+          guestid: "17",
+          fname: "Martin",
+          lname: "Ricky",
+          primaryemail: "livin@lavidaloca.com",
+          responded: true,
+          isattending: true,
+          isbringing: [
+            {
+              foodid: "86",
+              foodname: "not available",
+              isclaimed: true,
+            },
+            {
+              foodid: "13",
+              foodname: "ice cream",
+              isclaimed: true,
+            },
+          ],
+        },
+      ],
       isLoading: false,
       errors: false,
     },
     {
       potluckid: "5",
+      ishost: false,
       eventname: `Dinner at Not Ava's`,
       date: "22 March 2021",
       time: "12:00PM",
       location: `George's Deli`,
       description: `Turn left at the pointy hats!`,
-      foods: [],
-      guests: [],
+      foods: [
+        {
+          foodid: "18",
+          foodname: "pizza",
+          isclaimed: true,
+        },
+        {
+          foodid: "22",
+          foodname: "strange cake",
+          isclaimed: false,
+        },
+      ],
+      guests: [
+        {
+          guestid: "57",
+          fname: "Martin",
+          lname: "Ricky",
+          primaryemail: "livin@lavidaloca.com",
+          responded: false,
+          isattending: false,
+          isbringing: [],
+        },
+
+        {
+          guestid: "39",
+          fname: "Ricky",
+          lname: "Martin",
+          primaryemail: "livin@lavidaloca.com",
+          responded: true,
+          isattending: false,
+          isbringing: [
+            {
+              foodid: "86",
+              foodname: "not available",
+            },
+            {
+              foodid: "13",
+              foodname: "ice cream",
+            },
+          ],
+        },
+        {
+          guestid: "17",
+          fname: "Martin",
+          lname: "Ricky",
+          primaryemail: "livin@lavidaloca.com",
+          responded: true,
+          isattending: true,
+          isbringing: [
+            {
+              foodid: "86",
+              foodname: "not available",
+            },
+            {
+              foodid: "13",
+              foodname: "ice cream",
+            },
+          ],
+        },
+      ],
       isLoading: false,
       errors: false,
     },
@@ -84,21 +202,24 @@ function hostReducer(state = hostState, action) {
         errors: `Your event could not be updated, please try again. ${action.payload}`,
       };
 
-      case DELETE_EVENT_START :
-        return {
-          ...state, isLoading: true,
-        }
+    case DELETE_EVENT_START:
+      return {
+        ...state,
+        isLoading: true,
+      };
 
-        case DELETE_EVENT_SUCESS :
-          return {
-            ...state, isLoading: false,
-          }
+    case DELETE_EVENT_SUCESS:
+      return {
+        ...state,
+        isLoading: false,
+      };
 
-          case DELETE_EVENT_FAIL :
-            return {
-              ...state, isLoading: false,
-              errors: `Your event could not be deleted. If you are attempting to cancel your event last minute, please inform your guests directly. ${action.payload}`
-            }
+    case DELETE_EVENT_FAIL:
+      return {
+        ...state,
+        isLoading: false,
+        errors: `Your event could not be deleted. If you are attempting to cancel your event last minute, please inform your guests directly. ${action.payload}`,
+      };
     default:
       return state;
   }

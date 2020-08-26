@@ -1,7 +1,6 @@
 //will contain all data for the upcoming event
 //if user === host, card will contain complete GuestList (RSVP true/false)
 //if user === host, card will contain access to foods being brought and who is bringing food
-//if user === host, card will feature a button to call/text guests if they have not RSVP'd
 
 //if user === guest, card will contain googleMap location, date and time
 //if user === guest, card will contain their food obligation && stretch - recipe(Josh)
@@ -16,7 +15,6 @@ import {
   CardImg,
   CardTitle,
   CardText,
-  CardSubtitle,
   CardBody,
   Modal,
   ModalHeader,
@@ -33,21 +31,26 @@ import {
 import EditEvent from "../forms/EditEvent";
 import { deleteEvent } from "../../actions";
 import { connect } from "react-redux";
+import Food from "./Food";
 
 function Event(props) {
   const {
-    host,
+    ishost,
     eventname,
     date,
     time,
     location,
-    description /*foods, guests*/,
+    description,
+    foods,
+    guests,
   } = props;
 
   const [modal, setModal] = useState(false);
   const [nestedModal, setNestedModal] = useState(false);
   const [closeAll, setCloseAll] = useState(false);
   const [activeTab, setActiveTab] = useState("1");
+  let claimedFood = [];
+  let unclaimedFood = [];
 
   const toggle = () => setModal(!modal);
   const toggleNested = () => {
@@ -63,6 +66,30 @@ function Event(props) {
     if (activeTab !== tab) setActiveTab(tab);
   };
 
+  function foodSorter() {
+    for (let i = 0; i < foods.length; i++) {
+      if (foods[i].isclaimed === true) {
+        claimedFood.push(foods[i]);
+      } else {
+        unclaimedFood.push(foods[i]);
+      }
+    }
+  }
+  let guestList = [];
+  let needResponse = [];
+  function guestSorter() {
+    for (let i = 0; i < guests.length; i++) {
+      if (guests[i].isattending === true) {
+        guestList.push(guests[i]);
+      }
+      if (guests[i].responded === false) {
+        needResponse.push(guests[i]);
+      }
+    }
+  }
+
+  guestSorter();
+  foodSorter();
   return (
     <>
       <Card>
@@ -76,7 +103,6 @@ function Event(props) {
           <CardTitle>
             <h2>{eventname}</h2>
           </CardTitle>
-          <CardSubtitle>{host}</CardSubtitle>
           <CardText>
             {date} at {time} <br />
             {location} <br />
@@ -101,49 +127,57 @@ function Event(props) {
               <h5>Information</h5>
             </NavLink>
           </NavItem>
-          {/*Event Organizer Only */}
-          <NavItem>
-            <NavLink
-              className={{ active: activeTab === "2" }}
-              onClick={() => {
-                toggleTab("2");
-              }}
-            >
-              <h5>Guest List</h5>
-            </NavLink>
-          </NavItem>
-          {/* Event Guest Only */}
-          <NavItem>
-            <NavLink
-              className={{ active: activeTab === "3" }}
-              onClick={() => {
-                toggleTab("3");
-              }}
-            >
-              <h5>Food</h5>
-            </NavLink>
-          </NavItem>
+          {ishost ? (
+            <NavItem>
+              <NavLink
+                className={{ active: activeTab === "2" }}
+                onClick={() => {
+                  toggleTab("2");
+                }}
+              >
+                <h5>Guest List</h5>
+              </NavLink>
+            </NavItem>
+          ) : null}
 
-          <NavItem>
-            <NavLink
-              className={{ active: activeTab === "4" }}
-              onClick={() => {
-                toggleTab("4");
-              }}
-            >
-              <h5>Food</h5>
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink
-              className={{ active: activeTab === "5" }}
-              onClick={() => {
-                toggleTab("5");
-              }}
-            >
-              <h5>Update Event</h5>
-            </NavLink>
-          </NavItem>
+          {ishost ? null : (
+            <NavItem>
+              <NavLink
+                className={{ active: activeTab === "3" }}
+                onClick={() => {
+                  toggleTab("3");
+                }}
+              >
+                <h5>Menu</h5>
+              </NavLink>
+            </NavItem>
+          )}
+
+          {ishost ? null : (
+            <NavItem>
+              <NavLink
+                className={{ active: activeTab === "4" }}
+                onClick={() => {
+                  toggleTab("4");
+                }}
+              >
+                <h5>Bring More</h5>
+              </NavLink>
+            </NavItem>
+          )}
+
+          {ishost ? (
+            <NavItem>
+              <NavLink
+                className={{ active: activeTab === "5" }}
+                onClick={() => {
+                  toggleTab("5");
+                }}
+              >
+                <h5>Update Event</h5>
+              </NavLink>
+            </NavItem>
+          ) : null}
         </Nav>
 
         <TabContent activeTab={activeTab}>
@@ -189,12 +223,25 @@ function Event(props) {
               <Col sm="6">
                 {/*map guest list to card, for event organizer only? */}
                 <Card>
-                  <CardTitle>
-                    <h6>Guest Name</h6>
-                  </CardTitle>
-                  <CardText>RSVP : True/False; Bringing: Food Item/s</CardText>
-                  {/*Button makes phone call */}
-                  <Button>Call</Button>
+                  {guestList.map((guest) => (
+                    <>
+                      {guest.fname} {guest.lname} is bringing:{" "}
+                      {guest.isbringing.map((food) => (
+                        <>
+                          {" "}
+                          {food.foodname}
+                          <br />{" "}
+                        </>
+                      ))}
+                      !
+                    </>
+                  ))}
+                  {needResponse.map((guest) => (
+                    <>
+                      You are waiting for responses from : {guest.fname}{" "}
+                      {guest.lname} <br />
+                    </>
+                  ))}
                 </Card>
               </Col>
             </Row>
@@ -202,14 +249,19 @@ function Event(props) {
           <TabPane tabId="3">
             <Row>
               <Col sm="6">
-                {/*map foodItem to card, for event guest only? */}
                 <Card>
                   <CardTitle>
-                    <h6>Food Item Name</h6>
+                    <h6>Menu</h6>
                   </CardTitle>
-                  <CardText>RSVP : True/False; Bringing: Food Item/s</CardText>
-                  {/*Button makes phone call */}
-                  <Button className="bg-addon">Search Recipe?(stretch)</Button>
+
+                  {claimedFood.map((food) => (
+                    <>
+                      <Food key={food.foodid} foodname={food.foodname} />{" "}
+                      <Button className="bg-addon">
+                        Search Recipe?(stretch)
+                      </Button>{" "}
+                    </>
+                  ))}
                 </Card>
               </Col>
             </Row>
@@ -218,13 +270,13 @@ function Event(props) {
           <TabPane tabId="4">
             <Row>
               <Col sm="6">
-                {/*map foodItem to card, for event organizer only? */}
                 <Card>
-                  <CardTitle>
-                    <h6>Menu</h6>
-                  </CardTitle>
-                  <CardText>Filter Have / Need</CardText>
-                  {/*Button makes phone call */}
+                  {unclaimedFood.map((food) => (
+                    <>
+                      <Food key={food.foodid} foodname={food.foodname} />{" "}
+                      <Button className="bg-addon">Claim</Button>{" "}
+                    </>
+                  ))}
                 </Card>
               </Col>
             </Row>
