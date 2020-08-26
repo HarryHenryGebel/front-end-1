@@ -4,13 +4,14 @@
 //will contain UNCOMFIRMED food
 
 //will allow guests to click and accept unconfirmed food responsibilities
-//will allow host to update event ONLY 24 HOURS NOTICE (otherwise, tis rude!)
-//STRETCH will allow guests to UN-rsvp(but only with 24 hours notice) and re-add their food responsibilities (only in the event of cancellation, tis rude to not bring what you said you would!)
+//will allow host to update params ONLY 24 HOURS NOTICE (otherwise, tis rude!)
+//STRETCH will allow guests to UN-rsvp(but only with 24 hours notice) and re-add their food responsibilities (only in the params of cancellation, tis rude to not bring what you said you would!)
 
 //ADD ALERT TO CONFIRM UPDATED EVENT
 //ADD ALERT TO CONFIRM UN-RSVP
 //ADD ALERT TO CONFIRM FOOD ADDITION?
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 import EditEvent from "./forms/EditEvent";
 import {
   Container,
@@ -30,10 +31,23 @@ import {
   ModalBody,
   ModalFooter,
 } from "reactstrap";
+import Food from "../components/items/Food";
+import Guest from "../components/items/Guest";
 import { updateEvent, deleteEvent } from "../actions";
 import { connect } from "react-redux";
 
-function EventPage() {
+const mapStateToProps = (state) => {
+  return {
+    potlucks: state.potlucks,
+  };
+};
+
+function EventPage(props) {
+  const params = useParams();
+  const { potlucks } = props;
+  //params is the id
+  let potluck = [];
+
   const [activeTab, setActiveTab] = useState("1");
   const [modal, setModal] = useState(false);
 
@@ -41,6 +55,16 @@ function EventPage() {
   const toggleTab = (tab) => {
     if (activeTab !== tab) setActiveTab(tab);
   };
+
+  function potluckFinder() {
+    for (let i = 0; i < potlucks.length; i++) {
+      if (potlucks[i].potluckid === params.id) {
+        potluck.push(potlucks[i]);
+      }
+    }
+  }
+
+  potluckFinder();
 
   return (
     <>
@@ -53,8 +77,11 @@ function EventPage() {
             height="300vh"
             width="100%"
           />
-          <h1>Event Name</h1>
-          <p className="lead">Date and Location</p>
+          <h1>{potluck[0].eventname}</h1>
+          <p className="lead">
+            {potluck[0].date} at {potluck[0].time}
+          </p>
+          <p className="lead">{potluck[0].location}</p>
         </Container>
 
         <div>
@@ -89,34 +116,49 @@ function EventPage() {
                 <h5>Bring Food</h5>
               </NavLink>
             </NavItem>
-            <NavItem>
-              <NavLink
-                className={{ active: activeTab === "4" }}
-                onClick={() => {
-                  toggleTab("4");
-                }}
-              >
-                <h5>Change Your Mind? ONLY FOR GUEST</h5>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink
-                className={{ active: activeTab === "5" }}
-                onClick={() => {
-                  toggleTab("5");
-                }}
-              >
-                <h5>Update Event ONLY FOR HOST</h5>
-              </NavLink>
-            </NavItem>
+            {potluck[0].ishost ? null : (
+              <NavItem>
+                <NavLink
+                  className={{ active: activeTab === "4" }}
+                  onClick={() => {
+                    toggleTab("4");
+                  }}
+                >
+                  <h5>Change Your Mind?</h5>
+                </NavLink>
+              </NavItem>
+            )}
+
+            {potluck[0].ishost ? (
+              <NavItem>
+                <NavLink
+                  className={{ active: activeTab === "5" }}
+                  onClick={() => {
+                    toggleTab("5");
+                  }}
+                >
+                  <h5>Update Event</h5>
+                </NavLink>
+              </NavItem>
+            ) : null}
           </Nav>
           <TabContent activeTab={activeTab}>
             <TabPane tabId="1">
               <Row>
                 <Col sm="12">
-                  <h6>
-                    Location, Date, Time and What Food Item will be brought
-                  </h6>
+                  <p>
+                    {potluck[0].eventname} will be held at {potluck[0].time} on{" "}
+                    {potluck[0].date} at {potluck[0].location}.
+                  </p>
+                  <p>
+                    {/* This function is wrong. It should loop through to find the guest and post the guest's food. The function exists in Event.jsx */}
+                    You have told the host that you will be bringing:{" "}
+                    {potluck[0].foods.map((food) => (
+                      <>
+                        <Food key={food.foodid} foodname={food.foodname} />
+                      </>
+                    ))}
+                  </p>
                 </Col>
               </Row>
             </TabPane>
@@ -124,10 +166,16 @@ function EventPage() {
             <TabPane tabId="2">
               <Row>
                 <Col sm="12">
-                  <h6>
-                    List of Guests and Photo (Bio?) - Easy Guest Identification
-                    - Make new friends!
-                  </h6>
+                  {potluck[0].guests.map((guest) => (
+                    <>
+                      <Guest
+                        fname={guest.fname}
+                        lname={guest.lname}
+                        primaryemail={guest.primaryemail}
+                      />
+                      <br />
+                    </>
+                  ))}
                 </Col>
               </Row>
             </TabPane>
@@ -190,4 +238,6 @@ function EventPage() {
   );
 }
 
-export default connect(null, { updateEvent, deleteEvent })(EventPage);
+export default connect(mapStateToProps, { updateEvent, deleteEvent })(
+  EventPage
+);

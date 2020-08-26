@@ -1,16 +1,12 @@
 import React from "react";
-import { Button, Card, CardBody, CardText, CardFooter } from "reactstrap";
+import { Card, CardBody} from "reactstrap";
 
 export default function Food(props) {
-  const { foodname, description } = props;
+  const { foodname } = props;
   return (
     <Card>
       <CardBody>
-        <CardText>{foodname}</CardText>
-        <CardText>{description}</CardText>
-        <CardFooter>
-          <Button className=".bg-cancel">Remove</Button>
-        </CardFooter>
+        <h3>{foodname}</h3>
       </CardBody>
     </Card>
   );
