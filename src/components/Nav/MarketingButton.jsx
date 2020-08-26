@@ -14,11 +14,13 @@ export default function MarketingButton() {
           More Info (marketing pgs)
         </DropdownToggle>
         <DropdownMenu left="true">
-          <DropdownItem>Testimonials</DropdownItem>
-          <DropdownItem>Theme Ideas</DropdownItem>
-          <DropdownItem>Contact</DropdownItem>
+          <DropdownItem href="https://not-a-potluck.gebel.tech/about.html">About Us</DropdownItem>
+          <DropdownItem href="https://not-a-potluck.gebel.tech/themes.html">Theme Ideas</DropdownItem>
+          <DropdownItem href="https://not-a-potluck.gebel.tech/gallery.html">Gallery</DropdownItem>
+          <DropdownItem href="https://not-a-potluck.gebel.tech/contact.html">Contact Us</DropdownItem>
+          <DropdownItem href="https://not-a-potluck.gebel.tech/testimonials.html">Testimonials</DropdownItem>
           <DropdownItem divider />
-          <DropdownItem>Home</DropdownItem>
+          <DropdownItem href="https://not-a-potluck.gebel.tech/" >Home</DropdownItem>
         </DropdownMenu>
       </UncontrolledDropdown>
     </div>

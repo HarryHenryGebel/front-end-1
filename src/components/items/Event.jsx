@@ -33,6 +33,10 @@ import { deleteEvent } from "../../actions";
 import { connect } from "react-redux";
 import Food from "./Food";
 
+const mapStateToProps = (state) => {
+  return { primaryEmail: state.primaryEmail };
+};
+
 function Event(props) {
   const {
     isHost,
@@ -51,6 +55,18 @@ function Event(props) {
   const [activeTab, setActiveTab] = useState("1");
   let claimedFood = [];
   let unclaimedFood = [];
+  let guestList = [];
+  let needResponse = [];
+  let foundId = [];
+  let yourObligation = [];
+
+  const guestFormValues = {
+    guestId: foundId,
+    isAttending: true,
+    isBringing: yourObligation,
+  };
+
+  const [guestUpdate, setGuestUpdate] = useState(guestFormValues);
 
   const toggle = () => setModal(!modal);
   const toggleNested = () => {
@@ -75,8 +91,7 @@ function Event(props) {
       }
     }
   }
-  let guestList = [];
-  let needResponse = [];
+
   function guestSorter() {
     for (let i = 0; i < guests.length; i++) {
       if (guests[i].isAttending === true) {
@@ -87,7 +102,32 @@ function Event(props) {
       }
     }
   }
+  function guestIdFinder() {
+    for (let i = 0; i < guests.length; i++) {
+      if (guests[i].primaryEmail === props.primaryEmail) {
+        foundId = guests[i].guestId;
+      }
+    }
+  }
 
+  function obligationFinder() {
+    for (let i = 0; i < guestList.length; i++) {
+      if (props.primaryEmail === guestList[i].primaryEmail) {
+        for (let j = 0; j < guestList[i].isBringing.length; j++) {
+          yourObligation.push(guestList[i].isBringing[j]);
+        }
+      }
+    }
+  }
+
+  const foodUpdateHandler = (e) => {
+    setGuestUpdate({
+      ...guestUpdate,
+      isBringing: [...guestUpdate.isBringing, e.target.value],
+    });
+  };
+  guestIdFinder();
+  obligationFinder();
   guestSorter();
   foodSorter();
   return (
@@ -274,7 +314,10 @@ function Event(props) {
                   {unclaimedFood.map((food) => (
                     <Fragment key={food.foodId}>
                       <Food key={food.foodId} foodName={food.foodName} />{" "}
-                      <Button className="bg-addon">Claim</Button>{" "}
+                      {/* Change onClick to onSubmit */}
+                      <Button className="bg-addon" onClick={foodUpdateHandler}>
+                        Claim
+                      </Button>{" "}
                     </Fragment>
                   ))}
                 </Card>
@@ -295,4 +338,4 @@ function Event(props) {
   );
 }
 
-export default connect(null, { deleteEvent })(Event);
+export default connect(mapStateToProps, { deleteEvent })(Event);

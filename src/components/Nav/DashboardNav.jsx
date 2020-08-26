@@ -30,6 +30,8 @@ function DashboardNav(props) {
   const toggleModal = () => setModal(!modal);
   const [userModal, setuserModal] = useState(false);
   const userToggle = () => setuserModal(!userModal);
+  const [createEModal, setCreateEModal] = useState(false);
+  const createEToggle = () => setCreateEModal(!createEModal);
 
   let newInvites = [];
 
@@ -57,6 +59,7 @@ function DashboardNav(props) {
         </DropdownToggle>
 
         <DropdownMenu right>
+          <DropdownItem onClick={createEToggle} >Create Event</DropdownItem>
           <DropdownItem onClick={userToggle}>Update Profile</DropdownItem>
           {props.potlucks.length > 0
             ? props.potlucks.map((potluck) => (
@@ -92,6 +95,20 @@ function DashboardNav(props) {
         </ModalBody>
         <ModalFooter>
           <Button className="bg-cancel" onClick={userToggle}>
+            Cancel
+          </Button>
+        </ModalFooter>
+      </Modal>
+
+      <Modal isOpen={createEModal} toggle={createEToggle}>
+        <ModalHeader toggle={createEToggle}>
+          <h2>Create Event</h2>
+        </ModalHeader>
+        <ModalBody>
+          <EditUser />
+        </ModalBody>
+        <ModalFooter>
+          <Button className="bg-cancel" onClick={createEToggle}>
             Cancel
           </Button>
         </ModalFooter>
