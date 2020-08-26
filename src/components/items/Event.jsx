@@ -226,7 +226,7 @@ function Event(props) {
                   {guestList.map((guest) => (
                     <>
                       {guest.firstName} {guest.lastName} is bringing:{" "}
-                      {guest.isbringing.map((food) => (
+                      {guest.isBringing.map((food) => (
                         <>
                           {" "}
                           {food.foodName}

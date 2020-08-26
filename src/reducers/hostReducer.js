@@ -38,7 +38,7 @@ const hostState = {
           primaryEmail: "avawingfield@email.com",
           responded: false,
           isAttending: false,
-          isbringing: [],
+          isBringing: [],
         },
 
         {
@@ -48,7 +48,7 @@ const hostState = {
           primaryEmail: "livin@lavidaloca.com",
           responded: true,
           isAttending: false,
-          isbringing: [
+          isBringing: [
             {
               foodId: "86",
               foodName: "not available",
@@ -66,7 +66,7 @@ const hostState = {
           primaryEmail: "livin@lavidaloca.com",
           responded: true,
           isAttending: true,
-          isbringing: [
+          isBringing: [
             {
               foodId: "86",
               foodName: "not available",
@@ -111,7 +111,7 @@ const hostState = {
           primaryEmail: "livin@lavidaloca.com",
           responded: false,
           isAttending: false,
-          isbringing: [],
+          isBringing: [],
         },
 
         {
@@ -121,7 +121,7 @@ const hostState = {
           primaryEmail: "livin@lavidaloca.com",
           responded: true,
           isAttending: false,
-          isbringing: [
+          isBringing: [
             {
               foodId: "86",
               foodName: "not available",
@@ -139,7 +139,7 @@ const hostState = {
           primaryEmail: "livin@lavidaloca.com",
           responded: true,
           isAttending: true,
-          isbringing: [
+          isBringing: [
             {
               foodId: "86",
               foodName: "not available",
