@@ -68,7 +68,7 @@ function Event(props) {
 
   function foodSorter() {
     for (let i = 0; i < foods.length; i++) {
-      if (foods[i].isclaimed === true) {
+      if (foods[i].isClaimed === true) {
         claimedFood.push(foods[i]);
       } else {
         unclaimedFood.push(foods[i]);

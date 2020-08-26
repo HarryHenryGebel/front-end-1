@@ -27,12 +27,8 @@ const hostState = {
       location: `George's Deli`,
       description: `Turn left at the pointy hats!`,
       foods: [
-        {
-          foodId: "18",
-          foodName: "pizza",
-          isclaimed: true,
-        },
-        { foodId: "22", foodName: "strange cake", isclaimed: false },
+        { foodId: "18", foodName: "pizza", isClaimed: true },
+        { foodId: "22", foodName: "strange cake", isClaimed: false },
       ],
       guests: [
         {
@@ -74,12 +70,12 @@ const hostState = {
             {
               foodId: "86",
               foodName: "not available",
-              isclaimed: true,
+              isClaimed: true,
             },
             {
               foodId: "13",
               foodName: "ice cream",
-              isclaimed: true,
+              isClaimed: true,
             },
           ],
         },
@@ -99,12 +95,12 @@ const hostState = {
         {
           foodId: "18",
           foodName: "pizza",
-          isclaimed: true,
+          isClaimed: true,
         },
         {
           foodId: "22",
           foodName: "strange cake",
-          isclaimed: false,
+          isClaimed: false,
         },
       ],
       guests: [
