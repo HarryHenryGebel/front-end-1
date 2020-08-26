@@ -159,14 +159,14 @@ function CreateEvent() {
       {formValues.guests.map((guest) => (
         <>
           <Guest
-            key={guest.guestid}
-            fname={guest.fname}
-            lname={guest.lname}
-            primaryemail={guest.primaryemail}
+            key={guest.guestId}
+            firstName={guest.firstName}
+            lastName={guest.lastName}
+            primaryEmail={guest.primaryEmail}
           />
           <Button
             onClick={() => {
-              guestRemover(guest.fname);
+              guestRemover(guest.firstName);
             }}
             className="bg-cancel"
           >
@@ -221,10 +221,10 @@ function CreateEvent() {
       {console.log(formValues.foods)}
       {formValues.foods.map((food) => (
         <>
-          <Food key={food.foodid} foodname={food.foodname} />
+          <Food key={food.foodId} foodName={food.foodName} />
           <Button
             onClick={(e) => {
-              foodRemover(food.foodname);
+              foodRemover(food.foodName);
             }}
             className="bg-cancel"
           >

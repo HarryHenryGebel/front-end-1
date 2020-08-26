@@ -38,14 +38,14 @@ import { connect } from "react-redux";
 
 const mapStateToProps = (state) => {
   return {
-    primaryemail: state.primaryemail,
+    primaryEmail: state.primaryEmail,
     potlucks: state.potlucks,
   };
 };
 
 function EventPage(props) {
   const params = useParams();
-  const { potlucks, primaryemail } = props;
+  const { potlucks, primaryEmail } = props;
   //params is the id
   let potluck = [];
   let unclaimedFood = [];
@@ -63,9 +63,9 @@ function EventPage(props) {
   };
 
   const guestFormValues = {
-    guestid: foundId,
-    isattending: true,
-    isbringing: yourObligation,
+    guestId: foundId,
+    isAttending: true,
+    isBringing: yourObligation,
   };
 
   const [guestUpdate, setGuestUpdate] = useState(guestFormValues);
@@ -80,8 +80,8 @@ function EventPage(props) {
 
   function guestIdFinder() {
     for (let i = 0; i < potluck[0].guests.length; i++) {
-      if (potluck[0].guests[i].primaryemail === primaryemail) {
-        foundId = potluck[0].guests[i].guestid;
+      if (potluck[0].guests[i].primaryEmail === primaryEmail) {
+        foundId = potluck[0].guests[i].guestId;
       }
     }
   }
@@ -96,7 +96,7 @@ function EventPage(props) {
 
   function guestSorter() {
     for (let i = 0; i < potluck[0].guests.length; i++) {
-      if (potluck[0].guests[i].isattending === true) {
+      if (potluck[0].guests[i].isAttending === true) {
         guestList.push(potluck[0].guests[i]);
       }
       if (potluck[0].guests[i].responded === false) {
@@ -107,9 +107,9 @@ function EventPage(props) {
 
   function obligationFinder() {
     for (let i = 0; i < guestList.length; i++) {
-      if (primaryemail === guestList[i].primaryemail) {
-        for (let j = 0; j < guestList[i].isbringing.length; j++) {
-          yourObligation.push(guestList[i].isbringing[j]);
+      if (primaryEmail === guestList[i].primaryEmail) {
+        for (let j = 0; j < guestList[i].isBringing.length; j++) {
+          yourObligation.push(guestList[i].isBringing[j]);
         }
       }
     }
@@ -118,7 +118,7 @@ function EventPage(props) {
   const foodUpdateHandler = (e) => {
     setGuestUpdate({
       ...guestUpdate,
-      isbringing: [...guestUpdate.isbringing, e.target.value],
+      isBringing: [...guestUpdate.isBringing, e.target.value],
     });
   };
 
@@ -221,7 +221,7 @@ function EventPage(props) {
                       yourObligation.map((food) => (
                         <>
                           You have told the host that you will be bringing:
-                          <Food key={food.foodid} foodname={food.foodname} />
+                          <Food key={food.foodId} foodName={food.foodName} />
                         </>
                       ))
                     ) : (
@@ -259,7 +259,7 @@ function EventPage(props) {
                     {unclaimedFood.length > 0 ? (
                       unclaimedFood.map((food) => (
                         <>
-                          <Food key={food.foodid} foodname={food.foodname} />{" "}
+                          <Food key={food.foodId} foodName={food.foodName} />{" "}
                           <Button
                             className="bg-addon"
                             onClick={foodUpdateHandler}

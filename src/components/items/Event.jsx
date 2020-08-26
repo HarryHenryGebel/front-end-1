@@ -34,7 +34,7 @@ import { connect } from "react-redux";
 import Food from "./Food";
 
 const mapStateToProps = (state) => {
-  return { primaryemail: state.primaryemail };
+  return { primaryEmail: state.primaryEmail };
 };
 
 function Event(props) {
@@ -61,9 +61,9 @@ function Event(props) {
   let yourObligation = [];
 
   const guestFormValues = {
-    guestid: foundId,
-    isattending: true,
-    isbringing: yourObligation,
+    guestId: foundId,
+    isAttending: true,
+    isBringing: yourObligation,
   };
 
   const [guestUpdate, setGuestUpdate] = useState(guestFormValues);
@@ -104,15 +104,15 @@ function Event(props) {
   }
   function guestIdFinder() {
     for (let i = 0; i < guests.length; i++) {
-      if (guests[i].primaryemail === props.primaryemail) {
-        foundId = guests[i].guestid;
+      if (guests[i].primaryEmail === props.primaryEmail) {
+        foundId = guests[i].guestId;
       }
     }
   }
 
   function obligationFinder() {
     for (let i = 0; i < guestList.length; i++) {
-      if (props.primaryemail === guestList[i].primaryEmail) {
+      if (props.primaryEmail === guestList[i].primaryEmail) {
         for (let j = 0; j < guestList[i].isBringing.length; j++) {
           yourObligation.push(guestList[i].isBringing[j]);
         }
@@ -123,7 +123,7 @@ function Event(props) {
   const foodUpdateHandler = (e) => {
     setGuestUpdate({
       ...guestUpdate,
-      isbringing: [...guestUpdate.isbringing, e.target.value],
+      isBringing: [...guestUpdate.isBringing, e.target.value],
     });
   };
   guestIdFinder();
@@ -313,7 +313,7 @@ function Event(props) {
                 <Card>
                   {unclaimedFood.map((food) => (
                     <Fragment key={food.foodId}>
-                      <Food key={food.foodId} foodname={food.foodName} />{" "}
+                      <Food key={food.foodId} foodName={food.foodName} />{" "}
                       {/* Change onClick to onSubmit */}
                       <Button className="bg-addon" onClick={foodUpdateHandler}>
                         Claim

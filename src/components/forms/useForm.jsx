@@ -72,12 +72,12 @@ const useForm = (callback) => {
   };
 
   const foodRemover = (food) => {
-    const newFoods = formValues.foods.filter((item) => item.foodname !== food);
+    const newFoods = formValues.foods.filter((item) => item.foodName !== food);
     setFormValues({ ...formValues, foods: newFoods });
   };
 
   const guestRemover = (guest) => {
-    const newGuests = formValues.guests.filter((item) => item.fname !== guest);
+    const newGuests = formValues.guests.filter((item) => item.firstName !== guest);
     setFormValues({ ...formValues, guests: newGuests });
   };
 
