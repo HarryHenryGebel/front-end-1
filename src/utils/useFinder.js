@@ -1,12 +1,14 @@
 import { useState } from "react";
+import { respondEvent } from "../actions";
 
 const useFinder = (callback) => {
-  const [potluck, setPotluck] = useState();
+  const [potluck, setPotluck] = useState({});
   const [specificId, setSpecificId] = useState();
-  const [claimedFoods, setClaimedFoods] = useState();
-  const [unclaimedFoods, setUnclaimedFoods] = useState();
-  const [guestList, setGuestList] = useState();
-  const [unresponsive, setUnresponsive] = useState();
+  const [claimedFoods, setClaimedFoods] = useState([]);
+  const [unclaimedFoods, setUnclaimedFoods] = useState([]);
+  const [guestList, setGuestList] = useState([]);
+  const [unresponsive, setUnresponsive] = useState([]);
+  const [obligation, setObligation] = useState([]);
 
   const potluckFinder = (potlucks, id) => {
     const potlist = potlucks.filter((potluck) => potluck.potluckid === id);
@@ -26,6 +28,25 @@ const useFinder = (callback) => {
     setUnclaimedFoods(oldClaims);
     setClaimedFoods(newClaims);
   };
+
+  const guestSorter = () => {
+    const attending = potluck.guests.filter(
+      (guest) => guest.isattending === true
+    );
+    const responseless = potluck.guests.filter(
+      (guest) => guest.responded === false
+    );
+
+    setGuestList(attending);
+    setUnresponsive(responseless);
+  };
+
+  function obligationFinder(primaryemail) {
+    const myFoods = guestList.filter(
+      (guest) => guest.primaryemail === primaryemail
+    );
+    setObligation(myFoods.isbringing);
+  }
 
   return {};
 };
