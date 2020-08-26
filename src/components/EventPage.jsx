@@ -30,6 +30,7 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
+  Spinner
 } from "reactstrap";
 import Food from "../components/items/Food";
 import Guest from "../components/items/Guest";
@@ -38,6 +39,7 @@ import { connect } from "react-redux";
 
 const mapStateToProps = (state) => {
   return {
+    isloading: state.isloading,
     potlucks: state.potlucks,
   };
 };
@@ -68,6 +70,7 @@ function EventPage(props) {
 
   return (
     <>
+    {props.isloading ? <Spinner /> : null}
       <div>
         <Container fluid>
           <img

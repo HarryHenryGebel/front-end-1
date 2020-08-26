@@ -2,7 +2,7 @@
 //Will hold the shape of the card-deck
 //AddEvent will be in the DashBoardNavBar
 import React from "react";
-import { CardDeck } from "reactstrap";
+import { CardDeck, Spinner } from "reactstrap";
 import Event from "./items/Event";
 import { connect } from "react-redux";
 
@@ -10,11 +10,15 @@ const mapStateToProps = (state) => {
   return {
     username: state.username,
     potlucks: state.potlucks,
+    isloading: state.isloading,
   };
 };
 
 function EventList(props) {
+
   return (
+    <>
+    {props.isloading ? <Spinner /> : null}
     <CardDeck>
       {props.potlucks.map((dinner) => {
         return (
@@ -34,6 +38,7 @@ function EventList(props) {
         );
       })}
     </CardDeck>
+    </>
   );
 }
 
