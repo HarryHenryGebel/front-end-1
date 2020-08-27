@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 const useFinder = (callback) => {
   let potluck = {}
   let specificId = ''
@@ -14,29 +12,31 @@ const useFinder = (callback) => {
     potluck = potlist[0]
   };
 
-  const guestIdFinder = (guestemail) => {
-    const id = potluck.guests.filter(
-      (guest) => guest.primaryemail === guestemail
-    );
-    specificId = id[0].guestid
+  const guestIdFinder = (guestemail, dinner = potluck) => {
+      console.log(dinner)
+ for (let i = 0; i < dinner.guests.length; i++ ){
+     if (dinner.guests[i].primaryemail === guestemail){
+         specificId = dinner.guests[i].guestid
+     }
+ }
   };
 
-  const foodSorter = () => {
-      for (let i = 0; i<potluck.foods.length; i++){
-        if (potluck.foods[i].isclaimed === true){
-            claimedFoods.push(potluck.foods[i])
+  const foodSorter = (dinner = potluck) => {
+      for (let i = 0; i<dinner.foods.length; i++){
+        if (dinner.foods[i].isclaimed === true){
+            claimedFoods.push(dinner.foods[i])
         } else {
-            unclaimedFoods.push(potluck.foods[i])
+            unclaimedFoods.push(dinner.foods[i])
         }
       }
   };
 
-  const guestSorter = () => {
-      for (let i = 0; i< potluck.guests.length; i++){
-          if(potluck.guests[i].isattending === true){
-              guestList.push(potluck.guests[i])
+  const guestSorter = (dinner = potluck) => {
+      for (let i = 0; i< dinner.guests.length; i++){
+          if(dinner.guests[i].isattending === true){
+              guestList.push(dinner.guests[i])
           }else{
-              unresponsive.push(potluck.guests[i])
+              unresponsive.push(dinner.guests[i])
           }
       }
     }

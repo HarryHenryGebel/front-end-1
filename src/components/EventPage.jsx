@@ -75,7 +75,7 @@ const {potluck, specificId, claimedFoods, unclaimedFoods, guestList, unresponsiv
   };
 
   potluckFinder(potlucks, params.id);
-  guestIdFinder(primaryemail);
+  guestIdFinder(primaryemail, potluck);
   foodSorter();
   guestSorter();
   obligationFinder();

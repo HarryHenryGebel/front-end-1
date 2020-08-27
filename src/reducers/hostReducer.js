@@ -114,7 +114,7 @@ const hostState = {
           guestid: "57",
           fname: "Martin",
           lname: "Ricky",
-          primaryemail: "livin@lavidaloca.com",
+          primaryemail: "avawingfield@email.com",
           responded: false,
           isattending: false,
           isbringing: [],
@@ -124,7 +124,7 @@ const hostState = {
           guestid: "39",
           fname: "Ricky",
           lname: "Martin",
-          primaryemail: "livin@lavidaloca.com",
+          primaryemail: "avawingfield@email.com",
           responded: true,
           isattending: false,
           isbringing: [
@@ -142,7 +142,7 @@ const hostState = {
           guestid: "17",
           fname: "Martin",
           lname: "Ricky",
-          primaryemail: "livin@lavidaloca.com",
+          primaryemail: "avawingfield@email.com",
           responded: true,
           isattending: true,
           isbringing: [

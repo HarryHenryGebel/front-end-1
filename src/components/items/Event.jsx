@@ -32,6 +32,7 @@ import EditEvent from "../forms/EditEvent";
 import { deleteEvent } from "../../actions";
 import { connect } from "react-redux";
 import Food from "./Food";
+import {useFinder} from '../../utils'
 
 const mapStateToProps = (state) => {
   return {primaryemail: state.primaryemail}
@@ -39,6 +40,7 @@ const mapStateToProps = (state) => {
 
 function Event(props) {
   const {
+    dinner,
     ishost,
     eventname,
     date,
@@ -53,17 +55,13 @@ function Event(props) {
   const [nestedModal, setNestedModal] = useState(false);
   const [closeAll, setCloseAll] = useState(false);
   const [activeTab, setActiveTab] = useState("1");
-  let claimedFood = [];
-  let unclaimedFood = [];
-  let guestList = [];
-  let needResponse = [];
-  let foundId = [];
-  let yourObligation = []
+
+  const {potluck, specificId, claimedFoods, unclaimedFoods, guestList, unresponsive, obligation, potluckFinder, guestIdFinder, foodSorter, guestSorter, obligationFinder} = useFinder()
 
   const guestFormValues = {
-    guestid: foundId,
+    guestid: specificId,
     isattending: true,
-    isbringing: yourObligation,
+    isbringing: obligation,
   };
 
   const [guestUpdate, setGuestUpdate] = useState(guestFormValues);
@@ -82,43 +80,6 @@ function Event(props) {
     if (activeTab !== tab) setActiveTab(tab);
   };
 
-  function foodSorter() {
-    for (let i = 0; i < foods.length; i++) {
-      if (foods[i].isclaimed === true) {
-        claimedFood.push(foods[i]);
-      } else {
-        unclaimedFood.push(foods[i]);
-      }
-    }
-  }
-
-  function guestSorter() {
-    for (let i = 0; i < guests.length; i++) {
-      if (guests[i].isattending === true) {
-        guestList.push(guests[i]);
-      }
-      if (guests[i].responded === false){
-        needResponse.push(guests[i])
-      }
-    }
-  }
-  function guestIdFinder() {
-    for (let i = 0; i < guests.length; i++) {
-      if (guests[i].primaryemail === props.primaryemail) {
-        foundId = guests[i].guestid;
-      }
-    }
-  }
-
-  function obligationFinder() {
-    for (let i = 0; i < guestList.length; i++) {
-      if (props.primaryemail === guestList[i].primaryemail) {
-        for (let j = 0; j < guestList[i].isbringing.length; j++) {
-          yourObligation.push(guestList[i].isbringing[j]);
-        }
-      }
-    }
-  }
 
   const foodUpdateHandler = (e) => {
     setGuestUpdate({
@@ -126,10 +87,10 @@ function Event(props) {
       isbringing: [...guestUpdate.isbringing, e.target.value],
     });
   };
-  guestIdFinder();
+  guestIdFinder(props.primaryemail, dinner);
   obligationFinder();
-  guestSorter();
-  foodSorter();
+  guestSorter(dinner);
+  foodSorter(dinner);
   return (
     <>
       <Card>
@@ -264,7 +225,7 @@ function Event(props) {
                 {/*map guest list to card, for event organizer only? */}
                 <Card>
               {guestList.length > 0 ? guestList.map(guest => <>{guest.fname} {guest.lname} is bringing: {guest.isbringing.map(food => <> {food.foodname}<br /> </>)}!</>): null}
-              {needResponse.length > 0 ? needResponse.map(guest => <>You are waiting for responses from : {guest.fname} {guest.lname} <br /></>): null}  
+              {unresponsive.length > 0 ? unresponsive.map(guest => <>You are waiting for responses from : {guest.fname} {guest.lname} <br /></>): null}  
                 </Card>
               </Col>
             </Row>
@@ -277,8 +238,8 @@ function Event(props) {
                     <h6>Menu</h6>
                   </CardTitle>
 
-                  {claimedFood.length > 0
-                    ? claimedFood.map((food) => (
+                  {claimedFoods.length > 0
+                    ? claimedFoods.map((food) => (
                         <>
                           <Food key={food.foodid} foodname={food.foodname} />{" "}
                           <Button className="bg-addon">
@@ -296,8 +257,8 @@ function Event(props) {
             <Row>
               <Col sm="6">
                 <Card>
-                  {unclaimedFood.length > 0
-                    ? unclaimedFood.map((food) => (
+                  {unclaimedFoods.length > 0
+                    ? unclaimedFoods.map((food) => (
                         <>
                           <Food key={food.foodid} foodname={food.foodname} />{" "}
                           {/* Change onClick to onSubmit */}
