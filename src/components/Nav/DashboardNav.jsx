@@ -60,6 +60,10 @@ function DashboardNav(props) {
         </DropdownToggle>
 
         <DropdownMenu right>
+          <DropdownItem>
+            <Link to="/">Home</Link>
+          </DropdownItem>
+
           <DropdownItem onClick={createEToggle}>Create Event</DropdownItem>
           <DropdownItem onClick={userToggle}>Update Profile</DropdownItem>
           {props.potlucks.map((potluck) => (
