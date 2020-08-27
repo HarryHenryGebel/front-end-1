@@ -12,10 +12,9 @@ import {
 } from "reactstrap";
 import EventInvitation from "../EventInvitation";
 import EditUser from "../forms/EditUser";
-import CreateEvent from '../forms/CreateEvent'
+import CreateEvent from "../forms/CreateEvent";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-
 
 const mapStateToProps = (state) => {
   return {
@@ -61,19 +60,19 @@ function DashboardNav(props) {
         </DropdownToggle>
 
         <DropdownMenu right>
-          <DropdownItem><Link to = '/'>Home</Link></DropdownItem>
-          
-          <DropdownItem onClick={createEToggle} >Create Event</DropdownItem>
+          <DropdownItem>
+            <Link to="/">Home</Link>
+          </DropdownItem>
+
+          <DropdownItem onClick={createEToggle}>Create Event</DropdownItem>
           <DropdownItem onClick={userToggle}>Update Profile</DropdownItem>
-          {props.potlucks.length > 0
-            ? props.potlucks.map((potluck) => (
-                <DropdownItem key={potluck.potluckId}>
-                  <Link to={`/event/${potluck.potluckId}`}>
-                    {potluck.eventName}
-                  </Link>
-                </DropdownItem>
-              ))
-            : null}
+          {props.potlucks.map((potluck) => (
+            <DropdownItem key={potluck.potluckId}>
+              <Link to={`/event/${potluck.potluckId}`}>
+                {potluck.eventName}
+              </Link>
+            </DropdownItem>
+          ))}
 
           {/* show alert? */}
           {newInvites.map((invite) => (

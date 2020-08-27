@@ -32,6 +32,7 @@ import EditEvent from "../forms/EditEvent";
 import { deleteEvent } from "../../actions";
 import { connect } from "react-redux";
 import Food from "./Food";
+import { useFinder } from "../../utils";
 
 const mapStateToProps = (state) => {
   return { primaryEmail: state.primaryEmail };
@@ -39,31 +40,37 @@ const mapStateToProps = (state) => {
 
 function Event(props) {
   const {
+    dinner,
     isHost,
     eventName,
     date,
     time,
     location,
     description,
-    foods,
-    guests,
   } = props;
 
   const [modal, setModal] = useState(false);
   const [nestedModal, setNestedModal] = useState(false);
   const [closeAll, setCloseAll] = useState(false);
   const [activeTab, setActiveTab] = useState("1");
-  let claimedFood = [];
-  let unclaimedFood = [];
-  let guestList = [];
-  let needResponse = [];
-  let foundId = [];
-  let yourObligation = [];
+
+  const {
+    specificId,
+    claimedFoods,
+    unclaimedFoods,
+    guestList,
+    unresponsive,
+    obligation,
+    guestIdFinder,
+    foodSorter,
+    guestSorter,
+    obligationFinder,
+  } = useFinder();
 
   const guestFormValues = {
-    guestId: foundId,
+    guestId: specificId,
     isAttending: true,
-    isBringing: yourObligation,
+    isBringing: obligation,
   };
 
   const [guestUpdate, setGuestUpdate] = useState(guestFormValues);
@@ -82,54 +89,16 @@ function Event(props) {
     if (activeTab !== tab) setActiveTab(tab);
   };
 
-  function foodSorter() {
-    for (let i = 0; i < foods.length; i++) {
-      if (foods[i].isClaimed === true) {
-        claimedFood.push(foods[i]);
-      } else {
-        unclaimedFood.push(foods[i]);
-      }
-    }
-  }
-
-  function guestSorter() {
-    for (let i = 0; i < guests.length; i++) {
-      if (guests[i].isAttending === true) {
-        guestList.push(guests[i]);
-      }
-      if (guests[i].responded === false) {
-        needResponse.push(guests[i]);
-      }
-    }
-  }
-  function guestIdFinder() {
-    for (let i = 0; i < guests.length; i++) {
-      if (guests[i].primaryEmail === props.primaryEmail) {
-        foundId = guests[i].guestId;
-      }
-    }
-  }
-
-  function obligationFinder() {
-    for (let i = 0; i < guestList.length; i++) {
-      if (props.primaryEmail === guestList[i].primaryEmail) {
-        for (let j = 0; j < guestList[i].isBringing.length; j++) {
-          yourObligation.push(guestList[i].isBringing[j]);
-        }
-      }
-    }
-  }
-
   const foodUpdateHandler = (e) => {
     setGuestUpdate({
       ...guestUpdate,
       isBringing: [...guestUpdate.isBringing, e.target.value],
     });
   };
-  guestIdFinder();
+  guestIdFinder(props.primaryEmail, dinner);
   obligationFinder();
-  guestSorter();
-  foodSorter();
+  guestSorter(dinner);
+  foodSorter(dinner);
   return (
     <>
       <Card>
@@ -263,14 +232,14 @@ function Event(props) {
                       {guest.isBringing.map((food) => (
                         <Fragment key={food.foodId}>
                           {" "}
-                          {food.foodName}
+                          {food.foodname}
                           <br />{" "}
                         </Fragment>
                       ))}
                       !
                     </Fragment>
                   ))}
-                  {needResponse.map((guest) => (
+                  {unresponsive.map((guest) => (
                     <Fragment key={guest.guestId}>
                       You are waiting for responses from : {guest.firstName}{" "}
                       {guest.lastName} <br />
@@ -288,9 +257,9 @@ function Event(props) {
                     <h6>Menu</h6>
                   </CardTitle>
 
-                  {claimedFood.map((food) => (
+                  {claimedFoods.map((food) => (
                     <Fragment key={food.foodId}>
-                      <Food key={food.foodId} foodName={food.foodName} />{" "}
+                      <Food key={food.foodid} foodname={food.foodname} />{" "}
                       <Button className="bg-addon">
                         Search Recipe?(stretch)
                       </Button>{" "}
@@ -305,9 +274,9 @@ function Event(props) {
             <Row>
               <Col sm="6">
                 <Card>
-                  {unclaimedFood.map((food) => (
+                  {unclaimedFoods.map((food) => (
                     <Fragment key={food.foodId}>
-                      <Food key={food.foodId} foodName={food.foodName} />{" "}
+                      <Food key={food.foodid} foodname={food.foodname} />{" "}
                       {/* Change onClick to onSubmit */}
                       <Button className="bg-addon" onClick={foodUpdateHandler}>
                         Claim
