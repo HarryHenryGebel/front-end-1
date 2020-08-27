@@ -1,47 +1,33 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 
-
 function CountDown(props) {
-    const {potluck} = props
-
-    const date = potluck.date;
-    const time = potluck.time;
-
-    const beginning = `${date}, ${time}`
-
-    //beginning will go into the useEffect
-
-const emptyTimer = {
+  const emptyTimer = {
     days: undefined,
     hours: undefined,
     minutes: undefined,
-}
+  };
 
-const [timer,setTimer] = useState(emptyTimer)
+  const [timer, setTimer] = useState(emptyTimer);
 
-useEffect(()=>{
+  useEffect(() => {
     setInterval(() => {
-        // const { timeTillDate, timeFormat } = this.props;
-        const then = moment("05 26 2019, 6:00 am", "MM DD YYYY, h:mm a");
-        const now = moment();
-        const countdown = moment(then - now);
-        const days = countdown.format('D');
-        const hours = countdown.format('HH');
-        const minutes = countdown.format('mm');
+      // const { timeTillDate, timeFormat } = this.props;
+      const then = moment("05 26 2019, 6:00 am", "MM DD YYYY, h:mm a");
+      const now = moment();
+      const countdown = moment(then - now);
+      const days = countdown.format("D");
+      const hours = countdown.format("HH");
+      const minutes = countdown.format("mm");
 
-        setTimer({ days, hours, minutes });
+      setTimer({ days, hours, minutes });
     }, 10000);
-})
+  });
 
-
-  
   return (
-
-      <div id="clock">
-{timer.days} Days {timer.hours} Hours and {timer.minutes} Minutes!</div>
-
-
+    <div id="clock">
+      {timer.days} Days {timer.hours} Hours and {timer.minutes} Minutes!
+    </div>
   );
 }
 
