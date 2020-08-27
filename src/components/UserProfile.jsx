@@ -52,7 +52,19 @@ function UserProfile(props) {
           <h2>Event Information</h2>
         </ModalHeader>
         <ModalBody>
-          <Event />
+        <Event
+            key={props.potlucks[0].potluckId}
+            potluckId={props.potlucks[0].potluckId}
+            host={props.username}
+            eventName={props.potlucks[0].eventName}
+            date={props.potlucks[0].date}
+            time={props.potlucks[0].time}
+            location={props.potlucks[0].location}
+            description={props.potlucks[0].description}
+            foods={props.potlucks[0].foods}
+            guests={props.potlucks[0].guests}
+            isHost={props.potlucks[0].isHost}
+          />
         </ModalBody>
         <ModalFooter>
           <Button className="bg-cancel" onClick={eventToggle}>
