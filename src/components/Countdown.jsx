@@ -2,7 +2,15 @@ import React, { useState, useEffect } from "react";
 import moment from "moment";
 
 
-function CountDown() {
+function CountDown(props) {
+    const {potluck} = props
+
+    const date = potluck.date;
+    const time = potluck.time;
+
+    const beginning = `${date}, ${time}`
+
+    //beginning will go into the useEffect
 
 const emptyTimer = {
     days: undefined,

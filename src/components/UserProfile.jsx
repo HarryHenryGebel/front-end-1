@@ -38,7 +38,7 @@ function UserProfile(props) {
         <h1 className="display-3">Hello, {props.username}!</h1>
 
         <hr className="my-2" />
-        <p>Your next event is in <Countdown /></p>
+        <p>Your next event is in <Countdown potluck = {props.potlucks[0]}/></p>
         <p className="lead">
           <Button className="bg-addon" onClick={eventToggle}>
             Learn More
