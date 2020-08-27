@@ -236,7 +236,7 @@ function EventPage(props) {
                         </>
                       ))
                     ) : (
-                      <CardText>All food is being</CardText>
+                      <CardText>All food is being claimed.</CardText>
                     )}
                   </Card>
                 </Col>
