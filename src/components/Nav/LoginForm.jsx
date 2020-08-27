@@ -145,8 +145,6 @@ export default function LoginForm() {
             </Form>
           </ModalBody>
           <ModalFooter>
-            {/* delete once submit is working properly */}
-            <pre>{JSON.stringify(post, null, 2)}</pre>
             <Button
               color="primary"
               type="submit"
