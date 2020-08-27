@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 export const CREATE_EVENT_START = "CREATE_EVENT_START";
 export const CREATE_EVENT_SUCCESS = "CREATE_EVENT_SUCCESS";
 export const CREATE_EVENT_FAIL = "CREATE_EVENT_FAIL";
@@ -10,10 +12,12 @@ export const DELETE_EVENT_START = "DELETE_EVENT_START";
 export const DELETE_EVENT_SUCESS = "DELETE_EVENT_SUCESS";
 export const DELETE_EVENT_FAIL = "DELETE_EVENT_FAIL";
 
-export const createEvent = () => (dispatch) => {
+export const createEvent = (data) => (dispatch)=> {
   dispatch({ action: CREATE_EVENT_START });
-  dispatch({ action: CREATE_EVENT_SUCCESS, payload: "" });
-  dispatch({ action: CREATE_EVENT_FAIL, payload: "" });
+   axios
+  .post('https://lre-notapotluck.herokuapp.com/potlucks/potluck', data)
+  .then(res => dispatch({ action: CREATE_EVENT_SUCCESS, payload: res.data }))
+  .catch(e=> dispatch({ action: CREATE_EVENT_FAIL, payload: `${e}` })) 
 };
 
 export const updateEvent = () => (dispatch) => {

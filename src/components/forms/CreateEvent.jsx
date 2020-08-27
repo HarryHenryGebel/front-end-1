@@ -9,7 +9,7 @@ import Food from "../items/Food";
 
 //Use Add button to populate a list htmlFor Food and Guests
 
-function CreateEvent() {
+function CreateEvent(props) {
   const {
     food,
     concatLocation,
@@ -25,8 +25,14 @@ function CreateEvent() {
     guestRemover,
   } = useForm();
 
+  const onSubmit = (e) => {
+    e.preventDefault()
+    props.createEvent(formValues)
+
+  }
+
   return (
-    <Form>
+    <Form onSubmit = {onSubmit}>
       <Row form>
         <Col md={6}>
           <FormGroup>
@@ -263,7 +269,7 @@ function CreateEvent() {
           Confirm
         </Label>
       </FormGroup>
-      <Button className="bg-confirm">Create Event</Button>
+      <Button className="bg-confirm" type = "submit">Create Event</Button>
       <Button className="bg-cancel">Cancel</Button>
     </Form>
   );
