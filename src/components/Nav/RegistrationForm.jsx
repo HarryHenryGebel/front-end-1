@@ -25,7 +25,7 @@ export default function RegistrationForm () {
   const [post, setPost] = useState([]);
 
   useEffect(() => {
-    console.log('form state change')
+    // console.log('form state change')
     registrationSchema.isValid(formState).then(valid => {
       // console.log('valid?', valid)
 			setButtonDisabled(!valid);
@@ -38,13 +38,13 @@ export default function RegistrationForm () {
       username: "",
       email: "",
       password: "",
-      terms: true
+      terms: false
     });
     axios
       .post("https://reqres.in/api/users", formState)
       .then(res => {
         setPost(res.data);
-        console.log("success", post);
+        // console.log("success", post);
       })
       .catch(err => console.log(err.response));
   }
@@ -55,11 +55,11 @@ export default function RegistrationForm () {
       .validate(e.target.name === "terms" ? e.target.checked : e.target.value)
       .then(valid => {
         setErrors({...errors, [e.target.name]: ""});
-        console.log('Valid ERRORS', errors)
+        // console.log('Valid ERRORS', errors)
       })
       .catch(err => {
         setErrors({...errors, [e.target.name]: err.errors[0]});
-        console.log('Catch ERRORS', errors, "e.target", e.target, "t.target.name", e.target.name)
+        // console.log('Catch ERRORS', errors)
       });
   };
   const inputChange = (e) => {
@@ -78,6 +78,7 @@ export default function RegistrationForm () {
     <div>
     <Button className="bg-confirm" onClick={toggleModal}>Registration</Button>
     <Modal isOpen={modal} toggle={toggleModal}>
+    <form onSubmit={formSubmit}>
       <ModalHeader toggle={toggleModal}>Registration</ModalHeader>
       <ModalBody>
         <Form onSubmit={formSubmit}>
@@ -148,11 +149,11 @@ export default function RegistrationForm () {
         <Button
           color="primary"
           type="submit"
-          // Temp disabled to test submit button posting
-          // onClick={toggleModal}
+          onClick={toggleModal}
           disabled={buttonDisabled}
           >Submit</Button>{' '}
       </ModalFooter>
+    </form>
     </Modal>
   </div>
   );
