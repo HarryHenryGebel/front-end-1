@@ -2,7 +2,7 @@ import React from "react";
 import { Col, Row, Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { connect } from "react-redux";
 import { createEvent } from "../../actions";
-import {useForm} from '../../utils'
+import { useForm } from "../../utils";
 import Guest from "../items/Guest";
 import Food from "../items/Food";
 //Form Validation?
@@ -10,9 +10,22 @@ import Food from "../items/Food";
 //Use Add button to populate a list htmlFor Food and Guests
 
 function CreateEvent() {
-const {food, concatLocation, guest, formValues, changeHandler, changeLocationHandler, guestChangeHandler, foodChangeHandler, addGuest, addFood, foodRemover, guestRemover} = useForm()
- 
-return (
+  const {
+    food,
+    concatLocation,
+    guest,
+    formValues,
+    changeHandler,
+    changeLocationHandler,
+    guestChangeHandler,
+    foodChangeHandler,
+    addGuest,
+    addFood,
+    foodRemover,
+    guestRemover,
+  } = useForm();
+
+  return (
     <Form>
       <Row form>
         <Col md={6}>
@@ -20,10 +33,10 @@ return (
             <Label htmlFor="Name">Event Name</Label>
             <Input
               type="text"
-              name="eventname"
+              name="eventName"
               id="Name"
               placeholder="with a placeholder"
-              value={formValues.eventname}
+              value={formValues.eventName}
               onChange={changeHandler}
             />
           </FormGroup>
@@ -143,42 +156,47 @@ return (
           </FormGroup>
         </Col>
       </Row>
-      {formValues.guests.length > 0
-        ? formValues.guests.map((guest) => (
-          <>
-            <Guest
-              key={guest.guestid}
-              fname={guest.fname}
-              lname={guest.lname}
-              primaryemail={guest.primaryemail}
-            />
-            <Button onClick = {()=>{guestRemover(guest.fname)}} className = "bg-cancel">Remove</Button>
-            </>
-          ))
-        : null}
+      {formValues.guests.map((guest) => (
+        <>
+          <Guest
+            key={guest.guestId}
+            firstName={guest.firstName}
+            lastName={guest.lastName}
+            primaryEmail={guest.primaryEmail}
+          />
+          <Button
+            onClick={() => {
+              guestRemover(guest.firstName);
+            }}
+            className="bg-cancel"
+          >
+            Remove
+          </Button>
+        </>
+      ))}
       <Row form>
         <Col md={6}>
           <FormGroup>
-            <Label htmlFor="fname">First Name</Label>
+            <Label htmlFor="firstName">First Name</Label>
             <Input
               type="text"
-              name="fname"
-              id="fname"
+              name="firstName"
+              id="firstName"
               placeholder="with a placeholder"
-              value={guest.fname}
+              value={guest.firstName}
               onChange={guestChangeHandler}
             />
           </FormGroup>
         </Col>
         <Col md={6}>
           <FormGroup>
-            <Label htmlFor="lname">Last Name</Label>
+            <Label htmlFor="lastName">Last Name</Label>
             <Input
               type="text"
-              name="lname"
-              id="lname"
+              name="lastName"
+              id="lastName"
               placeholder="with a placeholder"
-              value={guest.lname}
+              value={guest.lastName}
               onChange={guestChangeHandler}
             />
           </FormGroup>
@@ -188,10 +206,10 @@ return (
             <Label htmlFor="Guestemail">Email</Label>
             <Input
               type="email"
-              name="primaryemail"
+              name="primaryEmail"
               id="email"
               placeholder="email placeholder"
-              value={guest.primaryemail}
+              value={guest.primaryEmail}
               onChange={guestChangeHandler}
             />
           </FormGroup>
@@ -201,25 +219,27 @@ return (
         Add Guest
       </Button>
       {console.log(formValues.foods)}
-      {formValues.foods.length > 0
-        ? formValues.foods.map((food) => (
-          <>
-            <Food
-              key={food.foodid}
-              foodname={food.foodname}
-            />
-            <Button onClick = {(e)=>{foodRemover(food.foodname)}} className = "bg-cancel">Remove</Button>
-            </>
-          ))
-        : null}
+      {formValues.foods.map((food) => (
+        <>
+          <Food key={food.foodId} foodName={food.foodName} />
+          <Button
+            onClick={(e) => {
+              foodRemover(food.foodName);
+            }}
+            className="bg-cancel"
+          >
+            Remove
+          </Button>
+        </>
+      ))}
       <FormGroup>
         <Label htmlFor="FoodName">Food Name</Label>
         <Input
           type="text"
-          name="foodname"
+          name="foodName"
           id="FoodName"
           placeholder="name"
-          value={food.foodname}
+          value={food.foodName}
           onChange={foodChangeHandler}
         />
       </FormGroup>{" "}

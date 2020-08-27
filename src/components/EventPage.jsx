@@ -30,25 +30,40 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
+  Spinner,
 } from "reactstrap";
 import Food from "../components/items/Food";
 import Guest from "../components/items/Guest";
 import { updateEvent, deleteEvent } from "../actions";
 import { connect } from "react-redux";
-import {useFinder} from '../utils'
+import { useFinder } from "../utils";
 
 const mapStateToProps = (state) => {
   return {
-    primaryemail: state.primaryemail,
+    isLoading: state.isLoading,
+    primaryEmail: state.primaryEmail,
     potlucks: state.potlucks,
   };
 };
 
 function EventPage(props) {
   const params = useParams();
-  const { potlucks, primaryemail } = props;
+  const { potlucks, primaryEmail } = props;
   //params is the id
-const {potluck, specificId, claimedFoods, unclaimedFoods, guestList, unresponsive, obligation, potluckFinder, guestIdFinder, foodSorter, guestSorter, obligationFinder} = useFinder()
+  const {
+    potluck,
+    specificId,
+    claimedFoods,
+    unclaimedFoods,
+    guestList,
+    unresponsive,
+    obligation,
+    potluckFinder,
+    guestIdFinder,
+    foodSorter,
+    guestSorter,
+    obligationFinder,
+  } = useFinder();
 
   const [activeTab, setActiveTab] = useState("1");
   const [modal, setModal] = useState(false);
@@ -66,11 +81,10 @@ const {potluck, specificId, claimedFoods, unclaimedFoods, guestList, unresponsiv
 
   const [guestUpdate, setGuestUpdate] = useState(guestFormValues);
 
-  
   const foodUpdateHandler = (e) => {
     setGuestUpdate({
       ...guestUpdate,
-      isbringing: [...guestUpdate.isbringing, e.target.value],
+      isBringing: [...guestUpdate.isBringing, e.target.value],
     });
   };
 
@@ -82,6 +96,7 @@ const {potluck, specificId, claimedFoods, unclaimedFoods, guestList, unresponsiv
 
   return (
     <>
+      {props.isLoading ? <Spinner /> : null}
       <div>
         <Container fluid>
           <img
@@ -91,7 +106,7 @@ const {potluck, specificId, claimedFoods, unclaimedFoods, guestList, unresponsiv
             height="300vh"
             width="100%"
           />
-          <h1>{potluck.eventname}</h1>
+          <H1>{Potluck.eventname}</h1>
           <p className="lead">
             {potluck.date} at {potluck.time}
           </p>
@@ -173,7 +188,7 @@ const {potluck, specificId, claimedFoods, unclaimedFoods, guestList, unresponsiv
                       obligation.map((food) => (
                         <>
                           You have told the host that you will be bringing:
-                          <Food key={food.foodid} foodname={food.foodname} />
+                          <Food key={food.foodId} foodName={food.foodName} />
                         </>
                       ))
                     ) : (
@@ -193,9 +208,9 @@ const {potluck, specificId, claimedFoods, unclaimedFoods, guestList, unresponsiv
                   {guestList.map((guest) => (
                     <>
                       <Guest
-                        fname={guest.fname}
-                        lname={guest.lname}
-                        primaryemail={guest.primaryemail}
+                        firstName={guest.firstName}
+                        lastName={guest.lastName}
+                        primaryEmail={guest.primaryEmail}
                       />
                       <br />
                     </>
@@ -211,8 +226,13 @@ const {potluck, specificId, claimedFoods, unclaimedFoods, guestList, unresponsiv
                     {unclaimedFoods.length > 0 ? (
                       unclaimedFoods.map((food) => (
                         <>
-                          <Food key={food.foodid} foodname={food.foodname} />{" "}
-                          <Button className="bg-addon" onClick = {foodUpdateHandler}>Claim Food Item!</Button>
+                          <Food key={food.foodId} foodName={food.foodName} />{" "}
+                          <Button
+                            className="bg-addon"
+                            onClick={foodUpdateHandler}
+                          >
+                            Claim Food Item!
+                          </Button>
                         </>
                       ))
                     ) : (

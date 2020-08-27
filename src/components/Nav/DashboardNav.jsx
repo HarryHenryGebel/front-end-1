@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Modal,
   ModalHeader,
@@ -12,14 +12,16 @@ import {
 } from "reactstrap";
 import EventInvitation from "../EventInvitation";
 import EditUser from "../forms/EditUser";
+import CreateEvent from '../forms/CreateEvent'
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+
 
 const mapStateToProps = (state) => {
   return {
     isLoading: state.isLoading,
     potlucks: state.potlucks,
-    primaryemail: state.primaryemail,
+    primaryEmail: state.primaryEmail,
   };
 };
 
@@ -30,6 +32,8 @@ function DashboardNav(props) {
   const toggleModal = () => setModal(!modal);
   const [userModal, setuserModal] = useState(false);
   const userToggle = () => setuserModal(!userModal);
+  const [createEModal, setCreateEModal] = useState(false);
+  const createEToggle = () => setCreateEModal(!createEModal);
 
   let newInvites = [];
 
@@ -38,7 +42,7 @@ function DashboardNav(props) {
       for (let j = 0; j < props.potlucks[i].guests.length; j++) {
         console.log();
         if (
-          props.primaryemail === props.potlucks[i].guests[j].primaryemail &&
+          props.primaryEmail === props.potlucks[i].guests[j].primaryEmail &&
           props.potlucks[i].guests[j].responded === false
         ) {
           newInvites.push(props.potlucks[i]);
@@ -57,28 +61,27 @@ function DashboardNav(props) {
         </DropdownToggle>
 
         <DropdownMenu right>
+          <DropdownItem onClick={createEToggle} >Create Event</DropdownItem>
           <DropdownItem onClick={userToggle}>Update Profile</DropdownItem>
           {props.potlucks.length > 0
             ? props.potlucks.map((potluck) => (
-                <DropdownItem key={potluck.potluckid}>
-                  <Link to={`/event/${potluck.potluckid}`}>
-                    {potluck.eventname}
+                <DropdownItem key={potluck.potluckId}>
+                  <Link to={`/event/${potluck.potluckId}`}>
+                    {potluck.eventName}
                   </Link>
                 </DropdownItem>
               ))
             : null}
 
           {/* show alert? */}
-          {newInvites.length > 0
-            ? newInvites.map((invite) => (
-                <DropdownItem key={invite.id} onClick={toggleModal}>
-                  {invite.eventname}
-                  <Modal isOpen={modal} toggle={toggleModal}>
-                    <EventInvitation key={invite.potluckid} potluck={invite} />
-                  </Modal>
-                </DropdownItem>
-              ))
-            : null}
+          {newInvites.map((invite) => (
+            <DropdownItem key={invite.potluckId} onClick={toggleModal}>
+              {invite.eventName}
+              <Modal isOpen={modal} toggle={toggleModal}>
+                <EventInvitation key={invite.potluckId} potluck={invite} />
+              </Modal>
+            </DropdownItem>
+          ))}
 
           <DropdownItem divider />
           <DropdownItem>Logout</DropdownItem>
@@ -94,6 +97,20 @@ function DashboardNav(props) {
         </ModalBody>
         <ModalFooter>
           <Button className="bg-cancel" onClick={userToggle}>
+            Cancel
+          </Button>
+        </ModalFooter>
+      </Modal>
+
+      <Modal isOpen={createEModal} toggle={createEToggle}>
+        <ModalHeader toggle={createEToggle}>
+          <h2>Create Event</h2>
+        </ModalHeader>
+        <ModalBody>
+          <CreateEvent />
+        </ModalBody>
+        <ModalFooter>
+          <Button className="bg-cancel" onClick={createEToggle}>
             Cancel
           </Button>
         </ModalFooter>

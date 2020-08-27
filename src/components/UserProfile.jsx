@@ -6,6 +6,7 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
+  Spinner
 } from "reactstrap";
 import Event from "./items/Event";
 import { connect } from "react-redux";
@@ -18,8 +19,9 @@ import { connect } from "react-redux";
 const mapStateToProps = (state) => {
   return {
     username: state.username,
-    imageurl: state.imageurl,
+    imageUrl: state.imageUrl,
     potlucks: state.potlucks,
+    isLoading: state.isLoading
   };
 };
 
@@ -29,8 +31,9 @@ function UserProfile(props) {
 
   return (
     <>
+    {props.isLoading ? <Spinner /> : null}
       <Jumbotron>
-        <img src={props.imageurl} alt="happy user" />
+        <img src={props.imageUrl} alt="happy user" />
         <h1 className="display-3">Hello, {props.username}!</h1>
 
         <hr className="my-2" />

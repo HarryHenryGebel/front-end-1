@@ -8,7 +8,7 @@
 //may need to break component down further
 
 //ADD ALERT TO CONFIRM EVENT CANCELLATION
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import {
   Card,
   Button,
@@ -32,11 +32,11 @@ import EditEvent from "../forms/EditEvent";
 import { deleteEvent } from "../../actions";
 import { connect } from "react-redux";
 import Food from "./Food";
-import {useFinder} from '../../utils'
+import { useFinder } from "../../utils";
 
 const mapStateToProps = (state) => {
-  return {primaryemail: state.primaryemail}
-}
+  return { primaryEmail: state.primaryEmail };
+};
 
 function Event(props) {
   const {
@@ -48,7 +48,7 @@ function Event(props) {
     location,
     description,
     foods,
-    guests
+    guests,
   } = props;
 
   const [modal, setModal] = useState(false);
@@ -56,7 +56,20 @@ function Event(props) {
   const [closeAll, setCloseAll] = useState(false);
   const [activeTab, setActiveTab] = useState("1");
 
-  const {potluck, specificId, claimedFoods, unclaimedFoods, guestList, unresponsive, obligation, potluckFinder, guestIdFinder, foodSorter, guestSorter, obligationFinder} = useFinder()
+  const {
+    potluck,
+    specificId,
+    claimedFoods,
+    unclaimedFoods,
+    guestList,
+    unresponsive,
+    obligation,
+    potluckFinder,
+    guestIdFinder,
+    foodSorter,
+    guestSorter,
+    obligationFinder,
+  } = useFinder();
 
   const guestFormValues = {
     guestid: specificId,
@@ -80,11 +93,10 @@ function Event(props) {
     if (activeTab !== tab) setActiveTab(tab);
   };
 
-
   const foodUpdateHandler = (e) => {
     setGuestUpdate({
       ...guestUpdate,
-      isbringing: [...guestUpdate.isbringing, e.target.value],
+      isBringing: [...guestUpdate.isBringing, e.target.value],
     });
   };
   guestIdFinder(props.primaryemail, dinner);
@@ -102,7 +114,7 @@ function Event(props) {
         />
         <CardBody>
           <CardTitle>
-            <h2>{eventname}</h2>
+            <h2>{eventName}</h2>
           </CardTitle>
           <CardText>
             {date} at {time} <br />
@@ -116,11 +128,11 @@ function Event(props) {
       </Card>
 
       <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle}>{eventname}</ModalHeader>
+        <ModalHeader toggle={toggle}>{eventName}</ModalHeader>
         <Nav tabs>
           <NavItem>
             <NavLink
-              className={{ active: activeTab === "1" }}
+              /* className={{ active: activeTab === "1" }} */
               onClick={() => {
                 toggleTab("1");
               }}
@@ -128,10 +140,10 @@ function Event(props) {
               <h5>Information</h5>
             </NavLink>
           </NavItem>
-          {ishost ? (
+          {isHost ? (
             <NavItem>
               <NavLink
-                className={{ active: activeTab === "2" }}
+                /* className={{ active: activeTab === "2" }} */
                 onClick={() => {
                   toggleTab("2");
                 }}
@@ -141,10 +153,10 @@ function Event(props) {
             </NavItem>
           ) : null}
 
-          {ishost ? null : (
+          {isHost ? null : (
             <NavItem>
               <NavLink
-                className={{ active: activeTab === "3" }}
+                /* className={{ active: activeTab === "3" }} */
                 onClick={() => {
                   toggleTab("3");
                 }}
@@ -154,10 +166,10 @@ function Event(props) {
             </NavItem>
           )}
 
-          {ishost ? null : (
+          {isHost ? null : (
             <NavItem>
               <NavLink
-                className={{ active: activeTab === "4" }}
+                /* className={{ active: activeTab === "4" }} */
                 onClick={() => {
                   toggleTab("4");
                 }}
@@ -167,10 +179,10 @@ function Event(props) {
             </NavItem>
           )}
 
-          {ishost ? (
+          {isHost ? (
             <NavItem>
               <NavLink
-                className={{ active: activeTab === "5" }}
+                /* className={{ active: activeTab === "5" }} */
                 onClick={() => {
                   toggleTab("5");
                 }}
@@ -224,8 +236,29 @@ function Event(props) {
               <Col sm="6">
                 {/*map guest list to card, for event organizer only? */}
                 <Card>
-              {guestList.length > 0 ? guestList.map(guest => <>{guest.fname} {guest.lname} is bringing: {guest.isbringing.map(food => <> {food.foodname}<br /> </>)}!</>): null}
-              {unresponsive.length > 0 ? unresponsive.map(guest => <>You are waiting for responses from : {guest.fname} {guest.lname} <br /></>): null}  
+                  {guestList.length > 0
+                    ? guestList.map((guest) => (
+                        <>
+                          {guest.fname} {guest.lname} is bringing:{" "}
+                          {guest.isbringing.map((food) => (
+                            <>
+                              {" "}
+                              {food.foodname}
+                              <br />{" "}
+                            </>
+                          ))}
+                          !
+                        </>
+                      ))
+                    : null}
+                  {unresponsive.length > 0
+                    ? unresponsive.map((guest) => (
+                        <>
+                          You are waiting for responses from : {guest.fname}{" "}
+                          {guest.lname} <br />
+                        </>
+                      ))
+                    : null}
                 </Card>
               </Col>
             </Row>
@@ -262,7 +295,12 @@ function Event(props) {
                         <>
                           <Food key={food.foodid} foodname={food.foodname} />{" "}
                           {/* Change onClick to onSubmit */}
-                          <Button className="bg-addon" onClick = {foodUpdateHandler}>Claim</Button>{" "}
+                          <Button
+                            className="bg-addon"
+                            onClick={foodUpdateHandler}
+                          >
+                            Claim
+                          </Button>{" "}
                         </>
                       ))
                     : null}
