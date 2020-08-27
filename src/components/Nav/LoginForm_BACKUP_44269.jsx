@@ -48,8 +48,11 @@ export default function LoginForm({setHasAuth, hasAuth}) {
       .post("https://reqres.in/api/users", formState)
       .then((res) => {
         setPost(res.data);
+<<<<<<< HEAD
         console.log("success", post);
         setHasAuth(true)
+=======
+>>>>>>> master
       })
       .catch((err) => console.log(err.response));
   };

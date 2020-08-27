@@ -15,29 +15,29 @@ const mapStateToProps = (state) => {
 };
 
 function EventList(props) {
-
   return (
     <>
-    {props.isLoading ? <Spinner /> : null}
-    <CardDeck>
-      {props.potlucks.map((dinner) => {
-        return (
-          <Event
-            key={dinner.potluckId}
-            potluckId={dinner.potluckId}
-            host={props.username}
-            eventName={dinner.eventName}
-            date={dinner.date}
-            time={dinner.time}
-            location={dinner.location}
-            description={dinner.description}
-            foods={dinner.foods}
-            guests={dinner.guests}
-            isHost={dinner.isHost}
-          />
-        );
-      })}
-    </CardDeck>
+      {props.isLoading ? <Spinner /> : null}
+      <CardDeck>
+        {props.potlucks.map((dinner) => {
+          return (
+            <Event
+              dinner={dinner}
+              potluckid={dinner.potluckid}
+              key={dinner.potluckId}
+              host={props.username}
+              eventName={dinner.eventName}
+              date={dinner.date}
+              time={dinner.time}
+              location={dinner.location}
+              description={dinner.description}
+              foods={dinner.foods}
+              guests={dinner.guests}
+              isHost={dinner.isHost}
+            />
+          );
+        })}
+      </CardDeck>
     </>
   );
 }
