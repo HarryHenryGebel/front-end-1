@@ -20,14 +20,20 @@ export const createEvent = (data) => (dispatch)=> {
   .catch(e=> dispatch({ action: CREATE_EVENT_FAIL, payload: `${e}` })) 
 };
 
-export const updateEvent = () => (dispatch) => {
+export const updateEvent = (id, data) => (dispatch) => {
   dispatch({ action: UPDATE_EVENT_START });
-  dispatch({ action: UPDATE_EVENT_SUCESS, payload: "" });
-  dispatch({ action: UPDATE_EVENT_FAIL, payload: "" });
+  axios
+  .put(`https://lre-notapotluck.herokuapp.com/potlucks/potluck/${id}`, data)
+  .then(res => dispatch({ action: UPDATE_EVENT_SUCESS, payload: res.data }))
+  .catch(e => dispatch({ action: UPDATE_EVENT_FAIL, payload: `${e}` }))
 };
 
-export const deleteEvent = () => (dispatch) => {
+export const deleteEvent = (id) => (dispatch) => {
   dispatch({ action: DELETE_EVENT_START });
-  dispatch({ action: DELETE_EVENT_SUCESS });
-  dispatch({ action: DELETE_EVENT_FAIL, payload: "" });
+  axios
+  .delete(`https://lre-notapotluck.herokuapp.com/potlucks/potluck/${id}`)
+  .then(res => dispatch({ action: DELETE_EVENT_SUCESS }))
+  .catch(e => dispatch({ action: DELETE_EVENT_FAIL, payload: `${e}`}))
+  
+  ;
 };
