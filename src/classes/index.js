@@ -1,3 +1,4 @@
+import HostsState from "./HostState.js";
 import User from "./User";
 
-export { User };
+export { HostState, User };
