@@ -8,19 +8,19 @@
 import React from "react";
 import EventList from "./EventList";
 import UserProfile from "./UserProfile";
-import {connect} from 'react-redux'
-import {Spinner} from 'reactstrap'
+import { connect } from "react-redux";
+import { Spinner } from "reactstrap";
 
 const mapStateToProps = (state) => {
-  return {isLoading: state.isLoading}
-}
+  return { isLoading: state.isLoading };
+};
 
 //import PrivateRoute
 
 function DashBoard(props) {
   return (
     <>
-    {props.isLoading ? <Spinner color = "info"/>: null }
+      {props.isLoading ? <Spinner /> : null}
       {/* if logged in, show EventList. Else, show Login/Registration */}
       <UserProfile />
       <EventList />
@@ -28,4 +28,4 @@ function DashBoard(props) {
   );
 }
 
-export default connect(mapStateToProps, {})(DashBoard)
+export default connect(mapStateToProps, {})(DashBoard);

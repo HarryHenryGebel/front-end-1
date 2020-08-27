@@ -36,6 +36,7 @@ import Food from "../components/items/Food";
 import Guest from "../components/items/Guest";
 import { updateEvent, deleteEvent } from "../actions";
 import { connect } from "react-redux";
+import { useFinder } from "../utils";
 
 const mapStateToProps = (state) => {
   return {
@@ -49,12 +50,18 @@ function EventPage(props) {
   const params = useParams();
   const { potlucks, primaryEmail } = props;
   //params is the id
-  let potluck = [];
-  let unclaimedFood = [];
-  let guestList = [];
-  let needResponse = [];
-  let yourObligation = [];
-  let foundId = "";
+  const {
+    potluck,
+    specificId,
+    unclaimedFoods,
+    guestList,
+    obligation,
+    potluckFinder,
+    guestIdFinder,
+    foodSorter,
+    guestSorter,
+    obligationFinder,
+  } = useFinder();
 
   const [activeTab, setActiveTab] = useState("1");
   const [modal, setModal] = useState(false);
@@ -65,57 +72,12 @@ function EventPage(props) {
   };
 
   const guestFormValues = {
-    guestId: foundId,
+    guestId: specificId,
     isAttending: true,
-    isBringing: yourObligation,
+    isBringing: obligation,
   };
 
   const [guestUpdate, setGuestUpdate] = useState(guestFormValues);
-
-  function potluckFinder() {
-    for (let i = 0; i < potlucks.length; i++) {
-      if (potlucks[i].potluckId === params.id) {
-        potluck.push(potlucks[i]);
-      }
-    }
-  }
-
-  function guestIdFinder() {
-    for (let i = 0; i < potluck[0].guests.length; i++) {
-      if (potluck[0].guests[i].primaryEmail === primaryEmail) {
-        foundId = potluck[0].guests[i].guestId;
-      }
-    }
-  }
-
-  function foodSorter() {
-    for (let i = 0; i < potluck[0].foods.length; i++) {
-      if (potluck[0].foods[i].isclaimed === false) {
-        unclaimedFood.push(potluck[0].foods[i]);
-      }
-    }
-  }
-
-  function guestSorter() {
-    for (let i = 0; i < potluck[0].guests.length; i++) {
-      if (potluck[0].guests[i].isAttending === true) {
-        guestList.push(potluck[0].guests[i]);
-      }
-      if (potluck[0].guests[i].responded === false) {
-        needResponse.push(potluck[0].guests[i]);
-      }
-    }
-  }
-
-  function obligationFinder() {
-    for (let i = 0; i < guestList.length; i++) {
-      if (primaryEmail === guestList[i].primaryEmail) {
-        for (let j = 0; j < guestList[i].isBringing.length; j++) {
-          yourObligation.push(guestList[i].isBringing[j]);
-        }
-      }
-    }
-  }
 
   const foodUpdateHandler = (e) => {
     setGuestUpdate({
@@ -124,15 +86,15 @@ function EventPage(props) {
     });
   };
 
-  potluckFinder();
-  guestIdFinder();
+  potluckFinder(potlucks, params.id);
+  guestIdFinder(primaryEmail, potluck);
   foodSorter();
   guestSorter();
   obligationFinder();
 
   return (
     <>
-      {props.isLoading ? <Spinner color = "info"/> : null}
+      {props.isLoading ? <Spinner color="info" /> : null}
       <div>
         <Container fluid>
           <img
@@ -142,11 +104,11 @@ function EventPage(props) {
             height="300vh"
             width="100%"
           />
-          <h1>{potluck[0].eventName}</h1>
+          <h1>{potluck.eventName}</h1>
           <p className="lead">
-            {potluck[0].date} at {potluck[0].time}
+            {potluck.date} at {potluck.time}
           </p>
-          <p className="lead">{potluck[0].location}</p>
+          <p className="lead">{potluck.location}</p>
         </Container>
 
         <div>
@@ -171,7 +133,7 @@ function EventPage(props) {
                 <h5>Guest List</h5>
               </NavLink>
             </NavItem>
-            {potluck[0].ishost ? null : (
+            {potluck.isHost ? null : (
               <NavItem>
                 <NavLink
                   className={{ active: activeTab === "3" }}
@@ -184,7 +146,7 @@ function EventPage(props) {
               </NavItem>
             )}
 
-            {potluck[0].ishost ? null : (
+            {potluck.isHost ? null : (
               <NavItem>
                 <NavLink
                   className={{ active: activeTab === "4" }}
@@ -197,7 +159,7 @@ function EventPage(props) {
               </NavItem>
             )}
 
-            {potluck[0].isHost ? (
+            {potluck.isHost ? (
               <NavItem>
                 <NavLink
                   className={{ active: activeTab === "5" }}
@@ -215,13 +177,13 @@ function EventPage(props) {
               <Row>
                 <Col sm="12">
                   <p>
-                    {potluck[0].eventName} will be held at {potluck[0].time} on{" "}
-                    {potluck[0].date} at {potluck[0].location}.
+                    {potluck.eventName} will be held at {potluck.time} on{" "}
+                    {potluck.date} at {potluck.location}.
                   </p>
                   <p>
                     {/* This function is wrong. It should loop through to find the guest and post the guest's food. The function exists in Event.jsx */}{" "}
-                    {potluck[0].ishost ? null : yourObligation.length > 0 ? (
-                      yourObligation.map((food) => (
+                    {potluck.isHost ? null : obligation.length > 0 ? (
+                      obligation.map((food) => (
                         <>
                           You have told the host that you will be bringing:
                           <Food key={food.foodId} foodName={food.foodName} />
@@ -241,7 +203,7 @@ function EventPage(props) {
             <TabPane tabId="2">
               <Row>
                 <Col sm="12">
-                  {potluck[0].guests.map((guest) => (
+                  {guestList.map((guest) => (
                     <>
                       <Guest
                         firstName={guest.firstName}
@@ -259,8 +221,8 @@ function EventPage(props) {
               <Row>
                 <Col sm="6">
                   <Card body>
-                    {unclaimedFood.length > 0 ? (
-                      unclaimedFood.map((food) => (
+                    {unclaimedFoods.length > 0 ? (
+                      unclaimedFoods.map((food) => (
                         <>
                           <Food key={food.foodId} foodName={food.foodName} />{" "}
                           <Button
@@ -272,7 +234,7 @@ function EventPage(props) {
                         </>
                       ))
                     ) : (
-                      <CardText>All food is being</CardText>
+                      <CardText>All food is being claimed.</CardText>
                     )}
                   </Card>
                 </Col>
