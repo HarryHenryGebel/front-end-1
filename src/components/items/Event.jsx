@@ -236,29 +236,25 @@ function Event(props) {
               <Col sm="6">
                 {/*map guest list to card, for event organizer only? */}
                 <Card>
-                  {guestList.length > 0
-                    ? guestList.map((guest) => (
+                  {guestList.map((guest) => (
+                    <>
+                      {guest.firstName} {guest.lastName} is bringing:{" "}
+                      {guest.isBringing.map((food) => (
                         <>
-                          {guest.firstName} {guest.lastName} is bringing:{" "}
-                          {guest.isBringing.map((food) => (
-                            <>
-                              {" "}
-                              {food.foodname}
-                              <br />{" "}
-                            </>
-                          ))}
-                          !
+                          {" "}
+                          {food.foodname}
+                          <br />{" "}
                         </>
-                      ))
-                    : null}
-                  {unresponsive.length > 0
-                    ? unresponsive.map((guest) => (
-                        <>
-                          You are waiting for responses from : {guest.firstName}{" "}
-                          {guest.lastName} <br />
-                        </>
-                      ))
-                    : null}
+                      ))}
+                      !
+                    </>
+                  ))}
+                  {unresponsive.map((guest) => (
+                    <>
+                      You are waiting for responses from : {guest.firstName}{" "}
+                      {guest.lastName} <br />
+                    </>
+                  ))}
                 </Card>
               </Col>
             </Row>
@@ -271,16 +267,14 @@ function Event(props) {
                     <h6>Menu</h6>
                   </CardTitle>
 
-                  {claimedFoods.length > 0
-                    ? claimedFoods.map((food) => (
-                        <>
-                          <Food key={food.foodid} foodname={food.foodname} />{" "}
-                          <Button className="bg-addon">
-                            Search Recipe?(stretch)
-                          </Button>{" "}
-                        </>
-                      ))
-                    : null}
+                  {claimedFoods.map((food) => (
+                    <>
+                      <Food key={food.foodid} foodname={food.foodname} />{" "}
+                      <Button className="bg-addon">
+                        Search Recipe?(stretch)
+                      </Button>{" "}
+                    </>
+                  ))}
                 </Card>
               </Col>
             </Row>
@@ -290,20 +284,15 @@ function Event(props) {
             <Row>
               <Col sm="6">
                 <Card>
-                  {unclaimedFoods.length > 0
-                    ? unclaimedFoods.map((food) => (
-                        <>
-                          <Food key={food.foodid} foodname={food.foodname} />{" "}
-                          {/* Change onClick to onSubmit */}
-                          <Button
-                            className="bg-addon"
-                            onClick={foodUpdateHandler}
-                          >
-                            Claim
-                          </Button>{" "}
-                        </>
-                      ))
-                    : null}
+                  {unclaimedFoods.map((food) => (
+                    <>
+                      <Food key={food.foodid} foodname={food.foodname} />{" "}
+                      {/* Change onClick to onSubmit */}
+                      <Button className="bg-addon" onClick={foodUpdateHandler}>
+                        Claim
+                      </Button>{" "}
+                    </>
+                  ))}
                 </Card>
               </Col>
             </Row>
