@@ -133,12 +133,6 @@ function Event(props) {
   return (
     <>
       <Card>
-        <CardImg
-          top
-          width="100%"
-          src="/assets/256x186.svg"
-          alt="Card image cap"
-        />
         <CardBody>
           <CardTitle>
             <h2>{eventName}</h2>
