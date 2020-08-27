@@ -18,7 +18,7 @@ function EventList(props) {
 
   return (
     <>
-    {props.isLoading ? <Spinner /> : null}
+    {props.isLoading ? <Spinner color = "info"/> : null}
     <CardDeck>
       {props.potlucks.map((dinner) => {
         return (

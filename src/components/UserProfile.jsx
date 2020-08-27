@@ -31,7 +31,7 @@ function UserProfile(props) {
 
   return (
     <>
-    {props.isLoading ? <Spinner /> : null}
+    {props.isLoading ? <Spinner color = "info"/> : null}
       <Jumbotron>
         <img src={props.imageUrl} alt="happy user" />
         <h1 className="display-3">Hello, {props.username}!</h1>
