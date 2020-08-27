@@ -16,7 +16,6 @@ const emptyTimer = {
     days: undefined,
     hours: undefined,
     minutes: undefined,
-    seconds: undefined
 }
 
 const [timer,setTimer] = useState(emptyTimer)
@@ -30,10 +29,9 @@ useEffect(()=>{
         const days = countdown.format('D');
         const hours = countdown.format('HH');
         const minutes = countdown.format('mm');
-        const seconds = countdown.format('ss');
 
-        setTimer({ days, hours, minutes, seconds });
-    }, 1000);
+        setTimer({ days, hours, minutes });
+    }, 10000);
 })
 
 
@@ -41,7 +39,7 @@ useEffect(()=>{
   return (
 
       <div id="clock">
-{timer.days} Days {timer.hours} Hours {timer.minutes} Minutes {timer.seconds} Seconds!</div>
+{timer.days} Days {timer.hours} Hours and {timer.minutes} Minutes!</div>
 
 
   );
