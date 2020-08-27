@@ -25,10 +25,12 @@ export default function NavBar() {
             <MarketingButton />
 
             {/* Dynamic Dropdown that only appears after login/registration */}
-            {!hasAuth ?
-              <><LoginForm setHasAuth={setHasAuth} hasAuth={hasAuth}/>
-              <RegistrationForm /></>
-              : <DashboardNav />}
+            {hasAuth ?
+            // null
+              <DashboardNav setHasAuth={setHasAuth} />
+              :
+              <><LoginForm setHasAuth={setHasAuth}/>
+              <RegistrationForm setHasAuth={setHasAuth} /></>}
 
 
           </Nav>

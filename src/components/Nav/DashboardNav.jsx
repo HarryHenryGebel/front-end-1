@@ -81,7 +81,7 @@ function DashboardNav(props) {
           ))}
 
           <DropdownItem divider />
-          <DropdownItem>Logout</DropdownItem>
+          <DropdownItem onClick={() => props.setHasAuth(false)}>Logout</DropdownItem>
         </DropdownMenu>
       </UncontrolledDropdown>
 
