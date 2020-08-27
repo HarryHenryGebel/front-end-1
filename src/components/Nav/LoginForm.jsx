@@ -16,7 +16,7 @@ import axios from "axios";
 import AlertRed from "../AlertRed.jsx";
 //import {useHistory} from 'react-router-dom'
 //push /
-export default function LoginForm() {
+export default function LoginForm({setHasAuth}) {
   const [modal, setModal] = useState(false);
   const toggleModal = () => setModal(!modal);
   const [formState, setFormState] = useState({
@@ -48,6 +48,8 @@ export default function LoginForm() {
       .post("https://reqres.in/api/users", formState)
       .then((res) => {
         setPost(res.data);
+        console.log("success", post);
+        setHasAuth(true)
       })
       .catch((err) => console.log(err.response));
   };

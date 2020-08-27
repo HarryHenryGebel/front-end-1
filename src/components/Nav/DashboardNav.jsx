@@ -56,7 +56,7 @@ function DashboardNav(props) {
     <div>
       <UncontrolledDropdown nav inNavbar>
         <DropdownToggle nav caret>
-          AfterLoginMenu
+          Menu
         </DropdownToggle>
 
         <DropdownMenu right>
@@ -85,7 +85,7 @@ function DashboardNav(props) {
           ))}
 
           <DropdownItem divider />
-          <DropdownItem>Logout</DropdownItem>
+          <DropdownItem onClick={() => props.setHasAuth(false)}>Logout</DropdownItem>
         </DropdownMenu>
       </UncontrolledDropdown>
 

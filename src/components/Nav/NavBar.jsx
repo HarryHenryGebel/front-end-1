@@ -8,7 +8,7 @@ import RegistrationForm from "./RegistrationForm.jsx";
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
-  // slice of state and pulling login status to display ModalButtons OR DashboardNavs
+  const [hasAuth, setHasAuth] = useState(false)
 
   return (
     <div>
@@ -20,14 +20,20 @@ export default function NavBar() {
         </NavbarBrand>
         {/* Collapse will switch everything inside it to hamburger dropdown (NavBarToggler) at smaller screen widths.*/}
         <Collapse isOpen={isOpen} navbar>
-          {/*add a space here pushing to opposite sides of screen */}
+          {/*add a styling here pushing to opposite sides of screen */}
           <Nav className="mr-auto" navbar>
             <MarketingButton />
+
             {/* Dynamic Dropdown that only appears after login/registration */}
-            <DashboardNav />
+            {hasAuth ?
+            // null
+              <DashboardNav setHasAuth={setHasAuth} />
+              :
+              <><LoginForm setHasAuth={setHasAuth}/>
+              <RegistrationForm setHasAuth={setHasAuth} /></>}
+
+
           </Nav>
-          <LoginForm />
-          <RegistrationForm />
         </Collapse>
         <NavbarToggler onClick={toggle} />{" "}
       </Navbar>

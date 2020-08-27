@@ -11,7 +11,7 @@ export default function MarketingButton() {
     <div>
       <UncontrolledDropdown nav inNavbar>
         <DropdownToggle nav caret>
-          More Info (marketing pgs)
+          More Info
         </DropdownToggle>
         <DropdownMenu left="true">
           <DropdownItem href="https://not-a-potluck.gebel.tech/about.html">About Us</DropdownItem>
