@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, Jumbotron } from "reactstrap";
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav } from "reactstrap";
 import DashboardNav from "./DashboardNav.jsx";
 import MarketingButton from "./MarketingButton.jsx";
 import LoginForm from "./LoginForm.jsx";
@@ -15,7 +15,9 @@ export default function NavBar() {
       {/* to revert NavBar colors: keep next line & remove NavBarBrand id */}
       {/* <Navbar color="light" light expand="md"> */}
       <Navbar color="dark" dark expand="md" id="darkBG">
-        <NavbarBrand href="/" id="title">Not So Pot-Luck</NavbarBrand>
+        <NavbarBrand href="/" id="title">
+          Not So Pot-Luck
+        </NavbarBrand>
         {/* Collapse will switch everything inside it to hamburger dropdown (NavBarToggler) at smaller screen widths.*/}
         <Collapse isOpen={isOpen} navbar>
           {/*add a space here pushing to opposite sides of screen */}
@@ -24,8 +26,8 @@ export default function NavBar() {
             {/* Dynamic Dropdown that only appears after login/registration */}
             <DashboardNav />
           </Nav>
-        <LoginForm />
-        <RegistrationForm />
+          <LoginForm />
+          <RegistrationForm />
         </Collapse>
         <NavbarToggler onClick={toggle} />{" "}
       </Navbar>
