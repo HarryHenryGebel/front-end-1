@@ -56,7 +56,7 @@ function DashboardNav(props) {
     <div>
       <UncontrolledDropdown nav inNavbar>
         <DropdownToggle nav caret>
-          AfterLoginMenu
+          Menu
         </DropdownToggle>
 
         <DropdownMenu right>
