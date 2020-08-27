@@ -85,7 +85,7 @@ function DashboardNav(props) {
           ))}
 
           <DropdownItem divider />
-          <DropdownItem onClick={() => props.setHasAuth(false)}>Logout</DropdownItem>
+          <DropdownItem onClick={() => localStorage.deleteItem("token")}>Logout</DropdownItem>
         </DropdownMenu>
       </UncontrolledDropdown>
 
