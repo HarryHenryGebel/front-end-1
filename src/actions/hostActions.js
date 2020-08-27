@@ -1,5 +1,4 @@
 import axios from "axios";
-import { UPDATE_FOOD_FAIL } from "./guestActions";
 
 export const CREATE_EVENT_START = "CREATE_EVENT_START";
 export const CREATE_EVENT_SUCCESS = "CREATE_EVENT_SUCCESS";
@@ -53,7 +52,7 @@ const addFood = (id, food) => (dispatch) => {
 const updateFood = (id, food) => (dispatch) => {
   dispatch({action: UPDATE_FOOD_START})
   dispatch({action: UPDATE_FOOD_SUCCESS})
-  dispatch({action: UPDATE_FOOD_FAIL})
+  dispatch({action: UDPATE_FOOD_FAIL})
 }
 
 const updateGuest = (id, guest) => (dispatch)=>{
