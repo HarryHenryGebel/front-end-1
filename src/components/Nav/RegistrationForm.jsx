@@ -76,7 +76,7 @@ export default function RegistrationForm () {
 
   return (
     <div>
-    <Button className="bg-confirm" onClick={toggleModal}>Registration</Button>
+    <Button className="bg-login" onClick={toggleModal}>Registration</Button>
     <Modal isOpen={modal} toggle={toggleModal}>
     <form onSubmit={formSubmit}>
       <ModalHeader toggle={toggleModal}>Registration</ModalHeader>
