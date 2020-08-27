@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, Jumbotron } from "reactstrap";
 import DashboardNav from "./DashboardNav.jsx";
 import MarketingButton from "./MarketingButton.jsx";
@@ -9,6 +9,20 @@ export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
   // slice of state and pulling login status to display ModalButtons OR DashboardNavs
+  const [hasAuth, setHasAuth] = useState(false)
+  //not an expression?? after resolving current error, next step will be to set up props in loginForm submit button.
+  useEffect(() => {
+    const DynamicButtons = () => {
+      !hasAuth
+        ? return (
+            <div>
+              <LoginForm setHasAuth={setHasAuth}/>
+              <RegistrationForm />
+            </div>
+          )
+        : <DashboardNav />
+    }
+  }, [hasAuth, setHasAuth])
 
   return (
     <div>
@@ -18,14 +32,15 @@ export default function NavBar() {
         <NavbarBrand href="/" id="title">Not So Pot-Luck</NavbarBrand>
         {/* Collapse will switch everything inside it to hamburger dropdown (NavBarToggler) at smaller screen widths.*/}
         <Collapse isOpen={isOpen} navbar>
-          {/*add a space here pushing to opposite sides of screen */}
+          {/*add a styling here pushing to opposite sides of screen */}
           <Nav className="mr-auto" navbar>
             <MarketingButton />
+
             {/* Dynamic Dropdown that only appears after login/registration */}
-            <DashboardNav />
+            {DynamicButtons()}
+
+
           </Nav>
-        <LoginForm />
-        <RegistrationForm />
         </Collapse>
         <NavbarToggler onClick={toggle} />{" "}
       </Navbar>
