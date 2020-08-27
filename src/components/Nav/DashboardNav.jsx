@@ -12,8 +12,10 @@ import {
 } from "reactstrap";
 import EventInvitation from "../EventInvitation";
 import EditUser from "../forms/EditUser";
+import CreateEvent from '../forms/CreateEvent'
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+
 
 const mapStateToProps = (state) => {
   return {
@@ -105,7 +107,7 @@ function DashboardNav(props) {
           <h2>Create Event</h2>
         </ModalHeader>
         <ModalBody>
-          <EditUser />
+          <CreateEvent />
         </ModalBody>
         <ModalFooter>
           <Button className="bg-cancel" onClick={createEToggle}>
