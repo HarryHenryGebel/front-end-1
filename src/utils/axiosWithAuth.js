@@ -5,7 +5,8 @@ export const axiosWithAuth = () => {
 
   return axios.create({
     headers: {
-      Authorization: token,
+        'Authorization': `Bearer ${token}`
     },
-  });
-};
+    baseURL: 'https://lre-notapotluck.herokuapp.com'
+})
+}
