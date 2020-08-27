@@ -86,7 +86,7 @@ export default function RegistrationForm() {
 
   return (
     <div>
-      <Button className="bg-confirm" onClick={toggleModal}>
+      <Button className="bg-login" onClick={toggleModal}>
         Registration
       </Button>
       <Modal isOpen={modal} toggle={toggleModal}>
@@ -95,7 +95,7 @@ export default function RegistrationForm() {
           <ModalBody>
             <Form onSubmit={formSubmit}>
               <FormGroup>
-                <Label for="usename">Username</Label>
+                <Label htmlFor="usename">Username</Label>
                 <Input
                   type="username"
                   name="username"
@@ -114,7 +114,7 @@ export default function RegistrationForm() {
                 </FormText>
               </FormGroup>
               <FormGroup>
-                <Label for="Password">Password</Label>
+                <Label htmlFor="Password">Password</Label>
                 <Input
                   type="password"
                   name="password"
@@ -133,7 +133,7 @@ export default function RegistrationForm() {
                 </FormText>
               </FormGroup>
               <FormGroup>
-                <Label for="Email">Email</Label>
+                <Label htmlFor="Email">Email</Label>
                 <Input
                   type="email"
                   name="email"
