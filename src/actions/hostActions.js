@@ -45,8 +45,8 @@ const addFood = (id, food) => (dispatch) => {
       `https://lre-notapotluck.herokuapp.com/foods/potluck/${id}/food/${food.foodname}`,
       food
     )
-    .then((res) => dispatch({ action: ADD_FOOD_SUCCESS, payload: res.data }))
-    .catch((e) => dispatch({ action: ADD_FOOD_FAIL }));
+    .then((res) => dispatch({ action: ADD_FOOD_SUCCESS, payload: {results: res.data, potluck: id} }))
+    .catch((e) => dispatch({ action: ADD_FOOD_FAIL, payload: {errors: `${e}`, potluck: id}}));
 };
 
 const updateFood = (id, food) => (dispatch) => {
@@ -65,8 +65,8 @@ const addGuest = (id, guest) => (dispatch) => {
   dispatch({ action: ADD_GUEST_START });
   axios
     .post(`https://lre-notapotluck.herokuapp.com/guests/potluck/${id}/${guest.fname}/${guest.lname}/${guest.primaryemail}`, guest)
-    .then((res) => dispatch({ action: ADD_FOOD_SUCCESS, payload: res.data }))
-    .catch((e) => dispatch({ action: ADD_FOOD_FAIL, payload: `${e}` }));
+    .then((res) => dispatch({ action: ADD_FOOD_SUCCESS, payload: {results: res.data, potluck: id} }))
+    .catch((e) => dispatch({ action: ADD_FOOD_FAIL, payload: {errors:`${e}`, potluck: id} }));
 };
 export const createEvent = (data) => async (dispatch) => {
   dispatch({ action: CREATE_EVENT_START });

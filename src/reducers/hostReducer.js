@@ -38,13 +38,13 @@ const hostState = {
       time: "",
       location: "",
       description: "",
+      isLoading: false,
+      errors: "",
       foods: [
         {
           foodId: "",
           foodName: "",
           isClaimed: undefined,
-          isLoading: false,
-          errors: "",
         },
       ],
       guests: [
@@ -56,8 +56,6 @@ const hostState = {
           responded: false,
           isAttending: false,
           isBringing: [],
-          isLoading: false,
-          errors: "",
         },
       ],
     },
@@ -83,7 +81,31 @@ function hostReducer(state = hostState, action) {
         isLoading: false,
         errors: `Your event could not be added. Please try again. ${action.payload}`,
       };
-
+    //This is probably wrong
+    case ADD_FOOD_START:
+      const potluck = state.potlucks.filter(
+        (potluck) => potluck.potluckId === action.payload.potluckid
+      );
+      return {
+        ...potluck,
+        isLoading: true,
+      };
+    case ADD_FOOD_SUCCESS:
+      return {
+        ...potluck,
+        isLoading: false,
+        foods: [...potluck.foods, action.payload.results],
+      };
+    case ADD_FOOD_FAIL: {
+      return {
+        ...potluck,
+        isLoading: false,
+        errors: action.payload.errors,
+      };
+    }
+    case ADD_GUEST_START:
+    case ADD_GUEST_SUCCESS:
+    case ADD_GUEST_FAIL:
     case UPDATE_EVENT_START:
       return {
         ...state,
