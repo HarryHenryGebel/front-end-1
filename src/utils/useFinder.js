@@ -1,52 +1,57 @@
 import { useState } from "react";
-import { respondEvent } from "../actions";
 
 const useFinder = (callback) => {
-  const [potluck, setPotluck] = useState({});
-  const [specificId, setSpecificId] = useState();
-  const [claimedFoods, setClaimedFoods] = useState([]);
-  const [unclaimedFoods, setUnclaimedFoods] = useState([]);
-  const [guestList, setGuestList] = useState([]);
-  const [unresponsive, setUnresponsive] = useState([]);
-  const [obligation, setObligation] = useState([]);
+  let potluck = {}
+  let specificId = ''
+  let claimedFoods = []
+  let unclaimedFoods = []
+  let guestList = []
+  let unresponsive = []
+  let obligation = []
 
   const potluckFinder = (potlucks, id) => {
     const potlist = potlucks.filter((potluck) => potluck.potluckid === id);
-    setPotluck(potlist);
+    potluck = potlist[0]
   };
 
-  const guestIdFinder = (primaryemail) => {
+  const guestIdFinder = (guestemail) => {
     const id = potluck.guests.filter(
-      (guest) => guest.primaryemail === primaryemail
+      (guest) => guest.primaryemail === guestemail
     );
-    setSpecificId(id);
+    specificId = id[0].guestid
   };
 
   const foodSorter = () => {
-    const newClaims = potluck.foods.filter((food) => food.isclaimed === true);
-    const oldClaims = potluck.foods.filter((food) => food.isclaimed === false);
-    setUnclaimedFoods(oldClaims);
-    setClaimedFoods(newClaims);
+      for (let i = 0; i<potluck.foods.length; i++){
+        if (potluck.foods[i].isclaimed === true){
+            claimedFoods.push(potluck.foods[i])
+        } else {
+            unclaimedFoods.push(potluck.foods[i])
+        }
+      }
   };
 
   const guestSorter = () => {
-    const attending = potluck.guests.filter(
-      (guest) => guest.isattending === true
-    );
-    const responseless = potluck.guests.filter(
-      (guest) => guest.responded === false
-    );
+      for (let i = 0; i< potluck.guests.length; i++){
+          if(potluck.guests[i].isattending === true){
+              guestList.push(potluck.guests[i])
+          }else{
+              unresponsive.push(potluck.guests[i])
+          }
+      }
+    }
+    
 
-    setGuestList(attending);
-    setUnresponsive(responseless);
-  };
-
-  function obligationFinder(primaryemail) {
-    const myFoods = guestList.filter(
+  const obligationFinder = (primaryemail) => {
+    const myGuestProfile = guestList.filter(
       (guest) => guest.primaryemail === primaryemail
     );
-    setObligation(myFoods.isbringing);
+
+    obligation = myGuestProfile.isbringing
+
   }
 
-  return {};
+  return {potluck, specificId, claimedFoods, unclaimedFoods, guestList, unresponsive, obligation, potluckFinder, guestIdFinder, foodSorter, guestSorter, obligationFinder};
 };
+
+export default useFinder
