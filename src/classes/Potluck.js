@@ -7,7 +7,8 @@ export default class Potluck {
     time,
     location,
     description,
-    foods = []
+    foods = [],
+    guests = []
   ) {
     this.potluckId = potluckId;
     this.hostId = hostId;
@@ -17,5 +18,6 @@ export default class Potluck {
     this.location = location;
     this.description = description;
     this.foods = foods;
+    this.guests = guests;
   }
 }
