@@ -17,7 +17,7 @@ import axios from "axios";
 import AlertRed from "../AlertRed";
 //import {useHistory} from 'react-router-dom'
 //push /dashboard
-export default function RegistrationForm({setHasAuth}) {
+export default function RegistrationForm() {
   const [modal, setModal] = useState(false);
   const toggleModal = () => setModal(!modal);
   const [formState, setFormState] = useState({
@@ -55,17 +55,12 @@ export default function RegistrationForm({setHasAuth}) {
       terms: false,
     });
     axios
-      // .post("https://reqres.in/api/users", formState)
       .post("https://lre-notapotluck.herokuapp.com/createnewuser", formState)
         .then((res) => {
           setPost(res.data);
-          // setHasAuth(true)
           console.log("success", post, res);
         })
         .catch((err) => console.log(err.response));
-    // axios
-    //   .get("https://lre-notapotluck.herokuapp.com/users")
-    //     .then(res => console.log("weirdgetrequest", post, res))
 
   };
 

@@ -17,7 +17,7 @@ import AlertRed from "../AlertRed.jsx";
 import axiosWithAuth from "../../utils/axiosWithAuth"
 import {useHistory} from 'react-router-dom'
 //push /
-export default function LoginForm({setHasAuth}) {
+export default function LoginForm() {
   const [modal, setModal] = useState(false);
   const toggleModal = () => setModal(!modal);
   const [formState, setFormState] = useState({
