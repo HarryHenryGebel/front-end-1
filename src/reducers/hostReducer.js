@@ -63,7 +63,7 @@ const hostState = {
 };
 
 function hostReducer(state = hostState, action) {
-  switch (action) {
+  switch (action.type) {
     case CREATE_EVENT_START:
       return {
         ...state,
@@ -83,29 +83,41 @@ function hostReducer(state = hostState, action) {
       };
     //This is probably wrong
     case ADD_FOOD_START:
-      const potluck = state.potlucks.filter(
+      const foodPotluck = state.potlucks.filter(
         (potluck) => potluck.potluckId === action.payload.potluckid
       );
       return {
-        ...potluck,
+        ...foodPotluck,
         isLoading: true,
       };
     case ADD_FOOD_SUCCESS:
       return {
-        ...potluck,
+        ...foodPotluck,
         isLoading: false,
-        foods: [...potluck.foods, action.payload.results],
+        foods: [...foodPotluck.foods, action.payload.results],
       };
     case ADD_FOOD_FAIL: {
       return {
-        ...potluck,
+        ...foodPotluck,
         isLoading: false,
         errors: action.payload.errors,
       };
     }
     case ADD_GUEST_START:
+      const guestPotluck = state.potlucks.filter(
+        (potluck) => potluck.potluckId === action.payload.potluckid
+      )
+      return{
+        ...guestPotluck, isLoading: true
+      }
     case ADD_GUEST_SUCCESS:
+      return{
+        ...guestPotluck, isLoading: false, guests:[...guestPotluck.guest, action.payload.results]
+      }
     case ADD_GUEST_FAIL:
+      return{
+        ...guestPotluck, isLoading: false, errors: action.payload.errors
+      }
     case UPDATE_EVENT_START:
       return {
         ...state,
