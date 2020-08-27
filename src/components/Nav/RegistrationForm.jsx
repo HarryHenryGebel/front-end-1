@@ -22,16 +22,18 @@ export default function RegistrationForm({setHasAuth}) {
   const toggleModal = () => setModal(!modal);
   const [formState, setFormState] = useState({
     username: "",
-    email: "",
     password: "",
-    terms: true,
+    primaryemail: "",
+    iimageurl: "",
+    terms: false,
   });
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [errors, setErrors] = useState({
     username: "",
-    email: "",
     password: "",
-    terms: "",
+    primaryemail: "",
+    iimageurl: "",
+    terms: ""
   });
   const [post, setPost] = useState([]);
 
@@ -47,18 +49,24 @@ export default function RegistrationForm({setHasAuth}) {
     e.preventDefault();
     setFormState({
       username: "",
-      email: "",
       password: "",
+      primaryemail: "",
+      iimageurl: "",
       terms: false,
     });
     axios
-      .post("https://reqres.in/api/users", formState)
-      .then((res) => {
-        setPost(res.data);
-        setHasAuth(true)
-        // console.log("success", post);
-      })
-      .catch((err) => console.log(err.response));
+      // .post("https://reqres.in/api/users", formState)
+      .post("https://lre-notapotluck.herokuapp.com/createnewuser", formState)
+        .then((res) => {
+          setPost(res.data);
+          // setHasAuth(true)
+          console.log("success", post, res);
+        })
+        .catch((err) => console.log(err.response));
+    // axios
+    //   .get("https://lre-notapotluck.herokuapp.com/users")
+    //     .then(res => console.log("weirdgetrequest", post, res))
+
   };
 
   const validateChange = (e) => {
@@ -136,15 +144,15 @@ export default function RegistrationForm({setHasAuth}) {
               <FormGroup>
                 <Label htmlFor="Email">Email</Label>
                 <Input
-                  type="email"
-                  name="email"
+                  type="primaryemail"
+                  name="primaryemail"
                   id="Email"
-                  value={formState.email}
+                  value={formState.primaryemail}
                   onChange={inputChange}
-                  placeholder="your@email.com"
+                  placeholder="your@primaryemail.com"
                 />
-                {errors.email.length > 0 ? (
-                  <AlertRed message={<p className="error">{errors.email}</p>} />
+                {errors.primaryemail.length > 0 ? (
+                  <AlertRed message={<p className="error">{errors.primaryemail}</p>} />
                 ) : null}
                 <FormText>Required. We will never send spam.</FormText>
               </FormGroup>
@@ -171,7 +179,7 @@ export default function RegistrationForm({setHasAuth}) {
           </ModalBody>
           <ModalFooter>
             {/* temp to test post, delete when done */}
-            <pre>{JSON.stringify(post, null, 2)}</pre>
+            {/* <pre>{JSON.stringify(post, null, 2)}</pre> */}
             <Button
               color="primary"
               type="submit"

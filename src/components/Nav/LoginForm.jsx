@@ -14,21 +14,23 @@ import { loginSchema } from "./yupSchemas";
 import * as yup from "yup";
 import axios from "axios";
 import AlertRed from "../AlertRed.jsx";
-//import {useHistory} from 'react-router-dom'
+import axiosWithAuth from "../../utils/axiosWithAuth"
+import {useHistory} from 'react-router-dom'
 //push /
 export default function LoginForm({setHasAuth}) {
   const [modal, setModal] = useState(false);
   const toggleModal = () => setModal(!modal);
   const [formState, setFormState] = useState({
-    email: "",
+    username: "",
     password: "",
   });
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [errors, setErrors] = useState({
-    email: "",
+    username: "",
     password: "",
   });
   const [post, setPost] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     // console.log('form state change')
@@ -40,18 +42,31 @@ export default function LoginForm({setHasAuth}) {
 
   const formSubmit = (e) => {
     e.preventDefault();
+    localStorage.removeItem("token")
+    const user = {
+      username: formState.username.trim(),
+      password: formState.password.trim()
+    }
     setFormState({
-      email: "",
+      username: "",
       password: "",
     });
-    axios
-      .post("https://reqres.in/api/users", formState)
-      .then((res) => {
-        setPost(res.data);
-        console.log("success", post);
-        setHasAuth(true)
-      })
-      .catch((err) => console.log(err.response));
+    axiosWithAuth()
+    .post('/login', `grant_type=password&username=${user.username}&password=${user.password}`, {
+      headers: {
+        Authorization: `Basic ${btoa('lambda-client:lambda-secret')}`,
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    })
+    .then(res => {
+      console.log(res)
+      localStorage.setItem('token', res.data.access_token)
+      history.push('/')
+    })
+    .catch(e => {
+      console.log("its so broken forever", e)
+      throw e
+    })
   };
 
   const validateChange = (e) => {
@@ -88,19 +103,19 @@ export default function LoginForm({setHasAuth}) {
           <ModalBody>
             <Form>
               <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                <Label htmlFor="email" className="mr-sm-2">
-                  Email
+                <Label htmlFor="username" className="mr-sm-2">
+                  Username
                 </Label>
                 <Input
-                  type="email"
-                  name="email"
-                  id="email"
-                  value={formState.email}
+                  type="username"
+                  name="username"
+                  id="username"
+                  value={formState.username}
                   onChange={inputChange}
-                  placeholder="something@idk.cool"
+                  placeholder="That thing you called yourself"
                 />
-                {errors.email.length > 0 ? (
-                  <AlertRed message={<p className="error">{errors.email}</p>} />
+                {errors.username.length > 0 ? (
+                  <AlertRed message={<p className="error">{errors.username}</p>} />
                 ) : null}
               </FormGroup>
               <FormGroup className="mb-2 mr-sm-2 mb-sm-0">

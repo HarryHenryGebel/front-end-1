@@ -1,10 +1,10 @@
 import * as yup from "yup"
 
 export const loginSchema = yup.object().shape({
-  email: yup
+  username: yup
     .string()
-    .email("Must be a valid email address.")
-    .required("Must include email address."),
+    .min(2, "At least 2 characters, please")
+    .required("Username is a required field."),
   password: yup
     .string()
     .min(6, "Your password was at least 6 characters")
@@ -12,7 +12,9 @@ export const loginSchema = yup.object().shape({
 });
 
 export const registrationSchema = yup.object().shape({
-  email: yup
+  imgurl: yup
+    .string(),
+  primaryemail: yup
     .string()
     .email("Must be a valid email address.")
     .required("Must include email address."),
