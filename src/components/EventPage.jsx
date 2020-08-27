@@ -132,7 +132,7 @@ function EventPage(props) {
 
   return (
     <>
-      {props.isLoading ? <Spinner /> : null}
+      {props.isLoading ? <Spinner color = "info"/> : null}
       <div>
         <Container fluid>
           <img

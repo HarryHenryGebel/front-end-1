@@ -20,7 +20,7 @@ const mapStateToProps = (state) => {
 function DashBoard(props) {
   return (
     <>
-    {props.isLoading ? <Spinner />: null }
+    {props.isLoading ? <Spinner color = "info"/>: null }
       {/* if logged in, show EventList. Else, show Login/Registration */}
       <UserProfile />
       <EventList />

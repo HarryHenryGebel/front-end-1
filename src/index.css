@@ -6,8 +6,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-h1,
 h2,
 h3,
 h4,
@@ -16,7 +14,28 @@ h6 {
   font-family: "Pacifico", cursive;
   color: #4281a4;
 }
-
+h1{
+  font-family: "Pacifico", cursive;
+  color: #504746;
+}
+h1:hover{
+  color: #03CBC7;
+}
+h2:hover{
+  color: #03CBC7;
+}
+h3:hover{
+  color: #03CBC7;
+}
+h4:hover{
+  color: #03CBC7;
+}
+h5:hover{
+  color: #03CBC7;
+}
+h6:hover{
+  color: #03CBC7;
+}
 button {
   border-radius: 0;
 }
@@ -91,6 +110,20 @@ a.bg-cancel:focus,
 button.bg-cancel:hover,
 button.bg-cancel:focus {
   background-color: #786a68 !important;
+  text-decoration: none;
+}
+
+.bg-login {
+  background-color: #6d6262 !important;
+  
+}
+
+a.bg-login:hover,
+a.bg-login:focus,
+button.bg-login:hover,
+button.bg-login:focus {
+  background-color:  #817270 !important;
+  text-decoration: none;
 }
 
 .bg-confirm {
@@ -103,6 +136,7 @@ a.bg-confirm:focus,
 button.bg-confirm:hover,
 button.bg-confirm:focus {
   background-color: #027977 !important;
+  text-decoration: none;
 }
 
 .bg-login {
