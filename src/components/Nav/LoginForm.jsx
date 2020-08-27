@@ -12,7 +12,6 @@ import {
 } from "reactstrap";
 import { loginSchema } from "./yupSchemas";
 import * as yup from "yup";
-import axios from "axios";
 import AlertRed from "../AlertRed.jsx";
 import axiosWithAuth from "../../utils/axiosWithAuth";
 import { useHistory } from "react-router-dom";
@@ -29,7 +28,6 @@ export default function LoginForm() {
     username: "",
     password: "",
   });
-  const [post, setPost] = useState([]);
   const history = useHistory();
 
   useEffect(() => {
