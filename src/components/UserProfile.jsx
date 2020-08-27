@@ -9,6 +9,7 @@ import {
   Spinner
 } from "reactstrap";
 import Event from "./items/Event";
+import Countdown from './Countdown'
 import { connect } from "react-redux";
 
 //All userInformation stored on Profile Page
@@ -37,7 +38,7 @@ function UserProfile(props) {
         <h1 className="display-3">Hello, {props.username}!</h1>
 
         <hr className="my-2" />
-        <p>Your next event is in number of days, at time!</p>
+        <p>Your next event is in <Countdown /></p>
         <p className="lead">
           <Button className="bg-addon" onClick={eventToggle}>
             Learn More
