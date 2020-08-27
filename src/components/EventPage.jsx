@@ -53,10 +53,8 @@ function EventPage(props) {
   const {
     potluck,
     specificId,
-    claimedFoods,
     unclaimedFoods,
     guestList,
-    unresponsive,
     obligation,
     potluckFinder,
     guestIdFinder,
@@ -96,7 +94,7 @@ function EventPage(props) {
 
   return (
     <>
-      {props.isLoading ? <Spinner color = "info"/> : null}
+      {props.isLoading ? <Spinner color="info" /> : null}
       <div>
         <Container fluid>
           <img
@@ -106,7 +104,7 @@ function EventPage(props) {
             height="300vh"
             width="100%"
           />
-          <H1>{Potluck.eventName}</h1>
+          <h1>{potluck.eventName}</h1>
           <p className="lead">
             {potluck.date} at {potluck.time}
           </p>

@@ -47,8 +47,6 @@ function Event(props) {
     time,
     location,
     description,
-    foods,
-    guests,
   } = props;
 
   const [modal, setModal] = useState(false);
@@ -57,14 +55,12 @@ function Event(props) {
   const [activeTab, setActiveTab] = useState("1");
 
   const {
-    potluck,
     specificId,
     claimedFoods,
     unclaimedFoods,
     guestList,
     unresponsive,
     obligation,
-    potluckFinder,
     guestIdFinder,
     foodSorter,
     guestSorter,
@@ -237,23 +233,23 @@ function Event(props) {
                 {/*map guest list to card, for event organizer only? */}
                 <Card>
                   {guestList.map((guest) => (
-                    <>
+                    <Fragment key={guest.guestId}>
                       {guest.firstName} {guest.lastName} is bringing:{" "}
                       {guest.isBringing.map((food) => (
-                        <>
+                        <Fragment key={food.foodId}>
                           {" "}
                           {food.foodname}
                           <br />{" "}
-                        </>
+                        </Fragment>
                       ))}
                       !
-                    </>
+                    </Fragment>
                   ))}
                   {unresponsive.map((guest) => (
-                    <>
+                    <Fragment key={guest.guestId}>
                       You are waiting for responses from : {guest.firstName}{" "}
                       {guest.lastName} <br />
-                    </>
+                    </Fragment>
                   ))}
                 </Card>
               </Col>
@@ -268,12 +264,12 @@ function Event(props) {
                   </CardTitle>
 
                   {claimedFoods.map((food) => (
-                    <>
+                    <Fragment key={food.foodId}>
                       <Food key={food.foodid} foodname={food.foodname} />{" "}
                       <Button className="bg-addon">
                         Search Recipe?(stretch)
                       </Button>{" "}
-                    </>
+                    </Fragment>
                   ))}
                 </Card>
               </Col>
@@ -285,13 +281,13 @@ function Event(props) {
               <Col sm="6">
                 <Card>
                   {unclaimedFoods.map((food) => (
-                    <>
+                    <Fragment key={food.foodId}>
                       <Food key={food.foodid} foodname={food.foodname} />{" "}
                       {/* Change onClick to onSubmit */}
                       <Button className="bg-addon" onClick={foodUpdateHandler}>
                         Claim
                       </Button>{" "}
-                    </>
+                    </Fragment>
                   ))}
                 </Card>
               </Col>
