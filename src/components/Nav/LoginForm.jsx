@@ -14,8 +14,8 @@ import { loginSchema } from "./yupSchemas";
 import * as yup from "yup";
 import axios from "axios";
 import AlertRed from "../AlertRed.jsx";
-import axiosWithAuth from "../../utils/axiosWithAuth"
-import {useHistory} from 'react-router-dom'
+import axiosWithAuth from "../../utils/axiosWithAuth";
+import { useHistory } from "react-router-dom";
 //push /
 export default function LoginForm() {
   const [modal, setModal] = useState(false);
@@ -42,31 +42,35 @@ export default function LoginForm() {
 
   const formSubmit = (e) => {
     e.preventDefault();
-    localStorage.removeItem("token")
+    localStorage.removeItem("token");
     const user = {
       username: formState.username.trim(),
-      password: formState.password.trim()
-    }
+      password: formState.password.trim(),
+    };
     setFormState({
       username: "",
       password: "",
     });
     axiosWithAuth()
-    .post('/login', `grant_type=password&username=${user.username}&password=${user.password}`, {
-      headers: {
-        Authorization: `Basic ${btoa('lambda-client:lambda-secret')}`,
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
-    })
-    .then(res => {
-      console.log(res)
-      localStorage.setItem('token', res.data.access_token)
-      history.push('/')
-    })
-    .catch(e => {
-      console.log("its so broken forever", e)
-      throw e
-    })
+      .post(
+        "/login",
+        `grant_type=password&username=${user.username}&password=${user.password}`,
+        {
+          headers: {
+            Authorization: `Basic ${btoa("lambda-client:lambda-secret")}`,
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        localStorage.setItem("token", res.data.access_token);
+        history.push("/");
+      })
+      .catch((e) => {
+        console.log("its so broken forever", e);
+        throw e;
+      });
   };
 
   const validateChange = (e) => {
@@ -115,7 +119,9 @@ export default function LoginForm() {
                   placeholder="That thing you called yourself"
                 />
                 {errors.username.length > 0 ? (
-                  <AlertRed message={<p className="error">{errors.username}</p>} />
+                  <AlertRed
+                    message={<p className="error">{errors.username}</p>}
+                  />
                 ) : null}
               </FormGroup>
               <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
