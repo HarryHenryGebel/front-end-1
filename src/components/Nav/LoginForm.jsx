@@ -21,7 +21,7 @@ export default function LoginForm() {
   const [post, setPost] = useState([]);
 
   useEffect(() => {
-    console.log('form state change')
+    // console.log('form state change')
     loginSchema.isValid(formState).then(valid => {
       // console.log('valid?', valid)
 			setButtonDisabled(!valid);
@@ -38,7 +38,6 @@ export default function LoginForm() {
       .post("https://reqres.in/api/users", formState)
       .then(res => {
         setPost(res.data);
-        console.log("success", post);
       })
       .catch(err => console.log(err.response));
   }
@@ -49,11 +48,11 @@ export default function LoginForm() {
       .validate(e.target.value)
       .then(valid => {
         setErrors({...errors, [e.target.name]: ""});
-        console.log('ERRORS', errors)
+        // console.log('Yup.then ERRORS', errors)
       })
       .catch(err => {
         setErrors({...errors, [e.target.name]: err.errors[0]});
-        console.log('ERRORS', errors, errors.email.length)
+        // console.log('Yup.catch ERRORS', errors)
       });
   };
   const inputChange = (e) => {
@@ -70,11 +69,10 @@ export default function LoginForm() {
     <div>
       <Button className="bg-addon" onClick={toggleModal}>Login</Button>
       <Modal isOpen={modal} toggle={toggleModal}>
-        {/* using this outer placement of Form lets the submit button properly POST, but totally ruins the layout. */}
-      {/* <Form inline onSubmit={formSubmit}> */}
+      <form onSubmit={formSubmit}>
         <ModalHeader toggle={toggleModal}>Login</ModalHeader>
         <ModalBody>
-          <Form onSubmit={formSubmit}>
+          <Form>
             <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
               <Label htmlFor="email" className="mr-sm-2">
                 Email
@@ -87,7 +85,6 @@ export default function LoginForm() {
                 onChange={inputChange}
                 placeholder="something@idk.cool"
               />
-              {/* for the love of potlucks, style these to go fit in the modal */}
               {errors.email.length > 0
                 ? <AlertRed message={<p className="error">{errors.email}</p>}/>
                 : null}
@@ -104,7 +101,6 @@ export default function LoginForm() {
                 onChange={inputChange}
                 placeholder="don't share me!"
               />
-              {/* for the love of potlucks, style these to go fit in the modal */}
               {errors.password.length > 0 ?
                 <AlertRed message={<p className="error">{errors.password}</p>}/>
                 : null}
@@ -112,16 +108,16 @@ export default function LoginForm() {
           </Form>
         </ModalBody>
         <ModalFooter>
+          {/* delete once submit is working properly */}
         <pre>{JSON.stringify(post, null, 2)}</pre>
           <Button
             color="primary"
             type="submit"
             disabled={buttonDisabled}
-            // Temp disabled to test submit button posting
-            // onClick={toggleModal}
+            onClick={toggleModal}
           >Submit</Button>{' '}
         </ModalFooter>
-        {/* </Form> */}
+        </form>
       </Modal>
     </div>
   )
