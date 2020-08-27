@@ -97,10 +97,23 @@ button.bg-cancel:focus {
   background-color: #027977 !important;
 }
 
+
 a.bg-confirm:hover,
 a.bg-confirm:focus,
 button.bg-confirm:hover,
 button.bg-confirm:focus {
+  background-color: #027977 !important;
+}
+
+.bg-login {
+  background-color: #ead2ac !important;
+  color: #504746 !important;
+}
+
+a.bg-login:hover,
+a.bg-login:focus,
+button.bg-login:hover,
+button.bg-login:focus {
   background-color: #027977 !important;
 }
 
@@ -129,3 +142,19 @@ code {
 #darkBG {
   background-color: #504746 !important;
 }
+
+
+#new-jumbotron {
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+  background-color: #ead2ac;
+  border-radius: 0.3rem;
+}
+
+@media (min-width: 576px) {
+  .new-jumbotron {
+    padding: 4rem 2rem;
+  }
+}
+
+
