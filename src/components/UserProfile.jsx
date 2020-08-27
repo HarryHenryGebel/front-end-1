@@ -32,8 +32,8 @@ function UserProfile(props) {
   return (
     <>
     {props.isLoading ? <Spinner /> : null}
-      <Jumbotron>
-        <img src={props.imageUrl} alt="happy user" />
+      <Jumbotron id="new-jumbotron">
+        {/* <img src={props.imageUrl} alt="happy user" /> */}
         <h1 className="display-3">Hello, {props.username}!</h1>
 
         <hr className="my-2" />

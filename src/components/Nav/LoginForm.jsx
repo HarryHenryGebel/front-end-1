@@ -67,7 +67,7 @@ export default function LoginForm() {
 
   return (
     <div>
-      <Button className="bg-addon" onClick={toggleModal}>Login</Button>
+      <Button className="bg-login" onClick={toggleModal}>Login</Button>
       <Modal isOpen={modal} toggle={toggleModal}>
       <form onSubmit={formSubmit}>
         <ModalHeader toggle={toggleModal}>Login</ModalHeader>
