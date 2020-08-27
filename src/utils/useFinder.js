@@ -15,8 +15,8 @@ const useFinder = (callback) => {
   const guestIdFinder = (guestemail, dinner = potluck) => {
       console.log(dinner)
  for (let i = 0; i < dinner.guests.length; i++ ){
-     if (dinner.guests[i].primaryemail === guestemail){
-         specificId = dinner.guests[i].guestid
+     if (dinner.guests[i].primaryEmail === guestemail){
+         specificId = dinner.guests[i].guestId
      }
  }
   };
@@ -33,7 +33,7 @@ const useFinder = (callback) => {
 
   const guestSorter = (dinner = potluck) => {
       for (let i = 0; i< dinner.guests.length; i++){
-          if(dinner.guests[i].isattending === true){
+          if(dinner.guests[i].isAttending === true){
               guestList.push(dinner.guests[i])
           }else{
               unresponsive.push(dinner.guests[i])
@@ -42,12 +42,12 @@ const useFinder = (callback) => {
     }
     
 
-  const obligationFinder = (primaryemail) => {
+  const obligationFinder = (primaryEmail) => {
     const myGuestProfile = guestList.filter(
-      (guest) => guest.primaryemail === primaryemail
+      (guest) => guest.primaryEmail === primaryEmail
     );
 
-    obligation = myGuestProfile.isbringing
+    obligation = myGuestProfile.isBringing
 
   }
 

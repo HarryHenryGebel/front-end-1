@@ -105,20 +105,20 @@ const hostState = {
       ],
       guests: [
         {
-          guestid: "57",
-          fname: "Martin",
-          lname: "Ricky",
-          primaryemail: "avawingfield@email.com",
+          guestId: "57",
+          firstName: "Martin",
+          lastName: "Ricky",
+          primaryEmail: "avawingfield@email.com",
           responded: false,
           isAttending: false,
           isBringing: [],
         },
 
         {
-          guestid: "39",
-          fname: "Ricky",
-          lname: "Martin",
-          primaryemail: "avawingfield@email.com",
+          guestId: "39",
+          firstName: "Ricky",
+          lastName: "Martin",
+          primaryEmail: "avawingfield@email.com",
           responded: true,
           isAttending: false,
           isBringing: [
@@ -133,10 +133,10 @@ const hostState = {
           ],
         },
         {
-          guestid: "17",
-          fname: "Martin",
-          lname: "Ricky",
-          primaryemail: "avawingfield@email.com",
+          guestId: "17",
+          firstName: "Martin",
+          lastName: "Ricky",
+          primaryEmail: "avawingfield@email.com",
           responded: true,
           isAttending: true,
           isBringing: [

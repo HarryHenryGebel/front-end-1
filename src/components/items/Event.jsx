@@ -41,8 +41,8 @@ const mapStateToProps = (state) => {
 function Event(props) {
   const {
     dinner,
-    ishost,
-    eventname,
+    isHost,
+    eventName,
     date,
     time,
     location,
@@ -72,9 +72,9 @@ function Event(props) {
   } = useFinder();
 
   const guestFormValues = {
-    guestid: specificId,
-    isattending: true,
-    isbringing: obligation,
+    guestId: specificId,
+    isAttending: true,
+    isBringing: obligation,
   };
 
   const [guestUpdate, setGuestUpdate] = useState(guestFormValues);
@@ -99,7 +99,7 @@ function Event(props) {
       isBringing: [...guestUpdate.isBringing, e.target.value],
     });
   };
-  guestIdFinder(props.primaryemail, dinner);
+  guestIdFinder(props.primaryEmail, dinner);
   obligationFinder();
   guestSorter(dinner);
   foodSorter(dinner);
@@ -239,8 +239,8 @@ function Event(props) {
                   {guestList.length > 0
                     ? guestList.map((guest) => (
                         <>
-                          {guest.fname} {guest.lname} is bringing:{" "}
-                          {guest.isbringing.map((food) => (
+                          {guest.firstName} {guest.lastName} is bringing:{" "}
+                          {guest.isBringing.map((food) => (
                             <>
                               {" "}
                               {food.foodname}
@@ -254,8 +254,8 @@ function Event(props) {
                   {unresponsive.length > 0
                     ? unresponsive.map((guest) => (
                         <>
-                          You are waiting for responses from : {guest.fname}{" "}
-                          {guest.lname} <br />
+                          You are waiting for responses from : {guest.firstName}{" "}
+                          {guest.lastName} <br />
                         </>
                       ))
                     : null}

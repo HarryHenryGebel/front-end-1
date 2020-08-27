@@ -74,9 +74,9 @@ function EventPage(props) {
   };
 
   const guestFormValues = {
-    guestid: specificId,
-    isattending: true,
-    isbringing: obligation,
+    guestId: specificId,
+    isAttending: true,
+    isBringing: obligation,
   };
 
   const [guestUpdate, setGuestUpdate] = useState(guestFormValues);
@@ -89,7 +89,7 @@ function EventPage(props) {
   };
 
   potluckFinder(potlucks, params.id);
-  guestIdFinder(primaryemail, potluck);
+  guestIdFinder(primaryEmail, potluck);
   foodSorter();
   guestSorter();
   obligationFinder();
@@ -106,7 +106,7 @@ function EventPage(props) {
             height="300vh"
             width="100%"
           />
-          <H1>{Potluck.eventname}</h1>
+          <H1>{Potluck.eventName}</h1>
           <p className="lead">
             {potluck.date} at {potluck.time}
           </p>
@@ -135,7 +135,7 @@ function EventPage(props) {
                 <h5>Guest List</h5>
               </NavLink>
             </NavItem>
-            {potluck.ishost ? null : (
+            {potluck.isHost ? null : (
               <NavItem>
                 <NavLink
                   className={{ active: activeTab === "3" }}
@@ -148,7 +148,7 @@ function EventPage(props) {
               </NavItem>
             )}
 
-            {potluck.ishost ? null : (
+            {potluck.isHost ? null : (
               <NavItem>
                 <NavLink
                   className={{ active: activeTab === "4" }}
@@ -161,7 +161,7 @@ function EventPage(props) {
               </NavItem>
             )}
 
-            {potluck.ishost ? (
+            {potluck.isHost ? (
               <NavItem>
                 <NavLink
                   className={{ active: activeTab === "5" }}
@@ -179,12 +179,12 @@ function EventPage(props) {
               <Row>
                 <Col sm="12">
                   <p>
-                    {potluck.eventname} will be held at {potluck.time} on{" "}
+                    {potluck.eventName} will be held at {potluck.time} on{" "}
                     {potluck.date} at {potluck.location}.
                   </p>
                   <p>
                     {/* This function is wrong. It should loop through to find the guest and post the guest's food. The function exists in Event.jsx */}{" "}
-                    {potluck.ishost ? null : obligation.length > 0 ? (
+                    {potluck.isHost ? null : obligation.length > 0 ? (
                       obligation.map((food) => (
                         <>
                           You have told the host that you will be bringing:
