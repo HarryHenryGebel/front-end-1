@@ -8,21 +8,7 @@ import RegistrationForm from "./RegistrationForm.jsx";
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
-  // slice of state and pulling login status to display ModalButtons OR DashboardNavs
   const [hasAuth, setHasAuth] = useState(false)
-  //not an expression?? after resolving current error, next step will be to set up props in loginForm submit button.
-  useEffect(() => {
-    const DynamicButtons = () => {
-      !hasAuth
-        ? return (
-            <div>
-              <LoginForm setHasAuth={setHasAuth}/>
-              <RegistrationForm />
-            </div>
-          )
-        : <DashboardNav />
-    }
-  }, [hasAuth, setHasAuth])
 
   return (
     <div>
@@ -37,7 +23,10 @@ export default function NavBar() {
             <MarketingButton />
 
             {/* Dynamic Dropdown that only appears after login/registration */}
-            {DynamicButtons()}
+            {!hasAuth ?
+              <><LoginForm setHasAuth={setHasAuth} hasAuth={hasAuth}/>
+              <RegistrationForm /></>
+              : <DashboardNav />}
 
 
           </Nav>
