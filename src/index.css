@@ -119,3 +119,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+/* =========NavBar styling overrides========= */
+
+#title {
+  font-family: "Pacifico", cursive;
+  color: #ead2ac;
+}
+
+#darkBG {
+  background-color: #504746 !important;
+}

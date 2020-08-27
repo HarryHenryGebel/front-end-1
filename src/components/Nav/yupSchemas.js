@@ -26,5 +26,5 @@ export const registrationSchema = yup.object().shape({
     .required("Username is a required field."),
   terms: yup
     .boolean()
-    .oneOf([true], "please agree to terms of use"),
+    .oneOf([true], "Agreeing to kindness and Terms of Service is mandatory for any good potluck experience."),
 });

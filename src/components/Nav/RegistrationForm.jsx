@@ -3,6 +3,7 @@ import { Form, FormGroup, Label, Input, FormText, Button, Modal, ModalHeader, Mo
 import { registrationSchema } from "./yupSchemas"
 import * as yup from "yup"
 import axios from "axios"
+import AlertRed from "../AlertRed"
 //import {useHistory} from 'react-router-dom'
 //push /dashboard
 export default function RegistrationForm () {
@@ -91,7 +92,9 @@ export default function RegistrationForm () {
               onChange={inputChange}
               placeholder="Public Username Here"
             />
-            {errors.username.length > 0 ? <p className="error">{errors.username}</p> : null}
+            {errors.username.length > 0
+                ? <AlertRed message={<p className="error">{errors.username}</p>}/>
+                : null}
             <FormText>Your username can be seen by others &amp; is required.</FormText>
           </FormGroup>
           <FormGroup>
@@ -104,7 +107,9 @@ export default function RegistrationForm () {
               onChange={inputChange}
               placeholder="Memorable Password Here"
             />
-            {errors.password.length > 0 ? <p className="error">{errors.password}</p> : null}
+            {errors.password.length > 0
+                ? <AlertRed message={<p className="error">{errors.password}</p>}/>
+                : null}
             <FormText>Needs at least 6 characters &amp; is required.</FormText>
           </FormGroup>
           <FormGroup>
@@ -117,7 +122,9 @@ export default function RegistrationForm () {
               onChange={inputChange}
               placeholder="your@email.com"
             />
-            {errors.email.length > 0 ? <p className="error">{errors.email}</p> : null}
+            {errors.email.length > 0
+                ? <AlertRed message={<p className="error">{errors.email}</p>}/>
+                : null}
             <FormText>Required. We will never send spam.</FormText>
           </FormGroup>
           <FormGroup check>
@@ -128,7 +135,9 @@ export default function RegistrationForm () {
                 value={formState.terms}
                 onChange={inputChange}/>{' '}
                 I Agree to Terms of Service and promise to be a nice human.
-            {errors.terms.length > 0 ? <p className="error">{errors.terms}</p> : null}
+                {errors.terms.length > 0
+                ? <AlertRed message={<p className="error">{errors.terms}</p>}/>
+                : null}
             </Label>
             <FormText>After logging in, you may edit more profile options.</FormText>
           </FormGroup>
