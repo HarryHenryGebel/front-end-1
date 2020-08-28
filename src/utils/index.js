@@ -1,8 +1,15 @@
-import axiosWithAuth from "./axiosWithAuth";
-import useForm from './useForm'
-import useFinder from './useFinder'
+import {
+  axiosWithAuth,
+  setUserIdByUsername,
+  storeLoginInformation,
+} from "./network";
+import useForm from "./useForm";
+import useFinder from "./useFinder";
 
-export { axiosWithAuth, useForm, useFinder };
-
-
-
+export {
+  axiosWithAuth,
+  setUserIdByUsername,
+  storeLoginInformation,
+  useFinder,
+  useForm,
+};
