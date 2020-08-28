@@ -1,6 +1,8 @@
 import { useState } from "react";
 
+
 const useForm = (callback) => {
+
 
   const locationForm = {
     address: "",
@@ -95,6 +97,7 @@ const useForm = (callback) => {
     addFood,
     foodRemover,
     guestRemover,
+
   };
 };
 

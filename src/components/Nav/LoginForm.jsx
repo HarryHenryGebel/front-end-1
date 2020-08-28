@@ -21,7 +21,7 @@ import {connect} from 'react-redux'
 
 
 
-
+export const USER_LOGIN = "USER_LOGIN"
 export default function LoginForm({setHasAuth}) {
   const history = useHistory();
   const [modal, setModal] = useState(false);
@@ -45,7 +45,7 @@ export default function LoginForm({setHasAuth}) {
     });
   }, [formState]);
 
-  const formSubmit = (e) => {
+  const formSubmit = (e) => dispatch =>{
     e.preventDefault();
     axiosWithAuth()
         .post('/login', `grant_type=password&username=${formState.username}&password=${formState.password}`, {
@@ -62,7 +62,14 @@ export default function LoginForm({setHasAuth}) {
           setFormState({
             username: "",
             password: "",
-          });
+          })
+          .get("/users/users")
+          .then((res) => {
+            
+            const useridarray = res.data.filter((user) => user.username === formState.username);
+            dispatch({type: USER_LOGIN, payload: useridarray})
+          })
+          .catch((e) => console.log(e.message));
 
         })
         .catch(e => {
