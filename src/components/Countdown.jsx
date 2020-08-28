@@ -25,9 +25,9 @@ function CountDown(props) {
   });
 
   return (
-    <div id="clock">
+    <span id="clock">
       {timer.days} Days {timer.hours} Hours and {timer.minutes} Minutes!
-    </div>
+    </span>
   );
 }
 
