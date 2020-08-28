@@ -24,7 +24,7 @@ export default class StateHolder {
       this.userId = -1;
       this.username = "";
       this.primaryEmail = "";
-      this.imageUrl = "";
+      this.imageUrl = "../assets/user.svg";
       this.isLoading = false;
       this.potlucks = [];
     }
