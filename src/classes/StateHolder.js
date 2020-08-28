@@ -3,21 +3,30 @@ import requester from "easier-requests";
 export default class StateHolder {
   constructor() {
     debugger;
-    this.isLoading = true; // true until we finish get
     this.errors = "";
 
     // check for login
     const token = localStorage.getItem("token");
+    this.token = token;
     this.isLoggedIn = token ? true : false;
 
     if (token) {
+      this.isLoading = true; // true until we finish get
+
       // store authorization information and related information
-      this.token = token;
       requester.setOptions({ headers: { Authorization: `Bearer ${token}` } });
 
       // get and store user information
       this.userId = JSON.parse(localStorage.getItem("userId"));
       this._initializeUser();
+    } else {
+      requester.setOptions({ headers: {} });
+      this.userId = -1;
+      this.username = "";
+      this.primaryEmail = "";
+      this.imageUrl = "";
+      this.isLoading = false;
+      this.potlucks = [];
     }
   }
 
