@@ -13,7 +13,7 @@ import {
 import { loginSchema } from "./yupSchemas";
 import * as yup from "yup";
 import AlertRed from "../AlertRed.jsx";
-import axiosWithAuth from "../../utils/axiosWithAuth";
+import { axiosWithAuth, storeLoginInformation } from "../../utils";
 import { useHistory } from "react-router-dom";
 //push /
 export default function LoginForm() {
@@ -41,18 +41,17 @@ export default function LoginForm() {
   const formSubmit = (e) => {
     e.preventDefault();
     localStorage.removeItem("token");
-    const user = {
-      username: formState.username.trim(),
-      password: formState.password.trim(),
-    };
     setFormState({
       username: "",
       password: "",
     });
+
+    const username = formState.username.trim(),
+      password = formState.password.trim();
     axiosWithAuth()
       .post(
         "/login",
-        `grant_type=password&username=${user.username}&password=${user.password}`,
+        `grant_type=password&username=${username}&password=${password}`,
         {
           headers: {
             Authorization: `Basic ${btoa("lambda-client:lambda-secret")}`,
@@ -61,8 +60,7 @@ export default function LoginForm() {
         }
       )
       .then((res) => {
-        console.log(res);
-        localStorage.setItem("token", res.data.access_token);
+        storeLoginInformation(res.data.access_token, username);
         history.push("/");
       })
       .catch((e) => {

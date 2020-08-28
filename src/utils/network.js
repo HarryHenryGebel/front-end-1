@@ -1,13 +1,27 @@
 import axios from "axios";
+import requester from "easier-request";
 
-const axiosWithAuth = () => {
-  const token = localStorage.getItem('token')
+export function axiosWithAuth() {
+  const token = localStorage.getItem("token");
   return axios.create({
-      headers: {
-          'Authorization': `Bearer ${token}`
-      },
-      baseURL: 'https://lre-notapotluck.herokuapp.com'
-  })
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    baseURL: "https://lre-notapotluck.herokuapp.com",
+  });
 }
 
-export default axiosWithAuth;
+export async function storeLoginInformation(token, username) {
+  try {
+    localStorage.setItem("token", token);
+    const id = requester.createUniqueID();
+    await requester.get(
+      "https://lre-notapotluck.herokuapp.com//users/users",
+      id
+    );
+    const users = requester.response(id).data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
