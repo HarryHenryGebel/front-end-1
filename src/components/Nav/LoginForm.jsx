@@ -61,14 +61,16 @@ export default function LoginForm() {
         }
       )
       .then((res) => {
-        console.log(res);
         localStorage.setItem("token", res.data.access_token);
+        localStorage.setItem('username', formState.username);
         history.push("/");
       })
+      
       .catch((e) => {
         console.log("its so broken forever", e);
         throw e;
       });
+
   };
 
   const validateChange = (e) => {

@@ -13,7 +13,6 @@ const useFinder = (callback) => {
   };
 
   const guestIdFinder = (guestemail, dinner = potluck) => {
-    console.log(dinner);
     for (let i = 0; i < dinner.guests.length; i++) {
       if (dinner.guests[i].primaryEmail === guestemail) {
         specificId = dinner.guests[i].guestId;
