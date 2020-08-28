@@ -66,6 +66,7 @@ const hostState = {
 function hostReducer(state = hostState, action) {
   switch (action.type) {
     case USER_LOGIN : 
+    console.log('HI')
     return{
       ...state, userId: action.payload.userid,
       username: action.payload.username,

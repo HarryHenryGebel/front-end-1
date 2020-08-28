@@ -59,13 +59,13 @@ export default function LoginForm({setHasAuth}) {
           localStorage.setItem('token', res.data.access_token)
           localStorage.setItem('username', formState.username)
           history.push('/')
-          setFormState({
-            username: "",
-            password: "",
-          })
+          // setFormState({
+          //   username: "",
+          //   password: "",
+          // })
           .get("/users/users")
           .then((res) => {
-            
+            console.log(res)
             const useridarray = res.data.filter((user) => user.username === formState.username);
             dispatch({type: USER_LOGIN, payload: useridarray})
           })
