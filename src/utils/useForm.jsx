@@ -77,7 +77,9 @@ const useForm = (callback) => {
   };
 
   const guestRemover = (guest) => {
-    const newGuests = formValues.guests.filter((item) => item.firstName !== guest);
+    const newGuests = formValues.guests.filter(
+      (item) => item.firstName !== guest
+    );
     setFormValues({ ...formValues, guests: newGuests });
   };
 

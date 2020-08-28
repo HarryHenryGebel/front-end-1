@@ -15,9 +15,9 @@ import {
   DELETE_EVENT_SUCESS,
   DELETE_EVENT_FAIL,
   UPDATE_FOOD_START,
-  UPDATE_FOOD_SUCESS,
+  UPDATE_FOOD_SUCCESS,
   UPDATE_FOOD_FAIL,
-  UDPATE_GUEST_START,
+  UPDATE_GUEST_START,
   UPDATE_GUEST_SUCCESS,
   UPDATE_GUEST_FAIL,
 } from "../actions";
@@ -106,18 +106,23 @@ function hostReducer(state = hostState, action) {
     case ADD_GUEST_START:
       const guestPotluck = state.potlucks.filter(
         (potluck) => potluck.potluckId === action.payload.potluckid
-      )
-      return{
-        ...guestPotluck, isLoading: true
-      }
+      );
+      return {
+        ...guestPotluck,
+        isLoading: true,
+      };
     case ADD_GUEST_SUCCESS:
-      return{
-        ...guestPotluck, isLoading: false, guests:[...guestPotluck.guest, action.payload.results]
-      }
+      return {
+        ...guestPotluck,
+        isLoading: false,
+        guests: [...guestPotluck.guest, action.payload.results],
+      };
     case ADD_GUEST_FAIL:
-      return{
-        ...guestPotluck, isLoading: false, errors: action.payload.errors
-      }
+      return {
+        ...guestPotluck,
+        isLoading: false,
+        errors: action.payload.errors,
+      };
     case UPDATE_EVENT_START:
       return {
         ...state,
@@ -136,6 +141,24 @@ function hostReducer(state = hostState, action) {
         isLoading: false,
         errors: `Your event could not be updated, please try again. ${action.payload}`,
       };
+    case UPDATE_FOOD_START:
+      console.log("START");
+      return {};
+    case UPDATE_FOOD_SUCCESS:
+      console.log("SUCCESS");
+      return {};
+    case UPDATE_FOOD_FAIL:
+      console.log("FAIL!");
+      return {};
+    case UPDATE_GUEST_START:
+      console.log("START");
+      return {};
+    case UPDATE_GUEST_SUCCESS:
+      console.log("SUCCESS");
+      return {};
+    case UPDATE_GUEST_FAIL:
+      console.log("FAIL!");
+      return {};
 
     case DELETE_EVENT_START:
       return {
