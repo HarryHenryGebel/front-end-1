@@ -10,6 +10,8 @@ import EventList from "./EventList";
 import UserProfile from "./UserProfile";
 import { connect } from "react-redux";
 import { Spinner } from "reactstrap";
+import { useEffect } from "react";
+import { axiosWithAuth } from "../utils";
 
 const mapStateToProps = (state) => {
   return { isLoading: state.isLoading };
@@ -18,6 +20,23 @@ const mapStateToProps = (state) => {
 //import PrivateRoute
 
 function DashBoard(props) {
+
+  useEffect( () => {
+    const username = localStorage.getItem('username')
+    axiosWithAuth()
+    .get('/users/users')
+    .then(res=> {
+      for(let i = 0; i < res.data.length; i++){
+        if (res.data[i].username === username){
+          const userdata = res.data[i]
+          localStorage.setItem('userId', userdata.userid)
+          localStorage.setItem('primaryemail', userdata.primaryemail)
+
+        }
+      }
+    })
+    .catch(e => console.log("why", e))
+  })
   return (
     <>
       {props.isLoading ? <Spinner /> : null}
@@ -27,5 +46,5 @@ function DashBoard(props) {
     </>
   );
 }
-
+export const LOAD_USER = "LOAD_USER"
 export default connect(mapStateToProps, {})(DashBoard);

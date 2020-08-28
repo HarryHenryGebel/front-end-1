@@ -40,7 +40,6 @@ export default function LoginForm() {
 
   const formSubmit = (e) => {
     e.preventDefault();
-    localStorage.removeItem("token");
     const user = {
       username: formState.username.trim(),
       password: formState.password.trim(),
@@ -62,15 +61,14 @@ export default function LoginForm() {
       )
       .then((res) => {
         localStorage.setItem("token", res.data.access_token);
-        localStorage.setItem('username', formState.username);
+        localStorage.setItem("username", formState.username);
         history.push("/");
       })
-      
+
       .catch((e) => {
         console.log("its so broken forever", e);
         throw e;
       });
-
   };
 
   const validateChange = (e) => {

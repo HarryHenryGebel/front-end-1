@@ -21,11 +21,12 @@ import {
   UPDATE_GUEST_SUCCESS,
   UPDATE_GUEST_FAIL,
 } from "../actions";
+import { LOAD_USER } from "../components/Dashboard";
 
 const hostState = {
-  userId: "",
-  username: "",
-  primaryEmail: "",
+  userId: localStorage.getItem('userid') || '',
+  username: localStorage.getItem('username') || '',
+  primaryEmail: localStorage.getItem('primaryemail') || '',
   imageUrl: "../assets/user.svg",
   isLoading: false,
   errors: "",
@@ -64,7 +65,13 @@ const hostState = {
 
 function hostReducer(state = hostState, action) {
   switch (action.type) {
-    
+    case LOAD_USER : 
+    return{
+      ...state,
+      userId: action.payload.userid,
+      username: action.payload.username,
+      primaryEmail: action.payload.primaryemail
+    }
     case CREATE_EVENT_START:
       return {
         ...state,
