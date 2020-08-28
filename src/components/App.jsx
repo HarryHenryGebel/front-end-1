@@ -9,7 +9,9 @@ import createStoreHolder from "../classes/StateHolder";
 
 function App(props) {
   // initialize state
-  useEffect(() => new props.createStoreHolder());
+  useEffect(() => {
+    props.createStoreHolder();
+  });
 
   return (
     <>
