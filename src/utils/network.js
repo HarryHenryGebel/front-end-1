@@ -30,6 +30,8 @@ export async function setUserIdByUsername(field, username) {
   } catch (error) {
     console.log(error);
     throw error;
+  } finally {
+    window.open("/", "_self");
   }
 }
 
