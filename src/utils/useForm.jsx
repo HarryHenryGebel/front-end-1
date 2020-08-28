@@ -1,20 +1,6 @@
 import { useState } from "react";
-import { axiosWithAuth } from "../utils";
 
 const useForm = (callback) => {
-let userid = ''
-  const idFetcher = () => {
-    const username = localStorage.getItem("username");
-
-    axiosWithAuth()
-      .get("/users/users")
-      .then((res) => {
-        
-        const useridarray = res.data.filter((user) => user.username === username);
-        userid = useridarray[0].userid
-      })
-      .catch((e) => console.log(e.message));
-  };
 
   const locationForm = {
     address: "",
@@ -41,7 +27,7 @@ let userid = ''
   const [guest, setGuests] = useState(guestForm);
 
   const initialForm = {
-    user: { userid: userid },
+    user: { userid: '' },
     eventName: "",
     date: "",
     time: "",
@@ -109,7 +95,6 @@ let userid = ''
     addFood,
     foodRemover,
     guestRemover,
-    idFetcher,
   };
 };
 
