@@ -30,8 +30,6 @@ export default function NavBar() {
               :
               <><LoginForm />
               <RegistrationForm /></>}
-
-
           </Nav>
         </Collapse>
         <NavbarToggler onClick={toggle} />{" "}
