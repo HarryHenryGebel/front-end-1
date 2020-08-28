@@ -11,12 +11,13 @@ import {
 } from "../actions";
 
 const hostState = {
-  userId: "1",
-  username: "avadinner",
-  primaryEmail: "avawingfield@email.com",
-  imageUrl: "../assets/user.svg",
+  userId: -1,
+  username: "",
+  primaryEmail: "",
+  imageUrl: "",
   isLoading: false,
   errors: "",
+  isLoggedIn: false,
   potlucks: [
     {
       potluckId: "3",
