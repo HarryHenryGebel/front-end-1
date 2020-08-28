@@ -89,6 +89,7 @@ function DashboardNav(props) {
             onClick={() => {
               localStorage.removeItem("token");
               localStorage.removeItem("userId");
+              window.open("/", "_self");
             }}
           >
             Logout

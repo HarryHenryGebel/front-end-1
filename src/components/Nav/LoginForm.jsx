@@ -60,7 +60,9 @@ export default function LoginForm() {
       )
       .then((res) => {
         storeLoginInformation(res.data.access_token, username);
-        history.push("/");
+        // kludgily refresh screen
+        // history.push("/");
+        window.open("/", "_self");
       })
       .catch((e) => {
         console.log("its so broken forever", e);
