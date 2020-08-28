@@ -17,7 +17,6 @@ import axiosWithAuth from "../../utils/axiosWithAuth";
 import { useHistory } from "react-router-dom";
 //push /
 export default function LoginForm() {
-
   const [modal, setModal] = useState(false);
   const toggleModal = () => setModal(!modal);
   const [formState, setFormState] = useState({
@@ -39,7 +38,7 @@ export default function LoginForm() {
     });
   }, [formState]);
 
-  const formSubmit = (e) => dispatch =>{
+  const formSubmit = (e) => {
     e.preventDefault();
     localStorage.removeItem("token");
     const user = {
@@ -72,28 +71,26 @@ export default function LoginForm() {
       });
   };
 
-         
-
-  // const validateChange = (e) => {
-  //   yup
-  //     .reach(loginSchema, e.target.name)
-  //     .validate(e.target.value)
-  //     .then((valid) => {
-  //       setErrors({ ...errors, [e.target.name]: "" });
-  //       // console.log('Yup.then ERRORS', errors)
-  //     })
-  //     .catch((err) => {
-  //       setErrors({ ...errors, [e.target.name]: err.errors[0] });
-  //       // console.log('Yup.catch ERRORS', errors)
-  //     });
-  // };
+  const validateChange = (e) => {
+    yup
+      .reach(loginSchema, e.target.name)
+      .validate(e.target.value)
+      .then((valid) => {
+        setErrors({ ...errors, [e.target.name]: "" });
+        // console.log('Yup.then ERRORS', errors)
+      })
+      .catch((err) => {
+        setErrors({ ...errors, [e.target.name]: err.errors[0] });
+        // console.log('Yup.catch ERRORS', errors)
+      });
+  };
   const inputChange = (e) => {
     e.persist();
     const newFormData = {
       ...formState,
       [e.target.name]: e.target.value,
     };
-    // validateChange(e);
+    validateChange(e);
     setFormState(newFormData);
   };
 
@@ -106,10 +103,9 @@ export default function LoginForm() {
         <form onSubmit={formSubmit}>
           <ModalHeader toggle={toggleModal}>Login</ModalHeader>
           <ModalBody>
-            <Form onSubmit = {formSubmit}>
+            <Form>
               <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                 <Label htmlFor="username" className="mr-sm-2">
-
                   Username
                 </Label>
                 <Input
@@ -150,6 +146,7 @@ export default function LoginForm() {
             <Button
               color="primary"
               type="submit"
+              disabled={buttonDisabled}
               onClick={toggleModal}
             >
               Submit

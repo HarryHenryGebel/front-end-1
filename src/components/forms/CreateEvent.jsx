@@ -24,12 +24,12 @@ function CreateEvent(props) {
     addFood,
     foodRemover,
     guestRemover,
-    idFetcher
+
   } = useForm();
 
   const onSubmit = (e) => {
     e.preventDefault()
-    idFetcher()
+
     props.createEvent(formValues)
 
   }

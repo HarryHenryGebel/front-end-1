@@ -8,10 +8,6 @@ import RegistrationForm from "./RegistrationForm.jsx";
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
-<<<<<<< HEAD
-  const [hasAuth, setHasAuth] = useState(true)
-=======
->>>>>>> origin/master
 
   return (
     <div>
@@ -28,24 +24,12 @@ export default function NavBar() {
             <MarketingButton />
 
             {/* Dynamic Dropdown that only appears after login/registration */}
-<<<<<<< HEAD
-            
-            
-              <DashboardNav setHasAuth={setHasAuth} />
-              
-              <><LoginForm setHasAuth={setHasAuth}/>
-              <RegistrationForm setHasAuth={setHasAuth} />
-              </>
-=======
             {localStorage.getItem("token") ?
             // null
               <DashboardNav />
               :
               <><LoginForm />
               <RegistrationForm /></>}
->>>>>>> origin/master
-
-
           </Nav>
         </Collapse>
         <NavbarToggler onClick={toggle} />{" "}
