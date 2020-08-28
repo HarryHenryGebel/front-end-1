@@ -62,6 +62,7 @@ export default function LoginForm() {
       )
       .then((res) => {
         console.log(res);
+        debugger;
         localStorage.setItem("token", res.data.access_token);
         history.push("/");
       })
