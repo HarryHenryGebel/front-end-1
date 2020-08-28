@@ -18,7 +18,7 @@ export async function storeLoginInformation(token, username) {
     debugger;
     const id = requester.createUniqueID();
     await requester.get(
-      "https://lre-notapotluck.herokuapp.com//users/users",
+      "https://lre-notapotluck.herokuapp.com/users/users",
       id
     );
     const users = requester.response(id).data;
