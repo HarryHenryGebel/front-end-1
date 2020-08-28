@@ -1,13 +1,16 @@
 import {
-  CREATE_EVENT_START,
-  CREATE_EVENT_SUCCESS,
-  CREATE_EVENT_FAIL,
   ADD_GUEST_START,
   ADD_GUEST_SUCCESS,
   ADD_GUEST_FAIL,
   ADD_FOOD_START,
   ADD_FOOD_SUCCESS,
   ADD_FOOD_FAIL,
+  CREATE_EVENT_START,
+  CREATE_EVENT_SUCCESS,
+  CREATE_EVENT_FAIL,
+  CREATE_STATE_START,
+  CREATE_STATE_SUCCESS,
+  CREATE_STATE_FAIL,
   UPDATE_EVENT_START,
   UPDATE_EVENT_SUCESS,
   UPDATE_EVENT_FAIL,
@@ -81,6 +84,18 @@ function hostReducer(state = hostState, action) {
         ...state,
         isLoading: false,
         errors: `Your event could not be added. Please try again. ${action.payload}`,
+      };
+    case CREATE_STATE_START:
+      return action.newState;
+    case CREATE_STATE_SUCCESS:
+      return {
+        ...action.newState,
+      };
+    case CREATE_STATE_FAIL:
+      return {
+        ...state,
+        isLoading: false,
+        errors: action.error,
       };
     //This is probably wrong
     case ADD_FOOD_START:

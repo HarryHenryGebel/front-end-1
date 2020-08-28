@@ -3,11 +3,13 @@ import Dashboard from "./Dashboard";
 import NavBar from "./Nav/NavBar.jsx";
 import EventPage from "./EventPage";
 import { Route } from "react-router-dom";
+import { connect } from "react-redux";
 
-import StateHolder from "../classes/StateHolder";
+import createStoreHolder from "../classes/StateHolder";
 
-export default function App() {
-  useEffect(() => new StateHolder());
+function App(props) {
+  // initialize state
+  useEffect(() => new props.createStoreHolder());
 
   return (
     <>
@@ -18,3 +20,4 @@ export default function App() {
     </>
   );
 }
+export default connect(null, { createStoreHolder })(App);
