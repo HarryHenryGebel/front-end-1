@@ -85,7 +85,13 @@ function DashboardNav(props) {
           ))}
 
           <DropdownItem divider />
-          <DropdownItem onClick={() => localStorage.removeItem("token")}>
+          <DropdownItem
+            onClick={() => {
+              localStorage.removeItem("token");
+              localStorage.removeItem("userId");
+              window.open("/", "_self");
+            }}
+          >
             Logout
           </DropdownItem>
         </DropdownMenu>

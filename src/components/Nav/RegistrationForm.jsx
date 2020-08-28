@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-  Form,
   FormGroup,
   Label,
   Input,
@@ -33,7 +32,7 @@ export default function RegistrationForm() {
     password: "",
     primaryemail: "",
     iimageurl: "",
-    terms: ""
+    terms: "",
   });
   const [post, setPost] = useState([]);
 
@@ -56,12 +55,11 @@ export default function RegistrationForm() {
     });
     axios
       .post("https://lre-notapotluck.herokuapp.com/createnewuser", formState)
-        .then((res) => {
-          setPost(res.data);
-          console.log("success", post, res);
-        })
-        .catch((err) => console.log(err.response));
-
+      .then((res) => {
+        setPost(res.data);
+        console.log("success", post, res);
+      })
+      .catch((err) => console.log(err.response));
   };
 
   const validateChange = (e) => {
@@ -97,80 +95,78 @@ export default function RegistrationForm() {
         <form onSubmit={formSubmit}>
           <ModalHeader toggle={toggleModal}>Registration</ModalHeader>
           <ModalBody>
-            <Form onSubmit={formSubmit}>
-              <FormGroup>
-                <Label htmlFor="usename">Username</Label>
-                <Input
-                  type="username"
-                  name="username"
-                  id="username"
-                  value={formState.username}
-                  onChange={inputChange}
-                  placeholder="Public Username Here"
+            <FormGroup>
+              <Label htmlFor="usename">Username</Label>
+              <Input
+                type="username"
+                name="username"
+                id="username"
+                value={formState.username}
+                onChange={inputChange}
+                placeholder="Public Username Here"
+              />
+              {errors.username.length > 0 ? (
+                <AlertRed
+                  message={<p className="error">{errors.username}</p>}
                 />
-                {errors.username.length > 0 ? (
-                  <AlertRed
-                    message={<p className="error">{errors.username}</p>}
-                  />
-                ) : null}
-                <FormText>
-                  Your username can be seen by others &amp; is required.
-                </FormText>
-              </FormGroup>
-              <FormGroup>
-                <Label htmlFor="Password">Password</Label>
-                <Input
-                  type="password"
-                  name="password"
-                  id="Password"
-                  value={formState.password}
-                  onChange={inputChange}
-                  placeholder="Memorable Password Here"
+              ) : null}
+              <FormText>
+                Your username can be seen by others &amp; is required.
+              </FormText>
+            </FormGroup>
+            <FormGroup>
+              <Label htmlFor="Password">Password</Label>
+              <Input
+                type="password"
+                name="password"
+                id="Password"
+                value={formState.password}
+                onChange={inputChange}
+                placeholder="Memorable Password Here"
+              />
+              {errors.password.length > 0 ? (
+                <AlertRed
+                  message={<p className="error">{errors.password}</p>}
                 />
-                {errors.password.length > 0 ? (
-                  <AlertRed
-                    message={<p className="error">{errors.password}</p>}
-                  />
-                ) : null}
-                <FormText>
-                  Needs at least 6 characters &amp; is required.
-                </FormText>
-              </FormGroup>
-              <FormGroup>
-                <Label htmlFor="Email">Email</Label>
-                <Input
-                  type="primaryemail"
-                  name="primaryemail"
-                  id="Email"
-                  value={formState.primaryemail}
-                  onChange={inputChange}
-                  placeholder="your@primaryemail.com"
+              ) : null}
+              <FormText>
+                Needs at least 6 characters &amp; is required.
+              </FormText>
+            </FormGroup>
+            <FormGroup>
+              <Label htmlFor="Email">Email</Label>
+              <Input
+                type="primaryemail"
+                name="primaryemail"
+                id="Email"
+                value={formState.primaryemail}
+                onChange={inputChange}
+                placeholder="your@primaryemail.com"
+              />
+              {errors.primaryemail.length > 0 ? (
+                <AlertRed
+                  message={<p className="error">{errors.primaryemail}</p>}
                 />
-                {errors.primaryemail.length > 0 ? (
-                  <AlertRed message={<p className="error">{errors.primaryemail}</p>} />
+              ) : null}
+              <FormText>Required. We will never send spam.</FormText>
+            </FormGroup>
+            <FormGroup check>
+              <Label check>
+                <Input
+                  type="checkbox"
+                  name="terms"
+                  value={formState.terms}
+                  onChange={inputChange}
+                />{" "}
+                I Agree to Terms of Service and promise to be a nice human.
+                {errors.terms.length > 0 ? (
+                  <AlertRed message={<p className="error">{errors.terms}</p>} />
                 ) : null}
-                <FormText>Required. We will never send spam.</FormText>
-              </FormGroup>
-              <FormGroup check>
-                <Label check>
-                  <Input
-                    type="checkbox"
-                    name="terms"
-                    value={formState.terms}
-                    onChange={inputChange}
-                  />{" "}
-                  I Agree to Terms of Service and promise to be a nice human.
-                  {errors.terms.length > 0 ? (
-                    <AlertRed
-                      message={<p className="error">{errors.terms}</p>}
-                    />
-                  ) : null}
-                </Label>
-                <FormText>
-                  After logging in, you may edit more profile options.
-                </FormText>
-              </FormGroup>
-            </Form>
+              </Label>
+              <FormText>
+                After logging in, you may edit more profile options.
+              </FormText>
+            </FormGroup>
           </ModalBody>
           <ModalFooter>
             {/* temp to test post, delete when done */}
