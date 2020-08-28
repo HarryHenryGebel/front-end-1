@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Alert } from 'reactstrap';
 
+//will run on any failed actions
 
 const AlertRed = ({message}) => {
 
