@@ -1,10 +1,11 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Col, Row, Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { connect } from "react-redux";
 import { createEvent } from "../../actions";
-import { useForm } from "../../utils";
+import { useForm, axiosWithAuth } from "../../utils";
 import Guest from "../items/Guest";
 import Food from "../items/Food";
+
 //Form Validation?
 
 //Use Add button to populate a list htmlFor Food and Guests
@@ -23,10 +24,12 @@ function CreateEvent(props) {
     addFood,
     foodRemover,
     guestRemover,
+    idFetcher
   } = useForm();
 
   const onSubmit = (e) => {
     e.preventDefault()
+    idFetcher()
     props.createEvent(formValues)
 
   }
@@ -43,18 +46,6 @@ function CreateEvent(props) {
               id="Name"
               placeholder="with a placeholder"
               value={formValues.eventName}
-              onChange={changeHandler}
-            />
-          </FormGroup>
-        </Col>
-        <Col md={6}>
-          <FormGroup>
-            <Label htmlFor="email">Email</Label>
-            <Input
-              type="email"
-              name="email"
-              id="email"
-              placeholder="email placeholder"
               onChange={changeHandler}
             />
           </FormGroup>

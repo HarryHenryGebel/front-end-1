@@ -1,4 +1,4 @@
-import axios from "axios";
+import {axiosWithAuth} from '../utils'
 
 export const CREATE_EVENT_START = "CREATE_EVENT_START";
 export const CREATE_EVENT_SUCCESS = "CREATE_EVENT_SUCCESS";
@@ -50,7 +50,7 @@ const updateGuest = (id, guest) => (dispatch) => {
 
 const addFood = (id, food) => (dispatch) => {
   dispatch({ type: ADD_FOOD_START });
-  axios
+  axiosWithAuth()
     .post(
       `https://lre-notapotluck.herokuapp.com/foods/potluck/${id}/food/${food.foodname}`,
       food
@@ -71,7 +71,7 @@ const addFood = (id, food) => (dispatch) => {
 
 const addGuest = (id, guest) => (dispatch) => {
   dispatch({ type: ADD_GUEST_START });
-  axios
+  axiosWithAuth()
     .post(
       `https://lre-notapotluck.herokuapp.com/guests/potluck/${id}/${guest.fname}/${guest.lname}/${guest.primaryemail}`,
       guest
@@ -90,20 +90,24 @@ const addGuest = (id, guest) => (dispatch) => {
     );
 };
 export const createEvent = (data) => async (dispatch) => {
+  console.log(data)
   dispatch({ type: CREATE_EVENT_START });
-  axios
+  axiosWithAuth()
     .post("https://lre-notapotluck.herokuapp.com/potlucks/potluck", data)
     .then(async (res) => {
       await dispatch({ type: CREATE_EVENT_SUCCESS, payload: res.data });
       await res.data.foods.map((food) => addFood(res.data.potluckid, food));
       await res.data.guests.map((guest) => addGuest(res.data.potluckid, guest));
+      console.log(res.data)
     })
-    .catch((e) => dispatch({ type: CREATE_EVENT_FAIL, payload: `${e}` }));
+    .catch((e) => console.log(e));
+
+    // dispatch({ type: CREATE_EVENT_FAIL, payload: `${e}` })
 };
 
 export const updateEvent = (id, data) => async (dispatch) => {
   dispatch({ type: UPDATE_EVENT_START });
-  axios
+  axiosWithAuth()
     .put(`https://lre-notapotluck.herokuapp.com/potlucks/potluck/${id}`, data)
     .then(async (res) => {
       await dispatch({ type: CREATE_EVENT_SUCCESS, payload: res.data });
@@ -117,7 +121,7 @@ export const updateEvent = (id, data) => async (dispatch) => {
 
 export const deleteEvent = (id) => (dispatch) => {
   dispatch({ type: DELETE_EVENT_START });
-  axios
+  axiosWithAuth()
     .delete(`https://lre-notapotluck.herokuapp.com/potlucks/potluck/${id}`)
     .then((res) => dispatch({ type: DELETE_EVENT_SUCESS }))
     .catch((e) => dispatch({ type: DELETE_EVENT_FAIL, payload: `${e}` }));
@@ -125,7 +129,7 @@ export const deleteEvent = (id) => (dispatch) => {
 
 export const deleteGuest = (id, guest) => (dispatch) => {
   dispatch({ type: ADD_GUEST_START });
-  axios
+  axiosWithAuth()
     .delete(
       `https://lre-notapotluck.herokuapp.com/guests/potluck/${id}/${guest.fname}/${guest.lname}/${guest.primaryemail}`
     )
@@ -144,7 +148,7 @@ export const deleteGuest = (id, guest) => (dispatch) => {
 
 export const deleteFood = (id, food) => (dispatch) => {
   dispatch({ type: DELETE_FOOD_START });
-  axios
+  axiosWithAuth()
     .delete(
       `https://lre-notapotluck.herokuapp.com/foods/potluck/${id}/food/${food.foodname}`
     )

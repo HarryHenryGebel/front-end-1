@@ -28,6 +28,7 @@ function EditEvent(props) {
     foodChangeHandler,
     addGuest,
     addFood,
+    idFetcher
   } = useForm();
 
   return (

@@ -1,6 +1,21 @@
 import { useState } from "react";
+import { axiosWithAuth } from "../utils";
 
 const useForm = (callback) => {
+let userid = ''
+  const idFetcher = () => {
+    const username = localStorage.getItem("username");
+
+    axiosWithAuth()
+      .get("/users/users")
+      .then((res) => {
+        
+        const useridarray = res.data.filter((user) => user.username === username);
+        userid = useridarray[0].userid
+      })
+      .catch((e) => console.log(e.message));
+  };
+
   const locationForm = {
     address: "",
     address2: "",
@@ -19,7 +34,6 @@ const useForm = (callback) => {
   const foodForm = {
     foodId: "",
     foodName: "",
-    description: "",
   };
 
   const [food, setFood] = useState(foodForm);
@@ -27,8 +41,7 @@ const useForm = (callback) => {
   const [guest, setGuests] = useState(guestForm);
 
   const initialForm = {
-    isHost: true,
-    potluckId: "",
+    user: { userid: userid },
     eventName: "",
     date: "",
     time: "",
@@ -96,6 +109,7 @@ const useForm = (callback) => {
     addFood,
     foodRemover,
     guestRemover,
+    idFetcher,
   };
 };
 
