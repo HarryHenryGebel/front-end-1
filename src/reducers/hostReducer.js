@@ -21,7 +21,6 @@ import {
   UPDATE_GUEST_SUCCESS,
   UPDATE_GUEST_FAIL,
 } from "../actions";
-import { USER_LOGIN } from "../components/Nav/LoginForm";
 
 const hostState = {
   userId: "",
@@ -65,13 +64,7 @@ const hostState = {
 
 function hostReducer(state = hostState, action) {
   switch (action.type) {
-    case USER_LOGIN : 
-    console.log('HI')
-    return{
-      ...state, userId: action.payload.userid,
-      username: action.payload.username,
-      primaryEmail: action.payload.primaryemail
-    }
+    
     case CREATE_EVENT_START:
       return {
         ...state,

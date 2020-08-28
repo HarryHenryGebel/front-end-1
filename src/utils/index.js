@@ -1,4 +1,4 @@
-import { axiosWithAuth } from "./axiosWithAuth";
+import axiosWithAuth from "./axiosWithAuth";
 import useForm from './useForm'
 import useFinder from './useFinder'
 
