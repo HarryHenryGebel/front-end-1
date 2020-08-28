@@ -49,7 +49,7 @@ function CreateEvent(props) {
         </Col>
         <Col md={6}>
           <FormGroup>
-            <Label htmlFor="email">Phone Number?</Label>
+            <Label htmlFor="email">Email</Label>
             <Input
               type="email"
               name="email"
