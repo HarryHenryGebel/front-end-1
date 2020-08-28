@@ -1,8 +1,8 @@
-import React, {useEffect} from "react";
+import React from "react";
 import { Col, Row, Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { connect } from "react-redux";
 import { createEvent } from "../../actions";
-import { useForm, axiosWithAuth } from "../../utils";
+import { useForm } from "../../utils";
 import Guest from "../items/Guest";
 import Food from "../items/Food";
 
@@ -24,18 +24,16 @@ function CreateEvent(props) {
     addFood,
     foodRemover,
     guestRemover,
-
   } = useForm();
 
   const onSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    props.createEvent(formValues)
-
-  }
+    props.createEvent(formValues);
+  };
 
   return (
-    <Form onSubmit = {onSubmit}>
+    <Form onSubmit={onSubmit}>
       <Row form>
         <Col md={6}>
           <FormGroup>
@@ -260,7 +258,9 @@ function CreateEvent(props) {
           Confirm
         </Label>
       </FormGroup>
-      <Button className="bg-confirm" type = "submit">Create Event</Button>
+      <Button className="bg-confirm" type="submit">
+        Create Event
+      </Button>
       <Button className="bg-cancel">Cancel</Button>
     </Form>
   );
