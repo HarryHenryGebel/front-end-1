@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 
-function CountDown() {
+function CountDown(props) {
   const emptyTimer = {
     days: undefined,
     hours: undefined,
     minutes: undefined,
-    seconds: undefined,
   };
 
   const [timer, setTimer] = useState(emptyTimer);
@@ -20,16 +19,14 @@ function CountDown() {
       const days = countdown.format("D");
       const hours = countdown.format("HH");
       const minutes = countdown.format("mm");
-      const seconds = countdown.format("ss");
 
-      setTimer({ days, hours, minutes, seconds });
-    }, 1000);
+      setTimer({ days, hours, minutes });
+    }, 10000);
   });
 
   return (
     <span id="clock">
-      {timer.days} Days {timer.hours} Hours {timer.minutes} Minutes{" "}
-      {timer.seconds} Seconds!
+      {timer.days} Days {timer.hours} Hours and {timer.minutes} Minutes!
     </span>
   );
 }

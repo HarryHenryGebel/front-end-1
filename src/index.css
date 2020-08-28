@@ -140,15 +140,13 @@ button.bg-confirm:focus {
 }
 
 .bg-login {
-  background-color: #ead2ac !important;
-  color: #504746 !important;
-}
+  background-color: #6e605f !important;}
 
 a.bg-login:hover,
 a.bg-login:focus,
 button.bg-login:hover,
 button.bg-login:focus {
-  background-color: #027977 !important;
+  background-color: #817e7e !important;
 }
 
 .bg-addon {

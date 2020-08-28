@@ -56,10 +56,14 @@ function DashboardNav(props) {
     <div>
       <UncontrolledDropdown nav inNavbar>
         <DropdownToggle nav caret>
-          AfterLoginMenu
+          Menu
         </DropdownToggle>
 
         <DropdownMenu right>
+          <DropdownItem>
+            <Link to="/">Home</Link>
+          </DropdownItem>
+
           <DropdownItem onClick={createEToggle}>Create Event</DropdownItem>
           <DropdownItem onClick={userToggle}>Update Profile</DropdownItem>
           {props.potlucks.map((potluck) => (
@@ -81,7 +85,7 @@ function DashboardNav(props) {
           ))}
 
           <DropdownItem divider />
-          <DropdownItem>Logout</DropdownItem>
+          <DropdownItem onClick={() => localStorage.deleteItem("token")}>Logout</DropdownItem>
         </DropdownMenu>
       </UncontrolledDropdown>
 
