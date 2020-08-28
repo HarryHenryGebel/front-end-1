@@ -13,7 +13,7 @@ import { loginSchema } from "./yupSchemas";
 import * as yup from "yup";
 import AlertRed from "../AlertRed.jsx";
 import { axiosWithAuth, storeLoginInformation } from "../../utils";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 //push /
 export default function LoginForm() {
   const [modal, setModal] = useState(false);
@@ -27,7 +27,7 @@ export default function LoginForm() {
     username: "",
     password: "",
   });
-  const history = useHistory();
+  // const history = useHistory();
 
   useEffect(() => {
     // console.log('form state change')
