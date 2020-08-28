@@ -1,6 +1,9 @@
 import { useState } from "react";
 
+
 const useForm = (callback) => {
+
+
   const locationForm = {
     address: "",
     address2: "",
@@ -19,7 +22,6 @@ const useForm = (callback) => {
   const foodForm = {
     foodId: "",
     foodName: "",
-    description: "",
   };
 
   const [food, setFood] = useState(foodForm);
@@ -27,8 +29,7 @@ const useForm = (callback) => {
   const [guest, setGuests] = useState(guestForm);
 
   const initialForm = {
-    isHost: true,
-    potluckId: "",
+    user: { userid: '' },
     eventName: "",
     date: "",
     time: "",
@@ -77,7 +78,9 @@ const useForm = (callback) => {
   };
 
   const guestRemover = (guest) => {
-    const newGuests = formValues.guests.filter((item) => item.firstName !== guest);
+    const newGuests = formValues.guests.filter(
+      (item) => item.firstName !== guest
+    );
     setFormValues({ ...formValues, guests: newGuests });
   };
 
@@ -94,6 +97,7 @@ const useForm = (callback) => {
     addFood,
     foodRemover,
     guestRemover,
+
   };
 };
 

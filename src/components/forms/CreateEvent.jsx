@@ -5,11 +5,12 @@ import { createEvent } from "../../actions";
 import { useForm } from "../../utils";
 import Guest from "../items/Guest";
 import Food from "../items/Food";
+
 //Form Validation?
 
 //Use Add button to populate a list htmlFor Food and Guests
 
-function CreateEvent() {
+function CreateEvent(props) {
   const {
     food,
     concatLocation,
@@ -25,8 +26,14 @@ function CreateEvent() {
     guestRemover,
   } = useForm();
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    props.createEvent(formValues);
+  };
+
   return (
-    <Form>
+    <Form onSubmit={onSubmit}>
       <Row form>
         <Col md={6}>
           <FormGroup>
@@ -37,18 +44,6 @@ function CreateEvent() {
               id="Name"
               placeholder="with a placeholder"
               value={formValues.eventName}
-              onChange={changeHandler}
-            />
-          </FormGroup>
-        </Col>
-        <Col md={6}>
-          <FormGroup>
-            <Label htmlFor="email">Phone Number?</Label>
-            <Input
-              type="email"
-              name="email"
-              id="email"
-              placeholder="email placeholder"
               onChange={changeHandler}
             />
           </FormGroup>
@@ -263,7 +258,9 @@ function CreateEvent() {
           Confirm
         </Label>
       </FormGroup>
-      <Button className="bg-confirm">Create Event</Button>
+      <Button className="bg-confirm" type="submit">
+        Create Event
+      </Button>
       <Button className="bg-cancel">Cancel</Button>
     </Form>
   );
