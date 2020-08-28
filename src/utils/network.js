@@ -11,20 +11,32 @@ export function axiosWithAuth() {
   });
 }
 
-export async function storeLoginInformation(token, username) {
+export async function setUserIdByUsername(field, username) {
   try {
-    localStorage.setItem("token", token);
-    requester.setOptions({ headers: { Authorization: `Bearer ${token}` } });
-    debugger;
     const id = requester.createUniqueID();
     await requester.get(
       "https://lre-notapotluck.herokuapp.com/users/users",
       id
     );
+
+    // usernames are canonically lowercase in API
+    const canonicalUsername = username.toLowerCase();
     const users = requester.response(id).data;
-    console.log(users);
+    for (let user of users)
+      if (user.username === canonicalUsername) {
+        localStorage.setItem(field, JSON.stringify(user.userid));
+        break;
+      }
   } catch (error) {
     console.log(error);
     throw error;
   }
 }
+
+export async function storeLoginInformation(token, username) {
+  localStorage.setItem("token", token);
+  requester.setOptions({ headers: { Authorization: `Bearer ${token}` } });
+  setUserIdByUsername("userId", username);
+}
+
+//  LocalWords:  userId
