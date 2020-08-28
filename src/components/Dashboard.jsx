@@ -31,7 +31,6 @@ function DashBoard(props) {
           const userdata = res.data[i]
           localStorage.setItem('userId', userdata.userid)
           localStorage.setItem('primaryemail', userdata.primaryemail)
-
         }
       }
     })

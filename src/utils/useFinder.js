@@ -13,39 +13,59 @@ const useFinder = (callback) => {
   };
 
   const guestIdFinder = (guestemail, dinner = potluck) => {
-    for (let i = 0; i < dinner.guests.length; i++) {
-      if (dinner.guests[i].primaryEmail === guestemail) {
-        specificId = dinner.guests[i].guestId;
+    if(dinner.guests === undefined){
+      return
+    }else {
+      for (let i = 0; i < dinner.guests.length; i++) {
+        if (dinner.guests[i].primaryEmail === guestemail) {
+          specificId = dinner.guests[i].guestId;
+        }
       }
     }
+    
   };
 
   const foodSorter = (dinner = potluck) => {
-    for (let i = 0; i < dinner.foods.length; i++) {
-      if (dinner.foods[i].isclaimed === true) {
-        claimedFoods.push(dinner.foods[i]);
-      } else {
-        unclaimedFoods.push(dinner.foods[i]);
+    if(dinner.foods === undefined){
+      return
+    }else {
+      for (let i = 0; i < dinner.foods.length; i++) {
+        if (dinner.foods[i].isclaimed === true) {
+          claimedFoods.push(dinner.foods[i]);
+        } else {
+          unclaimedFoods.push(dinner.foods[i]);
+        }
       }
     }
+    
   };
 
   const guestSorter = (dinner = potluck) => {
-    for (let i = 0; i < dinner.guests.length; i++) {
-      if (dinner.guests[i].isAttending === true) {
-        guestList.push(dinner.guests[i]);
-      } else {
-        unresponsive.push(dinner.guests[i]);
+    if (dinner.guests === undefined){
+      return
+    }else {
+      for (let i = 0; i < dinner.guests.length; i++) {
+        if (dinner.guests[i].isAttending === true) {
+          guestList.push(dinner.guests[i]);
+        } else {
+          unresponsive.push(dinner.guests[i]);
+        }
       }
     }
+    
   };
 
   const obligationFinder = (primaryEmail) => {
-    const myGuestProfile = guestList.filter(
-      (guest) => guest.primaryEmail === primaryEmail
-    );
-
-    obligation = myGuestProfile.isBringing;
+    if (guestList === undefined){
+      return
+    }else {
+      const myGuestProfile = guestList.filter(
+        (guest) => guest.primaryEmail === primaryEmail
+      );
+  
+      obligation = myGuestProfile.isBringing;
+    }
+    
   };
 
   return {

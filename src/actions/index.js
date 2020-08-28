@@ -89,10 +89,10 @@ const addGuest = (id, guest) => (dispatch) => {
       })
     );
 };
-export const createEvent = (data) => async (dispatch) => {
+export const createEvent = (data) => (dispatch) => {
   const event = {
     user: { userid: localStorage.getItem("userId") },
-    eventname: data.eventName,
+    eventname: data.eventname,
     date: data.date,
     time: data.time,
     location: data.location,
@@ -102,12 +102,14 @@ export const createEvent = (data) => async (dispatch) => {
   // dispatch({ type: CREATE_EVENT_START });
   axiosWithAuth()
     .post("https://lre-notapotluck.herokuapp.com/potlucks/potluck", event)
-    .then(async (res) => {
-      await dispatch({ type: CREATE_EVENT_SUCCESS, payload: res.data });
-      await res.data.foods.map((food) => addFood(res.data.potluckid, food));
-      await res.data.guests.map((guest) => addGuest(res.data.potluckid, guest));
-      console.log(res.data);
+    .then((res) => {
+      // await dispatch({ type: CREATE_EVENT_SUCCESS, payload: res.data });
+      // await res.data.foods.map((food) => addFood(res.data.potluckid, food));
+      console.log(res)
+      // await res.data.guests.map((guest) => addGuest(res.data.potluckid, guest));
+      console.log(res.config.data);
     })
+
     .catch((e) => console.log(e));
 
   // dispatch({ type: CREATE_EVENT_FAIL, payload: `${e}` })

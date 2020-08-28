@@ -21,7 +21,7 @@ import {
   UPDATE_GUEST_SUCCESS,
   UPDATE_GUEST_FAIL,
 } from "../actions";
-import { LOAD_USER } from "../components/Dashboard";
+
 
 const hostState = {
   userId: localStorage.getItem('userid') || '',
@@ -30,7 +30,8 @@ const hostState = {
   imageUrl: "../assets/user.svg",
   isLoading: false,
   errors: "",
-  potlucks: [
+  potlucks: 
+  [
     {
       potluckId: "",
       isHost: undefined,
