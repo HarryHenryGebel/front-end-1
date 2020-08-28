@@ -2,164 +2,69 @@ import {
   CREATE_EVENT_START,
   CREATE_EVENT_SUCCESS,
   CREATE_EVENT_FAIL,
+  ADD_GUEST_START,
+  ADD_GUEST_SUCCESS,
+  ADD_GUEST_FAIL,
+  ADD_FOOD_START,
+  ADD_FOOD_SUCCESS,
+  ADD_FOOD_FAIL,
   UPDATE_EVENT_START,
   UPDATE_EVENT_SUCESS,
   UPDATE_EVENT_FAIL,
   DELETE_EVENT_START,
   DELETE_EVENT_SUCESS,
   DELETE_EVENT_FAIL,
+  UPDATE_FOOD_START,
+  UPDATE_FOOD_SUCCESS,
+  UPDATE_FOOD_FAIL,
+  UPDATE_GUEST_START,
+  UPDATE_GUEST_SUCCESS,
+  UPDATE_GUEST_FAIL,
 } from "../actions";
 
 const hostState = {
   userId: -1,
   username: "",
   primaryEmail: "",
-  imageUrl: "",
+  imageUrl: "../assets/user.svg",
   isLoading: false,
   errors: "",
   isLoggedIn: false,
   potlucks: [
     {
-      potluckId: "3",
-      isHost: true,
-      eventName: `Dinner at Ava's`,
-      date: "02/11/2021",
-      time: "12:00PM",
-      location: `George's Deli`,
-      description: `Turn left at the pointy hats!`,
-      foods: [
-        { foodId: "18", foodName: "pizza", isClaimed: true },
-        { foodId: "22", foodName: "strange cake", isClaimed: false },
-      ],
-      guests: [
-        {
-          guestId: "57",
-          firstName: "Martin",
-          lastName: "Ricky",
-          primaryEmail: "avawingfield@email.com",
-          responded: false,
-          isAttending: false,
-          isBringing: [],
-        },
-
-        {
-          guestId: "39",
-          firstName: "Ricky",
-          lastName: "Martin",
-          primaryEmail: "livin@lavidaloca.com",
-          responded: true,
-          isAttending: false,
-          isBringing: [
-            {
-              foodId: "86",
-              foodName: "not available",
-            },
-            {
-              foodId: "13",
-              foodName: "ice cream",
-            },
-          ],
-        },
-        {
-          guestId: "17",
-          firstName: "Martin",
-          lastName: "Ricky",
-          primaryEmail: "livin@lavidaloca.com",
-          responded: true,
-          isAttending: true,
-          isBringing: [
-            {
-              foodId: "86",
-              foodName: "not available",
-              isClaimed: true,
-            },
-            {
-              foodId: "13",
-              foodName: "ice cream",
-              isClaimed: true,
-            },
-          ],
-        },
-      ],
+      potluckId: "",
+      isHost: undefined,
+      eventName: "",
+      date: "",
+      time: "",
+      location: "",
+      description: "",
       isLoading: false,
-      errors: false,
-    },
-    {
-      potluckId: "5",
-      isHost: false,
-      eventName: `Dinner at Not Ava's`,
-      date: "22 March 2021",
-      time: "12:00PM",
-      location: `George's Deli`,
-      description: `Turn left at the pointy hats!`,
+      errors: "",
       foods: [
         {
-          foodId: "18",
-          foodName: "pizza",
-          isClaimed: true,
-        },
-        {
-          foodId: "22",
-          foodName: "strange cake",
-          isClaimed: false,
+          foodId: "",
+          foodName: "",
+          isClaimed: undefined,
         },
       ],
       guests: [
         {
-          guestId: "57",
-          firstName: "Martin",
-          lastName: "Ricky",
-          primaryEmail: "avawingfield@email.com",
+          guestId: "",
+          firstName: "",
+          lastName: "",
+          primaryEmail: "",
           responded: false,
           isAttending: false,
           isBringing: [],
         },
-
-        {
-          guestId: "39",
-          firstName: "Ricky",
-          lastName: "Martin",
-          primaryEmail: "avawingfield@email.com",
-          responded: true,
-          isAttending: false,
-          isBringing: [
-            {
-              foodId: "86",
-              foodName: "not available",
-            },
-            {
-              foodId: "13",
-              foodName: "ice cream",
-            },
-          ],
-        },
-        {
-          guestId: "17",
-          firstName: "Martin",
-          lastName: "Ricky",
-          primaryEmail: "avawingfield@email.com",
-          responded: true,
-          isAttending: true,
-          isBringing: [
-            {
-              foodId: "86",
-              foodName: "not available",
-            },
-            {
-              foodId: "13",
-              foodName: "ice cream",
-            },
-          ],
-        },
       ],
-      isLoading: false,
-      errors: false,
     },
   ],
 };
 
 function hostReducer(state = hostState, action) {
-  switch (action) {
+  switch (action.type) {
     case CREATE_EVENT_START:
       return {
         ...state,
@@ -177,7 +82,48 @@ function hostReducer(state = hostState, action) {
         isLoading: false,
         errors: `Your event could not be added. Please try again. ${action.payload}`,
       };
-
+    //This is probably wrong
+    case ADD_FOOD_START:
+      const foodPotluck = state.potlucks.filter(
+        (potluck) => potluck.potluckId === action.payload.potluckid
+      );
+      return {
+        ...foodPotluck,
+        isLoading: true,
+      };
+    case ADD_FOOD_SUCCESS:
+      return {
+        ...foodPotluck,
+        isLoading: false,
+        foods: [...foodPotluck.foods, action.payload.results],
+      };
+    case ADD_FOOD_FAIL: {
+      return {
+        ...foodPotluck,
+        isLoading: false,
+        errors: action.payload.errors,
+      };
+    }
+    case ADD_GUEST_START:
+      const guestPotluck = state.potlucks.filter(
+        (potluck) => potluck.potluckId === action.payload.potluckid
+      );
+      return {
+        ...guestPotluck,
+        isLoading: true,
+      };
+    case ADD_GUEST_SUCCESS:
+      return {
+        ...guestPotluck,
+        isLoading: false,
+        guests: [...guestPotluck.guest, action.payload.results],
+      };
+    case ADD_GUEST_FAIL:
+      return {
+        ...guestPotluck,
+        isLoading: false,
+        errors: action.payload.errors,
+      };
     case UPDATE_EVENT_START:
       return {
         ...state,
@@ -196,6 +142,24 @@ function hostReducer(state = hostState, action) {
         isLoading: false,
         errors: `Your event could not be updated, please try again. ${action.payload}`,
       };
+    case UPDATE_FOOD_START:
+      console.log("START");
+      return {};
+    case UPDATE_FOOD_SUCCESS:
+      console.log("SUCCESS");
+      return {};
+    case UPDATE_FOOD_FAIL:
+      console.log("FAIL!");
+      return {};
+    case UPDATE_GUEST_START:
+      console.log("START");
+      return {};
+    case UPDATE_GUEST_SUCCESS:
+      console.log("SUCCESS");
+      return {};
+    case UPDATE_GUEST_FAIL:
+      console.log("FAIL!");
+      return {};
 
     case DELETE_EVENT_START:
       return {

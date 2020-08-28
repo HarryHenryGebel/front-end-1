@@ -62,7 +62,7 @@ export default function LoginForm() {
         storeLoginInformation(res.data.access_token, username);
         // kludgily refresh screen
         // history.push("/");
-        window.open("/", "_self");
+        // window.open("/", "_self");
       })
       .catch((e) => {
         console.log("its so broken forever", e);
@@ -141,9 +141,9 @@ export default function LoginForm() {
           </ModalBody>
           <ModalFooter>
             <Button
+              disabled={buttonDisabled}
               color="primary"
               type="submit"
-              disabled={buttonDisabled}
               onClick={toggleModal}
             >
               Submit
