@@ -1,10 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&family=Pacifico&display=swap");
-
+/* html {
+  height: 100%;
+} */
 body {
   margin: 0;
   font-family: "Open Sans Condensed", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+ /* grid prep for a sticky footer
+  min-height: 100%;
+  display: grid;
+  grid-template-rows: 1fr auto; */
 }
 h2,
 h3,
@@ -115,7 +121,7 @@ button.bg-cancel:focus {
 
 .bg-login {
   background-color: #6d6262 !important;
-  
+
 }
 
 a.bg-login:hover,
@@ -138,7 +144,7 @@ button.bg-confirm:focus {
   background-color: #027977 !important;
   text-decoration: none;
 }
-
+/* this is a duplicate, but not sure which to keep or if it needs to be here in cascade because magic -Josh */
 .bg-login {
   background-color: #6e605f !important;}
 
@@ -169,7 +175,21 @@ code {
 #title {
   font-family: "Pacifico", cursive;
   color: #ead2ac;
+  text-decoration: none;
 }
+
+#footer {
+  font-family: "Pacifico", cursive;
+  color: #ead2ac !important;
+  text-decoration: none;
+  border-color: pink !important;
+}
+/*
+.footer {
+/* for sticky footer */
+/* grid-row-start: 2;
+grid-row-end: 3;
+} */
 
 #darkBG {
   background-color: #504746 !important;
@@ -188,5 +208,3 @@ code {
     padding: 4rem 2rem;
   }
 }
-
-
