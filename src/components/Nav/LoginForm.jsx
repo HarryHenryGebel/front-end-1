@@ -146,7 +146,6 @@ export default function LoginForm() {
             <Button
               color="primary"
               type="submit"
-              disabled={buttonDisabled}
               onClick={toggleModal}
             >
               Submit
