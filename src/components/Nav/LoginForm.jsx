@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-  Form,
   FormGroup,
   Label,
   Input,
@@ -101,44 +100,42 @@ export default function LoginForm() {
         <form onSubmit={formSubmit}>
           <ModalHeader toggle={toggleModal}>Login</ModalHeader>
           <ModalBody>
-            <Form>
-              <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                <Label htmlFor="username" className="mr-sm-2">
-                  Username
-                </Label>
-                <Input
-                  type="username"
-                  name="username"
-                  id="username"
-                  value={formState.username}
-                  onChange={inputChange}
-                  placeholder="That thing you called yourself"
+            <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+              <Label htmlFor="username" className="mr-sm-2">
+                Username
+              </Label>
+              <Input
+                type="username"
+                name="username"
+                id="username"
+                value={formState.username}
+                onChange={inputChange}
+                placeholder="That thing you called yourself"
+              />
+              {errors.username.length > 0 ? (
+                <AlertRed
+                  message={<p className="error">{errors.username}</p>}
                 />
-                {errors.username.length > 0 ? (
-                  <AlertRed
-                    message={<p className="error">{errors.username}</p>}
-                  />
-                ) : null}
-              </FormGroup>
-              <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                <Label htmlFor="password" className="mr-sm-2">
-                  Password
-                </Label>
-                <Input
-                  type="password"
-                  name="password"
-                  id="password"
-                  value={formState.password}
-                  onChange={inputChange}
-                  placeholder="don't share me!"
+              ) : null}
+            </FormGroup>
+            <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+              <Label htmlFor="password" className="mr-sm-2">
+                Password
+              </Label>
+              <Input
+                type="password"
+                name="password"
+                id="password"
+                value={formState.password}
+                onChange={inputChange}
+                placeholder="don't share me!"
+              />
+              {errors.password.length > 0 ? (
+                <AlertRed
+                  message={<p className="error">{errors.password}</p>}
                 />
-                {errors.password.length > 0 ? (
-                  <AlertRed
-                    message={<p className="error">{errors.password}</p>}
-                  />
-                ) : null}
-              </FormGroup>
-            </Form>
+              ) : null}
+            </FormGroup>
           </ModalBody>
           <ModalFooter>
             <Button
