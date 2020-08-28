@@ -20,7 +20,6 @@ const useForm = (callback) => {
   };
 
   const foodForm = {
-    foodId: "",
     foodName: "",
   };
 
@@ -29,8 +28,8 @@ const useForm = (callback) => {
   const [guest, setGuests] = useState(guestForm);
 
   const initialForm = {
-    user: { userid: '' },
-    eventName: "",
+    user: { userid: localStorage.getItem('userId') },
+    eventname: "",
     date: "",
     time: "",
     location: "",

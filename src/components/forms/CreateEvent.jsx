@@ -42,10 +42,10 @@ function CreateEvent(props) {
             <Label htmlFor="Name">Event Name</Label>
             <Input
               type="text"
-              name="eventName"
+              name="eventname"
               id="Name"
               placeholder="with a placeholder"
-              value={formValues.eventName}
+              value={formValues.eventname}
               onChange={changeHandler}
             />
           </FormGroup>
@@ -215,7 +215,6 @@ function CreateEvent(props) {
       <Button onClick={addGuest} className="bg-addon">
         Add Guest
       </Button>
-      {console.log(formValues.foods)}
       {formValues.foods.map((food) => (
         <>
           <Food key={food.foodId} foodName={food.foodName} />

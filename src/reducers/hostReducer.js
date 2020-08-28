@@ -56,7 +56,6 @@ const hostState = {
           primaryEmail: "",
           responded: false,
           isAttending: false,
-          isBringing: [],
         },
       ],
     },
@@ -65,25 +64,21 @@ const hostState = {
 
 function hostReducer(state = hostState, action) {
   switch (action.type) {
-    case LOAD_USER : 
-    return{
-      ...state,
-      userId: action.payload.userid,
-      username: action.payload.username,
-      primaryEmail: action.payload.primaryemail
-    }
     case CREATE_EVENT_START:
+      console.log('Start')
       return {
         ...state,
         isLoading: true,
       };
     case CREATE_EVENT_SUCCESS:
+      console.log('Win!')
       return {
         ...state,
         isLoading: false,
         potlucks: [...state.potlucks, action.payload],
       };
     case CREATE_EVENT_FAIL:
+      console.log('Fail!')
       return {
         ...state,
         isLoading: false,
@@ -91,6 +86,7 @@ function hostReducer(state = hostState, action) {
       };
     //This is probably wrong
     case ADD_FOOD_START:
+      console.log('FOOD START!')
       const foodPotluck = state.potlucks.filter(
         (potluck) => potluck.potluckId === action.payload.potluckid
       );
@@ -99,12 +95,14 @@ function hostReducer(state = hostState, action) {
         isLoading: true,
       };
     case ADD_FOOD_SUCCESS:
+      console.log('FOOD WIN!')
       return {
         ...foodPotluck,
         isLoading: false,
         foods: [...foodPotluck.foods, action.payload.results],
       };
     case ADD_FOOD_FAIL: {
+      console.log('FOOD FAIL')
       return {
         ...foodPotluck,
         isLoading: false,
@@ -112,6 +110,7 @@ function hostReducer(state = hostState, action) {
       };
     }
     case ADD_GUEST_START:
+      console.log('GUEST START')
       const guestPotluck = state.potlucks.filter(
         (potluck) => potluck.potluckId === action.payload.potluckid
       );
@@ -120,12 +119,14 @@ function hostReducer(state = hostState, action) {
         isLoading: true,
       };
     case ADD_GUEST_SUCCESS:
+      console.log('FRIEND WIN')
       return {
         ...guestPotluck,
         isLoading: false,
         guests: [...guestPotluck.guest, action.payload.results],
       };
     case ADD_GUEST_FAIL:
+      console.log('FRIEND FAIL')
       return {
         ...guestPotluck,
         isLoading: false,

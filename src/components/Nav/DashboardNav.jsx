@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Modal,
   ModalHeader,
@@ -39,7 +39,6 @@ function DashboardNav(props) {
   function eventFinder() {
     for (let i = 0; i < props.potlucks.length; i++) {
       for (let j = 0; j < props.potlucks[i].guests.length; j++) {
-        console.log();
         if (
           props.primaryEmail === props.potlucks[i].guests[j].primaryEmail &&
           props.potlucks[i].guests[j].responded === false
@@ -50,7 +49,9 @@ function DashboardNav(props) {
     }
   }
 
-  eventFinder();
+useEffect(()=>{
+  eventFinder()
+})
 
   return (
     <div>
