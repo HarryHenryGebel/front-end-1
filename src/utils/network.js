@@ -1,5 +1,5 @@
 import axios from "axios";
-import requester from "easier-request";
+import requester from "easier-requests";
 
 export function axiosWithAuth() {
   const token = localStorage.getItem("token");
